@@ -1,0 +1,51 @@
+﻿name: Build & Test
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+permissions: read-all
+
+jobs:
+  build-and-test:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.1
+
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v1.1.1
+        with:
+          nuget-version: 'latest'
+
+      - name: Setup VSTest
+        uses: darenm/Setup-VSTest@v1
+
+      - name: Navigate to Solution Folder
+        run: |
+          cd $GITHUB_WORKSPACE
+
+      - name: Cache NuGet Packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: Restore Packages
+        run: |
+          nuget restore ./src/Enjin.Platform.Sdk/Enjin.Platform.Sdk.sln
+
+      - name: Build Solution
+        run: |
+          msbuild.exe ./src/Enjin.Platform.Sdk/Enjin.Platform.Sdk.sln /p:platform="Any CPU" /p:configuration="Release"
+
+      - name: Run Tests
+        run: |
+          vstest.console.exe ./src/Enjin.Platform.Sdk/Enjin.Platform.Sdk.Tests/bin/Release/net6.0/Enjin.Platform.Sdk.Tests.dll

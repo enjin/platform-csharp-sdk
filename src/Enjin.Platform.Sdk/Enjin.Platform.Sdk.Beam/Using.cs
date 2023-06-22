@@ -1,0 +1,1 @@
+﻿global using BeamClaimConnectionFragment = Enjin.Platform.Sdk.ConnectionFragment<Enjin.Platform.Sdk.Beam.BeamClaimFragment>;

@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enjin.Platform.Sdk", "Enjin.Platform.Sdk\Enjin.Platform.Sdk.csproj", "{805DB569-9034-47AB-B14B-3E9352710F46}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enjin.Platform.Sdk.Tests", "Enjin.Platform.Sdk.Tests\Enjin.Platform.Sdk.Tests.csproj", "{18F92E60-9525-4054-8502-2BB9081F7892}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enjin.Platform.Sdk.Beam", "Enjin.Platform.Sdk.Beam\Enjin.Platform.Sdk.Beam.csproj", "{A23F958D-3F65-4DD3-A37A-732DC97977F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enjin.Platform.Sdk.FuelTanks", "Enjin.Platform.Sdk.FuelTanks\Enjin.Platform.Sdk.FuelTanks.csproj", "{9F1668A1-BD96-4B5C-B422-CE04A755A2DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enjin.Platform.Sdk.Marketplace", "Enjin.Platform.Sdk.Marketplace\Enjin.Platform.Sdk.Marketplace.csproj", "{EA374F48-D959-4DDE-9646-70B0F0B5CFB8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{805DB569-9034-47AB-B14B-3E9352710F46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{805DB569-9034-47AB-B14B-3E9352710F46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{805DB569-9034-47AB-B14B-3E9352710F46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{805DB569-9034-47AB-B14B-3E9352710F46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18F92E60-9525-4054-8502-2BB9081F7892}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18F92E60-9525-4054-8502-2BB9081F7892}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18F92E60-9525-4054-8502-2BB9081F7892}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18F92E60-9525-4054-8502-2BB9081F7892}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A23F958D-3F65-4DD3-A37A-732DC97977F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A23F958D-3F65-4DD3-A37A-732DC97977F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A23F958D-3F65-4DD3-A37A-732DC97977F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A23F958D-3F65-4DD3-A37A-732DC97977F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F1668A1-BD96-4B5C-B422-CE04A755A2DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F1668A1-BD96-4B5C-B422-CE04A755A2DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F1668A1-BD96-4B5C-B422-CE04A755A2DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F1668A1-BD96-4B5C-B422-CE04A755A2DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA374F48-D959-4DDE-9646-70B0F0B5CFB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA374F48-D959-4DDE-9646-70B0F0B5CFB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA374F48-D959-4DDE-9646-70B0F0B5CFB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA374F48-D959-4DDE-9646-70B0F0B5CFB8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

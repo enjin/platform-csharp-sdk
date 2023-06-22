@@ -1,0 +1,72 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <!-- Project properties -->
+        <Title>Enjin Platform SDK Fuel Tanks</Title>
+        <Description>Extension for the SDK to support usage of fuel tanks on the Enjin Platform.</Description>
+        <Company>Enjin Pte. Ltd.</Company>
+        <Copyright>Enjin Pte. Ltd.</Copyright>
+        <Version>1.0.0-beta.1</Version>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <LangVersion>10</LangVersion>
+        <RootNamespace>Enjin.Platform.Sdk.FuelTanks</RootNamespace>
+        <Nullable>enable</Nullable>
+
+        <!-- Assembly properties -->
+        <AssemblyName>Enjin.Platform.Sdk.FuelTanks</AssemblyName>
+        <AssemblyInformationalVersion>v1.0.0-beta.1</AssemblyInformationalVersion>
+
+        <!-- Package properties -->
+        <PackageId>Enjin.Platform.Sdk.FuelTanks</PackageId>
+        <PackageProjectUrl>https://enjin.io/</PackageProjectUrl>
+        <PackageVersion>1.0.0-beta.1</PackageVersion>
+        <PackageLicenseExpression>LGPL-3.0-only</PackageLicenseExpression>
+        <PackageIcon>packageIcon.png</PackageIcon>
+        <NeutralLanguage>en</NeutralLanguage>
+        <RepositoryUrl>https://github.com/enjin/platform-csharp-sdk</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+        <!-- Symbol package -->
+        <IncludeSymbols>true</IncludeSymbols>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    </PropertyGroup>
+
+    <!-- For deterministic builds -->
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    </PropertyGroup>
+
+    <!-- Package items -->
+    <ItemGroup>
+        <None Include="$(SolutionDir)/packageIcon.png" Pack="true" PackagePath="" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+            <_Parameter1>
+                Enjin.Platform.Sdk.Tests
+            </_Parameter1>
+        </AssemblyAttribute>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+            <_Parameter1>
+                DynamicProxyGenAssembly2
+            </_Parameter1>
+        </AssemblyAttribute>
+        <PackageReference Include="JetBrains.Annotations" Version="2022.3.1" />
+        <PackageReference Include="Macross.Json.Extensions" Version="3.0.0" />
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="System.Text.Json" Version="7.0.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="$(SolutionDir)/Enjin.Platform.Sdk/Enjin.Platform.Sdk.csproj" />
+    </ItemGroup>
+
+</Project>

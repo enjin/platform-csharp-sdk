@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['balancesfragment_0',['BalancesFragment',['../a01636.html#a023d385e538a222f9a5ace706964e7c6',1,'Enjin::Platform::Sdk::BalancesFragment']]],
+  ['batchaddaccount_1',['BatchAddAccount',['../a01032.html#a1bcb1f1bbbf2903feda1433e687246b6',1,'Enjin::Platform::Sdk::FuelTanks::BatchAddAccount']]],
+  ['batchmint_2',['BatchMint',['../a01732.html#aea0d349fcd3a13c151215391567c64d1',1,'Enjin::Platform::Sdk::BatchMint']]],
+  ['batchremoveaccount_3',['BatchRemoveAccount',['../a01036.html#a0a1ab122806aa802a12021421f193cf5',1,'Enjin::Platform::Sdk::FuelTanks::BatchRemoveAccount']]],
+  ['batchsetattribute_4',['BatchSetAttribute',['../a01736.html#a433bf7e95914738d15fee555f89595f2',1,'Enjin::Platform::Sdk::BatchSetAttribute']]],
+  ['batchtransfer_5',['BatchTransfer',['../a01740.html#adfada7f1a80d078b1618ddb74c289b9d',1,'Enjin::Platform::Sdk::BatchTransfer']]],
+  ['beamclaimfragment_6',['BeamClaimFragment',['../a00924.html#a0c47aab37a66885e0cc27c2e875233d7',1,'Enjin::Platform::Sdk::Beam::BeamClaimFragment']]],
+  ['beamflaginputtype_7',['BeamFlagInputType',['../a00900.html#af7f7bd4bbf614d145ebd856075c7fee7',1,'Enjin::Platform::Sdk::Beam::BeamFlagInputType']]],
+  ['beamfragment_8',['BeamFragment',['../a00928.html#a776a080cc83a6ca1d31f52fa8cc70901',1,'Enjin::Platform::Sdk::Beam::BeamFragment']]],
+  ['beamqrfragment_9',['BeamQrFragment',['../a00932.html#a53579f765f2f9052cdd7e573cffc0203',1,'Enjin::Platform::Sdk::Beam::BeamQrFragment']]],
+  ['beamscanfragment_10',['BeamScanFragment',['../a00936.html#a380f32d7fe5a48be9ecfbb962d0f4a79',1,'Enjin::Platform::Sdk::Beam::BeamScanFragment']]],
+  ['blockfragment_11',['BlockFragment',['../a01640.html#a4c14462c499993e009b8794a48bc1239',1,'Enjin::Platform::Sdk::BlockFragment']]],
+  ['build_12',['Build',['../a01288.html#aa0a1bb792a712fd2a2c137071457c99f',1,'Enjin.Platform.Sdk.PusherEventService.PusherEventServiceBuilder.Build()'],['../a01588.html#adf632b61f3ec1820b737119006dcacad',1,'Enjin.Platform.Sdk.PlatformClient.PlatformClientBuilder.Build()'],['../a01600.html#a9f00919b4101001a12afb978628265d1',1,'Enjin.Platform.Sdk.PlatformRequest.PlatformRequestBuilder.Build()']]],
+  ['builder_13',['Builder',['../a01284.html#a540750b3331920df335fadc2bf3be76a',1,'Enjin.Platform.Sdk.PusherEventService.Builder()'],['../a01584.html#aa9c8c1076818b1c256251a5ef5fbc375',1,'Enjin.Platform.Sdk.PlatformClient.Builder()'],['../a01596.html#ae3801becf24bd15a428908a9af7bd30f',1,'Enjin.Platform.Sdk.PlatformRequest.Builder()']]],
+  ['burn_14',['Burn',['../a01744.html#a7118101d774aa0a361ccc6dd10ab8f5b',1,'Enjin::Platform::Sdk::Burn']]],
+  ['burnparamsinput_15',['BurnParamsInput',['../a01420.html#a49ceba4d4c22afbf10a107004af7a47f',1,'Enjin::Platform::Sdk::BurnParamsInput']]]
+];

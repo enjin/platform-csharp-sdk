@@ -1,0 +1,10 @@
+﻿global using BlockConnectionFragment = Enjin.Platform.Sdk.ConnectionFragment<Enjin.Platform.Sdk.BlockFragment>;
+global using CollectionAccountApprovalConnectionFragment = Enjin.Platform.Sdk.ConnectionFragment<Enjin.Platform.Sdk.CollectionAccountApprovalFragment>;
+global using CollectionAccountConnectionFragment = Enjin.Platform.Sdk.ConnectionFragment<Enjin.Platform.Sdk.CollectionAccountFragment>;
+global using CollectionConnectionFragment = Enjin.Platform.Sdk.ConnectionFragment<Enjin.Platform.Sdk.CollectionFragment>;
+global using EventConnectionFragment = Enjin.Platform.Sdk.ConnectionFragment<Enjin.Platform.Sdk.EventFragment>;
+global using TokenAccountApprovalConnectionFragment = Enjin.Platform.Sdk.ConnectionFragment<Enjin.Platform.Sdk.TokenAccountApprovalFragment>;
+global using TokenAccountConnectionFragment = Enjin.Platform.Sdk.ConnectionFragment<Enjin.Platform.Sdk.TokenAccountFragment>;
+global using TokenConnectionFragment = Enjin.Platform.Sdk.ConnectionFragment<Enjin.Platform.Sdk.TokenFragment>;
+global using TransactionConnectionFragment = Enjin.Platform.Sdk.ConnectionFragment<Enjin.Platform.Sdk.TransactionFragment>;
+global using WalletConnectionFragment = Enjin.Platform.Sdk.ConnectionFragment<Enjin.Platform.Sdk.WalletFragment>;
