@@ -5,7 +5,7 @@
 
 Open source SDK for connecting to and interacting with the Platform.
 
-More documentation may be found on the [Official Documentation Page](https://platform.docs.enjin.io).
+More documentation may be found on the [Official Documentation Page](https://docs.enjin.io/).
 
 ## Packages
 
