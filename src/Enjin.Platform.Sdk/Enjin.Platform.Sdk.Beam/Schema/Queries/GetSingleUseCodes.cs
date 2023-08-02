@@ -6,7 +6,7 @@ namespace Enjin.Platform.Sdk.Beam;
 /// A request for querying single use codes.
 /// </summary>
 [PublicAPI]
-public class GetSingleUseCodes : GraphQlRequest<GetSingleUseCodes, ConnectionFragment<BeamClaimFragment>>
+public class GetSingleUseCodes : GraphQlRequest<GetSingleUseCodes, BeamClaimConnectionFragment>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="GetSingleUseCodes"/> class.
