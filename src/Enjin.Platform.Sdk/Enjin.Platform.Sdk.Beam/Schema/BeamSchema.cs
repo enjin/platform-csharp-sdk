@@ -127,6 +127,18 @@ public static class BeamSchema
     }
 
     /// <summary>
+    /// Sends a <see cref="RemoveTokens"/> request to the platform.
+    /// </summary>
+    /// <param name="client">The <see cref="IPlatformClient"/> to send the request from.</param>
+    /// <param name="request">The <see cref="RemoveTokens"/> request to send.</param>
+    /// <returns>The task containing the response.</returns>
+    public static Task<IPlatformResponse<GraphQlResponse<bool?>>> SendRemoveTokens(
+        this IPlatformClient client, RemoveTokens request)
+    {
+        return client.SendRequest<GraphQlResponse<bool?>>(CreateRequest(request));
+    }
+
+    /// <summary>
     /// Sends a <see cref="UpdateBeam"/> request to the platform.
     /// </summary>
     /// <param name="client">The <see cref="IPlatformClient"/> to send the request from.</param>
