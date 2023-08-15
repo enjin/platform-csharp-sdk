@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['wallet_0',['Wallet',['../a01560.html',1,'Enjin::Platform::Sdk']]],
-  ['walletfragment_1',['WalletFragment',['../a01712.html',1,'Enjin::Platform::Sdk']]],
-  ['walletlink_2',['WalletLink',['../a01564.html',1,'Enjin::Platform::Sdk']]],
-  ['walletlinkfragment_3',['WalletLinkFragment',['../a01716.html',1,'Enjin::Platform::Sdk']]]
+  ['wallet_0',['Wallet',['../class_enjin_1_1_platform_1_1_sdk_1_1_wallet.html',1,'Enjin::Platform::Sdk']]],
+  ['walletfragment_1',['WalletFragment',['../class_enjin_1_1_platform_1_1_sdk_1_1_wallet_fragment.html',1,'Enjin::Platform::Sdk']]],
+  ['walletlink_2',['WalletLink',['../class_enjin_1_1_platform_1_1_sdk_1_1_wallet_link.html',1,'Enjin::Platform::Sdk']]],
+  ['walletlinkfragment_3',['WalletLinkFragment',['../class_enjin_1_1_platform_1_1_sdk_1_1_wallet_link_fragment.html',1,'Enjin::Platform::Sdk']]]
 ];
