@@ -140,6 +140,18 @@ public static class CoreTypes
     /// </summary>
     public const string IntArray = "[Int!]!";
 
+    // IntegerRangeString
+
+    /// <summary>
+    /// String for <c>IntegerRangeString</c> type.
+    /// </summary>
+    public const string IntegerRangeString = "IntegerRangeString!";
+
+    /// <summary>
+    /// String for an array of <c>IntegerRangeString</c> type.
+    /// </summary>
+    public const string IntegerRangeStringArray = "[IntegerRangeString!]!";
+
     // MarketPolicy
 
     /// <summary>

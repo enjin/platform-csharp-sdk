@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `SetAttributes` method to `CreateTokenParams`.
+- `SetSigningAccount` method to `UpdateTransaction`.
+- `SetSignedAtBlock` method to `UpdateTransaction`.
+- `GetBeams` query in beam schema.
+- `RemoveTokens` mutation in beam schema.
+
+### Deprecated
+
+- `SetSingleUse` method in `HasBeamCommonFieldsExtension`.
+
 ## [v1.0.0-beta.1] - 2023-06-21
 
 - Public beta release.

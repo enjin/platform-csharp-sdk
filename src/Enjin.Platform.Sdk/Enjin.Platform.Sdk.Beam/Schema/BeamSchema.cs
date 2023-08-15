@@ -39,6 +39,18 @@ public static class BeamSchema
     }
 
     /// <summary>
+    /// Sends a <see cref="GetBeams"/> request to the platform.
+    /// </summary>
+    /// <param name="client">The <see cref="IPlatformClient"/> to send the request from.</param>
+    /// <param name="request">The <see cref="GetBeams"/> request to send.</param>
+    /// <returns>The task containing the response.</returns>
+    public static Task<IPlatformResponse<GraphQlResponse<Connection<Beam>>>> SendGetBeams(
+        this IPlatformClient client, GetBeams request)
+    {
+        return client.SendRequest<GraphQlResponse<Connection<Beam>>>(CreateRequest(request));
+    }
+
+    /// <summary>
     /// Sends a <see cref="GetClaims"/> request to the platform.
     /// </summary>
     /// <param name="client">The <see cref="IPlatformClient"/> to send the request from.</param>
@@ -110,6 +122,18 @@ public static class BeamSchema
     /// <returns>The task containing the response.</returns>
     public static Task<IPlatformResponse<GraphQlResponse<bool?>>> SendExpireSingleUseCodes(
         this IPlatformClient client, ExpireSingleUseCodes request)
+    {
+        return client.SendRequest<GraphQlResponse<bool?>>(CreateRequest(request));
+    }
+
+    /// <summary>
+    /// Sends a <see cref="RemoveTokens"/> request to the platform.
+    /// </summary>
+    /// <param name="client">The <see cref="IPlatformClient"/> to send the request from.</param>
+    /// <param name="request">The <see cref="RemoveTokens"/> request to send.</param>
+    /// <returns>The task containing the response.</returns>
+    public static Task<IPlatformResponse<GraphQlResponse<bool?>>> SendRemoveTokens(
+        this IPlatformClient client, RemoveTokens request)
     {
         return client.SendRequest<GraphQlResponse<bool?>>(CreateRequest(request));
     }

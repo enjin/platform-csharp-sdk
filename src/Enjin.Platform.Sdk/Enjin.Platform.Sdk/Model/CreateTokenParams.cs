@@ -72,4 +72,14 @@ public class CreateTokenParams : GraphQlParameter<CreateTokenParams>,
     {
         return SetParameter("listingForbidden", listingForbidden);
     }
+
+    /// <summary>
+    /// Sets the initial attributes for the token.
+    /// </summary>
+    /// <param name="attributes">The attributes.</param>
+    /// <returns>This parameter for chaining.</returns>
+    public CreateTokenParams SetAttributes(params AttributeInput[] attributes)
+    {
+        return SetParameter("attributes", attributes);
+    }
 }

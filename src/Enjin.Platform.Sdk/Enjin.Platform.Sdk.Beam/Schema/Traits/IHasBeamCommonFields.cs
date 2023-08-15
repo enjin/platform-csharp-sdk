@@ -94,6 +94,7 @@ public static class HasBeamCommonFieldsExtension
     /// <param name="singleUse">Whether the beam can be used only once.</param>
     /// <typeparam name="THolder">The caller type.</typeparam>
     /// <returns>The caller for chaining.</returns>
+    [Obsolete]
     public static THolder SetSingleUse<THolder>(this THolder caller, bool? singleUse)
         where THolder : IHasBeamCommonFields<THolder>
     {

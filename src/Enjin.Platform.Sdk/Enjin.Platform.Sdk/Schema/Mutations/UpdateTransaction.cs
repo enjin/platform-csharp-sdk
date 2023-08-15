@@ -57,4 +57,24 @@ public class UpdateTransaction : GraphQlRequest<UpdateTransaction>
     {
         return SetVariable("transactionHash", CoreTypes.String, transactionHash);
     }
+
+    /// <summary>
+    /// Sets the signing wallet for the transaction.
+    /// </summary>
+    /// <param name="signingAccount">The signing wallet account.</param>
+    /// <returns>This request for chaining.</returns>
+    public UpdateTransaction SetSigningAccount(string? signingAccount)
+    {
+        return SetVariable("signingAccount", CoreTypes.String, signingAccount);
+    }
+
+    /// <summary>
+    /// Sets the block number the transaction was signed at.
+    /// </summary>
+    /// <param name="signedAtBlock">The block number.</param>
+    /// <returns>This request for chaining.</returns>
+    public UpdateTransaction SetSignedAtBlock(int? signedAtBlock)
+    {
+        return SetVariable("signedAtBlock", CoreTypes.Int, signedAtBlock);
+    }
 }
