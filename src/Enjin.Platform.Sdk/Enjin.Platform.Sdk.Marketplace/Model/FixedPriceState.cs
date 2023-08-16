@@ -22,6 +22,6 @@ public class FixedPriceState : ListingState
     /// </summary>
     [JsonConverter(typeof(NullableBigIntegerJsonConverter))]
     [JsonInclude]
-    [JsonPropertyName("type")]
+    [JsonPropertyName("amountFilled")]
     public BigInteger? AmountFilled { get; private set; }
 }
