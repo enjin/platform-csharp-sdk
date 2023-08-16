@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using System.Text.Json.Serialization;
+using JetBrains.Annotations;
 
 namespace Enjin.Platform.Sdk.Marketplace;
 
@@ -7,6 +8,7 @@ namespace Enjin.Platform.Sdk.Marketplace;
 /// </summary>
 /// <seealso cref="AuctionData"/>
 /// <seealso cref="FixedPriceData"/>
+[JsonConverter(typeof(ListingDataJsonConverter))]
 [PublicAPI]
 public abstract class ListingData
 {
