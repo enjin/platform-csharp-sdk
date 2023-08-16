@@ -9,6 +9,9 @@ namespace Enjin.Platform.Sdk.Marketplace;
 /// <see cref="JsonConverter"/> for <see cref="ListingState"/> type allowing for the conversion of the <c>ListingData</c>
 /// and inheriting types used in the platform's marketplace GraphQL API.
 /// </summary>
+/// <seealso cref="ListingState"/>
+/// <seealso cref="AuctionState"/>
+/// <seealso cref="FixedPriceState"/>
 [PublicAPI]
 public class ListingStateJsonConverter : JsonConverter<ListingState>
 {
