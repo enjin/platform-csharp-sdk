@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using PusherClient;
 
 namespace Enjin.Platform.Sdk;
@@ -29,7 +30,9 @@ internal class PusherListener
     /// <param name="evt">The <see cref="PusherEvent"/>.</param>
     public void OnEvent(PusherEvent evt)
     {
-        if (!_service.Registrations.Any())
+        IReadOnlyCollection<IEventListenerRegistration> registrations = _service.Registrations;
+
+        if (!registrations.Any())
         {
             _logger?.Log(LogLevel.Warning, "No registered listeners when platform event was received");
             return;
@@ -38,8 +41,7 @@ internal class PusherListener
         string eventName = evt.EventName;
         PlatformEvent platformEvent = new PlatformEvent(eventName, evt.ChannelName, evt.Data);
 
-        _service.Registrations
-                .Where(r => r.Matcher(eventName))
-                .Do(r => r.Listener.OnEvent(platformEvent));
+        registrations.Where(r => r.Matcher(eventName))
+                     .Do(r => r.Listener.OnEvent(platformEvent));
     }
 }

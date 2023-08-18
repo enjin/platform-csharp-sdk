@@ -10,5 +10,5 @@ internal interface IPusherEventServiceImpl : IEventService
     /// <summary>
     /// The event listener registrations of this service.
     /// </summary>
-    public IEnumerable<IEventListenerRegistration> Registrations { get; }
+    public IReadOnlyCollection<IEventListenerRegistration> Registrations { get; }
 }

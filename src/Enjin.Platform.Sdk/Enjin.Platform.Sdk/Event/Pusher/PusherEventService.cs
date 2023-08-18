@@ -258,6 +258,7 @@ public sealed class PusherEventService : IEventService
 
         // Mutexes
         private readonly object _disposeMutex = new();
+        private readonly object _registrationsMutex = new();
 
         /// <summary>
         /// Internal property representing whether this event service has been disposed.
@@ -295,7 +296,7 @@ public sealed class PusherEventService : IEventService
 
             if (logger != null)
             {
-                _client.Error += (_, e) => logger.Log(LogLevel.Error, e, "Error in Pusher event service");
+                _client.Error += (_, e) => logger.Log(LogLevel.Error, e, $"Error in {nameof(PusherEventService)}");
             }
         }
 
@@ -308,13 +309,37 @@ public sealed class PusherEventService : IEventService
         /// <returns>The registration for the listener.</returns>
         private IEventListenerRegistration RegisterListener(IEventListener listener, Func<string, bool> matcher)
         {
-            UnregisterListener(listener);
+            lock (_registrationsMutex)
+            {
+                UnregisterListenerImpl(listener);
 
-            EventListenerRegistration registration = new EventListenerRegistration(listener, matcher);
-            _registrations.Add(registration);
-            registration.IsRegistered = true;
+                EventListenerRegistration registration = new EventListenerRegistration(listener, matcher);
+                _registrations.Add(registration);
+                registration.IsRegistered = true;
 
-            return registration;
+                return registration;
+            }
+        }
+
+        /// <summary>
+        /// Implementation of the method for unregistering listeners. Only call this after acquiring the lock for
+        /// <see cref="_registrationsMutex"/>.
+        /// </summary>
+        /// <param name="listener">The listener.</param>
+        private void UnregisterListenerImpl(IEventListener listener)
+        {
+            for (int i = _registrations.Count - 1; i >= 0; i--)
+            {
+                EventListenerRegistration registration = _registrations[i];
+
+                if (!ReferenceEquals(registration.Listener, listener))
+                {
+                    continue;
+                }
+
+                _registrations.RemoveAt(i);
+                registration.IsRegistered = false;
+            }
         }
 
         /// <summary>
@@ -453,24 +478,19 @@ public sealed class PusherEventService : IEventService
         /// <inheritdoc/>
         public void UnregisterAllListeners()
         {
-            _registrations.Do(r => r.IsRegistered = false);
-            _registrations.Clear();
+            lock (_registrationsMutex)
+            {
+                _registrations.Do(r => r.IsRegistered = false);
+                _registrations.Clear();
+            }
         }
 
         /// <inheritdoc/>
         public void UnregisterListener(IEventListener listener)
         {
-            for (int i = _registrations.Count - 1; i >= 0; i--)
+            lock (_registrationsMutex)
             {
-                EventListenerRegistration registration = _registrations[i];
-
-                if (!ReferenceEquals(registration.Listener, listener))
-                {
-                    continue;
-                }
-
-                _registrations.RemoveAt(i);
-                registration.IsRegistered = false;
+                UnregisterListenerImpl(listener);
             }
         }
 
@@ -491,7 +511,16 @@ public sealed class PusherEventService : IEventService
         #region IPusherEventServiceImpl
 
         /// <inheritdoc/>
-        public IEnumerable<IEventListenerRegistration> Registrations => _registrations;
+        public IReadOnlyCollection<IEventListenerRegistration> Registrations
+        {
+            get
+            {
+                lock (_registrationsMutex)
+                {
+                    return _registrations.ToList();
+                }
+            }
+        }
 
         #endregion IPusherEventServiceImpl
     }
