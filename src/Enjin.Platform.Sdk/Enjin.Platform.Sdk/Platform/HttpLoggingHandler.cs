@@ -12,10 +12,10 @@ namespace Enjin.Platform.Sdk;
 /// </summary>
 internal class HttpLoggingHandler : DelegatingHandler
 {
-    private readonly StringBuilder _builder;
     private readonly HttpLogLevel _httpLogLevel;
     private readonly ILogger _logger;
 
+    private const int InitialBuilderSize = 1000;
     private const LogLevel TraceLevel = LogLevel.Trace;
 
     // Separators
@@ -38,16 +38,16 @@ internal class HttpLoggingHandler : DelegatingHandler
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _httpLogLevel = httpLogLevel;
-        _builder = new StringBuilder();
     }
 
     /// <summary>
     /// Logs the given request message.
     /// </summary>
     /// <param name="request">The request message.</param>
-    private void LogRequest(HttpRequestMessage request)
+    /// <param name="builder">The string builder to compile the log with.</param>
+    private void LogRequest(HttpRequestMessage request, StringBuilder builder)
     {
-        _builder.Clear();
+        builder.Clear();
 
         // Essential info
         string method = request.Method.Method.ToUpper();
@@ -57,14 +57,15 @@ internal class HttpLoggingHandler : DelegatingHandler
         // Basic
         if (_httpLogLevel == HttpLogLevel.Basic)
         {
-            _builder.Append("--> ").Append(method).Append(" ").Append(uri)
-                    .Append(" (").Append(contentLength).Append("-byte body)");
+            builder.Append("--> ").Append(method).Append(" ").Append(uri)
+                   .Append(" (").Append(contentLength).Append("-byte body)");
 
-            _logger.Log(TraceLevel, _builder.ToString());
+            _logger.Log(TraceLevel, builder.ToString());
+
             return;
         }
 
-        _builder.Append("--> ").Append(method).Append(" ").AppendLine(uri);
+        builder.Append("--> ").Append(method).Append(" ").AppendLine(uri);
 
         // Headers
         foreach (KeyValuePair<string, IEnumerable<string>> header in request.Headers)
@@ -78,23 +79,24 @@ internal class HttpLoggingHandler : DelegatingHandler
             }
 
             string valuesSeparator = key.Equals("User-Agent") ? SpaceSeparator : CommaSeparator;
-            _builder.Append(key).Append(": ").AppendLine(string.Join(valuesSeparator, values));
+            builder.Append(key).Append(": ").AppendLine(string.Join(valuesSeparator, values));
         }
 
         if (_httpLogLevel == HttpLogLevel.Headers)
         {
-            _builder.Append("<-- END ").Append(method);
+            builder.Append("<-- END ").Append(method).Append(contentLength).Append("-byte body)");
 
-            _logger.Log(TraceLevel, _builder.ToString());
+            _logger.Log(TraceLevel, builder.ToString());
+
             return;
         }
 
         // Body
-        _builder.AppendLine() // Line break between header(s) and body
-                .AppendLine(request.Content.ReadAsStringAsync().Result)
-                .Append("<-- END ").Append(method).Append(" (").Append(contentLength).Append("-byte body)");
+        builder.AppendLine() // Line break between header(s) and body
+               .AppendLine(request.Content.ReadAsStringAsync().Result)
+               .Append("<-- END ").Append(method).Append(" (").Append(contentLength).Append("-byte body)");
 
-        _logger.Log(TraceLevel, _builder.ToString());
+        _logger.Log(TraceLevel, builder.ToString());
     }
 
     /// <summary>
@@ -102,22 +104,26 @@ internal class HttpLoggingHandler : DelegatingHandler
     /// </summary>
     /// <param name="response">The response message.</param>
     /// <param name="rtt">The round-trip time of the message.</param>
-    private void LogResponse(HttpResponseMessage response, int rtt)
+    /// <param name="builder">The string builder to compile the log with.</param>
+    private void LogResponse(HttpResponseMessage response, int rtt, StringBuilder builder)
     {
-        _builder.Clear();
+        builder.Clear();
 
         // Essential info
         int statusCode = (int)response.StatusCode;
         string uri = response.RequestMessage.RequestUri.ToString();
 
         // Basic
-        _builder.Append("<-- ").Append(statusCode).Append(" ").Append(uri).Append(" (").Append(rtt).Append("ms)");
+        builder.Append("<-- ").Append(statusCode).Append(" ").Append(uri).Append(" (").Append(rtt).Append("ms)");
 
         if (_httpLogLevel == HttpLogLevel.Basic)
         {
-            _logger.Log(TraceLevel, _builder.ToString());
+            _logger.Log(TraceLevel, builder.ToString());
+
             return;
         }
+
+        builder.AppendLine();
 
         // Headers
         foreach (KeyValuePair<string, IEnumerable<string>> header in response.Headers)
@@ -130,23 +136,24 @@ internal class HttpLoggingHandler : DelegatingHandler
                 continue;
             }
 
-            _builder.Append(key).Append(": ").AppendLine(string.Join(CommaSeparator, values));
+            builder.Append(key).Append(": ").AppendLine(string.Join(CommaSeparator, values));
         }
 
         if (_httpLogLevel == HttpLogLevel.Headers)
         {
-            _builder.Append("<-- END HTTP");
+            builder.Append("<-- END HTTP");
 
-            _logger.Log(TraceLevel, _builder.ToString());
+            _logger.Log(TraceLevel, builder.ToString());
+
             return;
         }
 
         // Body
-        _builder.AppendLine() // Line break between header(s) and body
-                .AppendLine(response.Content.ReadAsStringAsync().Result)
-                .Append("<-- END HTTP");
+        builder.AppendLine() // Line break between header(s) and body
+               .AppendLine(response.Content.ReadAsStringAsync().Result)
+               .Append("<-- END HTTP");
 
-        _logger.Log(TraceLevel, _builder.ToString());
+        _logger.Log(TraceLevel, builder.ToString());
     }
 
     #region DelegatingHandler
@@ -163,13 +170,15 @@ internal class HttpLoggingHandler : DelegatingHandler
             return await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
         }
 
-        LogRequest(request);
+        StringBuilder builder = new(InitialBuilderSize);
+
+        LogRequest(request, builder);
 
         DateTimeOffset start = DateTimeOffset.Now;
         HttpResponseMessage response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
         DateTimeOffset end = DateTimeOffset.Now;
 
-        LogResponse(response, (end - start).Milliseconds);
+        LogResponse(response, (end - start).Milliseconds, builder);
 
         return response;
     }

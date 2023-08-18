@@ -24,6 +24,8 @@ public class PlatformClientTest
     private const string MediaType = "application/json";
     private const string Path = "/graphql";
 
+    private static readonly TimeSpan TIMEOUT = TimeSpan.FromMilliseconds(5000);
+
     [OneTimeSetUp]
     public void BeforeAll()
     {
@@ -83,7 +85,7 @@ public class PlatformClientTest
 
         // Act
         ClassUnderTest.SendRequest<GraphQlResponse<bool?>>(MockRequest.Object)
-                      .Wait(TimeSpan.FromSeconds(5));
+                      .Wait(TIMEOUT);
 
         // Assert
         MockServer.Should()
@@ -115,7 +117,7 @@ public class PlatformClientTest
 
         // Act
         ClassUnderTest.SendRequest<GraphQlResponse<bool?>>(MockRequest.Object)
-                      .Wait(TimeSpan.FromSeconds(5));
+                      .Wait(TIMEOUT);
 
         // Assert
         MockServer.Should()
