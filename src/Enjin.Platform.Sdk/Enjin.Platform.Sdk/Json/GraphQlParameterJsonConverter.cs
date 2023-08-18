@@ -22,7 +22,7 @@ public class GraphQlParameterJsonConverter<T> : JsonConverter<T>
     /// </exception>
     public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        throw new NotSupportedException();
+        throw new NotSupportedException($"{nameof(IGraphQlParameter)} is not a valid read type");
     }
 
     /// <inheritdoc/>
