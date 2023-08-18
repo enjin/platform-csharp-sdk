@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - `FixedPriceState.AmountFilled` now has the correct JSON property name
+- Listener registrations within `PusherEventService` are now atomic.
 
 ## [v1.0.0-beta.1] - 2023-06-21
 
