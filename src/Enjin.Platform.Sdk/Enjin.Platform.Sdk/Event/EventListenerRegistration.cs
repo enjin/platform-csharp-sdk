@@ -20,7 +20,7 @@ public sealed class EventListenerRegistration : IEventListenerRegistration
     /// <param name="listener">The event listener.</param>
     /// <param name="matcher">The event matcher.</param>
     /// <exception cref="ArgumentNullException">
-    /// Thrown if <see cref="listener"/> is <c>null</c>.
+    /// Thrown if listener is <c>null</c>.
     /// </exception>
     internal EventListenerRegistration(IEventListener listener, Func<string, bool> matcher)
     {
