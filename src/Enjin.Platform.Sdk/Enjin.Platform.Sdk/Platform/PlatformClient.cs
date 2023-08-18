@@ -224,7 +224,7 @@ public sealed class PlatformClient : IPlatformClient
         }
 
         /// <summary>
-        /// The <see cref="HttpLogLevel"/> for the client to use when processing HTTP traffic.
+        /// Sets the <see cref="HttpLogLevel"/> for the client to use when processing HTTP traffic.
         /// </summary>
         /// <param name="httpLogLevel">The <see cref="HttpLogLevel"/>.</param>
         /// <returns>This builder for chaining.</returns>
@@ -238,7 +238,7 @@ public sealed class PlatformClient : IPlatformClient
         }
 
         /// <summary>
-        /// The logger for the client to use.
+        /// Sets the logger for the client to use.
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <returns>This builder for chaining.</returns>

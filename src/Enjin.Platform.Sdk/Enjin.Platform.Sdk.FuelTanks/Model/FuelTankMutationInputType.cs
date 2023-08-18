@@ -50,7 +50,7 @@ public class FuelTankMutationInputType : GraphQlParameter<FuelTankMutationInputT
     /// <summary>
     /// Sets the fuel tank account rules.
     /// </summary>
-    /// <param name="accountRules"></param>
+    /// <param name="accountRules">The rules.</param>
     /// <returns>This parameter for chaining.</returns>
     public FuelTankMutationInputType SetAccountRules(AccountRuleInputType? accountRules)
     {

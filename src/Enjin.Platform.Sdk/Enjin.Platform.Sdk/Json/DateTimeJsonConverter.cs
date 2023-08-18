@@ -20,8 +20,13 @@ public class DateTimeJsonConverter : JsonConverter<DateTime>
     /// If the <see cref="JsonTokenType"/> is not <see cref="JsonTokenType.String"/>.
     /// </exception>
     /// <remarks>
+    /// <para>
+    /// <inheritdoc/>
+    /// </para>
+    /// <para>
     /// When returned in a response, the <c>DateTime</c> type on the platform is expected to be returned as a ISO 8601
     /// string.
+    /// </para>
     /// </remarks>
     public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {

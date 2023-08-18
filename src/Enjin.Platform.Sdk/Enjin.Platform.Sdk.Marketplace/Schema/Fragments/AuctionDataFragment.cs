@@ -3,7 +3,7 @@
 namespace Enjin.Platform.Sdk.Marketplace;
 
 /// <summary>
-/// A fragment for requesting properties of a <see cref="AuctionData"/> returned by the platform.
+/// A fragment for requesting properties of an <see cref="AuctionData"/> returned by the platform.
 /// </summary>
 [PublicAPI]
 public class AuctionDataFragment : ListingDataFragment<AuctionDataFragment>
