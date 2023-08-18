@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `RemoveTokens` mutation in beam schema.
 - `ListingDataJsonConverter` class to Marketplace library
 - `ListingStateJsonConverter` class to Marketplace library
+- `IGraphQlParameterHolder` now has `HasParameter` method.
+- `IGraphQlRequest` now has `HasVariable` method.
 
 ### Changed
 
