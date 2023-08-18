@@ -21,6 +21,11 @@ public class AuctionStateFragment : ListingStateFragment<AuctionStateFragment>
     /// </summary>
     /// <param name="isIncluded">Whether the field is included.</param>
     /// <returns>This fragment for chaining.</returns>
+    /// <remarks>
+    /// This field ought to be requested when using this fragment type for a
+    /// <see cref="ListingStateFragment{TFragment}"/> or else the <see cref="ListingStateJsonConverter"/> may not be
+    /// able to determine the type.
+    /// </remarks>
     public AuctionStateFragment WithType(bool isIncluded = true)
     {
         return WithField("type", isIncluded);

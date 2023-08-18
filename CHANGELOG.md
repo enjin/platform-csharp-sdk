@@ -14,10 +14,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `SetSignedAtBlock` method to `UpdateTransaction`.
 - `GetBeams` query in beam schema.
 - `RemoveTokens` mutation in beam schema.
+- `ListingDataJsonConverter` class to Marketplace library
+- `ListingStateJsonConverter` class to Marketplace library
+
+### Changed
+
+- `ListingData` now has converter attribute for `ListingDataJsonConverter`
+- `ListingState` now has converter attribute for `ListingStateJsonConverter`
 
 ### Deprecated
 
 - `SetSingleUse` method in `HasBeamCommonFieldsExtension`.
+
+### Fixed
+
+- `FixedPriceState.AmountFilled` now has the correct JSON property name
 
 ## [v1.0.0-beta.1] - 2023-06-21
 
