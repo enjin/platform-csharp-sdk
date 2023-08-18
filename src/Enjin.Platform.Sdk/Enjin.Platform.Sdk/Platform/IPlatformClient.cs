@@ -35,7 +35,7 @@ public interface IPlatformClient : IDisposable
     /// Sends the given platform request.
     /// </summary>
     /// <param name="request">The platform request.</param>
-    /// <typeparam name="T">The type of the result in the response.</typeparam>
+    /// <typeparam name="TResult">The type of the result in the response.</typeparam>
     /// <returns>The task containing the response.</returns>
-    public Task<IPlatformResponse<T>> SendRequest<T>(IPlatformRequest request);
+    public Task<IPlatformResponse<TResult>> SendRequest<TResult>(IPlatformRequest request);
 }

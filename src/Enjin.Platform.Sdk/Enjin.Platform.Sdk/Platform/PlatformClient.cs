@@ -118,7 +118,7 @@ public sealed class PlatformClient : IPlatformClient
     }
 
     /// <inheritdoc/>
-    public Task<IPlatformResponse<T>> SendRequest<T>(IPlatformRequest request)
+    public Task<IPlatformResponse<TResult>> SendRequest<TResult>(IPlatformRequest request)
     {
         Uri uri = new Uri(_httpClient.BaseAddress, request.Path);
 
@@ -129,8 +129,10 @@ public sealed class PlatformClient : IPlatformClient
             try
             {
                 string content = httpRes.Content.ReadAsStringAsync().Result;
-                T result = JsonSerializer.Deserialize<T>(content)!;
-                IPlatformResponse<T> res = new PlatformResponse<T>(httpRes.StatusCode, httpRes.Headers, result);
+                TResult result = JsonSerializer.Deserialize<TResult>(content)!;
+                IPlatformResponse<TResult> res = new PlatformResponse<TResult>(httpRes.StatusCode,
+                                                                               httpRes.Headers,
+                                                                               result);
 
                 return res;
             }

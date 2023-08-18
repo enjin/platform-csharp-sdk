@@ -10,10 +10,10 @@ namespace Enjin.Platform.Sdk;
 /// <summary>
 /// Abstract class implementation for GraphQL inputs which hold parameters.
 /// </summary>
-/// <typeparam name="T">The type of the parameter holder. Must extend this class.</typeparam>
+/// <typeparam name="THolder">The type of the parameter holder. Must extend this class.</typeparam>
 [PublicAPI]
-public abstract class GraphQlParameterHolder<T> : IGraphQlParameterHolder<T>
-    where T : GraphQlParameterHolder<T>
+public abstract class GraphQlParameterHolder<THolder> : IGraphQlParameterHolder<THolder>
+    where THolder : GraphQlParameterHolder<THolder>
 {
     private readonly Dictionary<string, List<IGraphQlParameter>> _listedNonScalarParameters = new();
     private readonly Dictionary<string, IGraphQlParameter> _nonScalarParameters = new();
@@ -118,7 +118,7 @@ public abstract class GraphQlParameterHolder<T> : IGraphQlParameterHolder<T>
     }
 
     /// <inheritdoc/>
-    public virtual T SetParameter(string key, object? value)
+    public virtual THolder SetParameter(string key, object? value)
     {
         _nonScalarParameters.Remove(key);
         _listedNonScalarParameters.Remove(key);
@@ -134,11 +134,11 @@ public abstract class GraphQlParameterHolder<T> : IGraphQlParameterHolder<T>
             _parameters[key] = value;
         }
 
-        return (T)this;
+        return (THolder)this;
     }
 
     /// <inheritdoc/>
-    public virtual T SetParameter(string key, IGraphQlParameter? value)
+    public virtual THolder SetParameter(string key, IGraphQlParameter? value)
     {
         _listedNonScalarParameters.Remove(key);
         _scalarParameters.Remove(key);
@@ -154,11 +154,11 @@ public abstract class GraphQlParameterHolder<T> : IGraphQlParameterHolder<T>
             _parameters[key] = value;
         }
 
-        return (T)this;
+        return (THolder)this;
     }
 
     /// <inheritdoc/>
-    public virtual T SetParameter(string key, params IGraphQlParameter[]? values)
+    public virtual THolder SetParameter(string key, params IGraphQlParameter[]? values)
     {
         _nonScalarParameters.Remove(key);
         _scalarParameters.Remove(key);
@@ -175,7 +175,7 @@ public abstract class GraphQlParameterHolder<T> : IGraphQlParameterHolder<T>
             _parameters[key] = value;
         }
 
-        return (T)this;
+        return (THolder)this;
     }
 
     #endregion IGraphQlParameterHolder

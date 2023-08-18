@@ -7,16 +7,16 @@ namespace Enjin.Platform.Sdk;
 /// <summary>
 /// Models a pagination from the platform.
 /// </summary>
-/// <typeparam name="T">The type within the pagination.</typeparam>
+/// <typeparam name="TModel">The type model within the pagination.</typeparam>
 [PublicAPI]
-public class Connection<T>
+public class Connection<TModel>
 {
     /// <summary>
     /// The edges in this connection.
     /// </summary>
     [JsonInclude]
     [JsonPropertyName("edges")]
-    public IEnumerable<Edge<T>>? Edges { get; private set; }
+    public IEnumerable<Edge<TModel>>? Edges { get; private set; }
 
     /// <summary>
     /// The page information for this connection.

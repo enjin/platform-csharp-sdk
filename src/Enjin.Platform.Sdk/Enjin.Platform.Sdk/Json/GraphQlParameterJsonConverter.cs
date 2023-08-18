@@ -9,10 +9,10 @@ namespace Enjin.Platform.Sdk;
 /// <summary>
 /// <see cref="JsonConverter"/> for classes implementing <see cref="IGraphQlParameter"/>.
 /// </summary>
-/// <typeparam name="T">The parameter type. Must implement <see cref="IGraphQlParameter"/>.</typeparam>
+/// <typeparam name="TValue">The parameter type. Must implement <see cref="IGraphQlParameter"/>.</typeparam>
 [PublicAPI]
-public class GraphQlParameterJsonConverter<T> : JsonConverter<T>
-    where T : IGraphQlParameter
+public class GraphQlParameterJsonConverter<TValue> : JsonConverter<TValue>
+    where TValue : IGraphQlParameter
 {
     /// <summary>
     /// Unsupported conversion.
@@ -20,13 +20,13 @@ public class GraphQlParameterJsonConverter<T> : JsonConverter<T>
     /// <exception cref="NotSupportedException">
     /// Always thrown when called.
     /// </exception>
-    public override T Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override TValue Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         throw new NotSupportedException($"{nameof(IGraphQlParameter)} is not a valid read type");
     }
 
     /// <inheritdoc/>
-    public override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, TValue value, JsonSerializerOptions options)
     {
         writer.WriteStartObject();
 
