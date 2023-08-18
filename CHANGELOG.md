@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `ListingData` now has converter attribute for `ListingDataJsonConverter`
 - `ListingState` now has converter attribute for `ListingStateJsonConverter`
+- `NotSupportedException` thrown within `GraphQlParameterJsonConverter.Read()` now has a message.
 
 ### Deprecated
 
