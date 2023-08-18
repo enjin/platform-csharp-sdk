@@ -30,6 +30,9 @@ internal class HttpLoggingHandler : DelegatingHandler
     /// </param>
     /// <param name="logger">The logger.</param>
     /// <param name="httpLogLevel">The <see cref="HttpLogLevel"/>.</param>
+    /// <exception cref="ArgumentException">
+    /// Thrown if httpLogLevel is <see cref="HttpLogLevel.None"/>.
+    /// </exception>
     /// <exception cref="ArgumentNullException">
     /// Thrown if logger is <c>null</c>.
     /// </exception>
@@ -37,6 +40,12 @@ internal class HttpLoggingHandler : DelegatingHandler
         : base(innerHandler)
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+
+        if (httpLogLevel == HttpLogLevel.None)
+        {
+            throw new ArgumentException($"{nameof(httpLogLevel)} cannot be {nameof(HttpLogLevel.None)}");
+        }
+
         _httpLogLevel = httpLogLevel;
     }
 
