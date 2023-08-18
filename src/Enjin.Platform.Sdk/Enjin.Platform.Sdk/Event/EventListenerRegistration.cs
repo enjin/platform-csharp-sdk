@@ -19,9 +19,12 @@ public sealed class EventListenerRegistration : IEventListenerRegistration
     /// </summary>
     /// <param name="listener">The event listener.</param>
     /// <param name="matcher">The event matcher.</param>
+    /// <exception cref="ArgumentNullException">
+    /// Thrown if <see cref="listener"/> is <c>null</c>.
+    /// </exception>
     internal EventListenerRegistration(IEventListener listener, Func<string, bool> matcher)
     {
-        Listener = listener;
+        Listener = listener ?? throw new ArgumentNullException(nameof(listener));
         Matcher = matcher;
     }
 
