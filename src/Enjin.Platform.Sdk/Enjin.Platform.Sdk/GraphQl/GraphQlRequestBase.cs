@@ -161,6 +161,12 @@ public abstract class GraphQlRequestBase<TRequest> : GraphQlParameterHolder<TReq
     public virtual GraphQlRequestType Type { get; }
 
     /// <inheritdoc/>
+    public virtual bool HasVariable(string name)
+    {
+        return _variables.ContainsKey(name);
+    }
+
+    /// <inheritdoc/>
     public virtual TRequest SetVariable(string name, string type, object? value)
     {
         if (value == null)

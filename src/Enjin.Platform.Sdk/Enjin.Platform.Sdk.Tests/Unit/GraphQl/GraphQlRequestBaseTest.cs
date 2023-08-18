@@ -82,6 +82,35 @@ public class GraphQlRequestBaseTest
     }
 
     [Test]
+    public void HasVariableWhenRequestDoesNotHaveVariableReturnsFalse()
+    {
+        // Arrange
+        const string name = "var";
+        GraphQlRequestBaseImpl request = new GraphQlRequestBaseImpl("Request", GraphQlRequestType.Query);
+
+        // Act
+        bool actual = request.HasVariable(name);
+
+        // Assert
+        Assert.That(actual, Is.False);
+    }
+
+    [Test]
+    public void HasVariableWhenRequestHasVariableReturnsTrue()
+    {
+        // Arrange
+        const string name = "var";
+        GraphQlRequestBaseImpl request = new GraphQlRequestBaseImpl("Request", GraphQlRequestType.Query);
+        request.SetVariable(name, "Int", 1);
+
+        // Act
+        bool actual = request.HasVariable(name);
+
+        // Assert
+        Assert.That(actual, Is.True);
+    }
+
+    [Test]
     public void HasVariablesWhenNoVariableHasBeenSetReturnsFalse()
     {
         // Arrange

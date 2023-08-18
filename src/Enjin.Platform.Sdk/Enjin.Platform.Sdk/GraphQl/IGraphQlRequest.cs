@@ -36,6 +36,13 @@ public interface IGraphQlRequest : IGraphQlCompilable
     /// The type of this request.
     /// </summary>
     public GraphQlRequestType Type { get; }
+
+    /// <summary>
+    /// Determines whether this request currently has a variable with the given name.
+    /// </summary>
+    /// <param name="name">The variable name.</param>
+    /// <returns>Whether a variable is being set.</returns>
+    public bool HasVariable(string name);
 }
 
 /// <summary>
