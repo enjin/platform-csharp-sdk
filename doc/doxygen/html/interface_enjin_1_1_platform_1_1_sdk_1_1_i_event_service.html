@@ -99,10 +99,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aca79fc1c6fbf4a3643804f282bc6ae6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a listener for this service.  <br /></td></tr>
 <tr class="separator:aca79fc1c6fbf4a3643804f282bc6ae6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a81f02076fa6bde8df544278cd205735d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="interface_enjin_1_1_platform_1_1_sdk_1_1_i_event_listener_registration.html">IEventListenerRegistration</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_enjin_1_1_platform_1_1_sdk_1_1_i_event_service.html#a81f02076fa6bde8df544278cd205735d">RegisterListenerExcludingEvents</a> (<a class="el" href="interface_enjin_1_1_platform_1_1_sdk_1_1_i_event_listener.html">IEventListener</a> listener, params string[] events)</td></tr>
-<tr class="memdesc:a81f02076fa6bde8df544278cd205735d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a listener for this service that is configured to filter for the specified events.  <br /></td></tr>
+<tr class="memdesc:a81f02076fa6bde8df544278cd205735d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a listener for this service that is configured to filter out the specified events.  <br /></td></tr>
 <tr class="separator:a81f02076fa6bde8df544278cd205735d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ba819fe74cb4701d830d86961253e79"><td class="memItemLeft" align="right" valign="top"><a class="el" href="interface_enjin_1_1_platform_1_1_sdk_1_1_i_event_listener_registration.html">IEventListenerRegistration</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_enjin_1_1_platform_1_1_sdk_1_1_i_event_service.html#a9ba819fe74cb4701d830d86961253e79">RegisterListenerIncludingEvents</a> (<a class="el" href="interface_enjin_1_1_platform_1_1_sdk_1_1_i_event_listener.html">IEventListener</a> listener, params string[] events)</td></tr>
-<tr class="memdesc:a9ba819fe74cb4701d830d86961253e79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a listener for this service that is configured to filter out the specified events.  <br /></td></tr>
+<tr class="memdesc:a9ba819fe74cb4701d830d86961253e79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a listener for this service that is configured to filter for the specified events.  <br /></td></tr>
 <tr class="separator:a9ba819fe74cb4701d830d86961253e79"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e5d137b91d133066b382f33eb682425"><td class="memItemLeft" align="right" valign="top"><a class="el" href="interface_enjin_1_1_platform_1_1_sdk_1_1_i_event_listener_registration.html">IEventListenerRegistration</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_enjin_1_1_platform_1_1_sdk_1_1_i_event_service.html#a6e5d137b91d133066b382f33eb682425">RegisterListenerWithMatcher</a> (<a class="el" href="interface_enjin_1_1_platform_1_1_sdk_1_1_i_event_listener.html">IEventListener</a> listener, Func&lt; string, bool &gt; matcher)</td></tr>
 <tr class="memdesc:a6e5d137b91d133066b382f33eb682425"><td class="mdescLeft">&#160;</td><td class="mdescRight">Registers a listener for this service that is configured to filter for events against the given matcher.  <br /></td></tr>
@@ -252,11 +252,11 @@ EventHandler&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom">
       </table>
 </div><div class="memdoc">
 
-<p>Registers a listener for this service that is configured to filter for the specified events. </p>
+<p>Registers a listener for this service that is configured to filter out the specified events. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">listener</td><td>The listener.</td></tr>
-    <tr><td class="paramname">events</td><td>The events to filter for.</td></tr>
+    <tr><td class="paramname">events</td><td>The events to filter out.</td></tr>
   </table>
   </dd>
 </dl>
@@ -298,11 +298,11 @@ EventHandler&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom">
       </table>
 </div><div class="memdoc">
 
-<p>Registers a listener for this service that is configured to filter out the specified events. </p>
+<p>Registers a listener for this service that is configured to filter for the specified events. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">listener</td><td>The listener.</td></tr>
-    <tr><td class="paramname">events</td><td>The events to filter out.</td></tr>
+    <tr><td class="paramname">events</td><td>The events to filter for.</td></tr>
   </table>
   </dd>
 </dl>
