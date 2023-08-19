@@ -217,17 +217,27 @@ public class PusherEventServiceTest
     public void UnregisterListenerWhenGivenRegisteredListenerUnregistersListener()
     {
         // Arrange
-        IEventListener mockListener = Mock.Of<IEventListener>();
-        IEventListenerRegistration registration = ClassUnderTest.RegisterListener(mockListener);
+        IEventListener dummyListener = Mock.Of<IEventListener>();
+        IEventListenerRegistration registration = ClassUnderTest.RegisterListener(dummyListener);
 
         // Assumptions
         Assume.That(registration.IsRegistered, Is.True, "Assume registration is active");
 
         // Act
-        ClassUnderTest.UnregisterListener(mockListener);
+        ClassUnderTest.UnregisterListener(dummyListener);
 
         // Assert
         Assert.That(registration.IsRegistered, Is.False, "Assert registration is not active");
+    }
+
+    [Test]
+    public void UnregisterListenerWhenGivenNonRegisteredListenerDoesNotThrowException()
+    {
+        // Arrange
+        IEventListener dummyListener = Mock.Of<IEventListener>();
+
+        // Assert
+        Assert.DoesNotThrow(() => ClassUnderTest.UnregisterListener(dummyListener));
     }
 
     [EventFilter(false)]
