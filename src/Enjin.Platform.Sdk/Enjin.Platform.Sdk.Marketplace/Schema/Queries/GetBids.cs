@@ -42,7 +42,7 @@ public class GetBids : GraphQlRequest<GetBids, MarketplaceBidConnectionFragment>
     /// Sets the listing IDs.
     /// </summary>
     /// <param name="listingIds">The listing IDs.</param>
-    /// <returns></returns>
+    /// <returns>This request for chaining.</returns>
     public GetBids SetListingIds(params string[]? listingIds)
     {
         return SetVariable("listingIds", CoreTypes.StringArray, listingIds);

@@ -39,7 +39,7 @@ var searchData=
   ['tokentransferred_36',['TokenTransferred',['../class_enjin_1_1_platform_1_1_sdk_1_1_substrate_events.html#aaa5542f831b6368421ee8c5313eae242',1,'Enjin::Platform::Sdk::SubstrateEvents']]],
   ['tokenunapproved_37',['TokenUnapproved',['../class_enjin_1_1_platform_1_1_sdk_1_1_substrate_events.html#a5d3165d8d170ad829ada940cf3bc472e',1,'Enjin::Platform::Sdk::SubstrateEvents']]],
   ['tostring_38',['ToString',['../struct_enjin_1_1_platform_1_1_sdk_1_1_integer_range.html#a6045ff02cfac7cda8f6fb74339ed2a47',1,'Enjin::Platform::Sdk::IntegerRange']]],
-  ['totalcount_39',['TotalCount',['../class_enjin_1_1_platform_1_1_sdk_1_1_connection.html#a57b393ccb2aebed41be3c99ce116b618',1,'Enjin::Platform::Sdk::Connection']]],
+  ['totalcount_39',['TotalCount',['../class_enjin_1_1_platform_1_1_sdk_1_1_connection.html#a46150e8e51c8b26a32da5384dd5cb0ff',1,'Enjin::Platform::Sdk::Connection']]],
   ['trace_40',['Trace',['../namespace_enjin_1_1_platform_1_1_sdk.html#a21ac3035b1059ff4dab28f1f728421e6add4ec0ac4e58f7c32a01244ae91150b1',1,'Enjin::Platform::Sdk']]],
   ['transaction_41',['Transaction',['../class_enjin_1_1_platform_1_1_sdk_1_1_transaction.html',1,'Enjin::Platform::Sdk']]],
   ['transactioncreated_42',['TransactionCreated',['../class_enjin_1_1_platform_1_1_sdk_1_1_global_events.html#ae73628bdf75d931075baea7f43fa0a2e',1,'Enjin::Platform::Sdk::GlobalEvents']]],

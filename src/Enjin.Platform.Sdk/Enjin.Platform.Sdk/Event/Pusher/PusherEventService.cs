@@ -204,7 +204,7 @@ public sealed class PusherEventService : IEventService
         }
 
         /// <summary>
-        /// Sets whether to use encryption for sending and receiving messages..
+        /// Sets whether to use encryption for sending and receiving messages.
         /// </summary>
         /// <param name="isEncrypted">Whether to use encryption.</param>
         /// <returns>This builder for chaining.</returns>

@@ -31,7 +31,7 @@ public class GetSales : GraphQlRequest<GetSales, MarketplaceSaleConnectionFragme
     /// <summary>
     /// Sets the wallet accounts.
     /// </summary>
-    /// <param name="accounts">Te wallet accounts.</param>
+    /// <param name="accounts">The wallet accounts.</param>
     /// <returns>This request for chaining.</returns>
     public GetSales SetAccounts(params string[]? accounts)
     {

@@ -20,8 +20,13 @@ public class NullableBigIntegerJsonConverter : JsonConverter<BigInteger?>
     /// <see cref="JsonTokenType.Null"/>.
     /// </exception>
     /// <remarks>
+    /// <para>
+    /// <inheritdoc/>
+    /// </para>
+    /// <para>
     /// When returned in a response, the <c>BigInt</c> type on the platform is expected to be returned as a string and
     /// as such this converter only expects string or null JSON types.
+    /// </para>
     /// </remarks>
     public override BigInteger? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {

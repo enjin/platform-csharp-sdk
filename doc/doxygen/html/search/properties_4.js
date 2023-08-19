@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['edges_0',['Edges',['../class_enjin_1_1_platform_1_1_sdk_1_1_connection.html#ae0b8300ddfb28ee735c0f116c57263c5',1,'Enjin::Platform::Sdk::Connection']]],
+  ['edges_0',['Edges',['../class_enjin_1_1_platform_1_1_sdk_1_1_connection.html#a6c28b64099dc33dba9a85373b87688b7',1,'Enjin::Platform::Sdk::Connection']]],
   ['encodeddata_1',['EncodedData',['../class_enjin_1_1_platform_1_1_sdk_1_1_transaction.html#a313542a1b9d8ba654d84916539066d97',1,'Enjin::Platform::Sdk::Transaction']]],
   ['end_2',['End',['../class_enjin_1_1_platform_1_1_sdk_1_1_beam_1_1_beam.html#a0ffb02375c71b6a27fb7d78ce169d838',1,'Enjin::Platform::Sdk::Beam::Beam']]],
   ['endblock_3',['EndBlock',['../class_enjin_1_1_platform_1_1_sdk_1_1_marketplace_1_1_auction_data.html#a5b9bfa16f0042a5fd0520f3f8ff0df9f',1,'Enjin::Platform::Sdk::Marketplace::AuctionData']]],

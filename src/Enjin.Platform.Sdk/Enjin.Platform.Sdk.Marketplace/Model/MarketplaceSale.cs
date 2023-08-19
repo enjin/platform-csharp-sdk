@@ -19,7 +19,7 @@ public class MarketplaceSale
     public BigInteger? Id { get; private set; }
 
     /// <summary>
-    /// The price for each unit was sold at.
+    /// The price each unit was sold at.
     /// </summary>
     [JsonConverter(typeof(NullableBigIntegerJsonConverter))]
     [JsonInclude]

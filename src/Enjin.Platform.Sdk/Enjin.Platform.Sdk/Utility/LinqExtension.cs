@@ -13,10 +13,10 @@ internal static class LinqExtension
     /// </summary>
     /// <param name="source">The source.</param>
     /// <param name="action">The action.</param>
-    /// <typeparam name="T">The type of the elements in the source.</typeparam>
-    public static void Do<T>(this IEnumerable<T> source, Action<T> action)
+    /// <typeparam name="TSource">The type of the elements in the source.</typeparam>
+    public static void Do<TSource>(this IEnumerable<TSource> source, Action<TSource> action)
     {
-        foreach (T el in source)
+        foreach (TSource el in source)
         {
             action(el);
         }

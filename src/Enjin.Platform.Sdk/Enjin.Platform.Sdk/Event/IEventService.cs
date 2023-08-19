@@ -60,10 +60,10 @@ public interface IEventService : IDisposable
     public IEventListenerRegistration RegisterListener(IEventListener listener);
 
     /// <summary>
-    /// Registers a listener for this service that is configured to filter for the specified events.
+    /// Registers a listener for this service that is configured to filter out the specified events.
     /// </summary>
     /// <param name="listener">The listener.</param>
-    /// <param name="events">The events to filter for.</param>
+    /// <param name="events">The events to filter out.</param>
     /// <returns>The registration for the listener.</returns>
     /// <exception cref="ArgumentException">
     /// Thrown if <see cref="EventFilterAttribute"/> is attached to listener.
@@ -71,10 +71,10 @@ public interface IEventService : IDisposable
     public IEventListenerRegistration RegisterListenerExcludingEvents(IEventListener listener, params string[] events);
 
     /// <summary>
-    /// Registers a listener for this service that is configured to filter out the specified events.
+    /// Registers a listener for this service that is configured to filter for the specified events.
     /// </summary>
     /// <param name="listener">The listener.</param>
-    /// <param name="events">The events to filter out.</param>
+    /// <param name="events">The events to filter for.</param>
     /// <returns>The registration for the listener.</returns>
     /// <exception cref="ArgumentException">
     /// Thrown if <see cref="EventFilterAttribute"/> is attached to listener.

@@ -6,7 +6,7 @@ namespace Enjin.Platform.Sdk.Beam;
 /// <summary>
 /// Interface used to add extension methods for setting common beam parameters.
 /// </summary>
-/// <typeparam name="THolder">The type of the parameter setter. Must implement this interface.</typeparam>
+/// <typeparam name="THolder">The type of the parameter holder. Must implement this interface.</typeparam>
 /// <seealso cref="HasBeamCommonFieldsExtension"/>
 [PublicAPI]
 public interface IHasBeamCommonFields<out THolder> : IGraphQlParameterHolder<THolder>

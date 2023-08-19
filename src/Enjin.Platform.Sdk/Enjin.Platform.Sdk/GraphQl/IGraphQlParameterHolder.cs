@@ -37,10 +37,10 @@ public interface IGraphQlParameterHolder
 /// <summary>
 /// Interface for setting parameters for GraphQL inputs which hold parameters.
 /// </summary>
-/// <typeparam name="T">The type of the parameter holder. Must implement this interface.</typeparam>
+/// <typeparam name="THolder">The type of the parameter holder. Must implement this interface.</typeparam>
 [PublicAPI]
-public interface IGraphQlParameterHolder<out T> : IGraphQlParameterHolder
-    where T : IGraphQlParameterHolder<T>
+public interface IGraphQlParameterHolder<out THolder> : IGraphQlParameterHolder
+    where THolder : IGraphQlParameterHolder<THolder>
 {
     /// <summary>
     /// Sets a scalar parameter to be stored by this holder.
@@ -51,7 +51,7 @@ public interface IGraphQlParameterHolder<out T> : IGraphQlParameterHolder
     /// <remarks>
     /// If value is <c>null</c>, then the parameter will be removed from this holder.
     /// </remarks>
-    public T SetParameter(string key, object? value);
+    public THolder SetParameter(string key, object? value);
 
     /// <summary>
     /// Sets a non-scalar parameter to be stored by this holder.
@@ -62,7 +62,7 @@ public interface IGraphQlParameterHolder<out T> : IGraphQlParameterHolder
     /// <remarks>
     /// If value is <c>null</c>, then the parameter will be removed from this holder.
     /// </remarks>
-    public T SetParameter(string key, IGraphQlParameter? value);
+    public THolder SetParameter(string key, IGraphQlParameter? value);
 
     /// <summary>
     /// Sets a listed non-scalar parameter to be stored by this holder.
@@ -73,5 +73,5 @@ public interface IGraphQlParameterHolder<out T> : IGraphQlParameterHolder
     /// <remarks>
     /// If values is <c>null</c>, then the parameter will be removed from this holder.
     /// </remarks>
-    public T SetParameter(string key, params IGraphQlParameter[]? values);
+    public THolder SetParameter(string key, params IGraphQlParameter[]? values);
 }

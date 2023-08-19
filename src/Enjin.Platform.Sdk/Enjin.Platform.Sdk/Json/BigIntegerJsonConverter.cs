@@ -19,8 +19,13 @@ public class BigIntegerJsonConverter : JsonConverter<BigInteger>
     /// If the <see cref="JsonTokenType"/> is not <see cref="JsonTokenType.String"/>.
     /// </exception>
     /// <remarks>
+    /// <para>
+    /// <inheritdoc/>
+    /// </para>
+    /// <para>
     /// When returned in a response, the <c>BigInt</c> type on the platform is expected to be returned as a string and
     /// as such this converter only expects string.
+    /// </para>
     /// </remarks>
     public override BigInteger Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {

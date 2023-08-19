@@ -13,9 +13,9 @@ public interface IGraphQlParameter : IGraphQlCompilable, IGraphQlParameterHolder
 /// <summary>
 /// Interface for setting inner parameters for complex GraphQL parameters.
 /// </summary>
-/// <typeparam name="T">The parameter type. Must implement this interface.</typeparam>
+/// <typeparam name="TParameter">The parameter type. Must implement this interface.</typeparam>
 [PublicAPI]
-public interface IGraphQlParameter<out T> : IGraphQlParameter, IGraphQlParameterHolder<T>
-    where T : IGraphQlParameter<T>
+public interface IGraphQlParameter<out TParameter> : IGraphQlParameter, IGraphQlParameterHolder<TParameter>
+    where TParameter : IGraphQlParameter<TParameter>
 {
 }

@@ -141,10 +141,10 @@ public class MarketplaceListingFragment : GraphQlFragment<MarketplaceListingFrag
     /// property of the <see cref="MarketplaceListing"/>.
     /// </summary>
     /// <param name="fragment">The <see cref="ListingState"/> fragment.</param>
-    /// <typeparam name="T">The specific type of the data.</typeparam>
+    /// <typeparam name="TFragment">The specific type of the state fragment.</typeparam>
     /// <returns>This fragment for chaining.</returns>
-    public MarketplaceListingFragment WithState<T>(ListingStateFragment<T>? fragment)
-        where T : ListingStateFragment<T>
+    public MarketplaceListingFragment WithState<TFragment>(ListingStateFragment<TFragment>? fragment)
+        where TFragment : ListingStateFragment<TFragment>
     {
         return WithField("state", fragment);
     }
@@ -154,10 +154,10 @@ public class MarketplaceListingFragment : GraphQlFragment<MarketplaceListingFrag
     /// property of the <see cref="MarketplaceListing"/>.
     /// </summary>
     /// <param name="fragment">The <see cref="ListingData"/> fragment.</param>
-    /// <typeparam name="T">The specific type of the data.</typeparam>
+    /// <typeparam name="TFragment">The specific type of the data fragment.</typeparam>
     /// <returns>This fragment for chaining.</returns>
-    public MarketplaceListingFragment WithData<T>(ListingDataFragment<T>? fragment)
-        where T : ListingDataFragment<T>
+    public MarketplaceListingFragment WithData<TFragment>(ListingDataFragment<TFragment>? fragment)
+        where TFragment : ListingDataFragment<TFragment>
     {
         return WithField("data", fragment);
     }

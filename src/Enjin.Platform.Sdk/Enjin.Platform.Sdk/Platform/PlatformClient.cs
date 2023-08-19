@@ -118,7 +118,7 @@ public sealed class PlatformClient : IPlatformClient
     }
 
     /// <inheritdoc/>
-    public Task<IPlatformResponse<T>> SendRequest<T>(IPlatformRequest request)
+    public Task<IPlatformResponse<TResult>> SendRequest<TResult>(IPlatformRequest request)
     {
         Uri uri = new Uri(_httpClient.BaseAddress, request.Path);
 
@@ -129,8 +129,10 @@ public sealed class PlatformClient : IPlatformClient
             try
             {
                 string content = httpRes.Content.ReadAsStringAsync().Result;
-                T result = JsonSerializer.Deserialize<T>(content)!;
-                IPlatformResponse<T> res = new PlatformResponse<T>(httpRes.StatusCode, httpRes.Headers, result);
+                TResult result = JsonSerializer.Deserialize<TResult>(content)!;
+                IPlatformResponse<TResult> res = new PlatformResponse<TResult>(httpRes.StatusCode,
+                                                                               httpRes.Headers,
+                                                                               result);
 
                 return res;
             }
@@ -222,7 +224,7 @@ public sealed class PlatformClient : IPlatformClient
         }
 
         /// <summary>
-        /// The <see cref="HttpLogLevel"/> for the client to use when processing HTTP traffic.
+        /// Sets the <see cref="HttpLogLevel"/> for the client to use when processing HTTP traffic.
         /// </summary>
         /// <param name="httpLogLevel">The <see cref="HttpLogLevel"/>.</param>
         /// <returns>This builder for chaining.</returns>
@@ -236,7 +238,7 @@ public sealed class PlatformClient : IPlatformClient
         }
 
         /// <summary>
-        /// The logger for the client to use.
+        /// Sets the logger for the client to use.
         /// </summary>
         /// <param name="logger">The logger.</param>
         /// <returns>This builder for chaining.</returns>

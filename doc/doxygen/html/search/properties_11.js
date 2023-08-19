@@ -7,7 +7,7 @@ var searchData=
   ['tokenaccounts_4',['TokenAccounts',['../class_enjin_1_1_platform_1_1_sdk_1_1_wallet.html#a45e1bb69d0c00e29b87e955b224da07a',1,'Enjin::Platform::Sdk::Wallet']]],
   ['tokenid_5',['TokenId',['../class_enjin_1_1_platform_1_1_sdk_1_1_beam_1_1_beam_claim.html#ac543084c4a237d1ad3a4fb1ae24fa568',1,'Enjin.Platform.Sdk.Beam.BeamClaim.TokenId'],['../class_enjin_1_1_platform_1_1_sdk_1_1_marketplace_1_1_asset.html#a3e709ade8f80502d9684427f73b3b111',1,'Enjin.Platform.Sdk.Marketplace.Asset.TokenId'],['../class_enjin_1_1_platform_1_1_sdk_1_1_token.html#abe1d7b4211fd6e9ba6a7b45a5ab78998',1,'Enjin.Platform.Sdk.Token.TokenId']]],
   ['tokens_6',['Tokens',['../class_enjin_1_1_platform_1_1_sdk_1_1_collection.html#a9b55ac81b01853a80e909a9b6b229ad1',1,'Enjin::Platform::Sdk::Collection']]],
-  ['totalcount_7',['TotalCount',['../class_enjin_1_1_platform_1_1_sdk_1_1_connection.html#a57b393ccb2aebed41be3c99ce116b618',1,'Enjin::Platform::Sdk::Connection']]],
+  ['totalcount_7',['TotalCount',['../class_enjin_1_1_platform_1_1_sdk_1_1_connection.html#a46150e8e51c8b26a32da5384dd5cb0ff',1,'Enjin::Platform::Sdk::Connection']]],
   ['transactionhash_8',['TransactionHash',['../class_enjin_1_1_platform_1_1_sdk_1_1_transaction.html#a52f43aae5614b6f2b60adc340074755a',1,'Enjin::Platform::Sdk::Transaction']]],
   ['transactionid_9',['TransactionId',['../class_enjin_1_1_platform_1_1_sdk_1_1_transaction.html#ac2184135f3f9e8efe3c0b16726e5800f',1,'Enjin::Platform::Sdk::Transaction']]],
   ['transactions_10',['Transactions',['../class_enjin_1_1_platform_1_1_sdk_1_1_wallet.html#a6379202edbb27ef93ec1ee178a44d540',1,'Enjin::Platform::Sdk::Wallet']]],

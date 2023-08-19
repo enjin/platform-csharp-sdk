@@ -7,7 +7,7 @@ var searchData=
   ['edgefragmentbase_4',['EdgeFragmentBase',['../class_enjin_1_1_platform_1_1_sdk_1_1_edge_fragment_base.html',1,'Enjin::Platform::Sdk']]],
   ['edgefragmentbase_3c_20edgefragment_20_3e_5',['EdgeFragmentBase&lt; EdgeFragment &gt;',['../class_enjin_1_1_platform_1_1_sdk_1_1_edge_fragment_base.html',1,'Enjin::Platform::Sdk']]],
   ['edgefragmentbase_3c_20edgefragment_3c_20tfragment_20_3e_20_3e_6',['EdgeFragmentBase&lt; EdgeFragment&lt; TFragment &gt; &gt;',['../class_enjin_1_1_platform_1_1_sdk_1_1_edge_fragment_base.html',1,'Enjin::Platform::Sdk']]],
-  ['edges_7',['Edges',['../class_enjin_1_1_platform_1_1_sdk_1_1_connection.html#ae0b8300ddfb28ee735c0f116c57263c5',1,'Enjin::Platform::Sdk::Connection']]],
+  ['edges_7',['Edges',['../class_enjin_1_1_platform_1_1_sdk_1_1_connection.html#a6c28b64099dc33dba9a85373b87688b7',1,'Enjin::Platform::Sdk::Connection']]],
   ['encodabletokenidinput_8',['EncodableTokenIdInput',['../class_enjin_1_1_platform_1_1_sdk_1_1_core_types.html#acae20a76ad9296a421270ea601590872',1,'Enjin.Platform.Sdk.CoreTypes.EncodableTokenIdInput'],['../class_enjin_1_1_platform_1_1_sdk_1_1_encodable_token_id_input.html#a0226f06224f36719b2b0b22a3146a273',1,'Enjin.Platform.Sdk.EncodableTokenIdInput.EncodableTokenIdInput()'],['../class_enjin_1_1_platform_1_1_sdk_1_1_encodable_token_id_input.html',1,'Enjin.Platform.Sdk.EncodableTokenIdInput']]],
   ['encodabletokenidinputarray_9',['EncodableTokenIdInputArray',['../class_enjin_1_1_platform_1_1_sdk_1_1_core_types.html#a42c91908c336e604ea14fa942c90bd91',1,'Enjin::Platform::Sdk::CoreTypes']]],
   ['encodeddata_10',['EncodedData',['../class_enjin_1_1_platform_1_1_sdk_1_1_transaction.html#a313542a1b9d8ba654d84916539066d97',1,'Enjin::Platform::Sdk::Transaction']]],
