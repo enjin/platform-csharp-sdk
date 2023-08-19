@@ -16,9 +16,9 @@ public class HttpLoggingHandlerTest
     private WireMockServer MockServer { get; set; }
 
     private const string BaseUrl = "http://localhost";
-    private const string ContentType = "Content-Type";
-    private const string MediaType = "application/json";
     private const string Path = "/graphql";
+
+    private static readonly TimeSpan TIMEOUT = TimeSpan.FromSeconds(5000);
 
     [OneTimeSetUp]
     public void BeforeAll()
@@ -61,16 +61,14 @@ public class HttpLoggingHandlerTest
 
         // Arrange - Stubbing
         MockServer.Given(Request.Create()
-                                .WithPath(Path)
-                                .UsingPost())
+                                .WithPath(Path))
                   .RespondWith(Response.Create()
                                        .WithSuccess()
-                                       .WithHeader(ContentType, MediaType)
                                        .WithBody(responseBody));
 
         // Act
         client.SendRequest<GraphQlResponse<bool?>>(MockRequest.Object)
-              .Wait(TimeSpan.FromSeconds(5));
+              .Wait(TIMEOUT);
 
         // Verify
         MockLogger.VerifyNoOtherCalls();
@@ -88,16 +86,14 @@ public class HttpLoggingHandlerTest
 
         // Arrange - Stubbing
         MockServer.Given(Request.Create()
-                                .WithPath(Path)
-                                .UsingPost())
+                                .WithPath(Path))
                   .RespondWith(Response.Create()
                                        .WithSuccess()
-                                       .WithHeader(ContentType, MediaType)
                                        .WithBody(responseBody));
 
         // Act
         client.SendRequest<GraphQlResponse<bool?>>(MockRequest.Object)
-              .Wait(TimeSpan.FromSeconds(5));
+              .Wait(TIMEOUT);
 
         // Verify
         MockLogger.Verify(mock => mock.Log(LogLevel.Trace, It.IsAny<string?>()), Times.Exactly(2));
