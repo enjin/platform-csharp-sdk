@@ -32,8 +32,31 @@ public class GraphQlParameterJsonConverter<TValue> : JsonConverter<TValue>
 
         foreach (KeyValuePair<string, object?> variable in value.Parameters)
         {
-            writer.WritePropertyName(variable.Key);
-            writer.WriteRawValue(JsonSerializer.Serialize(variable.Value, options));
+          if (variable.Value != null && variable.Value.GetType().IsGenericType && variable.Value.GetType().GetGenericTypeDefinition() == typeof(List<>)) 
+          {
+                var arrayOfParams = (List<IGraphQlParameter>) variable.Value;
+                writer.WritePropertyName(variable.Key);
+                
+                foreach (var graphQlParameter in arrayOfParams)
+                {
+                    writer.WriteStartArray();
+                    writer.WriteStartObject();
+                    
+                    foreach (KeyValuePair<string, object?> parameter in graphQlParameter.Parameters)
+                    {
+                        writer.WritePropertyName(parameter.Key);
+                        writer.WriteRawValue(JsonSerializer.Serialize(parameter.Value, options));
+                    }
+                    
+                    writer.WriteEndObject();
+                    writer.WriteEndArray();
+                }
+          }
+          else
+          {
+              writer.WritePropertyName(variable.Key);
+              writer.WriteRawValue(JsonSerializer.Serialize(variable.Value, options));
+          }
         }
 
         writer.WriteEndObject();
