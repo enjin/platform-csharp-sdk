@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Numerics;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using JetBrains.Annotations;
@@ -29,11 +31,34 @@ public class GraphQlParameterJsonConverter<TValue> : JsonConverter<TValue>
     public override void Write(Utf8JsonWriter writer, TValue value, JsonSerializerOptions options)
     {
         writer.WriteStartObject();
-
-        foreach (KeyValuePair<string, object?> variable in value.Parameters)
+        foreach (var variable in value.Parameters)
         {
-            writer.WritePropertyName(variable.Key);
-            writer.WriteRawValue(JsonSerializer.Serialize(variable.Value, options));
+            if (variable.Value is List<IGraphQlParameter> array)
+            {
+                writer.WritePropertyName(variable.Key);
+                writer.WriteStartArray();
+                foreach (var item in array)
+                {
+                    writer.WriteStartObject();
+                    foreach (var parameter in item.Parameters)
+                    {
+                        writer.WritePropertyName(parameter.Key);
+                        if (parameter.Value is BigInteger val)
+                            writer.WriteRawValue(val.ToString(CultureInfo.InvariantCulture));
+                        else 
+                            writer.WriteRawValue(JsonSerializer.Serialize(parameter.Value, options));
+                    }
+
+                    writer.WriteEndObject();
+                }
+
+                writer.WriteEndArray();
+            }
+            else
+            {
+                writer.WritePropertyName(variable.Key);
+                writer.WriteRawValue(JsonSerializer.Serialize(variable.Value, options));
+            }
         }
 
         writer.WriteEndObject();
