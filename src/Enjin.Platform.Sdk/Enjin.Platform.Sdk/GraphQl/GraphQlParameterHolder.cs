@@ -118,6 +118,12 @@ public abstract class GraphQlParameterHolder<THolder> : IGraphQlParameterHolder<
     }
 
     /// <inheritdoc/>
+    public virtual bool HasParameter(string key)
+    {
+        return _parameters.ContainsKey(key);
+    }
+
+    /// <inheritdoc/>
     public virtual THolder SetParameter(string key, object? value)
     {
         _nonScalarParameters.Remove(key);

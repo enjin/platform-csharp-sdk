@@ -193,6 +193,34 @@ public class GraphQlParameterHolderTest
     }
 
     [Test]
+    public void HasParameterWhenHolderDoesNotHaveParameterReturnsFalse()
+    {
+        // Arrange
+        const string key = "key";
+
+        // Act
+        bool actual = ClassUnderTest.HasParameter(key);
+
+        // Assert
+        Assert.That(actual, Is.False);
+    }
+
+    [Test]
+    public void HasParameterWhenHolderHasParameterReturnsTrue()
+    {
+        // Arrange
+        const string key = "key";
+        IGraphQlParameter value = MockParameter.Object;
+        ClassUnderTest.SetParameter(key, value);
+
+        // Act
+        bool actual = ClassUnderTest.HasParameter(key);
+
+        // Assert
+        Assert.That(actual, Is.True);
+    }
+
+    [Test]
     public void HasParametersWhenNoParametersAreSetReturnsFalse()
     {
         // Act

@@ -32,6 +32,13 @@ public interface IGraphQlParameterHolder
     /// This method will return an empty string if <see cref="HasParameters"/> is <c>false</c>.
     /// </remarks>
     public string CompileParameters();
+
+    /// <summary>
+    /// Determines whether this holder currently has a parameter with the given key.
+    /// </summary>
+    /// <param name="key">The parameter key.</param>
+    /// <returns>Whether a parameter is being held.</returns>
+    public bool HasParameter(string key);
 }
 
 /// <summary>
