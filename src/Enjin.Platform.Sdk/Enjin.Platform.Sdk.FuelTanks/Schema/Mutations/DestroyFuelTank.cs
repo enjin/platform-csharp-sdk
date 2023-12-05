@@ -8,7 +8,8 @@ namespace Enjin.Platform.Sdk.FuelTanks;
 /// <seealso cref="Transaction"/>
 [PublicAPI]
 public class DestroyFuelTank : GraphQlRequest<DestroyFuelTank, TransactionFragment>,
-                               IHasIdempotencyKey<DestroyFuelTank>
+                               IHasIdempotencyKey<DestroyFuelTank>,
+                               IHasSigningAccount<DestroyFuelTank>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="DestroyFuelTank"/> class.

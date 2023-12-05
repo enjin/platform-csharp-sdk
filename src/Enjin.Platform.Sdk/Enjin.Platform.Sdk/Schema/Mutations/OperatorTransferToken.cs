@@ -10,7 +10,8 @@ namespace Enjin.Platform.Sdk;
 [PublicAPI]
 public class OperatorTransferToken : GraphQlRequest<OperatorTransferToken, TransactionFragment>,
                                      IHasIdempotencyKey<OperatorTransferToken>,
-                                     IHasSkipValidation<OperatorTransferToken>
+                                     IHasSkipValidation<OperatorTransferToken>,
+                                     IHasSigningAccount<OperatorTransferToken>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="OperatorTransferToken"/> class.

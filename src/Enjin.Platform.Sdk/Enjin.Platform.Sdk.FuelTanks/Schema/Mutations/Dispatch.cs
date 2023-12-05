@@ -9,7 +9,8 @@ namespace Enjin.Platform.Sdk.FuelTanks;
 /// <seealso cref="Transaction"/>
 [PublicAPI]
 public class Dispatch : GraphQlRequest<Dispatch, TransactionFragment>,
-                        IHasIdempotencyKey<Dispatch>
+                        IHasIdempotencyKey<Dispatch>,
+                        IHasSigningAccount<Dispatch>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Dispatch"/> class.

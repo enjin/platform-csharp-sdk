@@ -9,7 +9,8 @@ namespace Enjin.Platform.Sdk.FuelTanks;
 /// <seealso cref="Transaction"/>
 [PublicAPI]
 public class SetConsumption : GraphQlRequest<SetConsumption, TransactionFragment>,
-                              IHasIdempotencyKey<SetConsumption>
+                              IHasIdempotencyKey<SetConsumption>,
+                              IHasSigningAccount<SetConsumption>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="SetConsumption"/> class.

@@ -15,7 +15,8 @@ namespace Enjin.Platform.Sdk;
 public class Freeze : GraphQlRequest<Freeze, TransactionFragment>,
                       IHasEncodableTokenId<Freeze>,
                       IHasIdempotencyKey<Freeze>,
-                      IHasSkipValidation<Freeze>
+                      IHasSkipValidation<Freeze>,
+                      IHasSigningAccount<Freeze>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Freeze"/> class.

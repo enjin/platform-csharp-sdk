@@ -11,7 +11,8 @@ namespace Enjin.Platform.Sdk;
 public class RemoveTokenAttribute : GraphQlRequest<RemoveTokenAttribute, TransactionFragment>,
                                     IHasEncodableTokenId<RemoveTokenAttribute>,
                                     IHasIdempotencyKey<RemoveTokenAttribute>,
-                                    IHasSkipValidation<RemoveTokenAttribute>
+                                    IHasSkipValidation<RemoveTokenAttribute>,
+                                    IHasSigningAccount<RemoveTokenAttribute>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="RemoveTokenAttribute"/> class.

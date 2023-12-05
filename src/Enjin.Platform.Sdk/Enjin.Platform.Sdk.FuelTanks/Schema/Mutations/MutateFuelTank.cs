@@ -8,7 +8,8 @@ namespace Enjin.Platform.Sdk.FuelTanks;
 /// <seealso cref="Transaction"/>
 [PublicAPI]
 public class MutateFuelTank : GraphQlRequest<MutateFuelTank, TransactionFragment>,
-                              IHasIdempotencyKey<MutateFuelTank>
+                              IHasIdempotencyKey<MutateFuelTank>,
+                              IHasSigningAccount<MutateFuelTank>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="MutateFuelTank"/> class.

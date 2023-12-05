@@ -9,7 +9,8 @@ namespace Enjin.Platform.Sdk.Marketplace;
 /// <see cref="Transaction"/>
 [PublicAPI]
 public class CreateListing : GraphQlRequest<CreateListing, TransactionFragment>,
-                             IHasIdempotencyKey<CreateListing>
+                             IHasIdempotencyKey<CreateListing>,
+                             IHasSigningAccount<CreateListing>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="CreateListing"/> class.

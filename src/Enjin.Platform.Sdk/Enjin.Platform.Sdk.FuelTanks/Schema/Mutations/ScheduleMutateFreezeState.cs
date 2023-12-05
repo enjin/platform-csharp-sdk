@@ -10,7 +10,8 @@ namespace Enjin.Platform.Sdk.FuelTanks;
 /// <seealso cref="Transaction"/>
 [PublicAPI]
 public class ScheduleMutateFreezeState : GraphQlRequest<ScheduleMutateFreezeState, TransactionFragment>,
-                                         IHasIdempotencyKey<ScheduleMutateFreezeState>
+                                         IHasIdempotencyKey<ScheduleMutateFreezeState>,
+                                         IHasSigningAccount<ScheduleMutateFreezeState>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="ScheduleMutateFreezeState"/> class.

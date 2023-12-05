@@ -11,7 +11,8 @@ namespace Enjin.Platform.Sdk;
 public class SetTokenAttribute : GraphQlRequest<SetTokenAttribute, TransactionFragment>,
                                  IHasEncodableTokenId<SetTokenAttribute>,
                                  IHasIdempotencyKey<SetTokenAttribute>,
-                                 IHasSkipValidation<SetTokenAttribute>
+                                 IHasSkipValidation<SetTokenAttribute>,
+                                 IHasSigningAccount<SetTokenAttribute>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="SetTokenAttribute"/> class.

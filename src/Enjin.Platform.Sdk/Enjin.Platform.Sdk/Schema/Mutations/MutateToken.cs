@@ -11,7 +11,8 @@ namespace Enjin.Platform.Sdk;
 public class MutateToken : GraphQlRequest<MutateToken, TransactionFragment>,
                            IHasEncodableTokenId<MutateToken>,
                            IHasIdempotencyKey<MutateToken>,
-                           IHasSkipValidation<MutateToken>
+                           IHasSkipValidation<MutateToken>,
+                           IHasSigningAccount<MutateToken>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="MutateToken"/> class.

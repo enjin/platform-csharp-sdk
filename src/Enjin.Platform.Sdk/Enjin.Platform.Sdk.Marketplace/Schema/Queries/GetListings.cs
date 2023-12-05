@@ -53,9 +53,9 @@ public class GetListings : GraphQlRequest<GetListings, MarketplaceListingConnect
     /// </summary>
     /// <param name="makeAssetId">The collection and token ID.</param>
     /// <returns>This request for chaining.</returns>
-    public GetListings SetMakeAssetId(AssetInputType? makeAssetId)
+    public GetListings SetMakeAssetId(MultiTokenIdInput? makeAssetId)
     {
-        return SetVariable("makeAssetId", MarketplaceTypes.AssetInputType, makeAssetId);
+        return SetVariable("makeAssetId", CoreTypes.MultiTokenIdInput, makeAssetId);
     }
 
     /// <summary>
@@ -63,8 +63,8 @@ public class GetListings : GraphQlRequest<GetListings, MarketplaceListingConnect
     /// </summary>
     /// <param name="takeAssetId">The collection and token ID.</param>
     /// <returns>This request for chaining.</returns>
-    public GetListings SetTakeAssetId(AssetInputType? takeAssetId)
+    public GetListings SetTakeAssetId(MultiTokenIdInput? takeAssetId)
     {
-        return SetVariable("takeAssetId", MarketplaceTypes.AssetInputType, takeAssetId);
+        return SetVariable("takeAssetId", CoreTypes.MultiTokenIdInput, takeAssetId);
     }
 }

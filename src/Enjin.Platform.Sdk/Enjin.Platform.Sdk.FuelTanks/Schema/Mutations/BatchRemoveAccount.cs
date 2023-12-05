@@ -8,7 +8,8 @@ namespace Enjin.Platform.Sdk.FuelTanks;
 /// <seealso cref="Transaction"/>
 [PublicAPI]
 public class BatchRemoveAccount : GraphQlRequest<BatchRemoveAccount, TransactionFragment>,
-                                  IHasIdempotencyKey<BatchRemoveAccount>
+                                  IHasIdempotencyKey<BatchRemoveAccount>,
+                                  IHasSigningAccount<BatchRemoveAccount>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="BatchRemoveAccount"/> class.

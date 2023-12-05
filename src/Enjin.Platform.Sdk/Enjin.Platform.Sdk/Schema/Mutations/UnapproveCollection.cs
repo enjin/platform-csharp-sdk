@@ -11,7 +11,8 @@ namespace Enjin.Platform.Sdk;
 [PublicAPI]
 public class UnapproveCollection : GraphQlRequest<UnapproveCollection, TransactionFragment>,
                                    IHasIdempotencyKey<UnapproveCollection>,
-                                   IHasSkipValidation<UnapproveCollection>
+                                   IHasSkipValidation<UnapproveCollection>,
+                                   IHasSigningAccount<UnapproveCollection>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="UnapproveCollection"/> class.

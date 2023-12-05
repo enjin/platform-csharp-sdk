@@ -13,7 +13,8 @@ namespace Enjin.Platform.Sdk;
 [PublicAPI]
 public class CreateToken : GraphQlRequest<CreateToken, TransactionFragment>,
                            IHasIdempotencyKey<CreateToken>,
-                           IHasSkipValidation<CreateToken>
+                           IHasSkipValidation<CreateToken>,
+                           IHasSigningAccount<CreateToken>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="CreateToken"/> class.
