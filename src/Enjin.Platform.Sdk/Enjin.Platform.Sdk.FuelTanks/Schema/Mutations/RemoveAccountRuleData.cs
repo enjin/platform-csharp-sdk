@@ -9,7 +9,8 @@ namespace Enjin.Platform.Sdk.FuelTanks;
 /// <seealso cref="Transaction"/>
 [PublicAPI]
 public class RemoveAccountRuleData : GraphQlRequest<RemoveAccountRuleData, TransactionFragment>,
-                                     IHasIdempotencyKey<RemoveAccountRuleData>
+                                     IHasIdempotencyKey<RemoveAccountRuleData>,
+                                     IHasSigningAccount<RemoveAccountRuleData>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="RemoveAccountRuleData"/> class.

@@ -12,7 +12,8 @@ namespace Enjin.Platform.Sdk.Marketplace;
 /// <seealso cref="Transaction"/>
 [PublicAPI]
 public class PlaceBid : GraphQlRequest<PlaceBid, TransactionFragment>,
-                        IHasIdempotencyKey<PlaceBid>
+                        IHasIdempotencyKey<PlaceBid>,
+                        IHasSigningAccount<PlaceBid>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="PlaceBid"/> class.

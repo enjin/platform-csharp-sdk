@@ -9,7 +9,8 @@ namespace Enjin.Platform.Sdk.Marketplace;
 /// <seealso cref="Transaction"/>
 [PublicAPI]
 public class FillListing : GraphQlRequest<FillListing, TransactionFragment>,
-                           IHasIdempotencyKey<FillListing>
+                           IHasIdempotencyKey<FillListing>,
+                           IHasSigningAccount<FillListing>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="FillListing"/> class.

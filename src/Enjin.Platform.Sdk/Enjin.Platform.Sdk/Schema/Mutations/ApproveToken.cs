@@ -15,7 +15,8 @@ namespace Enjin.Platform.Sdk;
 public class ApproveToken : GraphQlRequest<ApproveToken, TransactionFragment>,
                             IHasEncodableTokenId<ApproveToken>,
                             IHasIdempotencyKey<ApproveToken>,
-                            IHasSkipValidation<ApproveToken>
+                            IHasSkipValidation<ApproveToken>,
+                            IHasSigningAccount<ApproveToken>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="ApproveToken"/> class.

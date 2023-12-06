@@ -9,7 +9,8 @@ namespace Enjin.Platform.Sdk.FuelTanks;
 /// <seealso cref="Transaction"/>
 [PublicAPI]
 public class InsertRuleSet : GraphQlRequest<InsertRuleSet, TransactionFragment>,
-                             IHasIdempotencyKey<InsertRuleSet>
+                             IHasIdempotencyKey<InsertRuleSet>,
+                             IHasSigningAccount<InsertRuleSet>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="InsertRuleSet"/> class.

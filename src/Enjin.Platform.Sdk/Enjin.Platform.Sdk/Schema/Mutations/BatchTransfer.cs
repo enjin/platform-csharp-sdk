@@ -20,7 +20,8 @@ namespace Enjin.Platform.Sdk;
 public class BatchTransfer : GraphQlRequest<BatchTransfer, TransactionFragment>,
                              IHasContinueOnFailure<BatchTransfer>,
                              IHasIdempotencyKey<BatchTransfer>,
-                             IHasSkipValidation<BatchTransfer>
+                             IHasSkipValidation<BatchTransfer>,
+                             IHasSigningAccount<BatchTransfer>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="BatchTransfer"/> class.

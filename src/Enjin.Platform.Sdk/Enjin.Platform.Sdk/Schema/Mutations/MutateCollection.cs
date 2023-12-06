@@ -10,7 +10,8 @@ namespace Enjin.Platform.Sdk;
 [PublicAPI]
 public class MutateCollection : GraphQlRequest<MutateCollection, TransactionFragment>,
                                 IHasIdempotencyKey<MutateCollection>,
-                                IHasSkipValidation<MutateCollection>
+                                IHasSkipValidation<MutateCollection>,
+                                IHasSigningAccount<MutateCollection>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="MutateCollection"/> class.

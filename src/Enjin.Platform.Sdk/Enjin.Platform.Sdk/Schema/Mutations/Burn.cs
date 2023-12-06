@@ -13,7 +13,8 @@ namespace Enjin.Platform.Sdk;
 [PublicAPI]
 public class Burn : GraphQlRequest<Burn, TransactionFragment>,
                     IHasIdempotencyKey<Burn>,
-                    IHasSkipValidation<Burn>
+                    IHasSkipValidation<Burn>,
+                    IHasSigningAccount<Burn>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Burn"/> class.

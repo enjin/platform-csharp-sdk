@@ -8,7 +8,8 @@ namespace Enjin.Platform.Sdk.Marketplace;
 /// <seealso cref="Transaction"/>
 [PublicAPI]
 public class CancelListing : GraphQlRequest<CancelListing, TransactionFragment>,
-                             IHasIdempotencyKey<CancelListing>
+                             IHasIdempotencyKey<CancelListing>,
+                             IHasSigningAccount<CancelListing>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="CancelListing"/> class.

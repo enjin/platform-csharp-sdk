@@ -11,7 +11,8 @@ namespace Enjin.Platform.Sdk;
 public class Thaw : GraphQlRequest<Thaw, TransactionFragment>,
                     IHasEncodableTokenId<Thaw>,
                     IHasIdempotencyKey<Thaw>,
-                    IHasSkipValidation<Thaw>
+                    IHasSkipValidation<Thaw>,
+                    IHasSigningAccount<Thaw>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Thaw"/> class.

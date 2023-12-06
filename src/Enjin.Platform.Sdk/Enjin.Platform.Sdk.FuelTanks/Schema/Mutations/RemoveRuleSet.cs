@@ -9,7 +9,8 @@ namespace Enjin.Platform.Sdk.FuelTanks;
 /// <seealso cref="Transaction"/>
 [PublicAPI]
 public class RemoveRuleSet : GraphQlRequest<RemoveRuleSet, TransactionFragment>,
-                             IHasIdempotencyKey<RemoveRuleSet>
+                             IHasIdempotencyKey<RemoveRuleSet>,
+                             IHasSigningAccount<RemoveRuleSet>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="RemoveRuleSet"/> class.

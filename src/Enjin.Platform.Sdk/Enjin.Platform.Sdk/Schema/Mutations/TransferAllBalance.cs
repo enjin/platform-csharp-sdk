@@ -13,7 +13,8 @@ namespace Enjin.Platform.Sdk;
 [PublicAPI]
 public class TransferAllBalance : GraphQlRequest<TransferAllBalance, TransactionFragment>,
                                   IHasIdempotencyKey<TransferAllBalance>,
-                                  IHasSkipValidation<TransferAllBalance>
+                                  IHasSkipValidation<TransferAllBalance>,
+                                  IHasSigningAccount<TransferAllBalance>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="TransferAllBalance"/> class.

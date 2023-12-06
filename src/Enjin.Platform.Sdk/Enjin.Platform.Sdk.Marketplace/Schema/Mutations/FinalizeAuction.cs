@@ -11,7 +11,8 @@ namespace Enjin.Platform.Sdk.Marketplace;
 /// <seealso cref="Transaction"/>
 [PublicAPI]
 public class FinalizeAuction : GraphQlRequest<FinalizeAuction, TransactionFragment>,
-                               IHasIdempotencyKey<FinalizeAuction>
+                               IHasIdempotencyKey<FinalizeAuction>,
+                               IHasSigningAccount<FinalizeAuction>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="FinalizeAuction"/> class.

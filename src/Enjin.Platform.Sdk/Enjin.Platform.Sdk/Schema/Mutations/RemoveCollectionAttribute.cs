@@ -10,7 +10,8 @@ namespace Enjin.Platform.Sdk;
 [PublicAPI]
 public class RemoveCollectionAttribute : GraphQlRequest<RemoveCollectionAttribute, TransactionFragment>,
                                          IHasIdempotencyKey<RemoveCollectionAttribute>,
-                                         IHasSkipValidation<RemoveCollectionAttribute>
+                                         IHasSkipValidation<RemoveCollectionAttribute>,
+                                         IHasSigningAccount<RemoveCollectionAttribute>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="RemoveCollectionAttribute"/> class.

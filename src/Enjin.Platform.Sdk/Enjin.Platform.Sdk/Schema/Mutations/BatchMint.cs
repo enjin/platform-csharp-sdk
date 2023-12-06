@@ -19,7 +19,8 @@ namespace Enjin.Platform.Sdk;
 public class BatchMint : GraphQlRequest<BatchMint, TransactionFragment>,
                          IHasContinueOnFailure<BatchMint>,
                          IHasIdempotencyKey<BatchMint>,
-                         IHasSkipValidation<BatchMint>
+                         IHasSkipValidation<BatchMint>,
+                         IHasSigningAccount<BatchMint>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="BatchMint"/> class.

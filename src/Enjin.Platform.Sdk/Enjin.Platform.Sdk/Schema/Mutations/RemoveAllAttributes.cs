@@ -10,7 +10,8 @@ namespace Enjin.Platform.Sdk;
 public class RemoveAllAttributes : GraphQlRequest<RemoveAllAttributes, TransactionFragment>,
                                    IHasEncodableTokenId<RemoveAllAttributes>,
                                    IHasIdempotencyKey<RemoveAllAttributes>,
-                                   IHasSkipValidation<RemoveAllAttributes>
+                                   IHasSkipValidation<RemoveAllAttributes>,
+                                   IHasSigningAccount<RemoveAllAttributes>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="RemoveAllAttributes"/> class.
