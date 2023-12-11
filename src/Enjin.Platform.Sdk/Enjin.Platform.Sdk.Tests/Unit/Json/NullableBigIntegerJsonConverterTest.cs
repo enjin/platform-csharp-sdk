@@ -53,7 +53,6 @@ public class NullableBigIntegerJsonConverterTest
     }
 
     [Test]
-    [TestCase(@"0")]
     [TestCase(@"""1.1579E+77""")]
     [TestCase(@"""1.0""")]
     [TestCase(@"[]")]
