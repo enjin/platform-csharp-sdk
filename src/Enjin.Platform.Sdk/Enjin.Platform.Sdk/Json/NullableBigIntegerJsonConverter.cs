@@ -24,14 +24,15 @@ public class NullableBigIntegerJsonConverter : JsonConverter<BigInteger?>
     /// <inheritdoc/>
     /// </para>
     /// <para>
-    /// When returned in a response, the <c>BigInt</c> type on the platform is expected to be returned as a string and
-    /// as such this converter only expects string or null JSON types.
+    /// When returned in a response, the <c>BigInt</c> type on the platform is expected to be returned as an int or a
+    ///  string and as such this converter only expects string or null JSON types.
     /// </para>
     /// </remarks>
     public override BigInteger? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         return reader.TokenType switch
         {
+            JsonTokenType.Number => new BigInteger(reader.GetInt32()),
             JsonTokenType.String => BigInteger.Parse(reader.GetString()!, NumberStyles.Integer),
             JsonTokenType.Null => null,
             _ => throw new FormatException($"Invalid {nameof(JsonTokenType)} for {nameof(Nullable<BigInteger>)} field")
