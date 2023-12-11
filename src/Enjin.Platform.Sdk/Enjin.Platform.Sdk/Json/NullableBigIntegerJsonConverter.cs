@@ -25,7 +25,7 @@ public class NullableBigIntegerJsonConverter : JsonConverter<BigInteger?>
     /// </para>
     /// <para>
     /// When returned in a response, the <c>BigInt</c> type on the platform is expected to be returned as an int or a
-    ///  string and as such this converter only expects string or null JSON types.
+    ///  string and as such this converter only expects number, string or null JSON types.
     /// </para>
     /// </remarks>
     public override BigInteger? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
