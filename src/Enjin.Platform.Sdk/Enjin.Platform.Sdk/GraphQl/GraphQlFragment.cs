@@ -36,7 +36,14 @@ public abstract class GraphQlFragment<TFragment> : GraphQlParameterHolder<TFragm
             builder.Append("(").Append(CompileParameters()).Append(") ");
         }
 
-        return builder.Append("{ ").Append(CompileFields()).Append(" }").ToString();
+        if (HasFields)
+        {
+            return builder.Append("{ ").Append(CompileFields()).Append(" }").ToString();
+        }
+        else
+        {
+            return builder.ToString();
+        }
     }
 
     #endregion IGraphQlCompilable
@@ -49,11 +56,6 @@ public abstract class GraphQlFragment<TFragment> : GraphQlParameterHolder<TFragm
     /// <inheritdoc/>
     public virtual string CompileFields()
     {
-        if (!HasFields)
-        {
-            throw new InvalidOperationException("Cannot compile fragment without setting any fields");
-        }
-
         int i = 0;
         int count = _scalarFields.Count + _fragmentFields.Count;
         StringBuilder builder = new StringBuilder();
