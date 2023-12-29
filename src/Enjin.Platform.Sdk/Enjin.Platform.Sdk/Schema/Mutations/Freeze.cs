@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 using JetBrains.Annotations;
 
 namespace Enjin.Platform.Sdk;
@@ -50,11 +51,26 @@ public class Freeze : GraphQlRequest<Freeze, TransactionFragment>,
     /// </summary>
     /// <param name="collectionId">The collection ID.</param>
     /// <returns>This request for chaining.</returns>
+    /// <deprecated>
+    /// This function is now deprecated and will be removed in a future release.
+    /// Use SetCollectionId(BigInteger? collectionId) instead.
+    /// </deprecated>
+    [Obsolete("This function is now deprecated and will be removed in a future release.  Use SetCollectionId(BigInteger? collectionId) instead.")]
     public Freeze SetCollection(BigInteger? collectionId)
     {
         return SetVariable("collectionId", CoreTypes.BigInt, collectionId);
     }
 
+    /// <summary>
+    /// Sets the collection ID to freeze.
+    /// </summary>
+    /// <param name="collectionId">The collection ID.</param>
+    /// <returns>This request for chaining.</returns>
+    public Freeze SetCollectionId(BigInteger? collectionId)
+    {
+        return SetVariable("collectionId", CoreTypes.BigInt, collectionId);
+    }
+    
     /// <summary>
     /// Sets the collection account to freeze.
     /// </summary>
