@@ -34,6 +34,16 @@ public class Freeze : GraphQlRequest<Freeze, TransactionFragment>,
     {
         return SetVariable("freezeType", CoreTypes.FreezeType, freezeType);
     }
+    
+    /// <summary>
+    /// Sets the freeze state type.
+    /// </summary>
+    /// <param name="freezeState">The freeze state type.</param>
+    /// <returns>This request for chaining.</returns>
+    public Freeze SetFreezeState(FreezeState? freezeState)
+    {
+        return SetVariable("freezeState", CoreTypes.FreezeState, freezeState);
+    }
 
     /// <summary>
     /// Sets the collection ID to freeze.

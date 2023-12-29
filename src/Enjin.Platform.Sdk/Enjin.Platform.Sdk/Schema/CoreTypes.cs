@@ -116,6 +116,18 @@ public static class CoreTypes
     /// </summary>
     public const string EncodableTokenIdInputArray = "[EncodableTokenIdInput!]!";
 
+    // FreezeStateType
+    
+    /// <summary>
+    /// String for <c>FreezeType</c> type.
+    /// </summary>
+    public const string FreezeState = "FreezeStateType!";
+
+    /// <summary>
+    /// String for an array of <c>FreezeType</c> type.
+    /// </summary>
+    public const string FreezeStateArray = "[FreezeStateType!]!";
+    
     // FreezeType
 
     /// <summary>
