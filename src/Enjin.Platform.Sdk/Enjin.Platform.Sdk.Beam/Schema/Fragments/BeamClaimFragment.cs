@@ -102,10 +102,10 @@ public class BeamClaimFragment : GraphQlFragment<BeamClaimFragment>
     /// <summary>
     /// Sets whether the <see cref="BeamClaim"/> is to be returned with its <see cref="BeamClaim.Qr"/> property.
     /// </summary>
-    /// <param name="isIncluded">Whether the field is included.</param>
+    /// <param name="fragment">The <see cref="BeamQrFragment"/> fragment.</param>
     /// <returns>This fragment for chaining.</returns>
-    public BeamClaimFragment WithQr(bool isIncluded = true)
+    public BeamClaimFragment WithQr(BeamQrFragment? fragment)
     {
-        return WithField("qr", isIncluded);
+        return WithField("qr", fragment);
     }
 }
