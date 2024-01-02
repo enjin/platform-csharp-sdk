@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 using JetBrains.Annotations;
 
 namespace Enjin.Platform.Sdk;
@@ -78,4 +79,18 @@ public class Transaction
     [JsonInclude]
     [JsonPropertyName("events")]
     public Connection<Event>? Events { get; private set; }
+
+    /// <summary>
+    /// The encoded signing payload for this transaction.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("signingPayload")]
+    public string? SigningPayload { get; private set; }
+
+    /// <summary>
+    /// The decoded signing payload in json format. This is in the correct format to send to wallet connect.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("signingPayloadJson")]
+    public JsonElement? SigningPayloadJson { get; private set; }
 }
