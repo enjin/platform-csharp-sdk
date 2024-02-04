@@ -23,4 +23,10 @@ public enum TokenMintCapType
     /// </summary>
     [EnumMember(Value = "SUPPLY")]
     Supply,
+    
+    /// <summary>
+    /// Indicates that there should be no limit on the total number of circulating tokens.
+    /// </summary>
+    [EnumMember(Value = "INFINITE")]
+    Infinite,
 }
