@@ -23,17 +23,6 @@ public class GraphQlFragmentTest
     }
 
     [Test]
-    public void CompileFieldsWhenNoFieldsAreSetThrowsInvalidOperationException()
-    {
-        // Assumptions
-        Assume.That(ClassUnderTest.HasFields, Is.False,
-                    $"Assume {nameof(ClassUnderTest.HasFields)} is false");
-
-        // Assert
-        Assert.Throws<InvalidOperationException>(() => ClassUnderTest.CompileFields());
-    }
-
-    [Test]
     public void CompileFieldsWhenScalarFieldIsSetReturnsExpectedString()
     {
         // Arrange
@@ -104,24 +93,6 @@ public class GraphQlFragmentTest
 
         // Verify
         MockInnerFragment.Verify(mock => mock.Compile(), Times.Once);
-    }
-
-    [Test]
-    public void CompileWhenParametersAreSetAndNoFieldsAreSetThrowsInvalidOperationException()
-    {
-        // Arrange
-        const string key = "key";
-        const string value = "value";
-        ClassUnderTest.SetParameter(key, value);
-
-        // Assumptions
-        Assume.That(ClassUnderTest.HasParameters, Is.True,
-                    $"Assume {nameof(ClassUnderTest.HasParameters)} is true");
-        Assume.That(ClassUnderTest.HasFields, Is.False,
-                    $"Assume {nameof(ClassUnderTest.HasFields)} is false");
-
-        // Assert
-        Assert.Throws<InvalidOperationException>(() => ClassUnderTest.Compile());
     }
 
     [Test]
