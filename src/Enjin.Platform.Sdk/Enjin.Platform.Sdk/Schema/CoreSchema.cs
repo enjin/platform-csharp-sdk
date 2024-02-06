@@ -403,6 +403,18 @@ public static class CoreSchema
     }
 
     /// <summary>
+    /// Sends a <see cref="SendTransaction"/> request to the platform.
+    /// </summary>
+    /// <param name="client">The <see cref="IPlatformClient"/> to send the request from.</param>
+    /// <param name="request">The <see cref="SendTransaction"/> request to send.</param>
+    /// <returns>The task containing the response.</returns>
+    public static Task<IPlatformResponse<GraphQlResponse<string>>> SendSendTransaction(
+        this IPlatformClient client, SendTransaction request)
+    {
+        return client.SendRequest<GraphQlResponse<string>>(CreateRequest(request));
+    }
+
+    /// <summary>
     /// Sends a <see cref="SetCollectionAttribute"/> request to the platform.
     /// </summary>
     /// <param name="client">The <see cref="IPlatformClient"/> to send the request from.</param>
