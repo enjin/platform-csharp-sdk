@@ -4,7 +4,6 @@ using PusherClient;
 
 namespace Enjin.Platform.Sdk;
 
-///
 /// <summary>
 /// Wrapper class for a Pusher client to be used in a <see cref="PusherEventService"/>.
 /// </summary>
