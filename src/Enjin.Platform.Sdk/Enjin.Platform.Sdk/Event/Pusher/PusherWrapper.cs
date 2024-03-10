@@ -4,6 +4,7 @@ using PusherClient;
 
 namespace Enjin.Platform.Sdk;
 
+///
 /// <summary>
 /// Wrapper class for a Pusher client to be used in a <see cref="PusherEventService"/>.
 /// </summary>
@@ -17,11 +18,36 @@ internal class PusherWrapper : IPusherWrapper
     {
         _client = new Pusher(key, options);
 
-        _client.Connected += Connected;
-        _client.ConnectionStateChanged += ConnectionStateChanged;
-        _client.Disconnected += Disconnected;
-        _client.Error += Error;
-        _client.Subscribed += Subscribed;
+        _client.Connected += ClientOnConnected;
+        _client.ConnectionStateChanged += ClientOnConnectionStateChanged;
+        _client.Disconnected += ClientOnDisconnected;
+        _client.Error += ClientOnError;
+        _client.Subscribed += ClientOnSubscribed;
+    }
+
+    void ClientOnSubscribed(object sender, Channel channel)
+    {
+        Subscribed?.Invoke(sender, channel);
+    }
+
+    void ClientOnError(object sender, PusherException error)
+    {
+        Error?.Invoke(sender, error);
+    }
+
+    void ClientOnConnected(object sender)
+    {
+        Connected?.Invoke(sender);
+    }
+
+    void ClientOnDisconnected(object sender)
+    {
+        Disconnected?.Invoke(sender);
+    }
+
+    void ClientOnConnectionStateChanged(object sender, PusherClient.ConnectionState state)
+    {
+        ConnectionStateChanged?.Invoke(sender, state);
     }
 
     #region IPusherWrapper
