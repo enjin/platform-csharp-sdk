@@ -43,7 +43,7 @@ public class GetTransactions : GraphQlRequest<GetTransactions, TransactionConnec
     /// </summary>
     /// <param name="ids">The internal IDs of the transaction.</param>
     /// <returns>This request for chaining.</returns>
-    public GetTransactions SetIds(params string[]? ids)
+    public GetTransactions SetIds(params BigInteger[]? ids)
     {
         return SetVariable("ids", CoreTypes.BigIntArray, ids);
     }
