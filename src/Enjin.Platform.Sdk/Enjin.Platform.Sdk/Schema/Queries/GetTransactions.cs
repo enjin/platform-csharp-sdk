@@ -39,6 +39,16 @@ public class GetTransactions : GraphQlRequest<GetTransactions, TransactionConnec
     }
 
     /// <summary>
+    /// Sets the blockchain internal IDs to filter to.
+    /// </summary>
+    /// <param name="ids">The internal IDs of the transaction.</param>
+    /// <returns>This request for chaining.</returns>
+    public GetTransactions SetIds(params string[]? ids)
+    {
+        return SetVariable("ids", CoreTypes.BigIntArray, ids);
+    }
+
+    /// <summary>
     /// Sets the blockchain transaction hashes to filter to.
     /// </summary>
     /// <param name="transactionHashes">The transaction hashes.</param>
