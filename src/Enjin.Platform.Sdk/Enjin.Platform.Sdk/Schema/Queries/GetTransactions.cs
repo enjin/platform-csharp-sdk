@@ -1,4 +1,5 @@
-﻿using JetBrains.Annotations;
+﻿using System.Numerics;
+using JetBrains.Annotations;
 
 namespace Enjin.Platform.Sdk;
 
@@ -36,6 +37,16 @@ public class GetTransactions : GraphQlRequest<GetTransactions, TransactionConnec
     public GetTransactions SetTransactionIds(params string[]? transactionIds)
     {
         return SetVariable("transactionIds", CoreTypes.StringArray, transactionIds);
+    }
+
+    /// <summary>
+    /// Sets the blockchain internal IDs to filter to.
+    /// </summary>
+    /// <param name="ids">The internal IDs of the transaction.</param>
+    /// <returns>This request for chaining.</returns>
+    public GetTransactions SetIds(params BigInteger[]? ids)
+    {
+        return SetVariable("ids", CoreTypes.BigIntArray, ids);
     }
 
     /// <summary>
