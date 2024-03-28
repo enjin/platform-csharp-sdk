@@ -1,4 +1,6 @@
-﻿using System.Text.Json;
+﻿using System.Numerics;
+using System;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using JetBrains.Annotations;
 
@@ -46,5 +48,45 @@ public class DispatchInputType : GraphQlParameter<DispatchInputType>
     public DispatchInputType SetVariables(JsonElement? variables)
     {
         return SetParameter("variables", variables);
+    }
+
+    /// <summary>
+    /// Assigns the Request and extracts the relevant data
+    /// </summary>
+    /// <param name="request">The Request object.</param>
+    /// <param name="call">The call option.</param>
+    /// <returns>This parameter for chaining.</returns>
+    public DispatchInputType SetupFromRequestObject<TRequest, TFragment>(GraphQlRequest<TRequest, TFragment> request, DispatchCall? call)
+        where TRequest : GraphQlRequest<TRequest, TFragment>
+        where TFragment : IGraphQlFragment
+
+    {
+        var options = new JsonSerializerOptions
+        {
+            Converters = { new BigIntegerConverter() }
+        };
+
+        var jsonString = JsonSerializer.Serialize(request.VariablesWithoutTypes, options);
+        using var doc = JsonDocument.Parse(jsonString);
+        var jsonElement = doc.RootElement;
+        return SetCall(call)
+            .SetQuery(request.Compile())
+            .SetVariables(jsonElement);
+    }
+    
+    class BigIntegerConverter : JsonConverter<BigInteger>
+    {
+        /// <inheritdoc />
+        public override BigInteger Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            var valueAsString = reader.GetString() ?? string.Empty;
+            return BigInteger.Parse(valueAsString);
+        }
+
+        /// <inheritdoc />
+        public override void Write(Utf8JsonWriter writer, BigInteger value, JsonSerializerOptions options)
+        {
+            writer.WriteStringValue(value.ToString());
+        }
     }
 }
