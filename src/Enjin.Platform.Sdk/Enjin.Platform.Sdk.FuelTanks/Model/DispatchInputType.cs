@@ -61,6 +61,14 @@ public class DispatchInputType : GraphQlParameter<DispatchInputType>
         where TFragment : IGraphQlFragment
 
     {
+        if (request.FragmentParameters != null && request.FragmentParameters is TransactionFragment transactionFragment)
+        {
+            // Ensure that Id and EncodedData are included, because they're a requirement of the DispatchInput call
+            transactionFragment
+                .WithId()
+                .WithEncodedData();
+        }
+
         var options = new JsonSerializerOptions
         {
             Converters = { new BigIntegerConverter() }
