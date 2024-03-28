@@ -22,4 +22,10 @@ public enum DispatchCall
     /// </summary>
     [EnumMember(Value = "FUEL_TANKS")]
     FuelTanks,
+    
+    /// <summary>
+    /// Indicates a dispatch call as <c>MARKETPLACE</c>.
+    /// </summary>
+    [EnumMember(Value = "MARKETPLACE")]
+    Marketplace,
 }
