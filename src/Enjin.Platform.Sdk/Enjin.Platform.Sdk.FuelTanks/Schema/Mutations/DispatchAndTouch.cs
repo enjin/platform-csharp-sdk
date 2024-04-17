@@ -60,12 +60,12 @@ public class DispatchAndTouch : GraphQlRequest<DispatchAndTouch, TransactionFrag
     }
     
     /// <summary>
-    /// Sets the signing account.
+    /// Sets the signing wallet for the transaction.
     /// </summary>
-    /// <param name="account">The signingAccount.</param>
+    /// <param name="signingAccount">The signing wallet account.</param>
     /// <returns>This request for chaining.</returns>
-    public DispatchAndTouch SetSigningAccount(string? account)
+    public DispatchAndTouch SetSigningAccount(string? signingAccount)
     {
-        return SetVariable("signingAccount", CoreTypes.String, account);
+        return SetVariable("signingAccount", CoreTypes.String, signingAccount);
     }
 }
