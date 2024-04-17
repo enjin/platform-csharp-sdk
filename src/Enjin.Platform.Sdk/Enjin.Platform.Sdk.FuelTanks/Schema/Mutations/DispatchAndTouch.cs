@@ -58,4 +58,14 @@ public class DispatchAndTouch : GraphQlRequest<DispatchAndTouch, TransactionFrag
     {
         return SetVariable("paysRemainingFee", CoreTypes.Boolean, paysRemainingFee);
     }
+    
+    /// <summary>
+    /// Sets the signing wallet for the transaction.
+    /// </summary>
+    /// <param name="signingAccount">The signing wallet account.</param>
+    /// <returns>This request for chaining.</returns>
+    public DispatchAndTouch SetSigningAccount(string? signingAccount)
+    {
+        return SetVariable("signingAccount", CoreTypes.String, signingAccount);
+    }
 }
