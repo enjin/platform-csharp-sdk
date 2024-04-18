@@ -10,6 +10,7 @@ namespace Enjin.Platform.Sdk.FuelTanks;
 [PublicAPI]
 public class RemoveAccountRuleData : GraphQlRequest<RemoveAccountRuleData, TransactionFragment>,
                                      IHasIdempotencyKey<RemoveAccountRuleData>,
+                                     IHasSkipValidation<RemoveAccountRuleData>,
                                      IHasSigningAccount<RemoveAccountRuleData>
 {
     /// <summary>

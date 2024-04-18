@@ -10,6 +10,7 @@ namespace Enjin.Platform.Sdk.FuelTanks;
 [PublicAPI]
 public class RemoveRuleSet : GraphQlRequest<RemoveRuleSet, TransactionFragment>,
                              IHasIdempotencyKey<RemoveRuleSet>,
+                             IHasSkipValidation<RemoveRuleSet>,
                              IHasSigningAccount<RemoveRuleSet>
 {
     /// <summary>
