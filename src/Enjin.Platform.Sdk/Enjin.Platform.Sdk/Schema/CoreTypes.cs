@@ -116,6 +116,18 @@ public static class CoreTypes
     /// </summary>
     public const string EncodableTokenIdInputArray = "[EncodableTokenIdInput!]!";
 
+    // StringFilterInputType
+
+    /// <summary>
+    /// String for <c>StringFilterInput</c> type.
+    /// </summary>
+    public const string StringFilter = "StringFilter!";
+    
+    /// <summary>
+    /// String for an array of <c>StringFilterInput</c> type.
+    /// </summary>
+    public const string StringFilterArray = "[StringFilter!]";
+    
     // FreezeStateType
     
     /// <summary>
