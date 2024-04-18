@@ -10,6 +10,7 @@ namespace Enjin.Platform.Sdk.FuelTanks;
 [PublicAPI]
 public class DispatchAndTouch : GraphQlRequest<DispatchAndTouch, TransactionFragment>,
                                 IHasIdempotencyKey<DispatchAndTouch>,
+                                IHasSkipValidation<DispatchAndTouch>,
                                 IHasSigningAccount<DispatchAndTouch>
 {
     /// <summary>

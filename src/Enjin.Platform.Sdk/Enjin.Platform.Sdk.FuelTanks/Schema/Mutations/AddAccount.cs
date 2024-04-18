@@ -9,6 +9,7 @@ namespace Enjin.Platform.Sdk.FuelTanks;
 [PublicAPI]
 public class AddAccount : GraphQlRequest<AddAccount, TransactionFragment>,
                           IHasIdempotencyKey<AddAccount>,
+                          IHasSkipValidation<AddAccount>,
                           IHasSigningAccount<AddAccount>
 {
     /// <summary>

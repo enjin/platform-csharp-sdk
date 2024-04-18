@@ -10,6 +10,7 @@ namespace Enjin.Platform.Sdk.FuelTanks;
 [PublicAPI]
 public class Dispatch : GraphQlRequest<Dispatch, TransactionFragment>,
                         IHasIdempotencyKey<Dispatch>,
+                        IHasSkipValidation<Dispatch>,
                         IHasSigningAccount<Dispatch>
 {
     /// <summary>

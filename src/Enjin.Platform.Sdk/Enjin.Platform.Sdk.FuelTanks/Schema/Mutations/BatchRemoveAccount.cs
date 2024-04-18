@@ -9,6 +9,7 @@ namespace Enjin.Platform.Sdk.FuelTanks;
 [PublicAPI]
 public class BatchRemoveAccount : GraphQlRequest<BatchRemoveAccount, TransactionFragment>,
                                   IHasIdempotencyKey<BatchRemoveAccount>,
+                                  IHasSkipValidation<BatchRemoveAccount>,
                                   IHasSigningAccount<BatchRemoveAccount>
 {
     /// <summary>

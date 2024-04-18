@@ -9,6 +9,7 @@ namespace Enjin.Platform.Sdk.FuelTanks;
 [PublicAPI]
 public class CreateFuelTank : GraphQlRequest<CreateFuelTank, TransactionFragment>,
                               IHasIdempotencyKey<CreateFuelTank>,
+                              IHasSkipValidation<CreateFuelTank>,
                               IHasSigningAccount<CreateFuelTank>
 {
     /// <summary>
