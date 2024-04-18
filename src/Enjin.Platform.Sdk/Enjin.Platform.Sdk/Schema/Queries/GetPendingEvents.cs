@@ -25,4 +25,14 @@ public class GetPendingEvents : GraphQlRequest<GetPendingEvents, PendingEventsFr
     {
         return SetVariable("acknowledgeEvents", CoreTypes.Boolean, acknowledgeEvents);
     }
+
+    /// <summary>
+    /// Sets any channel filters.
+    /// </summary>
+    /// <param name="filters">Sets any channel filters.</param>
+    /// <returns>This request for chaining.</returns>
+    public GetPendingEvents SetChannelFilters(StringFilterInput[]? filters)
+    {
+        return SetVariable("channelFilters", CoreTypes.StringFilterArray, filters);
+    }
 }
