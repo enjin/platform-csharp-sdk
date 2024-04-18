@@ -46,4 +46,14 @@ public class TransferRecipient : GraphQlParameter<TransferRecipient>
     {
         return SetParameter("operatorParams", operatorParams);
     }
+    
+    /// <summary>
+    /// Sets parameters for making a balance transfer.
+    /// </summary>
+    /// <param name="transferBalanceParams">The parameters.</param>
+    /// <returns>This parameter for chaining.</returns>
+    public TransferRecipient SetTransferBalanceParams(TransferBalanceParams? transferBalanceParams)
+    {
+        return SetParameter("transferBalanceParams", transferBalanceParams);
+    }
 }
