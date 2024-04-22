@@ -10,6 +10,7 @@ namespace Enjin.Platform.Sdk.Marketplace;
 [PublicAPI]
 public class CreateListing : GraphQlRequest<CreateListing, TransactionFragment>,
                              IHasIdempotencyKey<CreateListing>,
+                             IHasSkipValidation<CreateListing>,
                              IHasSigningAccount<CreateListing>
 {
     /// <summary>

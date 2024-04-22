@@ -13,6 +13,7 @@ namespace Enjin.Platform.Sdk.Marketplace;
 [PublicAPI]
 public class PlaceBid : GraphQlRequest<PlaceBid, TransactionFragment>,
                         IHasIdempotencyKey<PlaceBid>,
+                        IHasSkipValidation<PlaceBid>,
                         IHasSigningAccount<PlaceBid>
 {
     /// <summary>
