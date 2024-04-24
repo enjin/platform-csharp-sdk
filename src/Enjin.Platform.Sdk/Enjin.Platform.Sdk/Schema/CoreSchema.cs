@@ -164,10 +164,10 @@ public static class CoreSchema
     /// <param name="client">The <see cref="IPlatformClient"/> to send the request from.</param>
     /// <param name="request">The <see cref="GetPendingEvents"/> request to send.</param>
     /// <returns>The task containing the response.</returns>
-    public static Task<IPlatformResponse<GraphQlResponse<PendingEvents>>> SendGetPendingEvents(
+    public static Task<IPlatformResponse<GraphQlResponse<Connection<PendingEvent>>>> SendGetPendingEvents(
         this IPlatformClient client, GetPendingEvents request)
     {
-        return client.SendRequest<GraphQlResponse<PendingEvents>>(CreateRequest(request));
+        return client.SendRequest<GraphQlResponse<Connection<PendingEvent>>>(CreateRequest(request));
     }
 
     /// <summary>
