@@ -5,9 +5,9 @@ namespace Enjin.Platform.Sdk;
 /// <summary>
 /// A request for querying a list of events that were broadcasted but not yet acknowledged.
 /// </summary>
-/// <seealso cref="PendingEvents"/>
+/// <seealso cref="PendingEvent"/>
 [PublicAPI]
-public class GetPendingEvents : GraphQlRequest<GetPendingEvents, PendingEventsFragment>
+public class GetPendingEvents : GraphQlRequest<GetPendingEvents, PendingEventsConnectionFragment>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="GetPendingEvents"/> class.

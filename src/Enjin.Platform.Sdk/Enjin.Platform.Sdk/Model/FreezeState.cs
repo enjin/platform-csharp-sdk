@@ -24,7 +24,7 @@ public enum FreezeState
     Temporary,
 
     /// <summary>
-    /// Indicates the the token cannot be frozen.
+    /// Indicates the token cannot be frozen.
     /// </summary>
     [EnumMember(Value = "NEVER")]
     Never,
