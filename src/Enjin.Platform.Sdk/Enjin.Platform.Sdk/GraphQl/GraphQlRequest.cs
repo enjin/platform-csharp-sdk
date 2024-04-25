@@ -58,6 +58,11 @@ public abstract class GraphQlRequest<TRequest, TFragment> : GraphQlRequestBase<T
     /// </summary>
     private bool HasRequestParameters => base.HasParameters;
 
+    /// <summary>
+    /// Gets the currently assigned fragment parameters
+    /// </summary>
+    public TFragment? FragmentParameters => _fragment;
+
     /// <inheritdoc/>
     protected GraphQlRequest(string name, GraphQlRequestType type) : base(name, type)
     {
