@@ -2,6 +2,7 @@
 using System.Numerics;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Enjin.Platform.Sdk.PendingEvents;
 using JetBrains.Annotations;
 
 namespace Enjin.Platform.Sdk;
@@ -57,4 +58,54 @@ public class PendingEvent
     [JsonInclude]
     [JsonPropertyName("data")]
     public JsonElement? Data { get; private set; }
+    
+    public PendingEventDataBase? DataTyped
+    {
+        get
+        {
+            if (Name == null || Data == null)
+            {
+                return null;
+            }
+
+            switch (Name)
+            {
+                case "platform:transfer":
+                {
+                    return JsonSerializer.Deserialize<PendingEventDataTransfer>(Data.Value.GetRawText());
+                }
+                case "platform:token-transferred":
+                {
+                    return JsonSerializer.Deserialize<PendingEventDataTokenTransferred>(Data.Value.GetRawText());
+                }
+                case "platform:reserved":
+                {
+                    return JsonSerializer.Deserialize<PendingEventDataReserved>(Data.Value.GetRawText());
+                }
+                case "platform:withdraw":
+                {
+                    return JsonSerializer.Deserialize<PendingEventDataWithdraw>(Data.Value.GetRawText());
+                }
+                case "platform:deposit":
+                {
+                    return JsonSerializer.Deserialize<PendingEventDataDeposit>(Data.Value.GetRawText());
+                }
+                case "platform:token-minted":
+                {
+                    return JsonSerializer.Deserialize<PendingEventDataTokenMinted>(Data.Value.GetRawText());
+                }
+                case "platform:token-created":
+                {
+                    return JsonSerializer.Deserialize<PendingEventDataTokenCreated>(Data.Value.GetRawText());
+                }
+                case "platform:collection-created":
+                {
+                    return JsonSerializer.Deserialize<PendingEventDataCollectionCreated>(Data.Value.GetRawText());
+                }
+            }
+
+            // Unsupported
+            return null;
+        }
+    }
 }
