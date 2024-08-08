@@ -67,4 +67,14 @@ public class GetListings : GraphQlRequest<GetListings, MarketplaceListingConnect
     {
         return SetVariable("takeAssetId", CoreTypes.MultiTokenIdInput, takeAssetId);
     }
+
+    /// <summary>
+    /// Sets the listing states that will be returned.
+    /// </summary>
+    /// <param name="states">The list of states that you want returned</param>
+    /// <returns>This request for chaining.</returns>
+    public GetListings SetStates(params ListingStateEnum[]? states)
+    {
+        return SetVariable("states", CoreTypes.ListingStateEnumArray, states);
+    }
 }
