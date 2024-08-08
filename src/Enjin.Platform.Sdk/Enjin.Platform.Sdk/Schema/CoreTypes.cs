@@ -331,4 +331,16 @@ public static class CoreTypes
     /// String for an array of <c>TransferRecipient</c> type.
     /// </summary>
     public const string TransferRecipientArray = "[TransferRecipient!]!";
+
+    // ListingStateEnum
+
+    /// <summary>
+    /// String for <c>ListingStateEnum</c> type.
+    /// </summary>
+    public const string ListingStateEnum = "ListingStateEnum!";
+
+    /// <summary>
+    /// String for an array of <c>ListingStateEnumArray</c> type.
+    /// </summary>
+    public const string ListingStateEnumArray = "[ListingStateEnum!]!";
 }
