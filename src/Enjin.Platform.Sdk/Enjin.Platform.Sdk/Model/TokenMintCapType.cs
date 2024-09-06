@@ -25,6 +25,13 @@ public enum TokenMintCapType
     Supply,
     
     /// <summary>
+    /// Indicates that a limit may be set on the total number of circulating tokens.
+    /// This type does not allow for burned tokens to be re-minted.
+    /// </summary>
+    [EnumMember(Value = "COLLAPSING_SUPPLY")]
+    CollapsingSupply,
+    
+    /// <summary>
     /// Indicates that there should be no limit on the total number of circulating tokens.
     /// </summary>
     [EnumMember(Value = "INFINITE")]

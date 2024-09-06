@@ -98,4 +98,25 @@ public class Beam
     [JsonInclude]
     [JsonPropertyName("qr")]
     public BeamQr? Qr { get; private set; }
+    
+    /// <summary>
+    /// The claim probability for each token.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("probabilities")]
+    public BeamQr? Probabilities { get; private set; }
+    
+    /// <summary>
+    /// The beam claims.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("claims")]
+    public BeamQr? Claims { get; private set; }
+    
+    /// <summary>
+    /// The number of claims remaining in this beam.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("claimsRemaining")]
+    public BeamQr? ClaimsRemaining { get; private set; }
 }

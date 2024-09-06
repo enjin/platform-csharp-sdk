@@ -49,17 +49,4 @@ public class SimpleTransferToken : GraphQlRequest<SimpleTransferToken, Transacti
     {
         return SetVariable("params", CoreTypes.SimpleTransferParams, parameters);
     }
-
-    /// <summary>
-    /// Sets the signing wallet for the transaction.
-    /// </summary>
-    /// <param name="signingAccount">The signing wallet account.</param>
-    /// <returns>This request for chaining.</returns>
-    /// <remarks>
-    /// The account defaults to wallet daemon if not specified.
-    /// </remarks>
-    public SimpleTransferToken SetSigningAccount(string? signingAccount)
-    {
-        return SetVariable("signingAccount", CoreTypes.String, signingAccount);
-    }
 }

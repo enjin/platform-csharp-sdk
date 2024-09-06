@@ -44,6 +44,13 @@ public class PendingEvent
     [JsonInclude]
     [JsonPropertyName("sent")]
     public string? Sent { get; private set; }
+    
+    /// <summary>
+    /// The blockchain network.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("network")]
+    public string? Network { get; private set; }
 
     /// <summary>
     /// The channels this event was sent to.

@@ -81,14 +81,6 @@ public class Token
     public BigInteger? UnitPrice { get; private set; }
 
     /// <summary>
-    /// The amount of currency reserved from the issuer for minting.
-    /// </summary>
-    [JsonConverter(typeof(NullableBigIntegerJsonConverter))]
-    [JsonInclude]
-    [JsonPropertyName("mintDeposit")]
-    public BigInteger? MintDeposit { get; private set; }
-
-    /// <summary>
     /// The number of attributes set on this token.
     /// </summary>
     [JsonInclude]
@@ -115,6 +107,14 @@ public class Token
     [JsonInclude]
     [JsonPropertyName("accounts")]
     public Connection<TokenAccount>? Accounts { get; private set; }
+    
+    /// <summary>
+    /// The amount of currency reserved from the issuer for minting.
+    /// </summary>
+    [JsonConverter(typeof(NullableBigIntegerJsonConverter))]
+    [JsonInclude]
+    [JsonPropertyName("mintDeposit")]
+    public BigInteger? MintDeposit { get; private set; }
 
     /// <summary>
     /// The metadata for this token.

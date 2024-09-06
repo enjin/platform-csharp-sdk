@@ -30,6 +30,13 @@ public class BeamClaim
     [JsonInclude]
     [JsonPropertyName("tokenId")]
     public string? TokenId { get; private set; }
+    
+    /// <summary>
+    /// The claimable tokens quantity.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("quantity")]
+    public string? Quantity { get; private set; }
 
     /// <summary>
     /// The beam details.
@@ -73,11 +80,39 @@ public class BeamClaim
     [JsonInclude]
     [JsonPropertyName("code")]
     public string? Code { get; private set; }
-
+    
+    /// <summary>
+    /// The claim identifier code.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("identifierCode")]
+    public string? IdentifierCode { get; private set; }
+    
     /// <summary>
     /// The QR URL for the claimable code.
     /// </summary>
     [JsonInclude]
     [JsonPropertyName("qr")]
     public BeamQr? Qr { get; private set; }
+    
+    /// <summary>
+    /// An initial attribute to set for the token when minting on demand.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("attributes")]
+    public BeamQr? Attributes { get; private set; }
+    
+    /// <summary>
+    /// An blockchain transaction.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("transaction")]
+    public BeamQr? Transaction { get; private set; }
+    
+    /// <summary>
+    /// The idempotency key set for this transaction.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("idempotencyKey")]
+    public BeamQr? IdempotencyKey { get; private set; }
 }

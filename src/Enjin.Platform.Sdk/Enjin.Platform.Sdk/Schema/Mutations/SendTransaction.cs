@@ -29,16 +29,6 @@ public class SendTransaction : GraphQlRequest<SendTransaction>
     }
 
     /// <summary>
-    /// The signature for the payload.
-    /// </summary>
-    /// <param name="signature">The signature for the payload.</param>
-    /// <returns>This request for chaining.</returns>
-    public SendTransaction SetSignature(string? signature)
-    {
-        return SetVariable("signature", CoreTypes.String, signature);
-    }
-
-    /// <summary>
     /// The payload that has been signed.
     /// </summary>
     /// <param name="signingPayloadJson">The transaction ID.</param>
@@ -48,4 +38,13 @@ public class SendTransaction : GraphQlRequest<SendTransaction>
         return SetVariable("signingPayloadJson", "Object!", signingPayloadJson);
     }
 
+    /// <summary>
+    /// The signature for the payload.
+    /// </summary>
+    /// <param name="signature">The signature for the payload.</param>
+    /// <returns>This request for chaining.</returns>
+    public SendTransaction SetSignature(string? signature)
+    {
+        return SetVariable("signature", CoreTypes.String, signature);
+    }
 }

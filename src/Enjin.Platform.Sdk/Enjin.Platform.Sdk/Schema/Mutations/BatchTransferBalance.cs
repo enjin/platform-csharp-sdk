@@ -39,17 +39,4 @@ public class BatchTransferBalance : GraphQlRequest<BatchTransferBalance, Transac
     {
         return SetVariable("recipients", CoreTypes.TransferRecipientArray, recipients);
     }
-
-    /// <summary>
-    /// Sets the signing wallet for the transaction.
-    /// </summary>
-    /// <param name="signingAccount">The signing wallet account.</param>
-    /// <returns>This request for chaining.</returns>
-    /// <remarks>
-    /// The account defaults to wallet daemon if not specified.
-    /// </remarks>
-    public BatchTransferBalance SetSigningAccount(string? signingAccount)
-    {
-        return SetVariable("signingAccount", CoreTypes.String, signingAccount);
-    }
 }

@@ -45,17 +45,4 @@ public class TransferAllBalance : GraphQlRequest<TransferAllBalance, Transaction
     {
         return SetVariable("keepAlive", CoreTypes.Boolean, keepAlive);
     }
-
-    /// <summary>
-    /// Sets the signing wallet for the transaction.
-    /// </summary>
-    /// <param name="signingAccount">The signing wallet account.</param>
-    /// <returns>This request for chaining.</returns>
-    /// <remarks>
-    /// The account defaults to wallet daemon if not specified.
-    /// </remarks>
-    public TransferAllBalance SetSigningAccount(string? signingAccount)
-    {
-        return SetVariable("signingAccount", CoreTypes.String, signingAccount);
-    }
 }
