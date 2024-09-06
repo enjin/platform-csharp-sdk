@@ -113,7 +113,7 @@ public class TransactionFragment : GraphQlFragment<TransactionFragment>
     }
 
     /// <summary>
-    /// Sets whether the <see cref="Transaction"/> is to be returned with its <see cref="Transaction.Hash"/> property.
+    /// Sets whether the <see cref="Transaction"/> is to be returned with its <see cref="Transaction.TransactionHash"/> property.
     /// </summary>
     /// <param name="isIncluded">Whether the field is included.</param>
     /// <returns>This fragment for chaining.</returns>

@@ -66,6 +66,12 @@ public class PendingEvent
     [JsonPropertyName("data")]
     public JsonElement? Data { get; private set; }
     
+    /// <summary>
+    /// Gets the typed data payload for this event based on the event name.
+    /// </summary>
+    /// <remarks>
+    /// This property deserializes the JSON data payload into a specific type based on the event name.
+    /// </remarks>
     public PendingEventDataBase? DataTyped
     {
         get

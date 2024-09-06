@@ -15,7 +15,7 @@ public class PendingEventDataWithdraw : PendingEventDataBase
     /// </summary>
     [JsonInclude]
     [JsonPropertyName("who")]
-    public string Who { get; private set; }
+    public string? Who { get; private set; }
 
     /// <summary>
     /// The amount that was withdrawn

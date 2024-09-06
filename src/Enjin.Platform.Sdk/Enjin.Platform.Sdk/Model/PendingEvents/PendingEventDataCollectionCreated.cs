@@ -15,7 +15,7 @@ public class PendingEventDataCollectionCreated : PendingEventDataBase
     /// </summary>
     [JsonInclude]
     [JsonPropertyName("owner")]
-    public string Owner { get; private set; }
+    public string? Owner { get; private set; }
     
     /// <summary>
     /// The collection ID of this asset.

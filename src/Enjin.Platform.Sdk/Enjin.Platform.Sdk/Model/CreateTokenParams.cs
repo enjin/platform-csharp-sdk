@@ -76,7 +76,7 @@ public class CreateTokenParams : GraphQlParameter<CreateTokenParams>,
     /// <summary>
     /// Sets the freeze state of the token.
     /// </summary>
-    /// <param name="FreezeState">Whether the token is frozen on create.</param>
+    /// <param name="freezeState">Whether the token is frozen on create.</param>
     /// <returns>This parameter for chaining.</returns>
     public CreateTokenParams SetFreezeState(FreezeState? freezeState)
     {

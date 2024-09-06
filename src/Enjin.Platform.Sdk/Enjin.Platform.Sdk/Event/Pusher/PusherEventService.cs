@@ -352,7 +352,8 @@ public sealed class PusherEventService : IEventService
         {
             Type listenerType = listener.GetType();
             Type attributeType = typeof(EventFilterAttribute);
-            attribute = (EventFilterAttribute)System.Attribute.GetCustomAttribute(listenerType, attributeType);
+            attribute = (EventFilterAttribute?)System.Attribute.GetCustomAttribute(listenerType, attributeType) 
+                        ?? throw new InvalidOperationException("EventFilterAttribute not found on listener type.");
 
             // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
             return attribute != null;
