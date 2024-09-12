@@ -25,6 +25,28 @@ public class AccountRequestFragment : GraphQlFragment<AccountRequestFragment>
     {
         return WithField("qrCode", isIncluded);
     }
+    
+    /// <summary>
+    /// Sets whether the <see cref="AccountRequest"/> is to be returned with its <see cref="AccountRequest.ProofUrl"/>
+    /// property.
+    /// </summary>
+    /// <param name="isIncluded">Whether the field is included.</param>
+    /// <returns>This fragment for chaining.</returns>
+    public AccountRequestFragment WithProofUrl(bool isIncluded = true)
+    {
+        return WithField("proofUrl", isIncluded);
+    }
+    
+    /// <summary>
+    /// Sets whether the <see cref="AccountRequest"/> is to be returned with its <see cref="AccountRequest.ProofCode"/>
+    /// property.
+    /// </summary>
+    /// <param name="isIncluded">Whether the field is included.</param>
+    /// <returns>This fragment for chaining.</returns>
+    public AccountRequestFragment WithProofCode(bool isIncluded = true)
+    {
+        return WithField("proofCode", isIncluded);
+    }
 
     /// <summary>
     /// Sets whether the <see cref="AccountRequest"/> is to be returned with its

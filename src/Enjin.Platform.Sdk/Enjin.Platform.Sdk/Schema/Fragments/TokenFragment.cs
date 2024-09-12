@@ -107,16 +107,6 @@ public class TokenFragment : GraphQlFragment<TokenFragment>
     }
 
     /// <summary>
-    /// Sets whether the <see cref="Token"/> is to be returned with its <see cref="Token.MintDeposit"/> property.
-    /// </summary>
-    /// <param name="isIncluded">Whether the field is included.</param>
-    /// <returns>This fragment for chaining.</returns>
-    public TokenFragment WithMintDeposit(bool isIncluded = true)
-    {
-        return WithField("mintDeposit", isIncluded);
-    }
-
-    /// <summary>
     /// Sets whether the <see cref="Token"/> is to be returned with its <see cref="Token.AttributeCount"/> property.
     /// </summary>
     /// <param name="isIncluded">Whether the field is included.</param>
@@ -157,6 +147,16 @@ public class TokenFragment : GraphQlFragment<TokenFragment>
     public TokenFragment WithAccounts(TokenAccountConnectionFragment? fragment)
     {
         return WithField("accounts", fragment);
+    }
+    
+    /// <summary>
+    /// Sets whether the <see cref="Token"/> is to be returned with its <see cref="Token.MintDeposit"/> property.
+    /// </summary>
+    /// <param name="isIncluded">Whether the field is included.</param>
+    /// <returns>This fragment for chaining.</returns>
+    public TokenFragment WithMintDeposit(bool isIncluded = true)
+    {
+        return WithField("mintDeposit", isIncluded);
     }
 
     /// <summary>
