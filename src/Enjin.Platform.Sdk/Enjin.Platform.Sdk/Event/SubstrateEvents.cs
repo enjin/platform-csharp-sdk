@@ -9,6 +9,61 @@ namespace Enjin.Platform.Sdk;
 public static class SubstrateEvents
 {
     /// <summary>
+    /// The name of the event for when a balance is set.
+    /// </summary>
+    public const string BalanceSet = "platform:balance-set";
+    
+    /// <summary>
+    /// The name of the event for when a deposit is set.
+    /// </summary>
+    public const string Deposit = "platform:deposit";
+    
+    /// <summary>
+    /// The name of the event for when dust is lost.
+    /// </summary>
+    public const string DustLost = "platform:dust-lost";
+    
+    /// <summary>
+    /// The name of the event for when endowed.
+    /// </summary>
+    public const string Endowed = "platform:endowed";
+    
+    /// <summary>
+    /// The name of the event for when reserve is set.
+    /// </summary>
+    public const string Reserved = "platform:reserved";
+    
+    /// <summary>
+    /// The name of the event for when reserve is repatriated.
+    /// </summary>
+    public const string ReserveRepatriated = "platform:reserve-repatriated";
+    
+    /// <summary>
+    /// The name of the event for when a slash happens.
+    /// </summary>
+    public const string Slashed = "platform:slashed";
+    
+    /// <summary>
+    /// The name of the event for when a teleport happens.
+    /// </summary>
+    public const string Teleport = "platform:teleport";
+    
+    /// <summary>
+    /// The name of the event for when reserve is repatriated.
+    /// </summary>
+    public const string Transfer = "platform:transfer";
+    
+    /// <summary>
+    /// The name of the event for when reserve is unreserved.
+    /// </summary>
+    public const string Unreserved = "platform:unreserved";
+    
+    /// <summary>
+    /// The name of the event for when a balance is withdrawn.
+    /// </summary>
+    public const string Withdraw = "platform:withdraw";
+    
+    /// <summary>
     /// The name of the event for when an account is created for a <c>Collection</c>.
     /// </summary>
     public const string CollectionAccountCreated = "platform:collection-account-created";
@@ -68,6 +123,11 @@ public static class SubstrateEvents
     /// </summary>
     public const string CollectionThawed = "platform:collection-thawed";
 
+    /// <summary>
+    /// The name of the event for when a <c>Collection</c> is transferred.
+    /// </summary>
+    public const string CollectionTransferred = "platform:collection-transferred";
+    
     /// <summary>
     /// The name of the event for when a <c>Collection</c> is unapproved.
     /// </summary>
@@ -137,6 +197,11 @@ public static class SubstrateEvents
     /// The name of the event for when a <c>Token</c> is mutated.
     /// </summary>
     public const string TokenMutated = "platform:token-mutated";
+    
+    /// <summary>
+    /// The name of the event for when a <c>Token</c> is reserved.
+    /// </summary>
+    public const string TokenReserved = "platform:token-reserved";
 
     /// <summary>
     /// The name of the event for when a <c>Token</c> is thawed.
@@ -152,4 +217,9 @@ public static class SubstrateEvents
     /// The name of the event for when a <c>Token</c> is unapproved.
     /// </summary>
     public const string TokenUnapproved = "platform:token-unapproved";
+    
+    /// <summary>
+    /// The name of the event for when a <c>Token</c> is unreserved.
+    /// </summary>
+    public const string TokenUnreserved = "platform:token-unreserved";
 }

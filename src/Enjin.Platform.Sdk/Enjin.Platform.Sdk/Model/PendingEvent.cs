@@ -83,35 +83,35 @@ public class PendingEvent
 
             switch (Name)
             {
-                case "platform:transfer":
+                case SubstrateEvents.Transfer:
                 {
                     return JsonSerializer.Deserialize<PendingEventDataTransfer>(Data.Value.GetRawText());
                 }
-                case "platform:token-transferred":
+                case SubstrateEvents.TokenTransferred:
                 {
                     return JsonSerializer.Deserialize<PendingEventDataTokenTransferred>(Data.Value.GetRawText());
                 }
-                case "platform:reserved":
+                case SubstrateEvents.Reserved:
                 {
                     return JsonSerializer.Deserialize<PendingEventDataReserved>(Data.Value.GetRawText());
                 }
-                case "platform:withdraw":
+                case SubstrateEvents.Withdraw:
                 {
                     return JsonSerializer.Deserialize<PendingEventDataWithdraw>(Data.Value.GetRawText());
                 }
-                case "platform:deposit":
+                case SubstrateEvents.Deposit:
                 {
                     return JsonSerializer.Deserialize<PendingEventDataDeposit>(Data.Value.GetRawText());
                 }
-                case "platform:token-minted":
+                case SubstrateEvents.TokenMinted:
                 {
                     return JsonSerializer.Deserialize<PendingEventDataTokenMinted>(Data.Value.GetRawText());
                 }
-                case "platform:token-created":
+                case SubstrateEvents.TokenCreated:
                 {
                     return JsonSerializer.Deserialize<PendingEventDataTokenCreated>(Data.Value.GetRawText());
                 }
-                case "platform:collection-created":
+                case SubstrateEvents.CollectionCreated:
                 {
                     return JsonSerializer.Deserialize<PendingEventDataCollectionCreated>(Data.Value.GetRawText());
                 }
