@@ -107,6 +107,16 @@ public class BeamFragment : GraphQlFragment<BeamFragment>
     {
         return WithField("message", fragment);
     }
+    
+    /// <summary>
+    /// Sets whether the <see cref="Beam"/> is to be returned with its <see cref="Beam.IsClaimable"/> property.
+    /// </summary>
+    /// <param name="isIncluded">Whether the field is included.</param>
+    /// <returns>This fragment for chaining.</returns>
+    public BeamFragment WithIsClaimable(bool isIncluded = true)
+    {
+        return WithField("isClaimable", isIncluded);
+    }
 
     /// <summary>
     /// Sets whether the <see cref="Beam"/> is to be returned with its <see cref="Beam.Flags"/> property.
@@ -127,5 +137,36 @@ public class BeamFragment : GraphQlFragment<BeamFragment>
     public BeamFragment WithQr(BeamQrFragment? fragment)
     {
         return WithField("qr", fragment);
+    }
+    
+    /// <summary>
+    /// Sets whether the <see cref="Beam"/> is to be returned with its <see cref="Beam.Probabilities"/> property.
+    /// </summary>
+    /// <param name="isIncluded">Whether the field is included.</param>
+    /// <returns>This fragment for chaining.</returns>
+    public BeamFragment WithProbabilities(bool isIncluded = true)
+    {
+        return WithField("probabilities", isIncluded);
+    }
+    
+    /// <summary>
+    /// Sets the <see cref="BeamScan"/> fragment to be used for getting the <see cref="Beam.Claims"/> property of the
+    /// <see cref="Beam"/>.
+    /// </summary>
+    /// <param name="fragment">The <see cref="BeamQr"/> fragment.</param>
+    /// <returns>This fragment for chaining.</returns>
+    public BeamFragment WithClaims(BeamClaimConnectionFragment? fragment)
+    {
+        return WithField("claims", fragment);
+    }
+    
+    /// <summary>
+    /// Sets whether the <see cref="Beam"/> is to be returned with its <see cref="Beam.ClaimsRemaining"/> property.
+    /// </summary>
+    /// <param name="isIncluded">Whether the field is included.</param>
+    /// <returns>This fragment for chaining.</returns>
+    public BeamFragment WithClaimsRemaining(bool isIncluded = true)
+    {
+        return WithField("claimsRemaining", isIncluded);
     }
 }

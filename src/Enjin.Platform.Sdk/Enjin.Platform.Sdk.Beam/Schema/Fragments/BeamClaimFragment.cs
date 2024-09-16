@@ -45,6 +45,16 @@ public class BeamClaimFragment : GraphQlFragment<BeamClaimFragment>
     {
         return WithField("tokenId", isIncluded);
     }
+    
+    /// <summary>
+    /// Sets whether the <see cref="BeamClaim"/> is to be returned with its <see cref="BeamClaim.Quantity"/> property.
+    /// </summary>
+    /// <param name="isIncluded">Whether the field is included.</param>
+    /// <returns>This fragment for chaining.</returns>
+    public BeamClaimFragment WithQuantity(bool isIncluded = true)
+    {
+        return WithField("quantity", isIncluded);
+    }
 
     /// <summary>
     /// Sets the <see cref="Beam"/> fragment to be used for getting the <see cref="BeamClaim.Beam"/> property of
@@ -88,6 +98,16 @@ public class BeamClaimFragment : GraphQlFragment<BeamClaimFragment>
     {
         return WithField("claimStatus", isIncluded);
     }
+    
+    /// <summary>
+    /// Sets whether the <see cref="BeamClaim"/> is to be returned with its <see cref="BeamClaim.Type"/> property.
+    /// </summary>
+    /// <param name="isIncluded">Whether the field is included.</param>
+    /// <returns>This fragment for chaining.</returns>
+    public BeamClaimFragment WithBeamType(bool isIncluded = true)
+    {
+        return WithField("beamType", isIncluded);
+    }
 
     /// <summary>
     /// Sets whether the <see cref="BeamClaim"/> is to be returned with its <see cref="BeamClaim.Code"/> property.
@@ -98,6 +118,16 @@ public class BeamClaimFragment : GraphQlFragment<BeamClaimFragment>
     {
         return WithField("code", isIncluded);
     }
+    
+    /// <summary>
+    /// Sets whether the <see cref="BeamClaim"/> is to be returned with its <see cref="BeamClaim.IdentifierCode"/> property.
+    /// </summary>
+    /// <param name="isIncluded">Whether the field is included.</param>
+    /// <returns>This fragment for chaining.</returns>
+    public BeamClaimFragment WithIdentifierCode(bool isIncluded = true)
+    {
+        return WithField("identifierCode", isIncluded);
+    }
 
     /// <summary>
     /// Sets whether the <see cref="BeamClaim"/> is to be returned with its <see cref="BeamClaim.Qr"/> property.
@@ -107,5 +137,35 @@ public class BeamClaimFragment : GraphQlFragment<BeamClaimFragment>
     public BeamClaimFragment WithQr(BeamQrFragment? fragment)
     {
         return WithField("qr", fragment);
+    }
+    
+    /// <summary>
+    /// Sets whether the <see cref="BeamClaim"/> is to be returned with its <see cref="BeamClaim.Attributes"/> property.
+    /// </summary>
+    /// <param name="fragment">Whether the field is included.</param>
+    /// <returns>This fragment for chaining.</returns>
+    public BeamClaimFragment WithAttributes(AttributeFragment? fragment)
+    {
+        return WithField("attributes", fragment);
+    }
+    
+    /// <summary>
+    /// Sets whether the <see cref="BeamClaim"/> is to be returned with its <see cref="BeamClaim.Code"/> property.
+    /// </summary>
+    /// <param name="fragment">Whether the field is included.</param>
+    /// <returns>This fragment for chaining.</returns>
+    public BeamClaimFragment WithTransaction(TransactionFragment? fragment)
+    {
+        return WithField("transaction", fragment);
+    }
+    
+    /// <summary>
+    /// Sets whether the <see cref="BeamClaim"/> is to be returned with its <see cref="BeamClaim.IdempotencyKey"/> property.
+    /// </summary>
+    /// <param name="isIncluded">Whether the field is included.</param>
+    /// <returns>This fragment for chaining.</returns>
+    public BeamClaimFragment WithIdempotencyKey(bool isIncluded = true)
+    {
+        return WithField("idempotencyKey", isIncluded);
     }
 }
