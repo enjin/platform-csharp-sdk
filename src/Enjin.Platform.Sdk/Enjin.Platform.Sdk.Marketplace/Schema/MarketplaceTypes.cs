@@ -32,6 +32,8 @@ public static class MarketplaceTypes
     /// </summary>
     public const string AuctionDataInputTypeArray = "[AuctionDataInputType!]!";
 
+    // ListingStateEnum
+    
     /// <summary>
     /// String for <c>ListingStateEnum</c> type.
     /// </summary>
