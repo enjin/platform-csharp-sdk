@@ -11,6 +11,7 @@ namespace Enjin.Platform.Sdk.FuelTanks;
 public class SetConsumption : GraphQlRequest<SetConsumption, TransactionFragment>,
                               IHasIdempotencyKey<SetConsumption>,
                               IHasSkipValidation<SetConsumption>,
+                              IHasSimulate<SetConsumption>,
                               IHasSigningAccount<SetConsumption>
 {
     /// <summary>

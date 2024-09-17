@@ -10,6 +10,7 @@ namespace Enjin.Platform.Sdk.FuelTanks;
 public class DestroyFuelTank : GraphQlRequest<DestroyFuelTank, TransactionFragment>,
                                IHasIdempotencyKey<DestroyFuelTank>,
                                IHasSkipValidation<DestroyFuelTank>,
+                               IHasSimulate<DestroyFuelTank>,
                                IHasSigningAccount<DestroyFuelTank>
 {
     /// <summary>
