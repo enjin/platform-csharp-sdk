@@ -14,7 +14,8 @@ namespace Enjin.Platform.Sdk;
 public class ApproveCollection : GraphQlRequest<ApproveCollection, TransactionFragment>,
                                  IHasIdempotencyKey<ApproveCollection>,
                                  IHasSkipValidation<ApproveCollection>,
-                                 IHasSigningAccount<ApproveCollection>
+                                 IHasSigningAccount<ApproveCollection>,
+                                 IHasSimulate<ApproveCollection>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="ApproveCollection"/> class.

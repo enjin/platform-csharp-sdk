@@ -14,7 +14,8 @@ namespace Enjin.Platform.Sdk;
 public class MintToken : GraphQlRequest<MintToken, TransactionFragment>,
                          IHasIdempotencyKey<MintToken>,
                          IHasSkipValidation<MintToken>,
-                         IHasSigningAccount<MintToken>
+                         IHasSigningAccount<MintToken>,
+                         IHasSimulate<MintToken>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="MintToken"/> class.

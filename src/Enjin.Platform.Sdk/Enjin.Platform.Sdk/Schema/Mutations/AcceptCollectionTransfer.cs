@@ -14,7 +14,8 @@ namespace Enjin.Platform.Sdk;
 public class AcceptCollectionTransfer : GraphQlRequest<AcceptCollectionTransfer, TransactionFragment>,
                                  IHasIdempotencyKey<AcceptCollectionTransfer>,
                                  IHasSkipValidation<AcceptCollectionTransfer>,
-                                 IHasSigningAccount<AcceptCollectionTransfer>
+                                 IHasSigningAccount<AcceptCollectionTransfer>,
+                                 IHasSimulate<AcceptCollectionTransfer>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="ApproveCollection"/> class.

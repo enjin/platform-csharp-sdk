@@ -20,7 +20,8 @@ public class BatchMint : GraphQlRequest<BatchMint, TransactionFragment>,
                          IHasContinueOnFailure<BatchMint>,
                          IHasIdempotencyKey<BatchMint>,
                          IHasSkipValidation<BatchMint>,
-                         IHasSigningAccount<BatchMint>
+                         IHasSigningAccount<BatchMint>,
+                         IHasSimulate<BatchMint>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="BatchMint"/> class.

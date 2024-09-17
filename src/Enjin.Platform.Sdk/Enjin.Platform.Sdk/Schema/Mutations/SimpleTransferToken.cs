@@ -11,7 +11,8 @@ namespace Enjin.Platform.Sdk;
 public class SimpleTransferToken : GraphQlRequest<SimpleTransferToken, TransactionFragment>,
                                    IHasIdempotencyKey<SimpleTransferToken>,
                                    IHasSkipValidation<SimpleTransferToken>,
-                                   IHasSigningAccount<SimpleTransferToken>
+                                   IHasSigningAccount<SimpleTransferToken>,
+                                   IHasSimulate<SimpleTransferToken>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="SimpleTransferToken"/> class.

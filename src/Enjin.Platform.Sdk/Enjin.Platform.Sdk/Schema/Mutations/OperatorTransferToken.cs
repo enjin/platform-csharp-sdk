@@ -11,7 +11,8 @@ namespace Enjin.Platform.Sdk;
 public class OperatorTransferToken : GraphQlRequest<OperatorTransferToken, TransactionFragment>,
                                      IHasIdempotencyKey<OperatorTransferToken>,
                                      IHasSkipValidation<OperatorTransferToken>,
-                                     IHasSigningAccount<OperatorTransferToken>
+                                     IHasSigningAccount<OperatorTransferToken>,
+                                     IHasSimulate<OperatorTransferToken>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="OperatorTransferToken"/> class.

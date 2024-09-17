@@ -21,7 +21,8 @@ public class BatchTransferBalance : GraphQlRequest<BatchTransferBalance, Transac
                              IHasContinueOnFailure<BatchTransferBalance>,
                              IHasIdempotencyKey<BatchTransferBalance>,
                              IHasSkipValidation<BatchTransferBalance>,
-                             IHasSigningAccount<BatchTransferBalance>
+                             IHasSigningAccount<BatchTransferBalance>,
+                             IHasSimulate<BatchTransferBalance>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="BatchTransferBalance"/> class.

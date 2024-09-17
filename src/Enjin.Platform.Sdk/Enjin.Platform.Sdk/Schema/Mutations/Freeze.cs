@@ -17,7 +17,8 @@ public class Freeze : GraphQlRequest<Freeze, TransactionFragment>,
                       IHasEncodableTokenId<Freeze>,
                       IHasIdempotencyKey<Freeze>,
                       IHasSkipValidation<Freeze>,
-                      IHasSigningAccount<Freeze>
+                      IHasSigningAccount<Freeze>,
+                      IHasSimulate<Freeze>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Freeze"/> class.
