@@ -21,7 +21,7 @@ public class GetPendingEvents : GraphQlRequest<GetPendingEvents, PendingEventsCo
     /// </summary>
     /// <param name="names">The name filters.</param>
     /// <returns>This request for chaining.</returns>
-    public GetPendingEvents SetNames(StringFilterInput[]? names)
+    public GetPendingEvents SetNames(params StringFilterInput[]? names)
     {
         return SetVariable("names", CoreTypes.StringFilterArray, names);
     }
@@ -41,7 +41,7 @@ public class GetPendingEvents : GraphQlRequest<GetPendingEvents, PendingEventsCo
     /// </summary>
     /// <param name="filters">Sets any channel filters.</param>
     /// <returns>This request for chaining.</returns>
-    public GetPendingEvents SetChannelFilters(StringFilterInput[]? filters)
+    public GetPendingEvents SetChannelFilters(params StringFilterInput[]? filters)
     {
         return SetVariable("channelFilters", CoreTypes.StringFilterArray, filters);
     }

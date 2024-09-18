@@ -22,7 +22,7 @@ public class RetryTransactions : GraphQlRequest<RetryTransactions, TransactionFr
     /// </summary>
     /// <param name="ids">The IDs.</param>
     /// <returns>This request for chaining.</returns>
-    public RetryTransactions SetCollectionId(BigInteger[]? ids)
+    public RetryTransactions SetCollectionId(params BigInteger[]? ids)
     {
         return SetVariable("ids", CoreTypes.BigIntArray, ids);
     }
@@ -32,7 +32,7 @@ public class RetryTransactions : GraphQlRequest<RetryTransactions, TransactionFr
     /// </summary>
     /// <param name="idempotencyKeys">The idempotency keys.</param>
     /// <returns>This request for chaining.</returns>
-    public RetryTransactions SetKey(string[]? idempotencyKeys)
+    public RetryTransactions SetKey(params string[]? idempotencyKeys)
     {
         return SetVariable("idempotencyKeys", CoreTypes.StringArray, idempotencyKeys);
     }

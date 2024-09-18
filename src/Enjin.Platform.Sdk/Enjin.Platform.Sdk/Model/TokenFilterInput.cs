@@ -23,7 +23,7 @@ public class TokenFilterInput : GraphQlParameter<TokenFilterInput>
     /// </summary>
     /// <param name="tokenIds">The token IDs.</param>
     /// <returns>This parameter for chaining.</returns>
-    public TokenFilterInput SettokenIds(IntegerRangeString[]? tokenIds)
+    public TokenFilterInput SetTokenIds(params IntegerRangeString[]? tokenIds)
     {
         return SetParameter("tokenIds", tokenIds);
     }

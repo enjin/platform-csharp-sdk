@@ -18,11 +18,11 @@ namespace Enjin.Platform.Sdk;
 /// <seealso cref="Transaction"/>
 [PublicAPI]
 public class BatchTransferBalance : GraphQlRequest<BatchTransferBalance, TransactionFragment>,
-                             IHasContinueOnFailure<BatchTransferBalance>,
-                             IHasIdempotencyKey<BatchTransferBalance>,
-                             IHasSkipValidation<BatchTransferBalance>,
-                             IHasSigningAccount<BatchTransferBalance>,
-                             IHasSimulate<BatchTransferBalance>
+                                    IHasContinueOnFailure<BatchTransferBalance>,
+                                    IHasIdempotencyKey<BatchTransferBalance>,
+                                    IHasSkipValidation<BatchTransferBalance>,
+                                    IHasSigningAccount<BatchTransferBalance>,
+                                    IHasSimulate<BatchTransferBalance>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="BatchTransferBalance"/> class.

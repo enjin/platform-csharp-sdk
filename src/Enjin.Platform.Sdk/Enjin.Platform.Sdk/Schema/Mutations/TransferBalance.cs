@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 using JetBrains.Annotations;
 
 namespace Enjin.Platform.Sdk;
@@ -11,6 +12,7 @@ namespace Enjin.Platform.Sdk;
 /// with at least the existential deposit.
 /// </remarks>
 /// <seealso cref="Transaction"/>
+[Obsolete("This mutation is deprecated and will be removed in a future release. Use the TransferAllowDeath and TransferKeepAlive mutations instead.")]
 [PublicAPI]
 public class TransferBalance : GraphQlRequest<TransferBalance, TransactionFragment>,
                                IHasIdempotencyKey<TransferBalance>,

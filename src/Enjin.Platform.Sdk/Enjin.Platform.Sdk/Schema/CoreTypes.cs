@@ -331,4 +331,16 @@ public static class CoreTypes
     /// String for an array of <c>TransferRecipient</c> type.
     /// </summary>
     public const string TransferRecipientArray = "[TransferRecipient!]!";
+    
+    // ModelType
+    
+    /// <summary>
+    /// String for <c>ModelType</c> type.
+    /// </summary>
+    public const string ModelType = "ModelType!";
+
+    /// <summary>
+    /// String for an array of <c>ModelType</c> type.
+    /// </summary>
+    public const string ModelTypeArray = "[ModelType!]!";
 }
