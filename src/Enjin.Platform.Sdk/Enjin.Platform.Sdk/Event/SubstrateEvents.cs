@@ -49,7 +49,7 @@ public static class SubstrateEvents
     public const string Teleport = "platform:teleport";
     
     /// <summary>
-    /// The name of the event for when reserve is repatriated.
+    /// The name of the event for when a transfer happens.
     /// </summary>
     public const string Transfer = "platform:transfer";
     
