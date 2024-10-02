@@ -63,30 +63,66 @@ public class Token
     [JsonInclude]
     [JsonPropertyName("royalty")]
     public Royalty? Royalty { get; private set; }
-
-    /// <summary>
-    /// The minimum required balance of this token for all accounts.
-    /// </summary>
-    [JsonConverter(typeof(NullableBigIntegerJsonConverter))]
-    [JsonInclude]
-    [JsonPropertyName("minimumBalance")]
-    public BigInteger? MinimumBalance { get; private set; }
-
-    /// <summary>
-    /// The price of each token in EFI.
-    /// </summary>
-    [JsonConverter(typeof(NullableBigIntegerJsonConverter))]
-    [JsonInclude]
-    [JsonPropertyName("unitPrice")]
-    public BigInteger? UnitPrice { get; private set; }
-
+    
     /// <summary>
     /// The number of attributes set on this token.
     /// </summary>
     [JsonInclude]
     [JsonPropertyName("attributeCount")]
     public int? AttributeCount { get; private set; }
+    
+    /// <summary>
+    /// Whether this token requires a deposit.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("requiresDeposit")]
+    public int? RequiresDeposit { get; private set; }
+    
+    /// <summary>
+    /// The creation deposit for this token.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("creationDeposit")]
+    public CreationDeposit? CreationDeposit { get; private set; }
 
+    /// <summary>
+    /// The owner deposit for this token.
+    /// </summary>
+    [JsonConverter(typeof(NullableBigIntegerJsonConverter))]
+    [JsonInclude]
+    [JsonPropertyName("ownerDeposit")]
+    public BigInteger? OwnerDeposit { get; private set; }
+    
+    /// <summary>
+    /// The total amount of deposit required.
+    /// </summary>
+    [JsonConverter(typeof(NullableBigIntegerJsonConverter))]
+    [JsonInclude]
+    [JsonPropertyName("totalTokenAccountDeposit")]
+    public BigInteger? TotalTokenAccountDeposit { get; private set; }
+    
+    /// <summary>
+    /// The amount of ENJ to infuse into each token.
+    /// </summary>
+    [JsonConverter(typeof(NullableBigIntegerJsonConverter))]
+    [JsonInclude]
+    [JsonPropertyName("infusion")]
+    public BigInteger? Infustion { get; private set; }
+    
+    /// <summary>
+    /// Whether anyone can infuse ENJ into this token.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("anyoneCanInfuse")]
+    public bool? AnyoneCanInfuse { get; private set; }
+    
+    /// <summary>
+    /// The token metadata.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("tokenMetadata")]
+    public TokenMetadata? TokenMetadata { get; private set; }
+    
     /// <summary>
     /// The collection this token belongs to.
     /// </summary>
@@ -107,14 +143,6 @@ public class Token
     [JsonInclude]
     [JsonPropertyName("accounts")]
     public Connection<TokenAccount>? Accounts { get; private set; }
-    
-    /// <summary>
-    /// The amount of currency reserved from the issuer for minting.
-    /// </summary>
-    [JsonConverter(typeof(NullableBigIntegerJsonConverter))]
-    [JsonInclude]
-    [JsonPropertyName("mintDeposit")]
-    public BigInteger? MintDeposit { get; private set; }
 
     /// <summary>
     /// The metadata for this token.
