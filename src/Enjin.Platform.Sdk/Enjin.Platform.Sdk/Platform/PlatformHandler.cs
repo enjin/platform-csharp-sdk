@@ -75,7 +75,7 @@ public sealed class PlatformHandler : DelegatingHandler
         {
             if (HasAuthToken)
             {
-                request.Headers.Authorization = new AuthenticationHeaderValue(_authToken);
+                request.Headers.Authorization = new AuthenticationHeaderValue(_authToken ?? throw new InvalidOperationException("Auth token is null or empty"));
             }
         }
 

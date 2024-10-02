@@ -15,6 +15,20 @@ public class AccountRequest
     [JsonInclude]
     [JsonPropertyName("qrCode")]
     public string? QrCode { get; private set; }
+    
+    /// <summary>
+    /// The proof URL to use instead of (or alongside) the QR Code
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("proofUrl")]
+    public string? ProofUrl { get; private set; }
+    
+    /// <summary>
+    /// The proof code for this request.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("proofCode")]
+    public string? ProofCode { get; private set; }
 
     /// <summary>
     /// The verification ID generated to get the account from.

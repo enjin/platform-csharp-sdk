@@ -16,7 +16,8 @@ public class ApproveToken : GraphQlRequest<ApproveToken, TransactionFragment>,
                             IHasEncodableTokenId<ApproveToken>,
                             IHasIdempotencyKey<ApproveToken>,
                             IHasSkipValidation<ApproveToken>,
-                            IHasSigningAccount<ApproveToken>
+                            IHasSigningAccount<ApproveToken>,
+                            IHasSimulate<ApproveToken>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="ApproveToken"/> class.

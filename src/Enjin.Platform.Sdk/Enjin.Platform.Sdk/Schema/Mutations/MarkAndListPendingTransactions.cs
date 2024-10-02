@@ -29,6 +29,16 @@ public class MarkAndListPendingTransactions
     }
 
     /// <summary>
+    /// Sets the network to filter to.
+    /// </summary>
+    /// <param name="network">The network.</param>
+    /// <returns>The request for chaining.</returns>
+    public MarkAndListPendingTransactions SetNetwork(string? network)
+    {
+        return SetVariable("network", CoreTypes.String, network);
+    }
+    
+    /// <summary>
     /// Sets whether the transactions are to be marked as processing. Defaults to <c>true</c> if not specified.
     /// </summary>
     /// <param name="markAsProcessing">Whether the transactions are to be marked as processing.</param>

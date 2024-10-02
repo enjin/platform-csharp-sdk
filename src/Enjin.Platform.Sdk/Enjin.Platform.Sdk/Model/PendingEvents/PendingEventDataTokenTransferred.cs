@@ -15,7 +15,7 @@ public class PendingEventDataTokenTransferred : PendingEventDataBase
     /// </summary>
     [JsonInclude]
     [JsonPropertyName("from")]
-    public string From { get; private set; }
+    public string? From { get; private set; }
 
     /// <summary>
     /// The amount that was transferred.
@@ -38,7 +38,7 @@ public class PendingEventDataTokenTransferred : PendingEventDataBase
     /// </summary>
     [JsonInclude]
     [JsonPropertyName("recipient")]
-    public string Recipient { get; private set; }
+    public string? Recipient { get; private set; }
 
     /// <summary>
     /// The collection ID of this asset.

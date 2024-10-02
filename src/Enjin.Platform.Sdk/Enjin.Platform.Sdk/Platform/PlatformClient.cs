@@ -120,7 +120,8 @@ public sealed class PlatformClient : IPlatformClient
     /// <inheritdoc/>
     public Task<IPlatformResponse<TResult>> SendRequest<TResult>(IPlatformRequest request)
     {
-        Uri uri = new Uri(_httpClient.BaseAddress, request.Path);
+        Uri baseAddress = _httpClient.BaseAddress ?? throw new InvalidOperationException("Base address is null");
+        Uri uri = new Uri(baseAddress, request.Path);
 
         return _httpClient.PostAsync(uri, request.Content).ContinueWith(task =>
         {

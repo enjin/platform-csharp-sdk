@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 using System.Text.Json.Serialization;
 using JetBrains.Annotations;
 
@@ -34,6 +35,7 @@ public class SimpleTransferParams : GraphQlParameter<SimpleTransferParams>,
     /// </summary>
     /// <param name="keepAlive">Whether the transaction will be kept from failing.</param>
     /// <returns>This parameter for chaining.</returns>
+    [Obsolete("This flag has been removed from the blockchain and will be ignored.")]
     public SimpleTransferParams SetKeepAlive(bool? keepAlive)
     {
         return SetParameter("keepAlive", keepAlive);

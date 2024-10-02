@@ -10,6 +10,7 @@ namespace Enjin.Platform.Sdk.FuelTanks;
 public class MutateFuelTank : GraphQlRequest<MutateFuelTank, TransactionFragment>,
                               IHasIdempotencyKey<MutateFuelTank>,
                               IHasSkipValidation<MutateFuelTank>,
+                              IHasSimulate<MutateFuelTank>,
                               IHasSigningAccount<MutateFuelTank>
 {
     /// <summary>

@@ -11,6 +11,7 @@ namespace Enjin.Platform.Sdk.FuelTanks;
 public class InsertRuleSet : GraphQlRequest<InsertRuleSet, TransactionFragment>,
                              IHasIdempotencyKey<InsertRuleSet>,
                              IHasSkipValidation<InsertRuleSet>,
+                             IHasSimulate<InsertRuleSet>,
                              IHasSigningAccount<InsertRuleSet>
 {
     /// <summary>

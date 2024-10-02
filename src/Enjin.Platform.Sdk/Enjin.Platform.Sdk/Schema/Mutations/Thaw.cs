@@ -12,7 +12,8 @@ public class Thaw : GraphQlRequest<Thaw, TransactionFragment>,
                     IHasEncodableTokenId<Thaw>,
                     IHasIdempotencyKey<Thaw>,
                     IHasSkipValidation<Thaw>,
-                    IHasSigningAccount<Thaw>
+                    IHasSigningAccount<Thaw>,
+                    IHasSimulate<Thaw>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Thaw"/> class.

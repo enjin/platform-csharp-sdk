@@ -29,27 +29,27 @@ public class Block
     /// The on-chain block hash.
     /// </summary>
     [JsonInclude]
-    [JsonPropertyName("number")]
+    [JsonPropertyName("hash")]
     public string? Hash { get; private set; }
 
     /// <summary>
     /// Whether this block was already synced.
     /// </summary>
     [JsonInclude]
-    [JsonPropertyName("number")]
+    [JsonPropertyName("synced")]
     public bool? Synced { get; private set; }
 
     /// <summary>
     /// Whether this block failed to be processed.
     /// </summary>
     [JsonInclude]
-    [JsonPropertyName("number")]
+    [JsonPropertyName("failed")]
     public bool? Failed { get; private set; }
 
     /// <summary>
     /// The exception that happened when processing this block, if one exists.
     /// </summary>
     [JsonInclude]
-    [JsonPropertyName("number")]
+    [JsonPropertyName("exception")]
     public string? Exception { get; private set; }
 }

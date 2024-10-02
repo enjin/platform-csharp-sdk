@@ -13,6 +13,7 @@ namespace Enjin.Platform.Sdk.Marketplace;
 public class FinalizeAuction : GraphQlRequest<FinalizeAuction, TransactionFragment>,
                                IHasIdempotencyKey<FinalizeAuction>,
                                IHasSkipValidation<FinalizeAuction>,
+                               IHasSimulate<FinalizeAuction>,
                                IHasSigningAccount<FinalizeAuction>
 {
     /// <summary>

@@ -46,4 +46,22 @@ public enum DispatchRuleEnum
     /// </summary>
     [EnumMember(Value = "REQUIRE_TOKEN")]
     RequireToken,
+    
+    /// <summary>
+    /// Indicates a dispatch rule as <c>PERMITTED_EXTRINSICS</c>.
+    /// </summary>
+    [EnumMember(Value = "PERMITTED_EXTRINSICS")]
+    PermittedExtrinsics,
+    
+    /// <summary>
+    /// Indicates a dispatch rule as <c>PERMITTED_CALLS</c>.
+    /// </summary>
+    [EnumMember(Value = "PERMITTED_CALLS")]
+    PermittedCalls,
+    
+    /// <summary>
+    /// Indicates a dispatch rule as <c>WHITELISTED_PALLETS</c>.
+    /// </summary>
+    [EnumMember(Value = "WHITELISTED_PALLETS")]
+    WhitelistedPallets
 }

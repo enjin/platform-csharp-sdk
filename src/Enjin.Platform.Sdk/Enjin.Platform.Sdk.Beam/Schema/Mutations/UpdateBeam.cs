@@ -35,4 +35,14 @@ public class UpdateBeam : GraphQlRequest<UpdateBeam>,
     {
         return SetVariable("flags", BeamTypes.BeamFlagInputTypeArray, flags);
     }
+    
+    /// <summary>
+    /// Sets the token IDs to add.
+    /// </summary>
+    /// <param name="tokenIds">The token claims to add.</param>
+    /// <returns>This request for chaining.</returns>
+    public UpdateBeam SetTokens(params ClaimToken[]? tokenIds)
+    {
+        return SetVariable("tokens", BeamTypes.ClaimTokenArray, tokenIds);
+    }
 }

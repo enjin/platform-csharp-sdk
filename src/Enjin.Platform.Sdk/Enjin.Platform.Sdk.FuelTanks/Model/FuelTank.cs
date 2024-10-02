@@ -28,15 +28,15 @@ public class FuelTank
     /// The flag for existential deposit.
     /// </summary>
     [JsonInclude]
-    [JsonPropertyName("reserveExistentialDeposit")]
-    public bool? ReserveExistentialDeposit { get; private set; }
+    [JsonPropertyName("reservesExistentialDeposit")]
+    public bool? ReservesExistentialDeposit { get; private set; }
 
     /// <summary>
     /// The flag for account creation deposit.
     /// </summary>
     [JsonInclude]
-    [JsonPropertyName("reserveAccountCreationDeposit")]
-    public bool? ReserveAccountCreationDeposit { get; private set; }
+    [JsonPropertyName("reservesAccountCreationDeposit")]
+    public bool? ReservesAccountCreationDeposit { get; private set; }
 
     /// <summary>
     /// The flag for deposit.
