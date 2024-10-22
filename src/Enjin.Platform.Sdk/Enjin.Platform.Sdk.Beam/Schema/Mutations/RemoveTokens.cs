@@ -30,7 +30,7 @@ public class RemoveTokens : GraphQlRequest<RemoveTokens>
     /// </summary>
     /// <param name="tokenIds">The token IDs.</param>
     /// <returns>This request for chaining.</returns>
-    public RemoveTokens SetTokenIds(params IntegerRange[]? tokenIds)
+    public RemoveTokens SetTokenIds(params IntegerRangeString[]? tokenIds)
     {
         return SetVariable("tokenIds", CoreTypes.IntegerRangeStringArray, tokenIds);
     }

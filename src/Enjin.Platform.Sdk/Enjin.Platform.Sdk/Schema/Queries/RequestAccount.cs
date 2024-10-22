@@ -15,14 +15,4 @@ public class RequestAccount : GraphQlRequest<RequestAccount, AccountRequestFragm
     public RequestAccount() : base("RequestAccount", GraphQlRequestType.Query)
     {
     }
-
-    /// <summary>
-    /// Sets the callback URL that the wallet should send the verification to.
-    /// </summary>
-    /// <param name="callback">The callback URL.</param>
-    /// <returns>This request for chaining.</returns>
-    public RequestAccount SetCallback(string? callback)
-    {
-        return SetVariable("callback", CoreTypes.String, callback);
-    }
 }

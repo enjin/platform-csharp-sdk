@@ -49,14 +49,14 @@ public class CollectionFragment : GraphQlFragment<CollectionFragment>
     }
 
     /// <summary>
-    /// Sets whether the <see cref="Collection"/> is to be returned with its <see cref="Collection.ForceSingleMint"/>
+    /// Sets whether the <see cref="Collection"/> is to be returned with its <see cref="Collection.ForceCollapsingSupply"/>
     /// property.
     /// </summary>
     /// <param name="isIncluded">Whether the field is included.</param>
     /// <returns>This fragment for chaining.</returns>
-    public CollectionFragment WithForceSingleMint(bool isIncluded = true)
+    public CollectionFragment WithForceCollapsingSupply(bool isIncluded = true)
     {
-        return WithField("forceSingleMint", isIncluded);
+        return WithField("forceCollapsingSupply", isIncluded);
     }
 
     /// <summary>
@@ -78,6 +78,36 @@ public class CollectionFragment : GraphQlFragment<CollectionFragment>
     public CollectionFragment WithRoyalty(RoyaltyFragment? fragment)
     {
         return WithField("royalty", fragment);
+    }
+    
+    /// <summary>
+    /// Sets whether the <see cref="Collection"/> is to be returned with its <see cref="Collection.TotalDeposit"/> property.
+    /// </summary>
+    /// <param name="isIncluded">Whether the field is included.</param>
+    /// <returns>This fragment for chaining.</returns>
+    public CollectionFragment WithTotalDeposit(bool isIncluded = true)
+    {
+        return WithField("totalDeposit", isIncluded);
+    }
+    
+    /// <summary>
+    /// Sets whether the <see cref="Collection"/> is to be returned with its <see cref="Collection.TotalInfusion"/> property.
+    /// </summary>
+    /// <param name="isIncluded">Whether the field is included.</param>
+    /// <returns>This fragment for chaining.</returns>
+    public CollectionFragment WithTotalInfusion(bool isIncluded = true)
+    {
+        return WithField("totalInfusion", isIncluded);
+    }
+    
+    /// <summary>
+    /// Sets whether the <see cref="Collection"/> is to be returned with its <see cref="Collection.CreationDeposit"/> property.
+    /// </summary>
+    /// <param name="isIncluded">Whether the field is included.</param>
+    /// <returns>This fragment for chaining.</returns>
+    public CollectionFragment WithCreationDeposit(bool isIncluded = true)
+    {
+        return WithField("creationDeposit", isIncluded);
     }
 
     /// <summary>

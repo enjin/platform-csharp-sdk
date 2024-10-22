@@ -10,6 +10,7 @@ namespace Enjin.Platform.Sdk.FuelTanks;
 public class CreateFuelTank : GraphQlRequest<CreateFuelTank, TransactionFragment>,
                               IHasIdempotencyKey<CreateFuelTank>,
                               IHasSkipValidation<CreateFuelTank>,
+                              IHasSimulate<CreateFuelTank>,
                               IHasSigningAccount<CreateFuelTank>
 {
     /// <summary>
@@ -30,16 +31,6 @@ public class CreateFuelTank : GraphQlRequest<CreateFuelTank, TransactionFragment
     }
 
     /// <summary>
-    /// Sets the flag for existential deposit.
-    /// </summary>
-    /// <param name="reservesExistentialDeposit">The flag.</param>
-    /// <returns>This request for chaining.</returns>
-    public CreateFuelTank SetReservesExistentialDeposit(bool? reservesExistentialDeposit)
-    {
-        return SetVariable("reservesExistentialDeposit", CoreTypes.Boolean, reservesExistentialDeposit);
-    }
-
-    /// <summary>
     /// Sets the flag for account creation deposit.
     /// </summary>
     /// <param name="reservesAccountCreationDeposit">The flag.</param>
@@ -50,13 +41,13 @@ public class CreateFuelTank : GraphQlRequest<CreateFuelTank, TransactionFragment
     }
 
     /// <summary>
-    /// Sets the flag for deposit.
+    /// Sets the fuel tank coverage policy.
     /// </summary>
-    /// <param name="providesDeposit">The flag.</param>
+    /// <param name="coveragePolicy">The flag.</param>
     /// <returns>This request for chaining.</returns>
-    public CreateFuelTank SetProvidesDeposit(bool? providesDeposit)
+    public CreateFuelTank SetCoveragePolicy(CoveragePolicy? coveragePolicy)
     {
-        return SetVariable("providesDeposit", CoreTypes.Boolean, providesDeposit);
+        return SetVariable("coveragePolicy", FuelTanksTypes.CoveragePolicy, coveragePolicy);
     }
 
     /// <summary>

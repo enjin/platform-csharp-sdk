@@ -11,7 +11,8 @@ namespace Enjin.Platform.Sdk;
 public class OperatorTransferToken : GraphQlRequest<OperatorTransferToken, TransactionFragment>,
                                      IHasIdempotencyKey<OperatorTransferToken>,
                                      IHasSkipValidation<OperatorTransferToken>,
-                                     IHasSigningAccount<OperatorTransferToken>
+                                     IHasSigningAccount<OperatorTransferToken>,
+                                     IHasSimulate<OperatorTransferToken>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="OperatorTransferToken"/> class.
@@ -48,18 +49,5 @@ public class OperatorTransferToken : GraphQlRequest<OperatorTransferToken, Trans
     public OperatorTransferToken SetParams(OperatorTransferParams? parameters)
     {
         return SetVariable("params", CoreTypes.OperatorTransferParams, parameters);
-    }
-
-    /// <summary>
-    /// Sets the signing wallet for the transaction.
-    /// </summary>
-    /// <param name="signingAccount">The signing wallet account.</param>
-    /// <returns>This request for chaining.</returns>
-    /// <remarks>
-    /// The account defaults to wallet daemon if not specified.
-    /// </remarks>
-    public OperatorTransferToken SetSigningAccount(string? signingAccount)
-    {
-        return SetVariable("signingAccount", CoreTypes.String, signingAccount);
     }
 }

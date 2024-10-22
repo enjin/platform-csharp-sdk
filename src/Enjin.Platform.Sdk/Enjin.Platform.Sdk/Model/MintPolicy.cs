@@ -39,13 +39,12 @@ public class MintPolicy : GraphQlParameter<MintPolicy>
     }
 
     /// <summary>
-    /// Set whether the tokens in the collection will be minted as single mint types. This would indicate the tokens in
-    /// the collection are non-fungible tokens (NFTs).
+    /// Set whether the tokens in the collection use a collapsing supply.
     /// </summary>
-    /// <param name="forceSingleMint">Whether the tokens are non-fungible.</param>
+    /// <param name="forceCollapsingSupply">Whether the tokens are non-fungible.</param>
     /// <returns>This parameter for chaining.</returns>
-    public MintPolicy SetForceSingleMint(bool? forceSingleMint)
+    public MintPolicy SetForceCollapsingSupply(bool? forceCollapsingSupply)
     {
-        return SetParameter("forceSingleMint", forceSingleMint);
+        return SetParameter("forceCollapsingSupply", forceCollapsingSupply);
     }
 }

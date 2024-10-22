@@ -12,7 +12,8 @@ public class SetTokenAttribute : GraphQlRequest<SetTokenAttribute, TransactionFr
                                  IHasEncodableTokenId<SetTokenAttribute>,
                                  IHasIdempotencyKey<SetTokenAttribute>,
                                  IHasSkipValidation<SetTokenAttribute>,
-                                 IHasSigningAccount<SetTokenAttribute>
+                                 IHasSigningAccount<SetTokenAttribute>,
+                                 IHasSimulate<SetTokenAttribute>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="SetTokenAttribute"/> class.

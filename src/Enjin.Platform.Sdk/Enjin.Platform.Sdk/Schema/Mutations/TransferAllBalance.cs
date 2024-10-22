@@ -14,7 +14,8 @@ namespace Enjin.Platform.Sdk;
 public class TransferAllBalance : GraphQlRequest<TransferAllBalance, TransactionFragment>,
                                   IHasIdempotencyKey<TransferAllBalance>,
                                   IHasSkipValidation<TransferAllBalance>,
-                                  IHasSigningAccount<TransferAllBalance>
+                                  IHasSigningAccount<TransferAllBalance>,
+                                  IHasSimulate<TransferAllBalance>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="TransferAllBalance"/> class.
@@ -44,18 +45,5 @@ public class TransferAllBalance : GraphQlRequest<TransferAllBalance, Transaction
     public TransferAllBalance SetKeepAlive(bool? keepAlive)
     {
         return SetVariable("keepAlive", CoreTypes.Boolean, keepAlive);
-    }
-
-    /// <summary>
-    /// Sets the signing wallet for the transaction.
-    /// </summary>
-    /// <param name="signingAccount">The signing wallet account.</param>
-    /// <returns>This request for chaining.</returns>
-    /// <remarks>
-    /// The account defaults to wallet daemon if not specified.
-    /// </remarks>
-    public TransferAllBalance SetSigningAccount(string? signingAccount)
-    {
-        return SetVariable("signingAccount", CoreTypes.String, signingAccount);
     }
 }

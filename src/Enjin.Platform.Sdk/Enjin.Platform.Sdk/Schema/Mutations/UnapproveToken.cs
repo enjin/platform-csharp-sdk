@@ -13,7 +13,8 @@ public class UnapproveToken : GraphQlRequest<UnapproveToken, TransactionFragment
                               IHasEncodableTokenId<UnapproveToken>,
                               IHasIdempotencyKey<UnapproveToken>,
                               IHasSkipValidation<UnapproveToken>,
-                              IHasSigningAccount<UnapproveToken>
+                              IHasSigningAccount<UnapproveToken>,
+                              IHasSimulate<UnapproveToken>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="UnapproveToken"/> class.

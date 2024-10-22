@@ -60,6 +60,17 @@ public class PendingEventFragment : GraphQlFragment<PendingEventFragment>
     }
     
     /// <summary>
+    /// Sets whether the <see cref="PendingEvent"/> is to be returned with its <see cref="PendingEvent.Network"/>
+    /// property.
+    /// </summary>
+    /// <param name="isIncluded">Whether the field is included.</param>
+    /// <returns>This fragment for chaining.</returns>
+    public PendingEventFragment WithNetwork(bool isIncluded = true)
+    {
+        return WithField("network", isIncluded);
+    }
+    
+    /// <summary>
     /// Sets whether the <see cref="PendingEvent"/> is to be returned with its <see cref="PendingEvent.Channels"/>
     /// property.
     /// </summary>

@@ -1,4 +1,4 @@
-﻿using System.Numerics;
+using System.Numerics;
 using JetBrains.Annotations;
 
 namespace Enjin.Platform.Sdk.Marketplace;
@@ -67,14 +67,24 @@ public class GetListings : GraphQlRequest<GetListings, MarketplaceListingConnect
     {
         return SetVariable("takeAssetId", CoreTypes.MultiTokenIdInput, takeAssetId);
     }
-
+    
     /// <summary>
-    /// Sets the listing states that will be returned.
+    /// Sets the internal IDs.
     /// </summary>
-    /// <param name="states">The list of states that you want returned</param>
+    /// <param name="collectionIds">The internal IDs.</param>
+    /// <returns>This request for chaining.</returns>
+    public GetListings SetCollectionIds(params BigInteger[]? collectionIds)
+    {
+        return SetVariable("collectionIds", CoreTypes.BigIntArray, collectionIds);
+    }
+    
+    /// <summary>
+    /// Sets the listing states.
+    /// </summary>
+    /// <param name="states">The listing states.</param>
     /// <returns>This request for chaining.</returns>
     public GetListings SetStates(params ListingStateEnum[]? states)
     {
-        return SetVariable("states", CoreTypes.ListingStateEnumArray, states);
+        return SetVariable("states", MarketplaceTypes.ListingStateEnumArray, states);
     }
 }

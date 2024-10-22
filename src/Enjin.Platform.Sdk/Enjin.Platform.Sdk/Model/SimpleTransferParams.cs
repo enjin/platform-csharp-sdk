@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 using System.Text.Json.Serialization;
 using JetBrains.Annotations;
 
@@ -27,15 +28,5 @@ public class SimpleTransferParams : GraphQlParameter<SimpleTransferParams>,
     public SimpleTransferParams SetAmount(BigInteger? amount)
     {
         return SetParameter("amount", amount);
-    }
-
-    /// <summary>
-    /// Sets whether the transaction will be kept from failing if the balance drops below the minimum requirement.
-    /// </summary>
-    /// <param name="keepAlive">Whether the transaction will be kept from failing.</param>
-    /// <returns>This parameter for chaining.</returns>
-    public SimpleTransferParams SetKeepAlive(bool? keepAlive)
-    {
-        return SetParameter("keepAlive", keepAlive);
     }
 }

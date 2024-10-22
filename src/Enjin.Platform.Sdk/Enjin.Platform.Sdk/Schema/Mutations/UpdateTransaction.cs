@@ -9,7 +9,8 @@ namespace Enjin.Platform.Sdk;
 /// The transaction ID and transaction hash are immutable once set.
 /// </remarks>
 [PublicAPI]
-public class UpdateTransaction : GraphQlRequest<UpdateTransaction>
+public class UpdateTransaction : GraphQlRequest<UpdateTransaction>, 
+                                 IHasSigningAccount<UpdateTransaction>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="UpdateTransaction"/> class.
@@ -56,16 +57,6 @@ public class UpdateTransaction : GraphQlRequest<UpdateTransaction>
     public UpdateTransaction SetTransactionHash(string? transactionHash)
     {
         return SetVariable("transactionHash", CoreTypes.String, transactionHash);
-    }
-
-    /// <summary>
-    /// Sets the signing wallet for the transaction.
-    /// </summary>
-    /// <param name="signingAccount">The signing wallet account.</param>
-    /// <returns>This request for chaining.</returns>
-    public UpdateTransaction SetSigningAccount(string? signingAccount)
-    {
-        return SetVariable("signingAccount", CoreTypes.String, signingAccount);
     }
 
     /// <summary>

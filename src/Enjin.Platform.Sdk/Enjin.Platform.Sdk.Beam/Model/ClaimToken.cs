@@ -22,7 +22,7 @@ public class ClaimToken : GraphQlParameter<ClaimToken>
     /// </summary>
     /// <param name="tokenIds">The token chain IDs.</param>
     /// <returns>This parameter for chaining.</returns>
-    public ClaimToken SetTokenIds(params IntegerRange[]? tokenIds)
+    public ClaimToken SetTokenIds(params IntegerRangeString[]? tokenIds)
     {
         return SetParameter("tokenIds", tokenIds);
     }

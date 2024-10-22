@@ -18,10 +18,11 @@ namespace Enjin.Platform.Sdk;
 /// <seealso cref="Transaction"/>
 [PublicAPI]
 public class BatchTransferBalance : GraphQlRequest<BatchTransferBalance, TransactionFragment>,
-                             IHasContinueOnFailure<BatchTransferBalance>,
-                             IHasIdempotencyKey<BatchTransferBalance>,
-                             IHasSkipValidation<BatchTransferBalance>,
-                             IHasSigningAccount<BatchTransferBalance>
+                                    IHasContinueOnFailure<BatchTransferBalance>,
+                                    IHasIdempotencyKey<BatchTransferBalance>,
+                                    IHasSkipValidation<BatchTransferBalance>,
+                                    IHasSigningAccount<BatchTransferBalance>,
+                                    IHasSimulate<BatchTransferBalance>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="BatchTransferBalance"/> class.
@@ -38,18 +39,5 @@ public class BatchTransferBalance : GraphQlRequest<BatchTransferBalance, Transac
     public BatchTransferBalance SetRecipients(params TransferRecipient[]? recipients)
     {
         return SetVariable("recipients", CoreTypes.TransferRecipientArray, recipients);
-    }
-
-    /// <summary>
-    /// Sets the signing wallet for the transaction.
-    /// </summary>
-    /// <param name="signingAccount">The signing wallet account.</param>
-    /// <returns>This request for chaining.</returns>
-    /// <remarks>
-    /// The account defaults to wallet daemon if not specified.
-    /// </remarks>
-    public BatchTransferBalance SetSigningAccount(string? signingAccount)
-    {
-        return SetVariable("signingAccount", CoreTypes.String, signingAccount);
     }
 }

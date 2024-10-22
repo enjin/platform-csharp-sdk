@@ -28,19 +28,15 @@ public class CreateTokenParams : GraphQlParameter<CreateTokenParams>,
     {
         return SetParameter("initialSupply", initialSupply);
     }
-
+    
     /// <summary>
-    /// Sets the price of each token.
+    /// Sets the number of tokens accounts that can be created before a deposit is required.
     /// </summary>
-    /// <param name="unitPrice">The price per token.</param>
+    /// <param name="accountDepositCount">The account count.</param>
     /// <returns>This parameter for chaining.</returns>
-    /// <remarks>
-    /// The price cannot be zero and the product of the unit price and the total supply must be greater than the token
-    /// account deposit.
-    /// </remarks>
-    public CreateTokenParams SetUnitPrice(BigInteger? unitPrice)
+    public CreateTokenParams SetAccountDepositCount(int? accountDepositCount)
     {
-        return SetParameter("unitPrice", unitPrice);
+        return SetParameter("accountDepositCount", accountDepositCount);
     }
 
     /// <summary>
@@ -72,6 +68,16 @@ public class CreateTokenParams : GraphQlParameter<CreateTokenParams>,
     {
         return SetParameter("listingForbidden", listingForbidden);
     }
+    
+    /// <summary>
+    /// Sets the freeze state of the token.
+    /// </summary>
+    /// <param name="freezeState">Whether the token is frozen on create.</param>
+    /// <returns>This parameter for chaining.</returns>
+    public CreateTokenParams SetFreezeState(FreezeState? freezeState)
+    {
+        return SetParameter("freezeState", freezeState);
+    }
 
     /// <summary>
     /// Sets the initial attributes for the token.
@@ -81,5 +87,35 @@ public class CreateTokenParams : GraphQlParameter<CreateTokenParams>,
     public CreateTokenParams SetAttributes(params AttributeInput[] attributes)
     {
         return SetParameter("attributes", attributes);
+    }
+    
+    /// <summary>
+    /// Sets the amount of ENJ infused into each token.
+    /// </summary>
+    /// <param name="infusion">The infusion amount.</param>
+    /// <returns>This parameter for chaining.</returns>
+    public CreateTokenParams SetInfusion(BigInteger? infusion)
+    {
+        return SetParameter("infusion", infusion);
+    }
+    
+    /// <summary>
+    /// Sets if anyone can infuse ENJ into this token.
+    /// </summary>
+    /// <param name="anyoneCanInfuse">The flag value.</param>
+    /// <returns>This parameter for chaining.</returns>
+    public CreateTokenParams SetAnyoneCanInfuse(bool? anyoneCanInfuse)
+    {
+        return SetParameter("anyoneCanInfuse", anyoneCanInfuse);
+    }
+    
+    /// <summary>
+    /// Sets the metadata for the token.
+    /// </summary>
+    /// <param name="metadata">The metadata.</param>
+    /// <returns>This parameter for chaining.</returns>
+    public CreateTokenParams SetMetadata(TokenMetadataInput? metadata)
+    {
+        return SetParameter("metadata", metadata);
     }
 }

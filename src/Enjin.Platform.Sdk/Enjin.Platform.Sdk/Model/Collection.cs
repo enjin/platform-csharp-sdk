@@ -38,14 +38,14 @@ public class Collection
     public BigInteger? MaxTokenSupply { get; private set; }
 
     /// <summary>
-    /// Whether the tokens in this collection will be minted as single mint types.
+    /// Whether the tokens in this collection will be minted using the collapsing supply type.
     /// </summary>
     /// <remarks>
     /// This would indicate the tokens in this collection are non-fungible.
     /// </remarks>
     [JsonInclude]
-    [JsonPropertyName("forceSingleMint")]
-    public bool? ForceSingleMint { get; private set; }
+    [JsonPropertyName("forceCollapsingSupply")]
+    public bool? ForceCollapsingSupply { get; private set; }
 
     /// <summary>
     /// Whether this collection is frozen.
@@ -60,6 +60,29 @@ public class Collection
     [JsonInclude]
     [JsonPropertyName("royalty")]
     public Royalty? Royalty { get; private set; }
+    
+    /// <summary>
+    /// The total deposit of this collection.
+    /// </summary>
+    [JsonConverter(typeof(NullableBigIntegerJsonConverter))]
+    [JsonInclude]
+    [JsonPropertyName("totalDeposit")]
+    public BigInteger? TotalDeposit { get; private set; }
+    
+    /// <summary>
+    /// The total infusion of this collection.
+    /// </summary>
+    [JsonConverter(typeof(NullableBigIntegerJsonConverter))]
+    [JsonInclude]
+    [JsonPropertyName("totalInfusion")]
+    public BigInteger? TotalInfusion { get; private set; }
+    
+    /// <summary>
+    /// The creation deposit of this collection.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("creationDeposit")]
+    public CreationDeposit? CreationDeposit { get; private set; }
 
     /// <summary>
     /// The network this collection belongs to.

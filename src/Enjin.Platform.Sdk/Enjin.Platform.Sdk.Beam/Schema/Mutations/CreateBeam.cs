@@ -16,6 +16,16 @@ public class CreateBeam : GraphQlRequest<CreateBeam>,
     public CreateBeam() : base("CreateBeam", GraphQlRequestType.Mutation)
     {
     }
+    
+    /// <summary>
+    /// Sets the source account for tokens.
+    /// </summary>
+    /// <param name="source">The source account.</param>
+    /// <returns>This request for chaining.</returns>
+    public CreateBeam SetSource(string? source)
+    {
+        return SetVariable("source", CoreTypes.String, source);
+    }
 
     /// <summary>
     /// Sets the beam flags that should be enabled or disabled.

@@ -6,7 +6,7 @@ namespace Enjin.Platform.Sdk.Beam;
 /// A request to act as a mutation for claiming a beam.
 /// </summary>
 [PublicAPI]
-public class ClaimBeam : GraphQlRequest<ClaimBeam>
+public class ClaimBeam : GraphQlRequest<ClaimBeam>, IHasIdempotencyKey<ClaimBeam>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="ClaimBeam"/> class.

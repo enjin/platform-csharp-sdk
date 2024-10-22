@@ -18,16 +18,6 @@ public class FuelTankMutationInputType : GraphQlParameter<FuelTankMutationInputT
     }
 
     /// <summary>
-    /// Sets the flag for existential deposit.
-    /// </summary>
-    /// <param name="reservesExistentialDeposit">The flag.</param>
-    /// <returns>This parameter for chaining.</returns>
-    public FuelTankMutationInputType SetReservesExistentialDeposit(bool? reservesExistentialDeposit)
-    {
-        return SetParameter("reservesExistentialDeposit", reservesExistentialDeposit);
-    }
-
-    /// <summary>
     /// Sets the flag for account creation deposit.
     /// </summary>
     /// <param name="reservesAccountCreationDeposit">The flag.</param>
@@ -38,13 +28,13 @@ public class FuelTankMutationInputType : GraphQlParameter<FuelTankMutationInputT
     }
 
     /// <summary>
-    /// Sets the flag for deposit.
+    /// Sets the fuel tank coverage policy.
     /// </summary>
-    /// <param name="providesDeposit">The flag.</param>
+    /// <param name="coveragePolicy">The flag.</param>
     /// <returns>This parameter for chaining.</returns>
-    public FuelTankMutationInputType SetProvidesDeposit(bool? providesDeposit)
+    public FuelTankMutationInputType SetCoveragePolicy(CoveragePolicy? coveragePolicy)
     {
-        return SetParameter("providesDeposit", providesDeposit);
+        return SetParameter("coveragePolicy", coveragePolicy);
     }
 
     /// <summary>

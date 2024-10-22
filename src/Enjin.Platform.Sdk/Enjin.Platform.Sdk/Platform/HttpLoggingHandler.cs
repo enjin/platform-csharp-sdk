@@ -60,8 +60,8 @@ internal class HttpLoggingHandler : DelegatingHandler
 
         // Essential info
         string method = request.Method.Method.ToUpper();
-        string uri = request.RequestUri.ToString();
-        long? contentLength = request.Content.Headers.ContentLength;
+        string uri = request.RequestUri?.ToString() ?? "Unknown URI";
+        long? contentLength = request.Content?.Headers?.ContentLength;
 
         // Basic
         if (_httpLogLevel == HttpLogLevel.Basic)
@@ -102,7 +102,7 @@ internal class HttpLoggingHandler : DelegatingHandler
 
         // Body
         builder.AppendLine() // Line break between header(s) and body
-               .AppendLine(request.Content.ReadAsStringAsync().Result)
+               .AppendLine(request.Content?.ReadAsStringAsync().Result ?? "No content")
                .Append("<-- END ").Append(method).Append(" (").Append(contentLength).Append("-byte body)");
 
         _logger.Log(TraceLevel, builder.ToString());
@@ -120,7 +120,7 @@ internal class HttpLoggingHandler : DelegatingHandler
 
         // Essential info
         int statusCode = (int)response.StatusCode;
-        string uri = response.RequestMessage.RequestUri.ToString();
+        string uri = response.RequestMessage?.RequestUri?.ToString() ?? "Unknown URI";
 
         // Basic
         builder.Append("<-- ").Append(statusCode).Append(" ").Append(uri).Append(" (").Append(rtt).Append("ms)");

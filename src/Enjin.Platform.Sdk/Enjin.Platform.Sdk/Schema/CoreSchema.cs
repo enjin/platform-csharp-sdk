@@ -147,18 +147,6 @@ public static class CoreSchema
     }
 
     /// <summary>
-    /// Sends a <see cref="GetLinkingCode"/> request to the platform.
-    /// </summary>
-    /// <param name="client">The <see cref="IPlatformClient"/> to send the request from.</param>
-    /// <param name="request">The <see cref="GetLinkingCode"/> request to send.</param>
-    /// <returns>The task containing the response.</returns>
-    public static Task<IPlatformResponse<GraphQlResponse<WalletLink>>> SendGetLinkingCode(
-        this IPlatformClient client, GetLinkingCode request)
-    {
-        return client.SendRequest<GraphQlResponse<WalletLink>>(CreateRequest(request));
-    }
-
-    /// <summary>
     /// Sends a <see cref="GetPendingEvents"/> request to the platform.
     /// </summary>
     /// <param name="client">The <see cref="IPlatformClient"/> to send the request from.</param>

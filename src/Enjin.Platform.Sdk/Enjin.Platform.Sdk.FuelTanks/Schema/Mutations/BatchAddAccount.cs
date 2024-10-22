@@ -10,6 +10,7 @@ namespace Enjin.Platform.Sdk.FuelTanks;
 public class BatchAddAccount : GraphQlRequest<BatchAddAccount, TransactionFragment>,
                                IHasIdempotencyKey<BatchAddAccount>,
                                IHasSkipValidation<BatchAddAccount>,
+                               IHasSimulate<BatchAddAccount>,
                                IHasSigningAccount<BatchAddAccount>
 {
     /// <summary>

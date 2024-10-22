@@ -19,6 +19,18 @@ public static class FuelTanksTypes
     /// String for an array of <c>AccountRuleInputType</c> type.
     /// </summary>
     public const string AccountRuleInputTypeArray = "[AccountRuleInputType!]!";
+    
+    // CoveragePolicy
+
+    /// <summary>
+    /// String for <c>CoveragePolicy</c> type.
+    /// </summary>
+    public const string CoveragePolicy = "CoveragePolicy!";
+
+    /// <summary>
+    /// String for an array of <c>CoveragePolicy</c> type.
+    /// </summary>
+    public const string CoveragePolicyArray = "[CoveragePolicy!]!";
 
     // DispatchInputType
 

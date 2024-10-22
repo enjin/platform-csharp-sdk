@@ -11,7 +11,8 @@ namespace Enjin.Platform.Sdk;
 public class SimpleTransferToken : GraphQlRequest<SimpleTransferToken, TransactionFragment>,
                                    IHasIdempotencyKey<SimpleTransferToken>,
                                    IHasSkipValidation<SimpleTransferToken>,
-                                   IHasSigningAccount<SimpleTransferToken>
+                                   IHasSigningAccount<SimpleTransferToken>,
+                                   IHasSimulate<SimpleTransferToken>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="SimpleTransferToken"/> class.
@@ -48,18 +49,5 @@ public class SimpleTransferToken : GraphQlRequest<SimpleTransferToken, Transacti
     public SimpleTransferToken SetParams(SimpleTransferParams? parameters)
     {
         return SetVariable("params", CoreTypes.SimpleTransferParams, parameters);
-    }
-
-    /// <summary>
-    /// Sets the signing wallet for the transaction.
-    /// </summary>
-    /// <param name="signingAccount">The signing wallet account.</param>
-    /// <returns>This request for chaining.</returns>
-    /// <remarks>
-    /// The account defaults to wallet daemon if not specified.
-    /// </remarks>
-    public SimpleTransferToken SetSigningAccount(string? signingAccount)
-    {
-        return SetVariable("signingAccount", CoreTypes.String, signingAccount);
     }
 }

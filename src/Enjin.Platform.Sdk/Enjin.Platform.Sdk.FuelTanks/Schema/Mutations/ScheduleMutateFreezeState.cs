@@ -12,6 +12,7 @@ namespace Enjin.Platform.Sdk.FuelTanks;
 public class ScheduleMutateFreezeState : GraphQlRequest<ScheduleMutateFreezeState, TransactionFragment>,
                                          IHasIdempotencyKey<ScheduleMutateFreezeState>,
                                          IHasSkipValidation<ScheduleMutateFreezeState>,
+                                         IHasSimulate<ScheduleMutateFreezeState>,
                                          IHasSigningAccount<ScheduleMutateFreezeState>
 {
     /// <summary>

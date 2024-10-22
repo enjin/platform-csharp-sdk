@@ -11,7 +11,8 @@ namespace Enjin.Platform.Sdk;
 public class SetCollectionAttribute : GraphQlRequest<SetCollectionAttribute, TransactionFragment>,
                                       IHasIdempotencyKey<SetCollectionAttribute>,
                                       IHasSkipValidation<SetCollectionAttribute>,
-                                      IHasSigningAccount<SetCollectionAttribute>
+                                      IHasSigningAccount<SetCollectionAttribute>,
+                                      IHasSimulate<SetCollectionAttribute>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="SetCollectionAttribute"/> class.

@@ -8,6 +8,7 @@ namespace Enjin.Platform.Sdk.Marketplace;
 /// </summary>
 /// <seealso cref="AuctionData"/>
 /// <seealso cref="FixedPriceData"/>
+/// <seealso cref="OfferData"/>
 [JsonConverter(typeof(ListingDataJsonConverter))]
 [PublicAPI]
 public abstract class ListingData
