@@ -111,19 +111,19 @@ public class Beam
     /// </summary>
     [JsonInclude]
     [JsonPropertyName("probabilities")]
-    public BeamQr? Probabilities { get; private set; }
+    public object? Probabilities { get; private set; }
     
     /// <summary>
     /// The beam claims.
     /// </summary>
     [JsonInclude]
     [JsonPropertyName("claims")]
-    public BeamQr? Claims { get; private set; }
+    public Connection<BeamClaim>? Claims { get; private set; }
     
     /// <summary>
     /// The number of claims remaining in this beam.
     /// </summary>
     [JsonInclude]
     [JsonPropertyName("claimsRemaining")]
-    public BeamQr? ClaimsRemaining { get; private set; }
+    public int? ClaimsRemaining { get; private set; }
 }

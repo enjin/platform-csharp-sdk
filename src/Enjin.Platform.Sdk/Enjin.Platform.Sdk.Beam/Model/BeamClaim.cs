@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using JetBrains.Annotations;
 
@@ -100,19 +101,19 @@ public class BeamClaim
     /// </summary>
     [JsonInclude]
     [JsonPropertyName("attributes")]
-    public BeamQr? Attributes { get; private set; }
+    public IEnumerable<Attribute>? Attributes { get; private set; }
     
     /// <summary>
-    /// An blockchain transaction.
+    /// A blockchain transaction.
     /// </summary>
     [JsonInclude]
     [JsonPropertyName("transaction")]
-    public BeamQr? Transaction { get; private set; }
+    public Transaction? Transaction { get; private set; }
     
     /// <summary>
     /// The idempotency key set for this transaction.
     /// </summary>
     [JsonInclude]
     [JsonPropertyName("idempotencyKey")]
-    public BeamQr? IdempotencyKey { get; private set; }
+    public string? IdempotencyKey { get; private set; }
 }
