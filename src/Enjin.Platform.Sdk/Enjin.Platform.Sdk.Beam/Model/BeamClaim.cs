@@ -37,7 +37,7 @@ public class BeamClaim
     /// </summary>
     [JsonInclude]
     [JsonPropertyName("quantity")]
-    public string? Quantity { get; private set; }
+    public int? Quantity { get; private set; }
 
     /// <summary>
     /// The beam details.

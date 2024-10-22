@@ -15,11 +15,11 @@ public enum CoveragePolicy
     /// Indicates that only Fees will be covered.
     /// </summary>
     [EnumMember(Value = "FEES")]
-    SingleMint,
+    Fees,
 
     /// <summary>
     /// Indicates that both Fees and Deposits will be covered.
     /// </summary>
     [EnumMember(Value = "FEES_AND_DEPOSIT")]
-    Supply,
+    FeesAndDeposit,
 }
