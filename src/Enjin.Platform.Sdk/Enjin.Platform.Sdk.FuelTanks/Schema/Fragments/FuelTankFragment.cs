@@ -36,16 +36,6 @@ public class FuelTankFragment : GraphQlFragment<FuelTankFragment>
     }
     
     /// <summary>
-    /// Sets whether the <see cref="FuelTank"/> is to be returned with its <see cref="FuelTank.ReservesExistentialDeposit"/> property.
-    /// </summary>
-    /// <param name="isIncluded">Whether the field is included.</param>
-    /// <returns>This fragment for chaining.</returns>
-    public FuelTankFragment WithReservesExistentialDeposit(bool isIncluded = true)
-    {
-        return WithField("reservesExistentialDeposit", isIncluded);
-    }
-    
-    /// <summary>
     /// Sets whether the <see cref="FuelTank"/> is to be returned with its <see cref="FuelTank.ReservesAccountCreationDeposit"/> property.
     /// </summary>
     /// <param name="isIncluded">Whether the field is included.</param>
@@ -56,13 +46,13 @@ public class FuelTankFragment : GraphQlFragment<FuelTankFragment>
     }
     
     /// <summary>
-    /// Sets whether the <see cref="FuelTank"/> is to be returned with its <see cref="FuelTank.ProvidesDeposit"/> property.
+    /// Sets whether the <see cref="FuelTank"/> is to be returned with its <see cref="FuelTank.CoveragePolicy"/> property.
     /// </summary>
     /// <param name="isIncluded">Whether the field is included.</param>
     /// <returns>This fragment for chaining.</returns>
-    public FuelTankFragment WithProvidesDeposit(bool isIncluded = true)
+    public FuelTankFragment WithCoveragePolicy(bool isIncluded = true)
     {
-        return WithField("providesDeposit", isIncluded);
+        return WithField("coveragePolicy", isIncluded);
     }
     
     /// <summary>

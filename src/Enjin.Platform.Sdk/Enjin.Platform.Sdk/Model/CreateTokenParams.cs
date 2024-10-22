@@ -114,7 +114,7 @@ public class CreateTokenParams : GraphQlParameter<CreateTokenParams>,
     /// </summary>
     /// <param name="metadata">The metadata.</param>
     /// <returns>This parameter for chaining.</returns>
-    public CreateTokenParams SetMetadata(MetadataInput? metadata)
+    public CreateTokenParams SetMetadata(TokenMetadataInput? metadata)
     {
         return SetParameter("metadata", metadata);
     }

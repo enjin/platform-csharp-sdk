@@ -63,6 +63,13 @@ public class Beam
     [JsonInclude]
     [JsonPropertyName("end")]
     public DateTime? End { get; private set; }
+    
+    /// <summary>
+    /// The wallet from which the beam asset will be retrieved.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("source")]
+    public Account? Source { get; private set; }
 
     /// <summary>
     /// The collection this beam belongs to.

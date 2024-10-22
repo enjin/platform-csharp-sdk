@@ -85,6 +85,17 @@ public class BeamFragment : GraphQlFragment<BeamFragment>
     {
         return WithField("end", isIncluded);
     }
+    
+    /// <summary>
+    /// Sets the <see cref="Account"/> fragment to be used for getting the <see cref="Beam.Source"/>
+    /// property of the <see cref="Beam"/>.
+    /// </summary>
+    /// <param name="fragment">The <see cref="Account"/> fragment.</param>
+    /// <returns>This fragment for chaining.</returns>
+    public BeamFragment WithSource(AccountFragment? fragment)
+    {
+        return WithField("source", fragment);
+    }
 
     /// <summary>
     /// Sets the <see cref="Collection"/> fragment to be used for getting the <see cref="Beam.Collection"/>

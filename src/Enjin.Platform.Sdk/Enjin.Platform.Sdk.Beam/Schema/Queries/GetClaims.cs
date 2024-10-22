@@ -35,6 +35,16 @@ public class GetClaims : GraphQlRequest<GetClaims, BeamClaimConnectionFragment>
     {
         return SetVariable("codes", CoreTypes.StringArray, codes);
     }
+    
+    /// <summary>
+    /// Sets the beam single use codes.
+    /// </summary>
+    /// <param name="singleUseCodes">The beam single use codes.</param>
+    /// <returns>This request for chaining.</returns>
+    public GetClaims SetSingleUseCodes(params string[]? singleUseCodes)
+    {
+        return SetVariable("singleUseCodes", CoreTypes.StringArray, singleUseCodes);
+    }
 
     /// <summary>
     /// Sets the wallet accounts.

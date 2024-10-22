@@ -107,7 +107,7 @@ public class Token
     [JsonConverter(typeof(NullableBigIntegerJsonConverter))]
     [JsonInclude]
     [JsonPropertyName("infusion")]
-    public BigInteger? Infustion { get; private set; }
+    public BigInteger? Infusion { get; private set; }
     
     /// <summary>
     /// Whether anyone can infuse ENJ into this token.

@@ -6,14 +6,14 @@ namespace Enjin.Platform.Sdk;
 /// <summary>
 /// Models a parameter for parameters that can be used to filter data.
 /// </summary>
-[JsonConverter(typeof(GraphQlParameterJsonConverter<StringFilterInput>))]
+[JsonConverter(typeof(GraphQlParameterJsonConverter<StringFilter>))]
 [PublicAPI]
-public class StringFilterInput : GraphQlParameter<StringFilterInput>
+public class StringFilter : GraphQlParameter<StringFilter>
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="StringFilterInput"/> class.
+    /// Initializes a new instance of the <see cref="StringFilter"/> class.
     /// </summary>
-    public StringFilterInput()
+    public StringFilter()
     {
     }
 
@@ -22,7 +22,7 @@ public class StringFilterInput : GraphQlParameter<StringFilterInput>
     /// </summary>
     /// <param name="type">The filter type.</param>
     /// <returns>This parameter for chaining.</returns>
-    public StringFilterInput SetType(FilterType? type)
+    public StringFilter SetType(FilterType? type)
     {
         return SetParameter("type", type);
     }
@@ -32,7 +32,7 @@ public class StringFilterInput : GraphQlParameter<StringFilterInput>
     /// </summary>
     /// <param name="filter">Set the search term for the filter.</param>
     /// <returns>This parameter for chaining.</returns>
-    public StringFilterInput SetFilter(string filter)
+    public StringFilter SetFilter(string filter)
     {
         return SetParameter("filter", filter);
     }

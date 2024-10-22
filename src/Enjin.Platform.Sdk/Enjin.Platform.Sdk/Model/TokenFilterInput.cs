@@ -12,7 +12,7 @@ namespace Enjin.Platform.Sdk;
 public class TokenFilterInput : GraphQlParameter<TokenFilterInput>
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="StringFilterInput"/> class.
+    /// Initializes a new instance of the <see cref="TokenFilterInput"/> class.
     /// </summary>
     public TokenFilterInput()
     {

@@ -7,14 +7,14 @@ namespace Enjin.Platform.Sdk;
 /// <summary>
 /// Models a parameter for setting the metadata on a token.
 /// </summary>
-[JsonConverter(typeof(GraphQlParameterJsonConverter<MetadataInput>))]
+[JsonConverter(typeof(GraphQlParameterJsonConverter<TokenMetadataInput>))]
 [PublicAPI]
-public class MetadataInput : GraphQlParameter<MetadataInput>
+public class TokenMetadataInput : GraphQlParameter<TokenMetadataInput>
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="MetadataInput"/> class.
+    /// Initializes a new instance of the <see cref="TokenMetadataInput"/> class.
     /// </summary>
-    public MetadataInput()
+    public TokenMetadataInput()
     {
     }
 
@@ -23,7 +23,7 @@ public class MetadataInput : GraphQlParameter<MetadataInput>
     /// </summary>
     /// <param name="name">The token name.</param>
     /// <returns>This parameter for chaining.</returns>
-    public MetadataInput SetName(string? name)
+    public TokenMetadataInput SetName(string? name)
     {
         return SetParameter("name", name);
     }
@@ -33,7 +33,7 @@ public class MetadataInput : GraphQlParameter<MetadataInput>
     /// </summary>
     /// <param name="symbol">The symbol name.</param>
     /// <returns>This parameter for chaining.</returns>
-    public MetadataInput SetSymbol(string? symbol)
+    public TokenMetadataInput SetSymbol(string? symbol)
     {
         return SetParameter("symbol", symbol);
     }
@@ -43,7 +43,7 @@ public class MetadataInput : GraphQlParameter<MetadataInput>
     /// </summary>
     /// <param name="decimalCount">The decimal count.</param>
     /// <returns>This parameter for chaining.</returns>
-    public MetadataInput SetDecimalCount(int? decimalCount)
+    public TokenMetadataInput SetDecimalCount(int? decimalCount)
     {
         return SetParameter("decimalCount", decimalCount);
     }

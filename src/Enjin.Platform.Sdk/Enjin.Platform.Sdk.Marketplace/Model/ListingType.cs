@@ -22,4 +22,10 @@ public enum ListingType
     /// </summary>
     [EnumMember(Value = "AUCTION")]
     Auction,
+    
+    /// <summary>
+    /// Indicates the listing is of type <c>OFFER</c>.
+    /// </summary>
+    [EnumMember(Value = "OFFER")]
+    Offer,
 }

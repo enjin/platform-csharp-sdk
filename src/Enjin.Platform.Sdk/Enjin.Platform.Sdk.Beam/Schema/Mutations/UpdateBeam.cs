@@ -25,6 +25,16 @@ public class UpdateBeam : GraphQlRequest<UpdateBeam>,
     {
         return SetVariable("code", CoreTypes.String, code);
     }
+    
+    /// <summary>
+    /// Sets the source account for tokens.
+    /// </summary>
+    /// <param name="source">The source account.</param>
+    /// <returns>This request for chaining.</returns>
+    public UpdateBeam SetSource(string? source)
+    {
+        return SetVariable("source", CoreTypes.String, source);
+    }
 
     /// <summary>
     /// Sets the beam flags that should be enabled or disabled.

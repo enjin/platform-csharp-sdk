@@ -275,12 +275,24 @@ public enum TransactionMethod
     /// </summary>
     [EnumMember(Value = "TransferAllBalance")]
     TransferAllBalance,
+    
+    /// <summary>
+    /// Indicates the transaction method is <c>TransferAllowDeath</c>.
+    /// </summary>
+    [EnumMember(Value = "TransferAllowDeath")]
+    TransferAllowDeath,
 
     /// <summary>
     /// Indicates the transaction method is <c>TransferBalance</c>.
     /// </summary>
     [EnumMember(Value = "TransferBalance")]
     TransferBalance,
+    
+    /// <summary>
+    /// Indicates the transaction method is <c>TransferKeepAlive</c>.
+    /// </summary>
+    [EnumMember(Value = "TransferKeepAlive")]
+    TransferKeepAlive,
 
     /// <summary>
     /// Indicates the transaction method is <c>UnapproveCollection</c>.

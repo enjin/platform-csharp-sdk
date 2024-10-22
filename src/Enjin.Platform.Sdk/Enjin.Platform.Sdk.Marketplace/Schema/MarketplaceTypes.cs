@@ -40,7 +40,19 @@ public static class MarketplaceTypes
     public const string ListingStateEnum = "ListingStateEnum!";
     
     /// <summary>
-    /// String for an array of <c>ListingStateEnumArray</c> type.
+    /// String for an array of <c>ListingStateEnum</c> type.
     /// </summary>
     public const string ListingStateEnumArray = "[ListingStateEnum!]!";
+    
+    // ListingDataInput
+    
+    /// <summary>
+    /// String for <c>ListingDataInput</c> type.
+    /// </summary>
+    public const string ListingDataInput = "ListingDataInput!";
+    
+    /// <summary>
+    /// String for an array of <c>ListingDataInput</c> type.
+    /// </summary>
+    public const string ListingDataInputArray = "[ListingDataInput!]!";
 }

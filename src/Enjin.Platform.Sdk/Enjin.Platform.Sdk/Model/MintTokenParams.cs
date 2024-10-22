@@ -28,19 +28,4 @@ public class MintTokenParams : GraphQlParameter<MintTokenParams>,
     {
         return SetParameter("amount", amount);
     }
-
-    /// <summary>
-    /// Sets the price of each token.
-    /// </summary>
-    /// <param name="unitPrice">The price per token.</param>
-    /// <returns>This parameter for chaining.</returns>
-    /// <remarks>
-    /// Leave as null if you want to keep the same unitPrice. You can also put a value if you want to change the
-    /// unit price. Please note you can only increase it and a deposit to the difference of every token previously
-    /// minted will also be needed.
-    /// </remarks>
-    public MintTokenParams SetUnitPrice(BigInteger? unitPrice)
-    {
-        return SetParameter("unitPrice", unitPrice);
-    }
 }
