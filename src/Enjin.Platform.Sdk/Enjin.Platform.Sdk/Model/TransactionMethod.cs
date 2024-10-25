@@ -149,6 +149,12 @@ public enum TransactionMethod
     /// </summary>
     [EnumMember(Value = "Freeze")]
     Freeze,
+    
+    /// <summary>
+    /// Indicates the transaction method is <c>Infuse</c>.
+    /// </summary>
+    [EnumMember(Value = "Infuse")]
+    Infuse,
 
     /// <summary>
     /// Indicates the transaction method is <c>InsertRuleSet</c>.

@@ -76,7 +76,7 @@ public class Token
     /// </summary>
     [JsonInclude]
     [JsonPropertyName("requiresDeposit")]
-    public int? RequiresDeposit { get; private set; }
+    public bool? RequiresDeposit { get; private set; }
     
     /// <summary>
     /// The creation deposit for this token.

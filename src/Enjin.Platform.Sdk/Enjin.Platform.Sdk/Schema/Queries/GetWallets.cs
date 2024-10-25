@@ -43,7 +43,7 @@ public class GetWallets : GraphQlRequest<GetWallets, WalletConnectionFragment>
     /// <returns>This request for chaining.</returns>
     public GetWallets SetVerificationIds(params string[]? verificationIds)
     {
-        return SetVariable("verificationIds", CoreTypes.String, verificationIds);
+        return SetVariable("verificationIds", CoreTypes.StringArray, verificationIds);
     }
 
     /// <summary>

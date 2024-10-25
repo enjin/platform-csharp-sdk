@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using JetBrains.Annotations;
 
@@ -111,7 +112,7 @@ public class Beam
     /// </summary>
     [JsonInclude]
     [JsonPropertyName("probabilities")]
-    public object? Probabilities { get; private set; }
+    public JsonElement? Probabilities { get; private set; }
     
     /// <summary>
     /// The beam claims.
