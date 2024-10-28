@@ -305,6 +305,18 @@ public static class CoreSchema
     {
         return client.SendRequest<GraphQlResponse<Transaction>>(CreateRequest(request));
     }
+    
+    /// <summary>
+    /// Sends a <see cref="Infuse"/> request to the platform.
+    /// </summary>
+    /// <param name="client">The <see cref="IPlatformClient"/> to send the request from.</param>
+    /// <param name="request">The <see cref="Infuse"/> request to send.</param>
+    /// <returns>The task containing the response.</returns>
+    public static Task<IPlatformResponse<GraphQlResponse<Transaction>>> SendInfuse(
+        this IPlatformClient client, Infuse request)
+    {
+        return client.SendRequest<GraphQlResponse<Transaction>>(CreateRequest(request));
+    }
 
     /// <summary>
     /// Sends a <see cref="MintToken"/> request to the platform.
@@ -389,6 +401,30 @@ public static class CoreSchema
     {
         return client.SendRequest<GraphQlResponse<Transaction>>(CreateRequest(request));
     }
+    
+    /// <summary>
+    /// Sends a <see cref="RefreshMetadata"/> request to the platform.
+    /// </summary>
+    /// <param name="client">The <see cref="IPlatformClient"/> to send the request from.</param>
+    /// <param name="request">The <see cref="RefreshMetadata"/> request to send.</param>
+    /// <returns>The task containing the response.</returns>
+    public static Task<IPlatformResponse<GraphQlResponse<Transaction>>> SendRefreshMetadata(
+        this IPlatformClient client, RefreshMetadata request)
+    {
+        return client.SendRequest<GraphQlResponse<Transaction>>(CreateRequest(request));
+    }
+    
+    /// <summary>
+    /// Sends a <see cref="RetryTransactions"/> request to the platform.
+    /// </summary>
+    /// <param name="client">The <see cref="IPlatformClient"/> to send the request from.</param>
+    /// <param name="request">The <see cref="TransferBalance"/> request to send.</param>
+    /// <returns>The task containing the response.</returns>
+    public static Task<IPlatformResponse<GraphQlResponse<Transaction>>> SendRetryTransactions(
+        this IPlatformClient client, RetryTransactions request)
+    {
+        return client.SendRequest<GraphQlResponse<Transaction>>(CreateRequest(request));
+    }
 
     /// <summary>
     /// Sends a <see cref="SendTransaction"/> request to the platform.
@@ -470,6 +506,30 @@ public static class CoreSchema
     /// <returns>The task containing the response.</returns>
     public static Task<IPlatformResponse<GraphQlResponse<Transaction>>> SendTransferBalance(
         this IPlatformClient client, TransferBalance request)
+    {
+        return client.SendRequest<GraphQlResponse<Transaction>>(CreateRequest(request));
+    }
+    
+    /// <summary>
+    /// Sends a <see cref="TransferAllowDeath"/> request to the platform.
+    /// </summary>
+    /// <param name="client">The <see cref="IPlatformClient"/> to send the request from.</param>
+    /// <param name="request">The <see cref="TransferAllowDeath"/> request to send.</param>
+    /// <returns>The task containing the response.</returns>
+    public static Task<IPlatformResponse<GraphQlResponse<Transaction>>> SendTransferAllowDeath(
+        this IPlatformClient client, TransferAllowDeath request)
+    {
+        return client.SendRequest<GraphQlResponse<Transaction>>(CreateRequest(request));
+    }
+    
+    /// <summary>
+    /// Sends a <see cref="TransferKeepAlive"/> request to the platform.
+    /// </summary>
+    /// <param name="client">The <see cref="IPlatformClient"/> to send the request from.</param>
+    /// <param name="request">The <see cref="TransferKeepAlive"/> request to send.</param>
+    /// <returns>The task containing the response.</returns>
+    public static Task<IPlatformResponse<GraphQlResponse<Transaction>>> SendTransferKeepAlive(
+        this IPlatformClient client, TransferKeepAlive request)
     {
         return client.SendRequest<GraphQlResponse<Transaction>>(CreateRequest(request));
     }
