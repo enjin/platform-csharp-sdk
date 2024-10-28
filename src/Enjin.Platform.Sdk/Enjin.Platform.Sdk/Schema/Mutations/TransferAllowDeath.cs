@@ -41,7 +41,7 @@ public class TransferAllowDeath : GraphQlRequest<TransferAllowDeath, Transaction
     /// </summary>
     /// <param name="amount">The recipient account.</param>
     /// <returns>This request for chaining.</returns>
-    public TransferAllowDeath SetRecipient(BigInteger? amount)
+    public TransferAllowDeath SetAmount(BigInteger? amount)
     {
         return SetVariable("amount", CoreTypes.BigInt, amount);
     }

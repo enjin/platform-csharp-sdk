@@ -41,7 +41,7 @@ public class TransferKeepAlive : GraphQlRequest<TransferKeepAlive, TransactionFr
     /// </summary>
     /// <param name="amount">The recipient account.</param>
     /// <returns>This request for chaining.</returns>
-    public TransferKeepAlive SetRecipient(BigInteger? amount)
+    public TransferKeepAlive SetAmount(BigInteger? amount)
     {
         return SetVariable("amount", CoreTypes.BigInt, amount);
     }
