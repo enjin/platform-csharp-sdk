@@ -245,6 +245,18 @@ public static class CoreSchema
     {
         return client.SendRequest<GraphQlResponse<Transaction>>(CreateRequest(request));
     }
+    
+    /// <summary>
+    /// Sends a <see cref="BatchTransferBalance"/> request to the platform.
+    /// </summary>
+    /// <param name="client">The <see cref="IPlatformClient"/> to send the request from.</param>
+    /// <param name="request">The <see cref="BatchTransferBalance"/> request to send.</param>
+    /// <returns>The task containing the response.</returns>
+    public static Task<IPlatformResponse<GraphQlResponse<Transaction>>> SendBatchTransferBalance(
+        this IPlatformClient client, BatchTransferBalance request)
+    {
+        return client.SendRequest<GraphQlResponse<Transaction>>(CreateRequest(request));
+    }
 
     /// <summary>
     /// Sends a <see cref="Burn"/> request to the platform.
