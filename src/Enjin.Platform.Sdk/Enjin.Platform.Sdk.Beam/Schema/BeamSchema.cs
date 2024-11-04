@@ -61,6 +61,18 @@ public static class BeamSchema
     {
         return client.SendRequest<GraphQlResponse<Connection<BeamClaim>>>(CreateRequest(request));
     }
+    
+    /// <summary>
+    /// Sends a <see cref="GetPendingClaims"/> request to the platform.
+    /// </summary>
+    /// <param name="client">The <see cref="IPlatformClient"/> to send the request from.</param>
+    /// <param name="request">The <see cref="GetPendingClaims"/> request to send.</param>
+    /// <returns>The task containing the response.</returns>
+    public static Task<IPlatformResponse<GraphQlResponse<Connection<BeamClaim>>>> SendGetPendingClaims(
+        this IPlatformClient client, GetPendingClaims request)
+    {
+        return client.SendRequest<GraphQlResponse<Connection<BeamClaim>>>(CreateRequest(request));
+    }
 
     /// <summary>
     /// Sends a <see cref="GetSingleUseCodes"/> request to the platform.
@@ -146,6 +158,30 @@ public static class BeamSchema
     /// <returns>The task containing the response.</returns>
     public static Task<IPlatformResponse<GraphQlResponse<bool?>>> SendUpdateBeam(
         this IPlatformClient client, UpdateBeam request)
+    {
+        return client.SendRequest<GraphQlResponse<bool?>>(CreateRequest(request));
+    }
+    
+    /// <summary>
+    /// Sends a <see cref="UpdateBeamWhitelist"/> request to the platform.
+    /// </summary>
+    /// <param name="client">The <see cref="IPlatformClient"/> to send the request from.</param>
+    /// <param name="request">The <see cref="UpdateBeamWhitelist"/> request to send.</param>
+    /// <returns>The task containing the response.</returns>
+    public static Task<IPlatformResponse<GraphQlResponse<bool?>>> SendUpdateBeamWhitelist(
+        this IPlatformClient client, UpdateBeamWhitelist request)
+    {
+        return client.SendRequest<GraphQlResponse<bool?>>(CreateRequest(request));
+    }
+    
+    /// <summary>
+    /// Sends a <see cref="AddTokens"/> request to the platform.
+    /// </summary>
+    /// <param name="client">The <see cref="IPlatformClient"/> to send the request from.</param>
+    /// <param name="request">The <see cref="AddTokens"/> request to send.</param>
+    /// <returns>The task containing the response.</returns>
+    public static Task<IPlatformResponse<GraphQlResponse<bool?>>> SendAddTokens(
+        this IPlatformClient client, AddTokens request)
     {
         return client.SendRequest<GraphQlResponse<bool?>>(CreateRequest(request));
     }

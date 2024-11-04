@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using JetBrains.Annotations;
 
 namespace Enjin.Platform.Sdk;
@@ -121,6 +122,18 @@ public static class CoreSchema
     {
         return client.SendRequest<GraphQlResponse<Wallet>>(CreateRequest(request));
     }
+    
+    /// <summary>
+    /// Sends a <see cref="GetWallets"/> request to the platform.
+    /// </summary>
+    /// <param name="client">The <see cref="IPlatformClient"/> to send the request from.</param>
+    /// <param name="request">The <see cref="GetWallets"/> request to send.</param>
+    /// <returns>The task containing the response.</returns>
+    public static Task<IPlatformResponse<GraphQlResponse<Connection<Wallet>>>> SendGetWallets(
+        this IPlatformClient client, GetWallets request)
+    {
+        return client.SendRequest<GraphQlResponse<Connection<Wallet>>>(CreateRequest(request));
+    }
 
     /// <summary>
     /// Sends a <see cref="VerifyMessage"/> request to the platform.
@@ -196,6 +209,18 @@ public static class CoreSchema
         this IPlatformClient client, AcceptCollectionTransfer request)
     {
         return client.SendRequest<GraphQlResponse<Transaction>>(CreateRequest(request));
+    }
+    
+    /// <summary>
+    /// Sends a <see cref="AddToTracked"/> request to the platform.
+    /// </summary>
+    /// <param name="client">The <see cref="IPlatformClient"/> to send the request from.</param>
+    /// <param name="request">The <see cref="AddToTracked"/> request to send.</param>
+    /// <returns>The task containing the response.</returns>
+    public static Task<IPlatformResponse<GraphQlResponse<bool?>>> SendAddToTracked(
+        this IPlatformClient client, AddToTracked request)
+    {
+        return client.SendRequest<GraphQlResponse<bool?>>(CreateRequest(request));
     }
 
     /// <summary>
@@ -412,6 +437,18 @@ public static class CoreSchema
         this IPlatformClient client, RemoveCollectionAttribute request)
     {
         return client.SendRequest<GraphQlResponse<Transaction>>(CreateRequest(request));
+    }
+    
+    /// <summary>
+    /// Sends a <see cref="RemoveFromTracked"/> request to the platform.
+    /// </summary>
+    /// <param name="client">The <see cref="IPlatformClient"/> to send the request from.</param>
+    /// <param name="request">The <see cref="RemoveFromTracked"/> request to send.</param>
+    /// <returns>The task containing the response.</returns>
+    public static Task<IPlatformResponse<GraphQlResponse<bool?>>> SendRemoveFromTracked(
+        this IPlatformClient client, RemoveFromTracked request)
+    {
+        return client.SendRequest<GraphQlResponse<bool?>>(CreateRequest(request));
     }
 
     /// <summary>
