@@ -21,7 +21,8 @@ public class BatchTransfer : GraphQlRequest<BatchTransfer, TransactionFragment>,
                              IHasContinueOnFailure<BatchTransfer>,
                              IHasIdempotencyKey<BatchTransfer>,
                              IHasSkipValidation<BatchTransfer>,
-                             IHasSigningAccount<BatchTransfer>
+                             IHasSigningAccount<BatchTransfer>,
+                             IHasSimulate<BatchTransfer>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="BatchTransfer"/> class.
@@ -48,18 +49,5 @@ public class BatchTransfer : GraphQlRequest<BatchTransfer, TransactionFragment>,
     public BatchTransfer SetRecipients(params TransferRecipient[]? recipients)
     {
         return SetVariable("recipients", CoreTypes.TransferRecipientArray, recipients);
-    }
-
-    /// <summary>
-    /// Sets the signing wallet for the transaction.
-    /// </summary>
-    /// <param name="signingAccount">The signing wallet account.</param>
-    /// <returns>This request for chaining.</returns>
-    /// <remarks>
-    /// The account defaults to wallet daemon if not specified.
-    /// </remarks>
-    public BatchTransfer SetSigningAccount(string? signingAccount)
-    {
-        return SetVariable("signingAccount", CoreTypes.String, signingAccount);
     }
 }

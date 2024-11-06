@@ -42,14 +42,4 @@ public class OperatorTransferParams : GraphQlParameter<OperatorTransferParams>,
     {
         return SetParameter("amount", amount);
     }
-
-    /// <summary>
-    /// Sets whether the transaction will be kept from failing if the balance drops below the minimum requirement.
-    /// </summary>
-    /// <param name="keepAlive">Whether the transaction will be kept from failing.</param>
-    /// <returns>This parameter for chaining.</returns>
-    public OperatorTransferParams SetKeepAlive(bool? keepAlive)
-    {
-        return SetParameter("keepAlive", keepAlive);
-    }
 }

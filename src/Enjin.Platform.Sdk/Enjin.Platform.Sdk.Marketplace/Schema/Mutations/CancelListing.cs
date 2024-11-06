@@ -10,6 +10,7 @@ namespace Enjin.Platform.Sdk.Marketplace;
 public class CancelListing : GraphQlRequest<CancelListing, TransactionFragment>,
                              IHasIdempotencyKey<CancelListing>,
                              IHasSkipValidation<CancelListing>,
+                             IHasSimulate<CancelListing>,
                              IHasSigningAccount<CancelListing>
 {
     /// <summary>

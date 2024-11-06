@@ -11,6 +11,7 @@ namespace Enjin.Platform.Sdk.Marketplace;
 public class CreateListing : GraphQlRequest<CreateListing, TransactionFragment>,
                              IHasIdempotencyKey<CreateListing>,
                              IHasSkipValidation<CreateListing>,
+                             IHasSimulate<CreateListing>,
                              IHasSigningAccount<CreateListing>
 {
     /// <summary>
@@ -18,16 +19,6 @@ public class CreateListing : GraphQlRequest<CreateListing, TransactionFragment>,
     /// </summary>
     public CreateListing() : base("CreateListing", GraphQlRequestType.Mutation)
     {
-    }
-
-    /// <summary>
-    /// Sets the seller account.
-    /// </summary>
-    /// <param name="account">The seller account.</param>
-    /// <returns>This request for chaining.</returns>
-    public CreateListing SetAccount(string? account)
-    {
-        return SetVariable("account", CoreTypes.String, account);
     }
 
     /// <summary>
@@ -81,12 +72,12 @@ public class CreateListing : GraphQlRequest<CreateListing, TransactionFragment>,
     }
 
     /// <summary>
-    /// Sets the data for an auction.
+    /// Sets the data for a listing.
     /// </summary>
-    /// <param name="auctionData">The auction data.</param>
+    /// <param name="listingData">The listing data.</param>
     /// <returns>This request for chaining.</returns>
-    public CreateListing SetAuctionData(AuctionDataInputType? auctionData)
+    public CreateListing SetListingData(ListingDataInput? listingData)
     {
-        return SetVariable("auctionData", MarketplaceTypes.AuctionDataInputType, auctionData);
+        return SetVariable("listingData", MarketplaceTypes.ListingDataInput, listingData);
     }
 }

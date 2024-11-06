@@ -19,7 +19,7 @@
         <!-- Package properties -->
         <PackageId>Enjin.Platform.Sdk.Beam</PackageId>
         <PackageProjectUrl>https://enjin.io/</PackageProjectUrl>
-        <PackageVersion>1.1.0</PackageVersion>
+        <PackageVersion>2.0.0</PackageVersion>
         <PackageLicenseExpression>LGPL-3.0-only</PackageLicenseExpression>
         <PackageIcon>packageIcon.png</PackageIcon>
         <NeutralLanguage>en</NeutralLanguage>
@@ -62,7 +62,7 @@
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="System.Text.Json" Version="7.0.3" />
+        <PackageReference Include="System.Text.Json" Version="8.0.5" />
     </ItemGroup>
 
     <ItemGroup>

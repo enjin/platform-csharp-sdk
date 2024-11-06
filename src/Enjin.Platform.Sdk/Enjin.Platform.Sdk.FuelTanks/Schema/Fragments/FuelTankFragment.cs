@@ -14,6 +14,16 @@ public class FuelTankFragment : GraphQlFragment<FuelTankFragment>
     public FuelTankFragment()
     {
     }
+    
+    /// <summary>
+    /// Sets whether the <see cref="FuelTank"/> is to be returned with its <see cref="FuelTank.TankId"/> property.
+    /// </summary>
+    /// <param name="fragment">Whether the field is included.</param>
+    /// <returns>This fragment for chaining.</returns>
+    public FuelTankFragment WithTankId(AccountFragment? fragment)
+    {
+        return WithField("tankId", fragment);
+    }
 
     /// <summary>
     /// Sets whether the <see cref="FuelTank"/> is to be returned with its <see cref="FuelTank.Name"/> property.
@@ -24,14 +34,84 @@ public class FuelTankFragment : GraphQlFragment<FuelTankFragment>
     {
         return WithField("name", isIncluded);
     }
-
+    
     /// <summary>
-    /// Sets whether the <see cref="FuelTank"/> is to be returned with its <see cref="FuelTank.TankId"/> property.
+    /// Sets whether the <see cref="FuelTank"/> is to be returned with its <see cref="FuelTank.ReservesAccountCreationDeposit"/> property.
     /// </summary>
     /// <param name="isIncluded">Whether the field is included.</param>
     /// <returns>This fragment for chaining.</returns>
-    public FuelTankFragment WithTankId(bool isIncluded = true)
+    public FuelTankFragment WithReservesAccountCreationDeposit(bool isIncluded = true)
     {
-        return WithField("tankId", isIncluded);
+        return WithField("reservesAccountCreationDeposit", isIncluded);
+    }
+    
+    /// <summary>
+    /// Sets whether the <see cref="FuelTank"/> is to be returned with its <see cref="FuelTank.CoveragePolicy"/> property.
+    /// </summary>
+    /// <param name="isIncluded">Whether the field is included.</param>
+    /// <returns>This fragment for chaining.</returns>
+    public FuelTankFragment WithCoveragePolicy(bool isIncluded = true)
+    {
+        return WithField("coveragePolicy", isIncluded);
+    }
+    
+    /// <summary>
+    /// Sets whether the <see cref="FuelTank"/> is to be returned with its <see cref="FuelTank.IsFrozen"/> property.
+    /// </summary>
+    /// <param name="isIncluded">Whether the field is included.</param>
+    /// <returns>This fragment for chaining.</returns>
+    public FuelTankFragment WithIsFrozen(bool isIncluded = true)
+    {
+        return WithField("isFrozen", isIncluded);
+    }
+    
+    /// <summary>
+    /// Sets whether the <see cref="FuelTank"/> is to be returned with its <see cref="FuelTank.AccountCount"/> property.
+    /// </summary>
+    /// <param name="isIncluded">Whether the field is included.</param>
+    /// <returns>This fragment for chaining.</returns>
+    public FuelTankFragment WithAccountCount(bool isIncluded = true)
+    {
+        return WithField("accountCount", isIncluded);
+    }
+    
+    /// <summary>
+    /// Sets whether the <see cref="FuelTank"/> is to be returned with its <see cref="FuelTank.Owner"/> property.
+    /// </summary>
+    /// <param name="fragment">Whether the field is included.</param>
+    /// <returns>This fragment for chaining.</returns>
+    public FuelTankFragment WithOwner(WalletFragment? fragment)
+    {
+        return WithField("owner", fragment);
+    }
+    
+    /// <summary>
+    /// Sets whether the <see cref="FuelTank"/> is to be returned with its <see cref="FuelTank.Accounts"/> property.
+    /// </summary>
+    /// <param name="fragment">Whether the field is included.</param>
+    /// <returns>This fragment for chaining.</returns>
+    public FuelTankFragment WithWallets(WalletFragment? fragment)
+    {
+        return WithField("accounts", fragment);
+    }
+    
+    /// <summary>
+    /// Sets whether the <see cref="FuelTank"/> is to be returned with its <see cref="FuelTank.AccountRules"/> property.
+    /// </summary>
+    /// <param name="isIncluded">Whether the field is included.</param>
+    /// <returns>This fragment for chaining.</returns>
+    public FuelTankFragment WithAccountRules(bool isIncluded = true)
+    {
+        return WithField("accountRules", isIncluded);
+    }
+    
+    /// <summary>
+    /// Sets whether the <see cref="FuelTank"/> is to be returned with its <see cref="FuelTank.DispatchRules"/> property.
+    /// </summary>
+    /// <param name="isIncluded">Whether the field is included.</param>
+    /// <returns>This fragment for chaining.</returns>
+    public FuelTankFragment WithDispatchRules(bool isIncluded = true)
+    {
+        return WithField("dispatchRules", isIncluded);
     }
 }

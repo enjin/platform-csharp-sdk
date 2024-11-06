@@ -15,7 +15,7 @@ public class PendingEventDataTokenMinted : PendingEventDataBase
     /// </summary>
     [JsonInclude]
     [JsonPropertyName("issuer")]
-    public string Issuer { get; private set; }
+    public string? Issuer { get; private set; }
 
     /// <summary>
     /// The token ID of this asset.
@@ -38,7 +38,7 @@ public class PendingEventDataTokenMinted : PendingEventDataBase
     /// </summary>
     [JsonInclude]
     [JsonPropertyName("recipient")]
-    public string Recipient { get; private set; }
+    public string? Recipient { get; private set; }
 
     /// <summary>
     /// The amount that was minted.

@@ -15,7 +15,7 @@ public class PendingEventDataTokenCreated : PendingEventDataBase
     /// </summary>
     [JsonInclude]
     [JsonPropertyName("wallet")]
-    public string Wallet { get; private set; }
+    public string? Wallet { get; private set; }
 
     /// <summary>
     /// The token ID of this asset.

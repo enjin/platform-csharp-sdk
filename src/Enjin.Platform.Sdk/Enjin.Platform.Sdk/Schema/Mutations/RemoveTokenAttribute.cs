@@ -12,7 +12,8 @@ public class RemoveTokenAttribute : GraphQlRequest<RemoveTokenAttribute, Transac
                                     IHasEncodableTokenId<RemoveTokenAttribute>,
                                     IHasIdempotencyKey<RemoveTokenAttribute>,
                                     IHasSkipValidation<RemoveTokenAttribute>,
-                                    IHasSigningAccount<RemoveTokenAttribute>
+                                    IHasSigningAccount<RemoveTokenAttribute>,
+                                    IHasSimulate<RemoveTokenAttribute>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="RemoveTokenAttribute"/> class.

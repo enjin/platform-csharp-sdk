@@ -11,6 +11,7 @@ namespace Enjin.Platform.Sdk.Marketplace;
 public class FillListing : GraphQlRequest<FillListing, TransactionFragment>,
                            IHasIdempotencyKey<FillListing>,
                            IHasSkipValidation<FillListing>,
+                           IHasSimulate<FillListing>,
                            IHasSigningAccount<FillListing>
 {
     /// <summary>

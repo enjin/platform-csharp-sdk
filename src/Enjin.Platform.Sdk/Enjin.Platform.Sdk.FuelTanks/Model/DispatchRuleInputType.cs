@@ -57,16 +57,6 @@ public class DispatchRuleInputType : GraphQlParameter<DispatchRuleInputType>
     {
         return SetParameter("maxFuelBurnPerTransaction", maxFuelBurnPerTransaction);
     }
-    
-    /// <summary>
-    /// Sets the permitted extrinsics that can be used with the fuel tank.
-    /// </summary>
-    /// <param name="permittedExtrinsics">The permitted extrinsics.</param>
-    /// <returns>This parameter for chaining.</returns>
-    public DispatchRuleInputType SetPermittedExtrinsics(params TransactionMethod[] permittedExtrinsics)
-    {
-        return SetParameter("permittedExtrinsics", permittedExtrinsics);
-    }
 
     /// <summary>
     /// Sets the rule for user fuel budget.
@@ -86,5 +76,25 @@ public class DispatchRuleInputType : GraphQlParameter<DispatchRuleInputType>
     public DispatchRuleInputType SetTankFuelBudget(FuelBudgetInputType? tankFuelBudget)
     {
         return SetParameter("tankFuelBudget", tankFuelBudget);
+    }
+    
+    /// <summary>
+    /// Sets the permitted extrinsics that can be used with the fuel tank.
+    /// </summary>
+    /// <param name="permittedExtrinsics">The permitted extrinsics.</param>
+    /// <returns>This parameter for chaining.</returns>
+    public DispatchRuleInputType SetPermittedExtrinsics(params TransactionMethod[] permittedExtrinsics)
+    {
+        return SetParameter("permittedExtrinsics", permittedExtrinsics);
+    }
+    
+    /// <summary>
+    /// Sets the signature required in this ruleset.
+    /// </summary>
+    /// <param name="requireSignature">The permitted extrinsics.</param>
+    /// <returns>This parameter for chaining.</returns>
+    public DispatchRuleInputType SetRequireSignature(RequireSignatureInputType? requireSignature)
+    {
+        return SetParameter("requireSignature", requireSignature);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 using JetBrains.Annotations;
 
 namespace Enjin.Platform.Sdk;
@@ -11,11 +12,13 @@ namespace Enjin.Platform.Sdk;
 /// with at least the existential deposit.
 /// </remarks>
 /// <seealso cref="Transaction"/>
+[Obsolete("This mutation is deprecated and will be removed in a future release. Use the TransferAllowDeath and TransferKeepAlive mutations instead.")]
 [PublicAPI]
 public class TransferBalance : GraphQlRequest<TransferBalance, TransactionFragment>,
                                IHasIdempotencyKey<TransferBalance>,
                                IHasSkipValidation<TransferBalance>,
-                               IHasSigningAccount<TransferBalance>
+                               IHasSigningAccount<TransferBalance>,
+                               IHasSimulate<TransferBalance>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="TransferBalance"/> class.
@@ -55,18 +58,5 @@ public class TransferBalance : GraphQlRequest<TransferBalance, TransactionFragme
     public TransferBalance SetKeepAlive(bool? keepAlive)
     {
         return SetVariable("keepAlive", CoreTypes.Boolean, keepAlive);
-    }
-
-    /// <summary>
-    /// Sets the signing wallet for the transaction.
-    /// </summary>
-    /// <param name="signingAccount">The signing wallet account.</param>
-    /// <returns>This request for chaining.</returns>
-    /// <remarks>
-    /// The account defaults to wallet daemon if not specified.
-    /// </remarks>
-    public TransferBalance SetSigningAccount(string? signingAccount)
-    {
-        return SetVariable("signingAccount", CoreTypes.String, signingAccount);
     }
 }

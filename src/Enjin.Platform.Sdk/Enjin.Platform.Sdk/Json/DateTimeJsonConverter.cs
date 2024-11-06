@@ -32,7 +32,7 @@ public class DateTimeJsonConverter : JsonConverter<DateTime>
     {
         return reader.TokenType switch
         {
-            JsonTokenType.String => DateTime.Parse(reader.GetString(), CULTURE_INFO),
+            JsonTokenType.String => DateTime.Parse(reader.GetString() ?? throw new FormatException("Null string for DateTime field"), CULTURE_INFO),
             _ => throw new FormatException($"Invalid {nameof(JsonTokenType)} for {nameof(DateTime)} field")
         };
     }

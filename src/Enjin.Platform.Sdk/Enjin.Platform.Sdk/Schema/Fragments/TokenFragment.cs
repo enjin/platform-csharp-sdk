@@ -87,36 +87,6 @@ public class TokenFragment : GraphQlFragment<TokenFragment>
     }
 
     /// <summary>
-    /// Sets whether the <see cref="Token"/> is to be returned with its <see cref="Token.MinimumBalance"/> property.
-    /// </summary>
-    /// <param name="isIncluded">Whether the field is included.</param>
-    /// <returns>This fragment for chaining.</returns>
-    public TokenFragment WithMinimumBalance(bool isIncluded = true)
-    {
-        return WithField("minimumBalance", isIncluded);
-    }
-
-    /// <summary>
-    /// Sets whether the <see cref="Token"/> is to be returned with its <see cref="Token.UnitPrice"/> property.
-    /// </summary>
-    /// <param name="isIncluded">Whether the field is included.</param>
-    /// <returns>This fragment for chaining.</returns>
-    public TokenFragment WithUnitPrice(bool isIncluded = true)
-    {
-        return WithField("unitPrice", isIncluded);
-    }
-
-    /// <summary>
-    /// Sets whether the <see cref="Token"/> is to be returned with its <see cref="Token.MintDeposit"/> property.
-    /// </summary>
-    /// <param name="isIncluded">Whether the field is included.</param>
-    /// <returns>This fragment for chaining.</returns>
-    public TokenFragment WithMintDeposit(bool isIncluded = true)
-    {
-        return WithField("mintDeposit", isIncluded);
-    }
-
-    /// <summary>
     /// Sets whether the <see cref="Token"/> is to be returned with its <see cref="Token.AttributeCount"/> property.
     /// </summary>
     /// <param name="isIncluded">Whether the field is included.</param>
@@ -124,6 +94,77 @@ public class TokenFragment : GraphQlFragment<TokenFragment>
     public TokenFragment WithAttributeCount(bool isIncluded = true)
     {
         return WithField("attributeCount", isIncluded);
+    }
+    
+    /// <summary>
+    /// Sets whether the <see cref="Token"/> is to be returned with its <see cref="Token.RequiresDeposit"/> property.
+    /// </summary>
+    /// <param name="isIncluded">Whether the field is included.</param>
+    /// <returns>This fragment for chaining.</returns>
+    public TokenFragment WithRequiresDeposit(bool isIncluded = true)
+    {
+        return WithField("requiresDeposit", isIncluded);
+    }
+    
+    /// <summary>
+    /// Sets whether the <see cref="Token"/> is to be returned with its <see cref="Token.CreationDeposit"/> property.
+    /// </summary>
+    /// <param name="isIncluded">Whether the field is included.</param>
+    /// <returns>This fragment for chaining.</returns>
+    public TokenFragment WithCreationDeposit(bool isIncluded = true)
+    {
+        return WithField("creationDeposit", isIncluded);
+    }
+    
+    /// <summary>
+    /// Sets whether the <see cref="Token"/> is to be returned with its <see cref="Token.OwnerDeposit"/> property.
+    /// </summary>
+    /// <param name="isIncluded">Whether the field is included.</param>
+    /// <returns>This fragment for chaining.</returns>
+    public TokenFragment WithOwnerDeposit(bool isIncluded = true)
+    {
+        return WithField("ownerDeposit", isIncluded);
+    }
+    
+    /// <summary>
+    /// Sets whether the <see cref="Token"/> is to be returned with its <see cref="Token.TotalTokenAccountDeposit"/> property.
+    /// </summary>
+    /// <param name="isIncluded">Whether the field is included.</param>
+    /// <returns>This fragment for chaining.</returns>
+    public TokenFragment WithTotalTokenAccountDeposit(bool isIncluded = true)
+    {
+        return WithField("totalTokenAccountDeposit", isIncluded);
+    }
+    
+    /// <summary>
+    /// Sets whether the <see cref="Token"/> is to be returned with its <see cref="Token.Infusion"/> property.
+    /// </summary>
+    /// <param name="isIncluded">Whether the field is included.</param>
+    /// <returns>This fragment for chaining.</returns>
+    public TokenFragment WithInfusion(bool isIncluded = true)
+    {
+        return WithField("infusion", isIncluded);
+    }
+    
+    /// <summary>
+    /// Sets whether the <see cref="Token"/> is to be returned with its <see cref="Token.AnyoneCanInfuse"/> property.
+    /// </summary>
+    /// <param name="isIncluded">Whether the field is included.</param>
+    /// <returns>This fragment for chaining.</returns>
+    public TokenFragment WithAnyoneCanInfuse(bool isIncluded = true)
+    {
+        return WithField("anyoneCanInfuse", isIncluded);
+    }
+    
+    /// <summary>
+    /// Sets the <see cref="Collection"/> fragment to be used for getting the <see cref="Token.TokenMetadata"/> property of
+    /// the <see cref="Token"/>.
+    /// </summary>
+    /// <param name="fragment">The <see cref="Collection"/> fragment.</param>
+    /// <returns>This fragment for chaining.</returns>
+    public TokenFragment WithTokenMetadata(TokenMetadataFragment? fragment)
+    {
+        return WithField("tokenMetadata", fragment);
     }
 
     /// <summary>

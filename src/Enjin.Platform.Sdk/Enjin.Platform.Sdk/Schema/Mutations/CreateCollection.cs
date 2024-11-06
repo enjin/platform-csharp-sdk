@@ -13,7 +13,8 @@ namespace Enjin.Platform.Sdk;
 public class CreateCollection : GraphQlRequest<CreateCollection, TransactionFragment>,
                                 IHasIdempotencyKey<CreateCollection>,
                                 IHasSkipValidation<CreateCollection>,
-                                IHasSigningAccount<CreateCollection>
+                                IHasSigningAccount<CreateCollection>,
+                                IHasSimulate<CreateCollection>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="CreateCollection"/> class.

@@ -28,16 +28,6 @@ public class GetTransaction : GraphQlRequest<GetTransaction, TransactionFragment
     }
 
     /// <summary>
-    /// Sets the idempotency key to filter to.
-    /// </summary>
-    /// <param name="idempotencyKey">The idempotency key.</param>
-    /// <returns>This request for chaining.</returns>
-    public GetTransaction SetIdempotencyKey(string? idempotencyKey)
-    {
-        return SetVariable("idempotencyKey", CoreTypes.String, idempotencyKey);
-    }
-
-    /// <summary>
     /// Sets the blockchain transaction ID.
     /// </summary>
     /// <param name="transactionId">The transaction ID.</param>
@@ -55,5 +45,15 @@ public class GetTransaction : GraphQlRequest<GetTransaction, TransactionFragment
     public GetTransaction SetTransactionHash(string? transactionHash)
     {
         return SetVariable("transactionHash", CoreTypes.String, transactionHash);
+    }
+    
+    /// <summary>
+    /// Sets the idempotency key to filter to.
+    /// </summary>
+    /// <param name="idempotencyKey">The idempotency key.</param>
+    /// <returns>This request for chaining.</returns>
+    public GetTransaction SetIdempotencyKey(string? idempotencyKey)
+    {
+        return SetVariable("idempotencyKey", CoreTypes.String, idempotencyKey);
     }
 }

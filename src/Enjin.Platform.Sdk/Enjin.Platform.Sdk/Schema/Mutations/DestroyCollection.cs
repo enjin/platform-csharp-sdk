@@ -14,7 +14,8 @@ namespace Enjin.Platform.Sdk;
 public class DestroyCollection : GraphQlRequest<DestroyCollection, TransactionFragment>,
                                  IHasIdempotencyKey<DestroyCollection>,
                                  IHasSkipValidation<DestroyCollection>,
-                                 IHasSigningAccount<DestroyCollection>
+                                 IHasSigningAccount<DestroyCollection>,
+                                 IHasSimulate<DestroyCollection>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="DestroyCollection"/> class.

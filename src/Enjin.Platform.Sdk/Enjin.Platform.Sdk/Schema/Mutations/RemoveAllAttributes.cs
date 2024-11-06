@@ -11,7 +11,8 @@ public class RemoveAllAttributes : GraphQlRequest<RemoveAllAttributes, Transacti
                                    IHasEncodableTokenId<RemoveAllAttributes>,
                                    IHasIdempotencyKey<RemoveAllAttributes>,
                                    IHasSkipValidation<RemoveAllAttributes>,
-                                   IHasSigningAccount<RemoveAllAttributes>
+                                   IHasSigningAccount<RemoveAllAttributes>,
+                                   IHasSimulate<RemoveAllAttributes>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="RemoveAllAttributes"/> class.

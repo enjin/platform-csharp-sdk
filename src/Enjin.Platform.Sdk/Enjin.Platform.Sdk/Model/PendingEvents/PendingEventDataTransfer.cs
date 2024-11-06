@@ -15,14 +15,14 @@ public class PendingEventDataTransfer : PendingEventDataBase
     /// </summary>
     [JsonInclude]
     [JsonPropertyName("to")]
-    public string To { get; private set; }
+    public string? To { get; private set; }
 
     /// <summary>
     /// The address this was sent from.
     /// </summary>
     [JsonInclude]
     [JsonPropertyName("from")]
-    public string From { get; private set; }
+    public string? From { get; private set; }
 
     /// <summary>
     /// The amount that was transferred.
@@ -37,5 +37,5 @@ public class PendingEventDataTransfer : PendingEventDataBase
     /// </summary>
     [JsonInclude]
     [JsonPropertyName("transactionHash")]
-    public string TransactionHash { get; private set; }
+    public string? TransactionHash { get; private set; }
 }

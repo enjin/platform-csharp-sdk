@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using JetBrains.Annotations;
 
@@ -63,6 +64,13 @@ public class Beam
     [JsonInclude]
     [JsonPropertyName("end")]
     public DateTime? End { get; private set; }
+    
+    /// <summary>
+    /// The wallet from which the beam asset will be retrieved.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("source")]
+    public Account? Source { get; private set; }
 
     /// <summary>
     /// The collection this beam belongs to.
@@ -98,4 +106,25 @@ public class Beam
     [JsonInclude]
     [JsonPropertyName("qr")]
     public BeamQr? Qr { get; private set; }
+    
+    /// <summary>
+    /// The claim probability for each token.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("probabilities")]
+    public JsonElement? Probabilities { get; private set; }
+    
+    /// <summary>
+    /// The beam claims.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("claims")]
+    public Connection<BeamClaim>? Claims { get; private set; }
+    
+    /// <summary>
+    /// The number of claims remaining in this beam.
+    /// </summary>
+    [JsonInclude]
+    [JsonPropertyName("claimsRemaining")]
+    public int? ClaimsRemaining { get; private set; }
 }

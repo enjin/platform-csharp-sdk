@@ -17,7 +17,8 @@ public class BatchSetAttribute : GraphQlRequest<BatchSetAttribute, TransactionFr
                                  IHasEncodableTokenId<BatchSetAttribute>,
                                  IHasIdempotencyKey<BatchSetAttribute>,
                                  IHasSkipValidation<BatchSetAttribute>,
-                                 IHasSigningAccount<BatchSetAttribute>
+                                 IHasSigningAccount<BatchSetAttribute>,
+                                 IHasSimulate<BatchSetAttribute>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="BatchSetAttribute"/> class.

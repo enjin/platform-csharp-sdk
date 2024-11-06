@@ -19,7 +19,7 @@
         <!-- Package properties -->
         <PackageId>Enjin.Platform.Sdk</PackageId>
         <PackageProjectUrl>https://enjin.io/</PackageProjectUrl>
-        <PackageVersion>1.1.1</PackageVersion>
+        <PackageVersion>2.0.0</PackageVersion>
         <PackageLicenseExpression>LGPL-3.0-only</PackageLicenseExpression>
         <PackageIcon>packageIcon.png</PackageIcon>
         <NeutralLanguage>en</NeutralLanguage>
@@ -63,7 +63,7 @@
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="PusherClient" Version="2.2.1" />
-        <PackageReference Include="System.Text.Json" Version="7.0.3" />
+        <PackageReference Include="System.Text.Json" Version="8.0.5" />
     </ItemGroup>
 
 </Project>

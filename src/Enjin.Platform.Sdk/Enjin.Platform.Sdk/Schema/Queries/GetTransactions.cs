@@ -20,15 +20,15 @@ public class GetTransactions : GraphQlRequest<GetTransactions, TransactionConnec
     }
 
     /// <summary>
-    /// Sets the idempotency keys to filter to.
+    /// Sets the blockchain internal IDs to filter to.
     /// </summary>
-    /// <param name="idempotencyKeys">The idempotency keys.</param>
+    /// <param name="ids">The internal IDs of the transaction.</param>
     /// <returns>This request for chaining.</returns>
-    public GetTransactions SetIdempotencyKeys(params string[]? idempotencyKeys)
+    public GetTransactions SetIds(params BigInteger[]? ids)
     {
-        return SetVariable("idempotencyKeys", CoreTypes.StringArray, idempotencyKeys);
+        return SetVariable("ids", CoreTypes.BigIntArray, ids);
     }
-
+    
     /// <summary>
     /// Sets the blockchain transaction IDs to filter to.
     /// </summary>
@@ -37,16 +37,6 @@ public class GetTransactions : GraphQlRequest<GetTransactions, TransactionConnec
     public GetTransactions SetTransactionIds(params string[]? transactionIds)
     {
         return SetVariable("transactionIds", CoreTypes.StringArray, transactionIds);
-    }
-
-    /// <summary>
-    /// Sets the blockchain internal IDs to filter to.
-    /// </summary>
-    /// <param name="ids">The internal IDs of the transaction.</param>
-    /// <returns>This request for chaining.</returns>
-    public GetTransactions SetIds(params BigInteger[]? ids)
-    {
-        return SetVariable("ids", CoreTypes.BigIntArray, ids);
     }
 
     /// <summary>
@@ -97,5 +87,25 @@ public class GetTransactions : GraphQlRequest<GetTransactions, TransactionConnec
     public GetTransactions SetAccounts(params string[]? accounts)
     {
         return SetVariable("accounts", CoreTypes.StringArray, accounts);
+    }
+    
+    /// <summary>
+    /// Sets the signed at block numbers to filter to.
+    /// </summary>
+    /// <param name="signedAtBlocks"></param>
+    /// <returns>This request for chaining</returns>
+    public GetTransactions SetSignedAtBlocks(params int[]? signedAtBlocks)
+    {
+        return SetVariable("signedAtBlocks", CoreTypes.IntArray, signedAtBlocks);
+    }
+    
+    /// <summary>
+    /// Sets the idempotency keys to filter to.
+    /// </summary>
+    /// <param name="idempotencyKeys">The idempotency keys.</param>
+    /// <returns>This request for chaining.</returns>
+    public GetTransactions SetIdempotencyKeys(params string[]? idempotencyKeys)
+    {
+        return SetVariable("idempotencyKeys", CoreTypes.StringArray, idempotencyKeys);
     }
 }

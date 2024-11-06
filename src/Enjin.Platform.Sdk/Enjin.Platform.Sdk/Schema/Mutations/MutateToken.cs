@@ -12,7 +12,8 @@ public class MutateToken : GraphQlRequest<MutateToken, TransactionFragment>,
                            IHasEncodableTokenId<MutateToken>,
                            IHasIdempotencyKey<MutateToken>,
                            IHasSkipValidation<MutateToken>,
-                           IHasSigningAccount<MutateToken>
+                           IHasSigningAccount<MutateToken>,
+                           IHasSimulate<MutateToken>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="MutateToken"/> class.

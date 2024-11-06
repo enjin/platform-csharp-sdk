@@ -18,7 +18,7 @@ public class GetTokens : GraphQlRequest<GetTokens, TokenConnectionFragment>,
     public GetTokens() : base("GetTokens", GraphQlRequestType.Query)
     {
     }
-
+    
     /// <summary>
     /// Sets the ID of the collection to return tokens from.
     /// </summary>

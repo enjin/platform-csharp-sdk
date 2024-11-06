@@ -17,7 +17,8 @@ public class Freeze : GraphQlRequest<Freeze, TransactionFragment>,
                       IHasEncodableTokenId<Freeze>,
                       IHasIdempotencyKey<Freeze>,
                       IHasSkipValidation<Freeze>,
-                      IHasSigningAccount<Freeze>
+                      IHasSigningAccount<Freeze>,
+                      IHasSimulate<Freeze>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Freeze"/> class.
@@ -44,21 +45,6 @@ public class Freeze : GraphQlRequest<Freeze, TransactionFragment>,
     public Freeze SetFreezeState(FreezeState? freezeState)
     {
         return SetVariable("freezeState", CoreTypes.FreezeState, freezeState);
-    }
-
-    /// <summary>
-    /// Sets the collection ID to freeze.
-    /// </summary>
-    /// <param name="collectionId">The collection ID.</param>
-    /// <returns>This request for chaining.</returns>
-    /// <deprecated>
-    /// This function is now deprecated and will be removed in a future release.
-    /// Use SetCollectionId(BigInteger? collectionId) instead.
-    /// </deprecated>
-    [Obsolete("This function is now deprecated and will be removed in a future release.  Use SetCollectionId(BigInteger? collectionId) instead.")]
-    public Freeze SetCollection(BigInteger? collectionId)
-    {
-        return SetVariable("collectionId", CoreTypes.BigInt, collectionId);
     }
 
     /// <summary>
