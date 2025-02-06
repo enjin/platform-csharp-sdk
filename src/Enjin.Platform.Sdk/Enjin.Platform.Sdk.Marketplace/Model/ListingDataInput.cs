@@ -1,10 +1,12 @@
-﻿using JetBrains.Annotations;
+﻿using System.Text.Json.Serialization;
+using JetBrains.Annotations;
 
 namespace Enjin.Platform.Sdk.Marketplace;
 
 /// <summary>
 /// Models a parameter for data for an auction.
 /// </summary>
+[JsonConverter(typeof(GraphQlParameterJsonConverter<ListingDataInput>))]
 [PublicAPI]
 public class ListingDataInput : GraphQlParameter<ListingDataInput>
 {
