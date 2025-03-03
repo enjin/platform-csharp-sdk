@@ -1,15 +1,18 @@
-﻿name: Build & Test
+name: Build, Test & Package
 
 on:
   push:
     branches:
       - master
+    tags:
+      - '*'
   pull_request:
 
-permissions: read-all
+permissions:
+  contents: write
 
 jobs:
-  build-and-test:
+  build:
     runs-on: windows-latest
     steps:
       - name: Checkout
@@ -27,8 +30,7 @@ jobs:
         uses: darenm/Setup-VSTest@v1
 
       - name: Navigate to Solution Folder
-        run: |
-          cd $GITHUB_WORKSPACE
+        run: cd $GITHUB_WORKSPACE
 
       - name: Cache NuGet Packages
         uses: actions/cache@v3
@@ -39,13 +41,21 @@ jobs:
             ${{ runner.os }}-nuget-
 
       - name: Restore Packages
-        run: |
-          nuget restore ./src/Enjin.Platform.Sdk/Enjin.Platform.Sdk.sln
+        run: nuget restore ./src/Enjin.Platform.Sdk/Enjin.Platform.Sdk.sln
 
       - name: Build Solution
-        run: |
-          msbuild.exe ./src/Enjin.Platform.Sdk/Enjin.Platform.Sdk.sln /p:platform="Any CPU" /p:configuration="Release"
+        run: msbuild.exe ./src/Enjin.Platform.Sdk/Enjin.Platform.Sdk.sln /p:platform="Any CPU" /p:configuration="Release"
 
       - name: Run Tests
+        run: vstest.console.exe ./src/Enjin.Platform.Sdk/Enjin.Platform.Sdk.Tests/bin/Release/net6.0/Enjin.Platform.Sdk.Tests.dll
+
+      - name: Build NuGet Packages
         run: |
-          vstest.console.exe ./src/Enjin.Platform.Sdk/Enjin.Platform.Sdk.Tests/bin/Release/net6.0/Enjin.Platform.Sdk.Tests.dll
+          cd ./src/Enjin.Platform.Sdk
+          dotnet pack --configuration Release --output ./nuget-packages/
+
+      - name: Upload Artifcats
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: ./src/Enjin.Platform.Sdk/nuget-packages/*.nupkg
