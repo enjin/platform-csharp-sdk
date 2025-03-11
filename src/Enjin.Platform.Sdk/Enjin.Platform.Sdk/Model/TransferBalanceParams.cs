@@ -7,7 +7,7 @@ namespace Enjin.Platform.Sdk;
 /// <summary>
 /// This model encapsulates the required parameters for a balance transfer.
 /// </summary>
-[JsonConverter(typeof(GraphQlParameterJsonConverter<SimpleTransferParams>))]
+[JsonConverter(typeof(GraphQlParameterJsonConverter<TransferBalanceParams>))]
 [PublicAPI]
 public class TransferBalanceParams : GraphQlParameter<TransferBalanceParams>,
                                     IHasEncodableTokenId<TransferBalanceParams>
