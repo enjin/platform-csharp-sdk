@@ -1,3 +1,0 @@
-﻿global using MarketplaceBidConnectionFragment = Enjin.Platform.Sdk.ConnectionFragment<Enjin.Platform.Sdk.Marketplace.MarketplaceBidFragment>;
-global using MarketplaceListingConnectionFragment = Enjin.Platform.Sdk.ConnectionFragment<Enjin.Platform.Sdk.Marketplace.MarketplaceListingFragment>;
-global using MarketplaceSaleConnectionFragment = Enjin.Platform.Sdk.ConnectionFragment<Enjin.Platform.Sdk.Marketplace.MarketplaceSaleFragment>;
