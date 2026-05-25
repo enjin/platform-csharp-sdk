@@ -9,6 +9,7 @@ namespace Enjin.Platform.Sdk;
 
 /// <summary>
 /// A HTTP handler used by <see cref="PlatformClient"/> for processing HTTP traffic to and from the platform.
+/// Attaches the <c>Authorization: Bearer &lt;token&gt;</c> header when an auth token is set.
 /// </summary>
 /// <seealso cref="PlatformClient"/>
 [PublicAPI]
@@ -75,7 +76,9 @@ public sealed class PlatformHandler : DelegatingHandler
         {
             if (HasAuthToken)
             {
-                request.Headers.Authorization = new AuthenticationHeaderValue(_authToken ?? throw new InvalidOperationException("Auth token is null or empty"));
+                request.Headers.Authorization = new AuthenticationHeaderValue(
+                    "Bearer",
+                    _authToken ?? throw new InvalidOperationException("Auth token is null or empty"));
             }
         }
 
