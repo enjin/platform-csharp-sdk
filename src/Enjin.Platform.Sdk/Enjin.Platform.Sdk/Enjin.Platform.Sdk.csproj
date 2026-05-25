@@ -24,6 +24,7 @@
         <PackageVersion>3.0.0</PackageVersion>
         <PackageLicenseExpression>LGPL-3.0-only</PackageLicenseExpression>
         <PackageIcon>packageIcon.png</PackageIcon>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
         <NeutralLanguage>en</NeutralLanguage>
         <RepositoryUrl>https://github.com/enjin/platform-csharp-sdk</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
@@ -44,7 +45,8 @@
 
     <!-- Package items -->
     <ItemGroup>
-        <None Include="$(SolutionDir)/packageIcon.png" Pack="true" PackagePath="" />
+        <None Include="$(MSBuildThisFileDirectory)../packageIcon.png" Pack="true" PackagePath="" />
+        <None Include="$(MSBuildThisFileDirectory)../../../README.md" Pack="true" PackagePath="" />
     </ItemGroup>
 
     <ItemGroup>

@@ -63,3 +63,51 @@ Please do not:
 Contributions which happen to introduce breaking changes may be considered if they are offset by significant
 improvements to the API, project structure, or respond to changes in the Platform or .NET ecosystems. However, in
 contributions which contain breaking changes will generally be discouraged.
+
+## Regenerating the GraphQL schema
+
+The contents of `src/Enjin.Platform.Sdk/Enjin.Platform.Sdk/Schema/Generated.cs` are produced from the Platform's
+GraphQL schema by the
+[`platform-sdk-generators`](https://github.com/enjin/platform-sdk-generators) tool (which wraps
+[GraphQlClientGenerator](https://github.com/Husqvik/GraphQlClientGenerator)).
+
+To regenerate the schema after a Platform API change:
+
+1. Clone the generators repository alongside this one:
+
+   ```sh
+   git clone git@github.com:enjin/platform-sdk-generators.git
+   ```
+
+2. Drop the latest `v3.json` schema (downloadable via introspection from the target Platform deployment) into
+   `platform-sdk-generators/CSharpSchemaGenerator/CSharpSchemaGenerator/schema/v3.json`.
+
+3. Run the generator:
+
+   ```sh
+   cd platform-sdk-generators/CSharpSchemaGenerator/CSharpSchemaGenerator
+   dotnet run
+   ```
+
+   This produces `generated/v3.cs` in the same folder.
+
+4. Copy the output into this repo, overwriting the existing file:
+
+   ```sh
+   cp generated/v3.cs \
+       ../../../platform-csharp-sdk/src/Enjin.Platform.Sdk/Enjin.Platform.Sdk/Schema/Generated.cs
+   ```
+
+5. Build and run the tests:
+
+   ```sh
+   dotnet test src/Enjin.Platform.Sdk/Enjin.Platform.Sdk.sln
+   ```
+
+The generated file is committed as source — consumers do not need to run the generator themselves. Any custom
+scalar mappings (e.g. `BigInt` → `System.Numerics.BigInteger`, `DateTime` → `System.DateTimeOffset`) live in the
+generators repo and apply automatically.
+
+If you need to add a hand-written wrapper, helper, or transport feature, place it next to the existing
+`Platform/` types — **never** edit `Schema/Generated.cs` directly, as your changes will be lost on the next
+regeneration.
