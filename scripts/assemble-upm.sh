@@ -65,6 +65,16 @@ cp "${TEMPLATE_DIR}/Runtime/Enjin.Platform.Sdk.dll.meta" "${STAGING}/Runtime/Enj
 cp "${TEMPLATE_DIR}/Runtime/Enjin.Platform.Sdk.xml.meta" "${STAGING}/Runtime/Enjin.Platform.Sdk.xml.meta"
 cp "${TEMPLATE_DIR}/Third Party Notices.md"             "${STAGING}/Third Party Notices.md"
 
+# Meta files for the root-level docs + package.json. Unity emits a warning
+# ("has no meta file, but it's in an immutable folder") for every package
+# asset without a meta sidecar, so we ship stable, hand-authored metas with
+# the package to keep the importer quiet.
+cp "${TEMPLATE_DIR}/README.md.meta"                     "${STAGING}/README.md.meta"
+cp "${TEMPLATE_DIR}/CHANGELOG.md.meta"                  "${STAGING}/CHANGELOG.md.meta"
+cp "${TEMPLATE_DIR}/LICENSE.md.meta"                    "${STAGING}/LICENSE.md.meta"
+cp "${TEMPLATE_DIR}/Third Party Notices.md.meta"        "${STAGING}/Third Party Notices.md.meta"
+cp "${TEMPLATE_DIR}/package.json.meta"                  "${STAGING}/package.json.meta"
+
 # --- substitute version into package.json ----------------------------------
 
 sed "s/\${VERSION}/${VERSION}/g" "${TEMPLATE_DIR}/package.json.tmpl" > "${STAGING}/package.json"
