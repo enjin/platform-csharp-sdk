@@ -21,6 +21,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   fields.
 - Smoke tests for `PlatformClient` covering success, error, and bearer-token paths against a WireMock
   server.
+- Unity Package Manager (UPM) distribution: every `v*` tag push assembles a UPM package
+  (manifest, precompiled `Enjin.Platform.Sdk.dll`, XML docs, IL2CPP `link.xml`, third-party
+  notices) from `unity-template/` via `scripts/assemble-upm.sh` and the
+  `.github/workflows/unity.yml` workflow. The package is published as a parallel
+  `upm/v<version>` git tag (installable as
+  `https://github.com/enjin/platform-csharp-sdk.git#upm/v<version>`) and attached as a
+  tarball to the GitHub Release. Declares `com.unity.nuget.newtonsoft-json` 3.2.1 as its
+  only dependency; requires Unity 2021.3 LTS with the .NET Standard 2.1 API compatibility
+  level.
 
 ### Changed
 
@@ -43,8 +52,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Breaking:** Pusher-based event subscriptions (`PusherEventService`, `Event/` namespace) have been
   removed. The v3 API does not yet expose a subscription/events transport that this SDK targets.
   The `CSharpEventsGenerator` project in
-  [`platform-sdk-generators`](https://github.com/enjin/platform-sdk-generators) is retained but
-  marked unused — the Platform team has confirmed events are not supported at this time.
+  [`platform-sdk-generators`](https://github.com/enjin/platform-sdk-generators) has also been deleted
+  — the Platform team has confirmed events are not supported at this time.
 - **Breaking:** All hand-written input/output models, enums, and GraphQL fragments under `Model/`,
   `Schema/`, and `GraphQl/` have been removed in favour of the generated client.
 - **Breaking:** `Enjin.Platform.Sdk.Tests` no longer ships test data for multipart uploads; v3 has no
