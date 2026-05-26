@@ -1,7 +1,7 @@
 # SdkSmoke
 
 A small console runner that exercises the SDK against a live Enjin Platform
-deployment. Use it after regenerating `Schema/Generated.cs` (see
+deployment. Use it after regenerating the `Schema/` tree (see
 [CONTRIBUTING.md](../../CONTRIBUTING.md)) or before cutting a release, to
 confirm the SDK round-trips real data over the wire.
 

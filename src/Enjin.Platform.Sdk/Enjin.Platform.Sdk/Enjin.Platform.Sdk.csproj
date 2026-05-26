@@ -11,7 +11,7 @@
         <LangVersion>12</LangVersion>
         <RootNamespace>Enjin.Platform.Sdk</RootNamespace>
         <Nullable>enable</Nullable>
-        <!-- Suppress XML doc warnings emitted by the auto-generated Schema/Generated.cs file. -->
+        <!-- Suppress XML doc warnings emitted by the auto-generated Schema/ files. -->
         <NoWarn>$(NoWarn);1591;1573;1572;1574</NoWarn>
 
         <!-- Assembly properties -->

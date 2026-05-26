@@ -66,12 +66,15 @@ IPlatformResponse<MutationResponse> response = await client.SendMutation(mutatio
 ## How it works
 
 The SDK is generated from the Platform's GraphQL schema using
-[GraphQlClientGenerator](https://github.com/Husqvik/GraphQlClientGenerator). The full schema lives in
-`src/Enjin.Platform.Sdk/Enjin.Platform.Sdk/Schema/Generated.cs` as a single auto-generated file, exposing:
+[GraphQlClientGenerator](https://github.com/Husqvik/GraphQlClientGenerator). The generated code lives under
+`src/Enjin.Platform.Sdk/Enjin.Platform.Sdk/Schema/`, bucketed by GraphQL type kind:
 
-* `QueryQueryBuilder` / `MutationQueryBuilder` — fluent builders for every operation.
-* POCOs for every type, input object, enum, and union (e.g. `Account`, `Transaction`, `Network`).
-* `Query` and `Mutation` root types used to deserialize responses.
+* `Schema/Infrastructure/` — base classes and the GraphQL type-name registry.
+* `Schema/Enums/` — every GraphQL enum (e.g. `Network`, `Chain`, `TransactionStateEnum`).
+* `Schema/Model/` — POCOs for every object / union / interface type (e.g. `Account`, `Transaction`, `Block`).
+* `Schema/Inputs/` — every GraphQL input object (e.g. `TransferBalanceParams`, `MintTokenParams`).
+* `Schema/QueryBuilders/` — fluent builders for every type, including the root `QueryQueryBuilder` and
+  `MutationQueryBuilder` used to compose operations.
 
 A thin transport layer (`PlatformClient`, `PlatformRequest`, `PlatformHandler`) handles HTTP, bearer-token
 authentication, and JSON serialization via Newtonsoft.Json.

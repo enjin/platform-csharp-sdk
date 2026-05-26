@@ -66,10 +66,18 @@ contributions which contain breaking changes will generally be discouraged.
 
 ## Regenerating the GraphQL schema
 
-The contents of `src/Enjin.Platform.Sdk/Enjin.Platform.Sdk/Schema/Generated.cs` are produced from the Platform's
+The contents of `src/Enjin.Platform.Sdk/Enjin.Platform.Sdk/Schema/` are produced from the Platform's
 GraphQL schema by the
 [`platform-sdk-generators`](https://github.com/enjin/platform-sdk-generators) tool (which wraps
 [GraphQlClientGenerator](https://github.com/Husqvik/GraphQlClientGenerator)).
+
+The generated tree is bucketed by GraphQL type kind into:
+
+- `Schema/Infrastructure/` — `BaseClasses.cs` (the query-builder runtime) and `GraphQlTypes.cs` (the type-name registry).
+- `Schema/Enums/` — one file per GraphQL enum.
+- `Schema/Model/` — one file per GraphQL object / union / interface (data classes).
+- `Schema/Inputs/` — one file per GraphQL input object.
+- `Schema/QueryBuilders/` — one file per fluent query/mutation builder (including the root `QueryQueryBuilder` and `MutationQueryBuilder`).
 
 To regenerate the schema after a Platform API change:
 
@@ -89,13 +97,15 @@ To regenerate the schema after a Platform API change:
    dotnet run
    ```
 
-   This produces `generated/v3.cs` in the same folder.
+   This produces `generated/v3/Schema/{Infrastructure,Enums,Model,Inputs,QueryBuilders}/*.cs` in the same folder.
+   The generator wipes `generated/v3/` before writing, so renamed or removed types do not leave orphan files.
 
-4. Copy the output into this repo, overwriting the existing file:
+4. Replace the SDK's `Schema/` tree with the generator output:
 
    ```sh
-   cp generated/v3.cs \
-       ../../../platform-csharp-sdk/src/Enjin.Platform.Sdk/Enjin.Platform.Sdk/Schema/Generated.cs
+   rm -rf ../../../platform-csharp-sdk/src/Enjin.Platform.Sdk/Enjin.Platform.Sdk/Schema
+   cp -R generated/v3/Schema \
+       ../../../platform-csharp-sdk/src/Enjin.Platform.Sdk/Enjin.Platform.Sdk/Schema
    ```
 
 5. Build and run the tests:
@@ -116,10 +126,10 @@ To regenerate the schema after a Platform API change:
    See [`tools/SdkSmoke/README.md`](tools/SdkSmoke/README.md) for details. The `.env` file is gitignored;
    never commit a token.
 
-The generated file is committed as source — consumers do not need to run the generator themselves. Any custom
+The generated files are committed as source — consumers do not need to run the generator themselves. Any custom
 scalar mappings (e.g. `BigInt` → `System.Numerics.BigInteger`, `DateTime` → `System.DateTimeOffset`) live in the
 generators repo and apply automatically.
 
 If you need to add a hand-written wrapper, helper, or transport feature, place it next to the existing
-`Platform/` types — **never** edit `Schema/Generated.cs` directly, as your changes will be lost on the next
+`Platform/` types — **never** edit anything under `Schema/` directly, as your changes will be lost on the next
 regeneration.

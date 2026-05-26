@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Auto-generated GraphQL client (`Schema/Generated.cs`) covering the entire v3 Platform API, including:
+- Auto-generated GraphQL client (under `Schema/`, bucketed into `Infrastructure/`, `Enums/`, `Model/`, `Inputs/`, `QueryBuilders/`) covering the entire v3 Platform API, including:
   - `QueryQueryBuilder` and `MutationQueryBuilder` fluent builders for every operation.
   - POCOs for every output type, input object, enum, and union exposed by the v3 schema.
   - `Query` / `Mutation` root types used to deserialize responses.
