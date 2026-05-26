@@ -104,6 +104,18 @@ To regenerate the schema after a Platform API change:
    dotnet test src/Enjin.Platform.Sdk/Enjin.Platform.Sdk.sln
    ```
 
+6. (Recommended) Run the live smoke runner against a real Platform deployment to confirm the regenerated
+   client still round-trips real data over the wire:
+
+   ```sh
+   cp tools/SdkSmoke/.env.example tools/SdkSmoke/.env
+   # edit tools/SdkSmoke/.env and set ENJIN_PLATFORM_TOKEN
+   dotnet run --project tools/SdkSmoke
+   ```
+
+   See [`tools/SdkSmoke/README.md`](tools/SdkSmoke/README.md) for details. The `.env` file is gitignored;
+   never commit a token.
+
 The generated file is committed as source — consumers do not need to run the generator themselves. Any custom
 scalar mappings (e.g. `BigInt` → `System.Numerics.BigInteger`, `DateTime` → `System.DateTimeOffset`) live in the
 generators repo and apply automatically.

@@ -436,3 +436,6 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
+# Smoke runner secrets (see tools/SdkSmoke/README.md)
+tools/SdkSmoke/.env
+
