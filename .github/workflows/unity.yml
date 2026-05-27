@@ -9,11 +9,6 @@ on:
   push:
     tags:
       - 'v*'
-    # TEMPORARY: also run on every push to the feature branch so we can validate
-    # the workflow end-to-end before tagging a real release. Remove this branches
-    # block (and the dry_run handling below) before merging to master.
-    branches:
-      - 'feature/PLA-2415/update-to-v3'
   workflow_dispatch:
     inputs:
       version:
@@ -39,20 +34,12 @@ jobs:
         run: |
           if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
             VERSION="${{ github.event.inputs.version }}"
-            DRY_RUN="false"
-          elif [[ "${GITHUB_REF}" == refs/tags/v* ]]; then
+          else
             # strip leading 'v' from refs/tags/v3.0.0
             VERSION="${GITHUB_REF_NAME#v}"
-            DRY_RUN="false"
-          else
-            # TEMPORARY: branch push (CI test) — build + assemble + upload artifact
-            # only; do NOT push an upm/* tag or attach a Release asset.
-            VERSION="0.0.0-ci.${GITHUB_RUN_NUMBER}"
-            DRY_RUN="true"
           fi
           echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
-          echo "dry_run=${DRY_RUN}" >> "$GITHUB_OUTPUT"
-          echo "Building UPM package for version ${VERSION} (dry_run=${DRY_RUN})"
+          echo "Building UPM package for version ${VERSION}"
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -74,8 +61,6 @@ jobs:
         run: ./scripts/assemble-upm.sh ${{ steps.version.outputs.version }}
 
       - name: Push upm/<version> tag
-        # Skipped on branch-push (dry-run) test runs.
-        if: steps.version.outputs.dry_run != 'true'
         # This is what end users reference in their Unity Package Manager git URL:
         #   https://github.com/enjin/platform-csharp-sdk.git#upm/v3.0.0
         # The tag points at an orphan commit whose tree is exactly the contents
@@ -106,7 +91,7 @@ jobs:
 
       - name: Attach tarball to GitHub Release
         uses: softprops/action-gh-release@v2
-        if: startsWith(github.ref, 'refs/tags/v') && steps.version.outputs.dry_run != 'true'
+        if: startsWith(github.ref, 'refs/tags/v')
         with:
           files: EnjinPlatformSdk-v${{ steps.version.outputs.version }}-upm.tar.gz
 
