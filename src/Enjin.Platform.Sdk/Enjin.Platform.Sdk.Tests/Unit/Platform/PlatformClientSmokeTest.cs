@@ -211,7 +211,7 @@ public class PlatformClientSmokeTest
             version = version[1..];
         }
 
-        var expected = $"Enjin.Platform.Sdk/{version}";
+        var expected = $"Enjin-Platform-CSharp-SDK/{version}";
 
         // Act
         using var client = new PlatformClient(new Uri(_server.Urls[0] + "/graphql"));

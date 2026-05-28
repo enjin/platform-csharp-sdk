@@ -43,7 +43,7 @@ public sealed class PlatformClient : IPlatformClient
             version = version[1..];
         }
 
-        return $"Enjin.Platform.Sdk/{version}";
+        return $"Enjin-Platform-CSharp-SDK/{version}";
     }
 
     private readonly HttpClient _httpClient;
@@ -64,7 +64,7 @@ public sealed class PlatformClient : IPlatformClient
     /// Initializes a new <see cref="PlatformClient"/>.
     /// </summary>
     /// <param name="baseAddress">The base address of the platform's GraphQL endpoint (e.g. <c>https://platform.enjin.io/graphql</c>). Defaults to <see cref="DefaultBaseAddress"/>.</param>
-    /// <param name="userAgent">Optional User-Agent header value. Defaults to <c>Enjin.Platform.Sdk/{assembly-version}</c>.</param>
+    /// <param name="userAgent">Optional User-Agent header value. Defaults to <c>Enjin-Platform-CSharp-SDK/{assembly-version}</c>.</param>
     /// <param name="logger">Optional logger; when provided HTTP traffic is logged at the given <paramref name="httpLogLevel"/>.</param>
     /// <param name="httpLogLevel">HTTP log level. Ignored when <paramref name="logger"/> is <c>null</c>.</param>
     public PlatformClient(
