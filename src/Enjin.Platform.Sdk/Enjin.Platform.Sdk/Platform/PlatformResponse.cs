@@ -15,9 +15,11 @@ namespace Enjin.Platform.Sdk;
 /// <param name="headers">The HTTP headers for the response.</param>
 /// <param name="result">The result for the response.</param>
 [PublicAPI]
-public sealed class PlatformResponse<TResult>(HttpStatusCode statusCode,
-                        HttpResponseHeaders headers,
-                        TResult result) : IPlatformResponse<TResult>
+public sealed class PlatformResponse<TResult>(
+    HttpStatusCode statusCode,
+    HttpResponseHeaders headers,
+    TResult result
+) : IPlatformResponse<TResult>
 {
     /// <inheritdoc/>
     public TResult Result { get; } = result;

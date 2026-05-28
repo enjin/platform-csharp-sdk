@@ -38,9 +38,8 @@ public sealed class PlatformHandler : DelegatingHandler
     /// Initializes a new instance of the <see cref="PlatformHandler"/> class with the given inner handler.
     /// </summary>
     /// <inheritdoc/>
-    internal PlatformHandler(HttpMessageHandler innerHandler) : base(innerHandler)
-    {
-    }
+    internal PlatformHandler(HttpMessageHandler innerHandler)
+        : base(innerHandler) { }
 
     /// <summary>
     /// Sets the authentication token for this handler.
@@ -69,8 +68,10 @@ public sealed class PlatformHandler : DelegatingHandler
     /// the request to the inner handler.
     /// </summary>
     /// <inheritdoc/>
-    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
-                                                                 CancellationToken cancellationToken)
+    protected override async Task<HttpResponseMessage> SendAsync(
+        HttpRequestMessage request,
+        CancellationToken cancellationToken
+    )
     {
         lock (_authMutex)
         {
@@ -78,7 +79,8 @@ public sealed class PlatformHandler : DelegatingHandler
             {
                 request.Headers.Authorization = new AuthenticationHeaderValue(
                     "Bearer",
-                    _authToken ?? throw new InvalidOperationException("Auth token is null or empty"));
+                    _authToken ?? throw new InvalidOperationException("Auth token is null or empty")
+                );
             }
         }
 

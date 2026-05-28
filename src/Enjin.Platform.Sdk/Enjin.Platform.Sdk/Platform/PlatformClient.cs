@@ -21,8 +21,8 @@ public sealed class PlatformClient : IPlatformClient
     private bool _disposed;
 
     /// <inheritdoc/>
-    public Uri BaseAddress => _httpClient.BaseAddress
-                              ?? throw new InvalidOperationException("BaseAddress is not set.");
+    public Uri BaseAddress =>
+        _httpClient.BaseAddress ?? throw new InvalidOperationException("BaseAddress is not set.");
 
     /// <inheritdoc/>
     public bool IsAuthenticated => _platformHandler.HasAuthToken;
@@ -37,10 +37,12 @@ public sealed class PlatformClient : IPlatformClient
     /// <param name="userAgent">Optional User-Agent header value. Defaults to <c>Enjin.Platform.Sdk/3.0.0</c>.</param>
     /// <param name="logger">Optional logger; when provided HTTP traffic is logged at the given <paramref name="httpLogLevel"/>.</param>
     /// <param name="httpLogLevel">HTTP log level. Ignored when <paramref name="logger"/> is <c>null</c>.</param>
-    public PlatformClient(Uri baseAddress,
-                          string? userAgent = null,
-                          ILogger? logger = null,
-                          HttpLogLevel httpLogLevel = HttpLogLevel.None)
+    public PlatformClient(
+        Uri baseAddress,
+        string? userAgent = null,
+        ILogger? logger = null,
+        HttpLogLevel httpLogLevel = HttpLogLevel.None
+    )
     {
         if (baseAddress == null)
         {
@@ -56,12 +58,11 @@ public sealed class PlatformClient : IPlatformClient
         }
 
         _platformHandler = new PlatformHandler(inner);
-        _httpClient = new HttpClient(_platformHandler)
-        {
-            BaseAddress = baseAddress,
-        };
+        _httpClient = new HttpClient(_platformHandler) { BaseAddress = baseAddress };
         _httpClient.DefaultRequestHeaders.UserAgent.ParseAdd(UserAgent);
-        _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        _httpClient.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json")
+        );
     }
 
     /// <inheritdoc/>
@@ -76,7 +77,8 @@ public sealed class PlatformClient : IPlatformClient
     }
 
     /// <inheritdoc/>
-    public Task<IPlatformResponse<TResult>> SendRequest<TResult>(IPlatformRequest request) => SendRequest<TResult>(request, CancellationToken.None);
+    public Task<IPlatformResponse<TResult>> SendRequest<TResult>(IPlatformRequest request) =>
+        SendRequest<TResult>(request, CancellationToken.None);
 
     /// <summary>
     /// Sends the given <paramref name="request"/> to the platform and deserializes the response body as <typeparamref name="TResult"/>.
@@ -85,8 +87,10 @@ public sealed class PlatformClient : IPlatformClient
     /// <param name="cancellationToken">Token to observe for cancellation.</param>
     /// <typeparam name="TResult">The expected response body type.</typeparam>
     /// <returns>The platform response.</returns>
-    public async Task<IPlatformResponse<TResult>> SendRequest<TResult>(IPlatformRequest request,
-                                                                       CancellationToken cancellationToken)
+    public async Task<IPlatformResponse<TResult>> SendRequest<TResult>(
+        IPlatformRequest request,
+        CancellationToken cancellationToken
+    )
     {
         if (request == null)
         {

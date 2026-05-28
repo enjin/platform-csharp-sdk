@@ -36,14 +36,20 @@ internal class HttpLoggingHandler : DelegatingHandler
     /// <exception cref="ArgumentNullException">
     /// Thrown if logger is <c>null</c>.
     /// </exception>
-    public HttpLoggingHandler(HttpMessageHandler innerHandler, ILogger logger, HttpLogLevel httpLogLevel)
+    public HttpLoggingHandler(
+        HttpMessageHandler innerHandler,
+        ILogger logger,
+        HttpLogLevel httpLogLevel
+    )
         : base(innerHandler)
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
         if (httpLogLevel == HttpLogLevel.None)
         {
-            throw new ArgumentException($"{nameof(httpLogLevel)} cannot be {nameof(HttpLogLevel.None)}");
+            throw new ArgumentException(
+                $"{nameof(httpLogLevel)} cannot be {nameof(HttpLogLevel.None)}"
+            );
         }
 
         _httpLogLevel = httpLogLevel;
@@ -66,8 +72,14 @@ internal class HttpLoggingHandler : DelegatingHandler
         // Basic
         if (_httpLogLevel == HttpLogLevel.Basic)
         {
-            builder.Append("--> ").Append(method).Append(' ').Append(uri)
-                   .Append(" (").Append(contentLength).Append("-byte body)");
+            builder
+                .Append("--> ")
+                .Append(method)
+                .Append(' ')
+                .Append(uri)
+                .Append(" (")
+                .Append(contentLength)
+                .Append("-byte body)");
 
             _logger.Log(TraceLevel, builder.ToString());
 
@@ -101,9 +113,14 @@ internal class HttpLoggingHandler : DelegatingHandler
         }
 
         // Body
-        builder.AppendLine() // Line break between header(s) and body
-               .AppendLine(request.Content?.ReadAsStringAsync().Result ?? "No content")
-               .Append("<-- END ").Append(method).Append(" (").Append(contentLength).Append("-byte body)");
+        builder
+            .AppendLine() // Line break between header(s) and body
+            .AppendLine(request.Content?.ReadAsStringAsync().Result ?? "No content")
+            .Append("<-- END ")
+            .Append(method)
+            .Append(" (")
+            .Append(contentLength)
+            .Append("-byte body)");
 
         _logger.Log(TraceLevel, builder.ToString());
     }
@@ -123,7 +140,14 @@ internal class HttpLoggingHandler : DelegatingHandler
         var uri = response.RequestMessage?.RequestUri?.ToString() ?? "Unknown URI";
 
         // Basic
-        builder.Append("<-- ").Append(statusCode).Append(' ').Append(uri).Append(" (").Append(rtt).Append("ms)");
+        builder
+            .Append("<-- ")
+            .Append(statusCode)
+            .Append(' ')
+            .Append(uri)
+            .Append(" (")
+            .Append(rtt)
+            .Append("ms)");
 
         if (_httpLogLevel == HttpLogLevel.Basic)
         {
@@ -158,9 +182,10 @@ internal class HttpLoggingHandler : DelegatingHandler
         }
 
         // Body
-        builder.AppendLine() // Line break between header(s) and body
-               .AppendLine(response.Content.ReadAsStringAsync().Result)
-               .Append("<-- END HTTP");
+        builder
+            .AppendLine() // Line break between header(s) and body
+            .AppendLine(response.Content.ReadAsStringAsync().Result)
+            .Append("<-- END HTTP");
 
         _logger.Log(TraceLevel, builder.ToString());
     }
@@ -171,8 +196,10 @@ internal class HttpLoggingHandler : DelegatingHandler
     /// Handles logging the request and response.
     /// </summary>
     /// <inheritdoc/>
-    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
-                                                                 CancellationToken cancellationToken)
+    protected override async Task<HttpResponseMessage> SendAsync(
+        HttpRequestMessage request,
+        CancellationToken cancellationToken
+    )
     {
         if (_httpLogLevel == HttpLogLevel.None)
         {

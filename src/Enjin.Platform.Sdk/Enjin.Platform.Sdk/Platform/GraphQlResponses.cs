@@ -7,15 +7,11 @@ namespace Enjin.Platform.Sdk;
 /// Wraps the generated abstract <see cref="GraphQlResponse{TDataContract}"/>.
 /// </summary>
 [PublicAPI]
-public sealed class QueryResponse : GraphQlResponse<Query>
-{
-}
+public sealed class QueryResponse : GraphQlResponse<Query> { }
 
 /// <summary>
 /// Concrete GraphQL response envelope for a <see cref="Mutation"/> operation.
 /// Wraps the generated abstract <see cref="GraphQlResponse{TDataContract}"/>.
 /// </summary>
 [PublicAPI]
-public sealed class MutationResponse : GraphQlResponse<Mutation>
-{
-}
+public sealed class MutationResponse : GraphQlResponse<Mutation> { }

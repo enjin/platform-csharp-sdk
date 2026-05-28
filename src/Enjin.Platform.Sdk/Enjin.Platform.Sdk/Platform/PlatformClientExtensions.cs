@@ -17,8 +17,10 @@ public static class PlatformClientExtensions
     /// <param name="client">The platform client.</param>
     /// <param name="builder">The query builder.</param>
     /// <returns>The platform response containing a <see cref="QueryResponse"/>.</returns>
-    public static Task<IPlatformResponse<QueryResponse>> SendQuery(this IPlatformClient client,
-                                                                   QueryQueryBuilder builder) => client.SendRequest<QueryResponse>(PlatformRequest.GraphQl(builder));
+    public static Task<IPlatformResponse<QueryResponse>> SendQuery(
+        this IPlatformClient client,
+        QueryQueryBuilder builder
+    ) => client.SendRequest<QueryResponse>(PlatformRequest.GraphQl(builder));
 
     /// <summary>
     /// Sends a GraphQL mutation built with <see cref="MutationQueryBuilder"/> and deserializes the
@@ -27,6 +29,8 @@ public static class PlatformClientExtensions
     /// <param name="client">The platform client.</param>
     /// <param name="builder">The mutation builder.</param>
     /// <returns>The platform response containing a <see cref="MutationResponse"/>.</returns>
-    public static Task<IPlatformResponse<MutationResponse>> SendMutation(this IPlatformClient client,
-                                                                          MutationQueryBuilder builder) => client.SendRequest<MutationResponse>(PlatformRequest.GraphQl(builder));
+    public static Task<IPlatformResponse<MutationResponse>> SendMutation(
+        this IPlatformClient client,
+        MutationQueryBuilder builder
+    ) => client.SendRequest<MutationResponse>(PlatformRequest.GraphQl(builder));
 }

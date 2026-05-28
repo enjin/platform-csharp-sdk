@@ -33,33 +33,37 @@ public class PlatformClientSmokeTest
     {
         // Arrange
         const string responseBody = """
-        {
-          "data": {
-            "GetAccount": {
-              "id": "0xabc",
-              "address": "5xyz"
+            {
+              "data": {
+                "GetAccount": {
+                  "id": "0xabc",
+                  "address": "5xyz"
+                }
+              }
             }
-          }
-        }
-        """;
+            """;
 
         _server
             .Given(Request.Create().WithPath("/graphql").UsingPost())
-            .RespondWith(Response.Create()
-                .WithStatusCode(200)
-                .WithHeader("Content-Type", "application/json")
-                .WithBody(responseBody));
+            .RespondWith(
+                Response
+                    .Create()
+                    .WithStatusCode(200)
+                    .WithHeader("Content-Type", "application/json")
+                    .WithBody(responseBody)
+            );
 
-        var builder = new QueryQueryBuilder()
-            .WithGetAccount(
-                new AccountQueryBuilder().WithId().WithAddress(),
-                Network.Enjin, Chain.Matrix, "0xabc");
+        var builder = new QueryQueryBuilder().WithGetAccount(
+            new AccountQueryBuilder().WithId().WithAddress(),
+            Network.Enjin,
+            Chain.Matrix,
+            "0xabc"
+        );
 
         // Act
         var response = await _client.SendQuery(builder);
         Assert.Multiple(() =>
         {
-
             // Assert
             Assert.That(response.IsSuccessStatusCode, Is.True);
             Assert.That(response.Result, Is.Not.Null);
@@ -79,25 +83,30 @@ public class PlatformClientSmokeTest
     {
         // Arrange
         const string responseBody = """
-        {
-          "data": null,
-          "errors": [
-            { "message": "Unauthorized", "locations": [ { "line": 1, "column": 1 } ] }
-          ]
-        }
-        """;
+            {
+              "data": null,
+              "errors": [
+                { "message": "Unauthorized", "locations": [ { "line": 1, "column": 1 } ] }
+              ]
+            }
+            """;
 
         _server
             .Given(Request.Create().WithPath("/graphql").UsingPost())
-            .RespondWith(Response.Create()
-                .WithStatusCode(200)
-                .WithHeader("Content-Type", "application/json")
-                .WithBody(responseBody));
+            .RespondWith(
+                Response
+                    .Create()
+                    .WithStatusCode(200)
+                    .WithHeader("Content-Type", "application/json")
+                    .WithBody(responseBody)
+            );
 
-        var builder = new QueryQueryBuilder()
-            .WithGetAccount(
-                new AccountQueryBuilder().WithId(),
-                Network.Enjin, Chain.Matrix, "0xabc");
+        var builder = new QueryQueryBuilder().WithGetAccount(
+            new AccountQueryBuilder().WithId(),
+            Network.Enjin,
+            Chain.Matrix,
+            "0xabc"
+        );
 
         // Act
         var response = await _client.SendQuery(builder);
@@ -116,16 +125,22 @@ public class PlatformClientSmokeTest
 
         _server
             .Given(Request.Create().WithPath("/graphql").UsingPost())
-            .RespondWith(Response.Create()
-                .WithStatusCode(200)
-                .WithHeader("Content-Type", "application/json")
-                .WithBody(responseBody));
+            .RespondWith(
+                Response
+                    .Create()
+                    .WithStatusCode(200)
+                    .WithHeader("Content-Type", "application/json")
+                    .WithBody(responseBody)
+            );
 
         _client.Auth("test-token-123");
 
-        var builder = new QueryQueryBuilder()
-            .WithGetAccount(new AccountQueryBuilder().WithId(),
-                Network.Enjin, Chain.Matrix, "0x");
+        var builder = new QueryQueryBuilder().WithGetAccount(
+            new AccountQueryBuilder().WithId(),
+            Network.Enjin,
+            Chain.Matrix,
+            "0x"
+        );
 
         // Act
         await _client.SendQuery(builder);
@@ -147,14 +162,20 @@ public class PlatformClientSmokeTest
         // Arrange
         _server
             .Given(Request.Create().WithPath("/graphql").UsingPost())
-            .RespondWith(Response.Create()
-                .WithStatusCode(200)
-                .WithHeader("Content-Type", "application/json")
-                .WithBody("""{"data":{}}"""));
+            .RespondWith(
+                Response
+                    .Create()
+                    .WithStatusCode(200)
+                    .WithHeader("Content-Type", "application/json")
+                    .WithBody("""{"data":{}}""")
+            );
 
-        var builder = new QueryQueryBuilder()
-            .WithGetAccount(new AccountQueryBuilder().WithId(),
-                Network.Enjin, Chain.Matrix, "0xabc");
+        var builder = new QueryQueryBuilder().WithGetAccount(
+            new AccountQueryBuilder().WithId(),
+            Network.Enjin,
+            Chain.Matrix,
+            "0xabc"
+        );
 
         // Act
         _ = _client.SendQuery(builder).GetAwaiter().GetResult();

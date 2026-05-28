@@ -1,71 +1,69 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <!-- Project properties -->
+    <Title>Enjin Platform SDK</Title>
+    <Description>Open source SDK for connecting to and interacting with the Enjin Platform.</Description>
+    <Company>Enjin Pte. Ltd.</Company>
+    <Copyright>Enjin Pte. Ltd.</Copyright>
+    <Version>3.0.0</Version>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>12</LangVersion>
+    <RootNamespace>Enjin.Platform.Sdk</RootNamespace>
+    <Nullable>enable</Nullable>
+    <!-- Suppress XML doc warnings emitted by the auto-generated Schema/ files. -->
+    <NoWarn>$(NoWarn);1591;1573;1572;1574</NoWarn>
 
-    <PropertyGroup>
-        <!-- Project properties -->
-        <Title>Enjin Platform SDK</Title>
-        <Description>Open source SDK for connecting to and interacting with the Enjin Platform.</Description>
-        <Company>Enjin Pte. Ltd.</Company>
-        <Copyright>Enjin Pte. Ltd.</Copyright>
-        <Version>3.0.0</Version>
-        <TargetFramework>netstandard2.1</TargetFramework>
-        <LangVersion>12</LangVersion>
-        <RootNamespace>Enjin.Platform.Sdk</RootNamespace>
-        <Nullable>enable</Nullable>
-        <!-- Suppress XML doc warnings emitted by the auto-generated Schema/ files. -->
-        <NoWarn>$(NoWarn);1591;1573;1572;1574</NoWarn>
+    <!-- Assembly properties -->
+    <AssemblyName>Enjin.Platform.Sdk</AssemblyName>
+    <AssemblyInformationalVersion>v3.0.0</AssemblyInformationalVersion>
 
-        <!-- Assembly properties -->
-        <AssemblyName>Enjin.Platform.Sdk</AssemblyName>
-        <AssemblyInformationalVersion>v3.0.0</AssemblyInformationalVersion>
+    <!-- Package properties -->
+    <PackageId>Enjin.Platform.Sdk</PackageId>
+    <PackageProjectUrl>https://enjin.io/</PackageProjectUrl>
+    <PackageVersion>3.0.0</PackageVersion>
+    <PackageLicenseExpression>LGPL-3.0-only</PackageLicenseExpression>
+    <PackageIcon>packageIcon.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <NeutralLanguage>en</NeutralLanguage>
+    <RepositoryUrl>https://github.com/enjin/platform-csharp-sdk</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-        <!-- Package properties -->
-        <PackageId>Enjin.Platform.Sdk</PackageId>
-        <PackageProjectUrl>https://enjin.io/</PackageProjectUrl>
-        <PackageVersion>3.0.0</PackageVersion>
-        <PackageLicenseExpression>LGPL-3.0-only</PackageLicenseExpression>
-        <PackageIcon>packageIcon.png</PackageIcon>
-        <PackageReadmeFile>README.md</PackageReadmeFile>
-        <NeutralLanguage>en</NeutralLanguage>
-        <RepositoryUrl>https://github.com/enjin/platform-csharp-sdk</RepositoryUrl>
-        <RepositoryType>git</RepositoryType>
-        <PublishRepositoryUrl>true</PublishRepositoryUrl>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- Symbol package -->
+    <IncludeSymbols>true</IncludeSymbols>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
 
-        <!-- Symbol package -->
-        <IncludeSymbols>true</IncludeSymbols>
-        <EmbedUntrackedSources>true</EmbedUntrackedSources>
-        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    </PropertyGroup>
+  <!-- For deterministic builds -->
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
 
-    <!-- For deterministic builds -->
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
-        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
-    </PropertyGroup>
+  <!-- Package items -->
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)../packageIcon.png" Pack="true" PackagePath="" />
+    <None Include="$(MSBuildThisFileDirectory)../../../README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
 
-    <!-- Package items -->
-    <ItemGroup>
-        <None Include="$(MSBuildThisFileDirectory)../packageIcon.png" Pack="true" PackagePath="" />
-        <None Include="$(MSBuildThisFileDirectory)../../../README.md" Pack="true" PackagePath="" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
-            <_Parameter1>
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>
                 Enjin.Platform.Sdk.Tests
             </_Parameter1>
-        </AssemblyAttribute>
-        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
-            <_Parameter1>
+    </AssemblyAttribute>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>
                 DynamicProxyGenAssembly2
             </_Parameter1>
-        </AssemblyAttribute>
-        <PackageReference Include="JetBrains.Annotations" Version="2022.3.1" />
-        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    </ItemGroup>
-
+    </AssemblyAttribute>
+    <PackageReference Include="JetBrains.Annotations" Version="2022.3.1" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
 </Project>
