@@ -6,7 +6,7 @@ namespace Enjin.Platform.Sdk.Tests;
 [TestFixture]
 public class PlatformHandlerTest
 {
-    private PlatformHandler? ClassUnderTest { get; set; }
+    private PlatformHandler ClassUnderTest { get; set; } = null!;
 
     [SetUp]
     public void SetUp()
