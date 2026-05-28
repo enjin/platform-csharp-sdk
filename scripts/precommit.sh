@@ -32,7 +32,7 @@ echo "==> Running CSharpier"
 dotnet csharpier format "$SRC_DIR"
 
 echo "==> Running dotnet format"
-dotnet format "$SOLUTION" --severity info
+dotnet format "$SOLUTION"
 
 echo "==> Building solution"
 dotnet build "$SOLUTION" --configuration Release

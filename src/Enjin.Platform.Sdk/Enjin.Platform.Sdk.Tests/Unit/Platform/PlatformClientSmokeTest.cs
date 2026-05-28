@@ -206,7 +206,7 @@ public class PlatformClientSmokeTest
             version = version[..plus];
         }
 
-        if (version.StartsWith("v"))
+        if (version.StartsWith('v'))
         {
             version = version[1..];
         }

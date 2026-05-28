@@ -33,7 +33,7 @@ public sealed class PlatformClient : IPlatformClient
         }
 
         // Strip a leading "v" so the header carries a plain SemVer value.
-        if (version.StartsWith("v"))
+        if (version.StartsWith('v'))
         {
             version = version[1..];
         }

@@ -41,7 +41,7 @@ jobs:
         run: dotnet csharpier check ./src
 
       - name: Verify Formatting (dotnet format)
-        run: dotnet format ./src/Enjin.Platform.Sdk/Enjin.Platform.Sdk.sln --verify-no-changes --no-restore --severity info
+        run: dotnet format ./src/Enjin.Platform.Sdk/Enjin.Platform.Sdk.sln --verify-no-changes --no-restore
 
       - name: Build Solution
         run: dotnet build ./src/Enjin.Platform.Sdk/Enjin.Platform.Sdk.sln --configuration Release --no-restore
