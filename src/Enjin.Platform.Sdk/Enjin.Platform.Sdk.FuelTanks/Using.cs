@@ -1,2 +1,0 @@
-﻿global using FuelTankConnectionFragment = Enjin.Platform.Sdk.ConnectionFragment<Enjin.Platform.Sdk.FuelTanks.FuelTankFragment>;
-global using WalletConnectionFragment = Enjin.Platform.Sdk.ConnectionFragment<Enjin.Platform.Sdk.WalletFragment>;

@@ -1,4 +1,4 @@
-﻿namespace Enjin.Platform.Sdk;
+namespace Enjin.Platform.Sdk;
 
 /// <summary>
 /// Static class with extension methods for <see cref="string"/>.
@@ -14,8 +14,5 @@ internal static class StringExtension
     /// <c>false</c> if the value of the value parameter is the same as the value of the source; otherwise, <c>true</c>.
     /// If value is <c>null</c>, the method returns <c>true</c>.
     /// </returns>
-    public static bool NotEquals(this string source, string value)
-    {
-        return !source.Equals(value);
-    }
+    public static bool NotEquals(this string source, string value) => !source.Equals(value);
 }

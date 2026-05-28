@@ -1,267 +1,151 @@
-﻿using System;
-using System.Linq;
+using System;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Reflection;
-using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
+using Newtonsoft.Json;
 
 namespace Enjin.Platform.Sdk;
 
 /// <summary>
-/// Client class for sending and receiving data with the platform.
+/// HTTP client for sending GraphQL operations to an Enjin Platform v3 endpoint.
 /// </summary>
 [PublicAPI]
 public sealed class PlatformClient : IPlatformClient
 {
-    private readonly PlatformHandler _handler;
+    private static readonly string DefaultUserAgent = BuildDefaultUserAgent();
+
+    private static string BuildDefaultUserAgent()
+    {
+        var asm = typeof(PlatformClient).Assembly;
+        var version =
+            asm.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion
+            ?? asm.GetName().Version?.ToString(3)
+            ?? "unknown";
+
+        // Strip SourceLink commit suffix like "3.0.0+abc1234".
+        var plus = version.IndexOf('+');
+        if (plus >= 0)
+        {
+            version = version[..plus];
+        }
+
+        // Strip a leading "v" so the header carries a plain SemVer value.
+        if (version.StartsWith('v'))
+        {
+            version = version[1..];
+        }
+
+        return $"Enjin.Platform.Sdk/{version}";
+    }
+
     private readonly HttpClient _httpClient;
-    private readonly ILogger? _logger;
-
-    // Mutexes
-    private readonly object _disposeMutex = new();
-
-    /// <summary>
-    /// Internal property representing whether this client has been disposed.
-    /// </summary>
-    private bool IsDisposed { get; set; }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="PlatformClient"/> class.
-    /// </summary>
-    /// <param name="baseAddress">The base address of the platform hosting the client.</param>
-    /// <param name="userAgent">The value for the User-Agent header.</param>
-    /// <param name="logger">The logger for the client.</param>
-    /// <param name="httpLogLevel">The <see cref="HttpLogLevel"/> for HTTP traffic.</param>
-    private PlatformClient(Uri baseAddress, string userAgent, ILogger? logger, HttpLogLevel httpLogLevel)
-    {
-        BaseAddress = baseAddress;
-        UserAgent = userAgent;
-
-        _logger = logger;
-        _handler = CreateHandler(httpLogLevel);
-        _httpClient = CreateHttpClient();
-    }
-
-    /// <summary>
-    /// Creates a new handler to be used by this client.
-    /// </summary>
-    /// <returns>The handler.</returns>
-    private PlatformHandler CreateHandler(HttpLogLevel httpLogLevel)
-    {
-        HttpMessageHandler innerHandler = new HttpClientHandler();
-
-        if (_logger != null && httpLogLevel != HttpLogLevel.None)
-        {
-            innerHandler = new HttpLoggingHandler(innerHandler, _logger, httpLogLevel);
-        }
-
-        return new PlatformHandler(innerHandler);
-    }
-
-    /// <summary>
-    /// Creates a new HTTP client to be used by this client.
-    /// </summary>
-    /// <returns>The HTTP client.</returns>
-    private HttpClient CreateHttpClient()
-    {
-        HttpClient client = new HttpClient(_handler)
-        {
-            BaseAddress = BaseAddress,
-        };
-
-        client.DefaultRequestHeaders.UserAgent.TryParseAdd(UserAgent);
-
-        return client;
-    }
-
-    /// <summary>
-    /// Creates a builder instance to be used for creating an instance of <see cref="PlatformClient"/>.
-    /// </summary>
-    /// <returns>The builder instance.</returns>
-    public static PlatformClientBuilder Builder() => new();
-
-    #region IDisposable
+    private readonly PlatformHandler _platformHandler;
+    private bool _disposed;
 
     /// <inheritdoc/>
-    public void Dispose()
-    {
-        lock (_disposeMutex)
-        {
-            if (IsDisposed)
-            {
-                return;
-            }
-
-            _httpClient.Dispose();
-            IsDisposed = true;
-        }
-    }
-
-    #endregion IDisposable
-
-    #region IPlatformClient
+    public Uri BaseAddress =>
+        _httpClient.BaseAddress ?? throw new InvalidOperationException("BaseAddress is not set.");
 
     /// <inheritdoc/>
-    public Uri BaseAddress { get; }
-
-    /// <inheritdoc/>
-    public bool IsAuthenticated => _handler.HasAuthToken;
+    public bool IsAuthenticated => _platformHandler.HasAuthToken;
 
     /// <inheritdoc/>
     public string UserAgent { get; }
 
+    /// <summary>
+    /// Initializes a new <see cref="PlatformClient"/>.
+    /// </summary>
+    /// <param name="baseAddress">The base address of the platform's GraphQL endpoint (e.g. <c>https://platform.enjin.io/graphql</c>).</param>
+    /// <param name="userAgent">Optional User-Agent header value. Defaults to <c>Enjin.Platform.Sdk/{assembly-version}</c>.</param>
+    /// <param name="logger">Optional logger; when provided HTTP traffic is logged at the given <paramref name="httpLogLevel"/>.</param>
+    /// <param name="httpLogLevel">HTTP log level. Ignored when <paramref name="logger"/> is <c>null</c>.</param>
+    public PlatformClient(
+        Uri baseAddress,
+        string? userAgent = null,
+        ILogger? logger = null,
+        HttpLogLevel httpLogLevel = HttpLogLevel.None
+    )
+    {
+        if (baseAddress == null)
+        {
+            throw new ArgumentNullException(nameof(baseAddress));
+        }
+
+        UserAgent = userAgent ?? DefaultUserAgent;
+
+        HttpMessageHandler inner = new HttpClientHandler();
+        if (logger != null && httpLogLevel != HttpLogLevel.None)
+        {
+            inner = new HttpLoggingHandler(inner, logger, httpLogLevel);
+        }
+
+        _platformHandler = new PlatformHandler(inner);
+        _httpClient = new HttpClient(_platformHandler) { BaseAddress = baseAddress };
+        _httpClient.DefaultRequestHeaders.UserAgent.ParseAdd(UserAgent);
+        _httpClient.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json")
+        );
+    }
+
     /// <inheritdoc/>
     public void Auth(string token)
     {
-        _handler.SetAuthToken(token);
+        if (token == null)
+        {
+            throw new ArgumentNullException(nameof(token));
+        }
+
+        _platformHandler.SetAuthToken(token);
     }
 
     /// <inheritdoc/>
-    public Task<IPlatformResponse<TResult>> SendRequest<TResult>(IPlatformRequest request)
-    {
-        Uri baseAddress = _httpClient.BaseAddress ?? throw new InvalidOperationException("Base address is null");
-        Uri uri = new Uri(baseAddress, request.Path);
-
-        return _httpClient.PostAsync(uri, request.Content).ContinueWith(task =>
-        {
-            HttpResponseMessage? httpRes = task.Result;
-
-            try
-            {
-                string content = httpRes.Content.ReadAsStringAsync().Result;
-                TResult result = JsonSerializer.Deserialize<TResult>(content)!;
-                IPlatformResponse<TResult> res = new PlatformResponse<TResult>(httpRes.StatusCode,
-                                                                               httpRes.Headers,
-                                                                               result);
-
-                return res;
-            }
-            catch (Exception e)
-            {
-                _logger?.Log(LogLevel.Error, e, "Error while processing platform response");
-                throw;
-            }
-            finally
-            {
-                httpRes?.Dispose();
-            }
-        });
-    }
-
-    #endregion IPlatformClient
+    public Task<IPlatformResponse<TResult>> SendRequest<TResult>(IPlatformRequest request) =>
+        SendRequest<TResult>(request, CancellationToken.None);
 
     /// <summary>
-    /// The builder class for defining and creating a new instance of the <see cref="PlatformClient"/> class.
+    /// Sends the given <paramref name="request"/> to the platform and deserializes the response body as <typeparamref name="TResult"/>.
     /// </summary>
-    [PublicAPI]
-    public sealed class PlatformClientBuilder
+    /// <param name="request">The platform request.</param>
+    /// <param name="cancellationToken">Token to observe for cancellation.</param>
+    /// <typeparam name="TResult">The expected response body type.</typeparam>
+    /// <returns>The platform response.</returns>
+    public async Task<IPlatformResponse<TResult>> SendRequest<TResult>(
+        IPlatformRequest request,
+        CancellationToken cancellationToken
+    )
     {
-        private Uri? _baseAddress;
-        private HttpLogLevel? _httpLogLevel;
-        private ILogger? _logger;
-        private string? _userAgent;
-
-        private static readonly string DEFAULT_USER_AGENT;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="PlatformClientBuilder"/> class.
-        /// </summary>
-        internal PlatformClientBuilder()
+        if (request == null)
         {
+            throw new ArgumentNullException(nameof(request));
         }
 
-        static PlatformClientBuilder()
+        using HttpRequestMessage message = new(HttpMethod.Post, request.Path)
         {
-            string? version = typeof(PlatformClient).Assembly
-                                                    .GetCustomAttributes<AssemblyInformationalVersionAttribute>()
-                                                    .First()
-                                                    .InformationalVersion;
-            string userAgentVersion = version.Split('+')[0];
+            Content = request.Content,
+        };
 
-            DEFAULT_USER_AGENT = $"Platform Enjin CSharp SDK v{userAgentVersion}";
+        using var response = await _httpClient
+            .SendAsync(message, cancellationToken)
+            .ConfigureAwait(false);
+
+        var body = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+        var result = JsonConvert.DeserializeObject<TResult>(body)!;
+
+        return new PlatformResponse<TResult>(response.StatusCode, response.Headers, result);
+    }
+
+    /// <inheritdoc/>
+    public void Dispose()
+    {
+        if (_disposed)
+        {
+            return;
         }
 
-        /// <summary>
-        /// Builds an instance of <see cref="PlatformClient"/> using the set parameters.
-        /// </summary>
-        /// <returns>The client instance.</returns>
-        /// <exception cref="InvalidOperationException">
-        /// Thrown if the base address is <c>null</c> at the time this method is called.
-        /// </exception>
-        public PlatformClient Build()
-        {
-            if (_baseAddress == null)
-            {
-                throw new InvalidOperationException($"Cannot build {nameof(PlatformClient)} without a base address");
-            }
-
-            string userAgent = _userAgent ?? DEFAULT_USER_AGENT;
-            HttpLogLevel httpLogLevel = _httpLogLevel ?? HttpLogLevel.None;
-
-            return new PlatformClient(_baseAddress, userAgent, _logger, httpLogLevel);
-        }
-
-        /// <summary>
-        /// Sets the <see cref="Uri"/> for the client to use as the base address for the platform.
-        /// </summary>
-        /// <param name="baseAddress">The base address as a <see cref="Uri"/>.</param>
-        /// <returns>This builder for chaining.</returns>
-        public PlatformClientBuilder SetBaseAddress(Uri baseAddress)
-        {
-            _baseAddress = baseAddress;
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the base address for the platform for the client to use from a URI string.
-        /// </summary>
-        /// <param name="baseAddress">The base address as a URI string.</param>
-        /// <returns>This builder for chaining.</returns>
-        public PlatformClientBuilder SetBaseAddress(string baseAddress)
-        {
-            _baseAddress = new Uri(baseAddress);
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the <see cref="HttpLogLevel"/> for the client to use when processing HTTP traffic.
-        /// </summary>
-        /// <param name="httpLogLevel">The <see cref="HttpLogLevel"/>.</param>
-        /// <returns>This builder for chaining.</returns>
-        /// <remarks>
-        /// This setting will have no effect if a logger is not supplied through <see cref="SetLogger"/>.
-        /// </remarks>
-        public PlatformClientBuilder SetHttpLogLevel(HttpLogLevel httpLogLevel)
-        {
-            _httpLogLevel = httpLogLevel;
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the logger for the client to use.
-        /// </summary>
-        /// <param name="logger">The logger.</param>
-        /// <returns>This builder for chaining.</returns>
-        public PlatformClientBuilder SetLogger(ILogger? logger)
-        {
-            _logger = logger;
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the value of the User-Agent header that the client will use when sending requests to the platform.
-        /// </summary>
-        /// <param name="userAgent">The User-Agent value.</param>
-        /// <returns>This builder for chaining.</returns>
-        /// <remarks>
-        /// If this value is not set when the client is built, then the User-Agent will be supplied as
-        /// <c>Platform Enjin CSharp SDK v{SDK_VERSION}</c>.
-        /// </remarks>
-        public PlatformClientBuilder SetUserAgent(string userAgent)
-        {
-            _userAgent = userAgent;
-            return this;
-        }
+        _httpClient.Dispose();
+        _disposed = true;
     }
 }

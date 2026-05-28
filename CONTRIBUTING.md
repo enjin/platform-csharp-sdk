@@ -63,3 +63,73 @@ Please do not:
 Contributions which happen to introduce breaking changes may be considered if they are offset by significant
 improvements to the API, project structure, or respond to changes in the Platform or .NET ecosystems. However, in
 contributions which contain breaking changes will generally be discouraged.
+
+## Regenerating the GraphQL schema
+
+The contents of `src/Enjin.Platform.Sdk/Enjin.Platform.Sdk/Schema/` are produced from the Platform's
+GraphQL schema by the
+[`platform-sdk-generators`](https://github.com/enjin/platform-sdk-generators) tool (which wraps
+[GraphQlClientGenerator](https://github.com/Husqvik/GraphQlClientGenerator)).
+
+The generated tree is bucketed by GraphQL type kind into:
+
+- `Schema/Infrastructure/` — `BaseClasses.cs` (the query-builder runtime) and `GraphQlTypes.cs` (the type-name registry).
+- `Schema/Enums/` — one file per GraphQL enum.
+- `Schema/Model/` — one file per GraphQL object / union / interface (data classes).
+- `Schema/Inputs/` — one file per GraphQL input object.
+- `Schema/QueryBuilders/` — one file per fluent query/mutation builder (including the root `QueryQueryBuilder` and `MutationQueryBuilder`).
+
+To regenerate the schema after a Platform API change:
+
+1. Clone the generators repository alongside this one:
+
+   ```sh
+   git clone git@github.com:enjin/platform-sdk-generators.git
+   ```
+
+2. Drop the latest `v3.json` schema (downloadable via introspection from the target Platform deployment) into
+   `platform-sdk-generators/CSharpSchemaGenerator/CSharpSchemaGenerator/schema/v3.json`.
+
+3. Run the generator:
+
+   ```sh
+   cd platform-sdk-generators/CSharpSchemaGenerator/CSharpSchemaGenerator
+   dotnet run
+   ```
+
+   This produces `generated/v3/Schema/{Infrastructure,Enums,Model,Inputs,QueryBuilders}/*.cs` in the same folder.
+   The generator wipes `generated/v3/` before writing, so renamed or removed types do not leave orphan files.
+
+4. Replace the SDK's `Schema/` tree with the generator output:
+
+   ```sh
+   rm -rf ../../../platform-csharp-sdk/src/Enjin.Platform.Sdk/Enjin.Platform.Sdk/Schema
+   cp -R generated/v3/Schema \
+       ../../../platform-csharp-sdk/src/Enjin.Platform.Sdk/Enjin.Platform.Sdk/Schema
+   ```
+
+5. Build and run the tests:
+
+   ```sh
+   dotnet test src/Enjin.Platform.Sdk/Enjin.Platform.Sdk.sln
+   ```
+
+6. (Recommended) Run the live smoke runner against a real Platform deployment to confirm the regenerated
+   client still round-trips real data over the wire:
+
+   ```sh
+   cp tools/SdkSmoke/.env.example tools/SdkSmoke/.env
+   # edit tools/SdkSmoke/.env and set ENJIN_PLATFORM_TOKEN
+   dotnet run --project tools/SdkSmoke
+   ```
+
+   See [`tools/SdkSmoke/README.md`](tools/SdkSmoke/README.md) for details. The `.env` file is gitignored;
+   never commit a token.
+
+The generated files are committed as source — consumers do not need to run the generator themselves. Any custom
+scalar mappings (e.g. `BigInt` → `System.Numerics.BigInteger`, `DateTime` → `System.DateTimeOffset`) live in the
+generators repo and apply automatically.
+
+If you need to add a hand-written wrapper, helper, or transport feature, place it next to the existing
+`Platform/` types — **never** edit anything under `Schema/` directly, as your changes will be lost on the next
+regeneration.

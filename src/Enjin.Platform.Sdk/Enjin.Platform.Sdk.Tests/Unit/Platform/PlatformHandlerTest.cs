@@ -1,4 +1,4 @@
-﻿using Moq;
+using Moq;
 using NUnit.Framework;
 
 namespace Enjin.Platform.Sdk.Tests;
@@ -6,12 +6,12 @@ namespace Enjin.Platform.Sdk.Tests;
 [TestFixture]
 public class PlatformHandlerTest
 {
-    private PlatformHandler ClassUnderTest { get; set; }
+    private PlatformHandler ClassUnderTest { get; set; } = null!;
 
     [SetUp]
     public void SetUp()
     {
-        HttpMessageHandler dummyInnerHandler = Mock.Of<HttpMessageHandler>();
+        var dummyInnerHandler = Mock.Of<HttpMessageHandler>();
         ClassUnderTest = new PlatformHandler(dummyInnerHandler);
     }
 
@@ -19,7 +19,7 @@ public class PlatformHandlerTest
     public void HasAuthTokenWhenNoTokenIsSetReturnsFalse()
     {
         // Act
-        bool actual = ClassUnderTest.HasAuthToken;
+        var actual = ClassUnderTest.HasAuthToken;
 
         // Assert
         Assert.That(actual, Is.False);
@@ -29,7 +29,7 @@ public class PlatformHandlerTest
     public void SetAuthTokenWhenGivenEmptyTokenDoesNotHaveAuthToken()
     {
         // Arrange
-        string token = string.Empty;
+        var token = string.Empty;
 
         // Act
         ClassUnderTest.SetAuthToken(token);

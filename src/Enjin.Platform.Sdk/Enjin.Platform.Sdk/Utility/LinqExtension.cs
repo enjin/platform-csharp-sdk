@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace Enjin.Platform.Sdk;
@@ -16,7 +16,7 @@ internal static class LinqExtension
     /// <typeparam name="TSource">The type of the elements in the source.</typeparam>
     public static void Do<TSource>(this IEnumerable<TSource> source, Action<TSource> action)
     {
-        foreach (TSource el in source)
+        foreach (var el in source)
         {
             action(el);
         }

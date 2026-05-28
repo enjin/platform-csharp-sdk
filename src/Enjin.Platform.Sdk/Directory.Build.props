@@ -1,0 +1,7 @@
+<Project>
+  <PropertyGroup>
+    <!-- Apply code style rules at build time, not just via `dotnet format`. -->
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <AnalysisLevel>latest</AnalysisLevel>
+  </PropertyGroup>
+</Project>

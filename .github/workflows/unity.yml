@@ -1,0 +1,104 @@
+name: Unity Package
+
+# Triggered on version-tag pushes (e.g. v3.0.0). Assembles the UPM distribution
+# from unity-template/ + the freshly-built DLL, pushes it to a parallel
+# `upm/<version>` git tag (which is what users reference in their Unity
+# Package Manager git URL), and attaches the tarball to the GitHub Release.
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to build (without leading v), e.g. 3.0.0'
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  upm:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Need full history + a writable token so we can push the upm/<version> tag.
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Determine version
+        id: version
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            VERSION="${{ github.event.inputs.version }}"
+          else
+            # strip leading 'v' from refs/tags/v3.0.0
+            VERSION="${GITHUB_REF_NAME#v}"
+          fi
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+          echo "Building UPM package for version ${VERSION}"
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+
+      - name: Cache NuGet Packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+
+      - name: Build SDK (Release)
+        run: dotnet build ./src/Enjin.Platform.Sdk/Enjin.Platform.Sdk/Enjin.Platform.Sdk.csproj --configuration Release
+
+      - name: Assemble UPM package
+        run: ./scripts/assemble-upm.sh ${{ steps.version.outputs.version }}
+
+      - name: Push upm/<version> tag
+        # This is what end users reference in their Unity Package Manager git URL:
+        #   https://github.com/enjin/platform-csharp-sdk.git#upm/v3.0.0
+        # The tag points at an orphan commit whose tree is exactly the contents
+        # of upm-staging/, so Unity's git fetcher sees a valid UPM package at
+        # the repo root (without any ?path= suffix needed).
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          VERSION="${{ steps.version.outputs.version }}"
+          UPM_TAG="upm/v${VERSION}"
+
+          WORK="$(mktemp -d)"
+          cp -R upm-staging/. "${WORK}/"
+          (
+            cd "${WORK}"
+            git init -q -b "${UPM_TAG}"
+            git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+            git add -A
+            git -c user.name="github-actions[bot]" \
+                -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+                commit -q -m "UPM package v${VERSION}"
+            git tag -f "${UPM_TAG}"
+            git push -f origin "refs/tags/${UPM_TAG}"
+          )
+          rm -rf "${WORK}"
+          echo "Pushed tag ${UPM_TAG}"
+
+      - name: Attach tarball to GitHub Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/v')
+        with:
+          files: EnjinPlatformSdk-v${{ steps.version.outputs.version }}-upm.tar.gz
+
+      - name: Upload tarball as workflow artifact
+        # Always upload (including workflow_dispatch runs) so manual builds are
+        # downloadable for inspection without needing a release.
+        uses: actions/upload-artifact@v4
+        with:
+          name: EnjinPlatformSdk-v${{ steps.version.outputs.version }}-upm
+          path: EnjinPlatformSdk-v${{ steps.version.outputs.version }}-upm.tar.gz

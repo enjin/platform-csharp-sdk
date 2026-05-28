@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
@@ -9,6 +9,7 @@ namespace Enjin.Platform.Sdk;
 
 /// <summary>
 /// A HTTP handler used by <see cref="PlatformClient"/> for processing HTTP traffic to and from the platform.
+/// Attaches the <c>Authorization: Bearer &lt;token&gt;</c> header when an auth token is set.
 /// </summary>
 /// <seealso cref="PlatformClient"/>
 [PublicAPI]
@@ -37,9 +38,8 @@ public sealed class PlatformHandler : DelegatingHandler
     /// Initializes a new instance of the <see cref="PlatformHandler"/> class with the given inner handler.
     /// </summary>
     /// <inheritdoc/>
-    internal PlatformHandler(HttpMessageHandler innerHandler) : base(innerHandler)
-    {
-    }
+    internal PlatformHandler(HttpMessageHandler innerHandler)
+        : base(innerHandler) { }
 
     /// <summary>
     /// Sets the authentication token for this handler.
@@ -68,14 +68,19 @@ public sealed class PlatformHandler : DelegatingHandler
     /// the request to the inner handler.
     /// </summary>
     /// <inheritdoc/>
-    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
-                                                                 CancellationToken cancellationToken)
+    protected override async Task<HttpResponseMessage> SendAsync(
+        HttpRequestMessage request,
+        CancellationToken cancellationToken
+    )
     {
         lock (_authMutex)
         {
             if (HasAuthToken)
             {
-                request.Headers.Authorization = new AuthenticationHeaderValue(_authToken ?? throw new InvalidOperationException("Auth token is null or empty"));
+                request.Headers.Authorization = new AuthenticationHeaderValue(
+                    "Bearer",
+                    _authToken ?? throw new InvalidOperationException("Auth token is null or empty")
+                );
             }
         }
 

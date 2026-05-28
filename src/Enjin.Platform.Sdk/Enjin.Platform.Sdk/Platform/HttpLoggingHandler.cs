@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
@@ -36,14 +36,20 @@ internal class HttpLoggingHandler : DelegatingHandler
     /// <exception cref="ArgumentNullException">
     /// Thrown if logger is <c>null</c>.
     /// </exception>
-    public HttpLoggingHandler(HttpMessageHandler innerHandler, ILogger logger, HttpLogLevel httpLogLevel)
+    public HttpLoggingHandler(
+        HttpMessageHandler innerHandler,
+        ILogger logger,
+        HttpLogLevel httpLogLevel
+    )
         : base(innerHandler)
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
         if (httpLogLevel == HttpLogLevel.None)
         {
-            throw new ArgumentException($"{nameof(httpLogLevel)} cannot be {nameof(HttpLogLevel.None)}");
+            throw new ArgumentException(
+                $"{nameof(httpLogLevel)} cannot be {nameof(HttpLogLevel.None)}"
+            );
         }
 
         _httpLogLevel = httpLogLevel;
@@ -59,35 +65,41 @@ internal class HttpLoggingHandler : DelegatingHandler
         builder.Clear();
 
         // Essential info
-        string method = request.Method.Method.ToUpper();
-        string uri = request.RequestUri?.ToString() ?? "Unknown URI";
-        long? contentLength = request.Content?.Headers?.ContentLength;
+        var method = request.Method.Method.ToUpper();
+        var uri = request.RequestUri?.ToString() ?? "Unknown URI";
+        var contentLength = request.Content?.Headers?.ContentLength;
 
         // Basic
         if (_httpLogLevel == HttpLogLevel.Basic)
         {
-            builder.Append("--> ").Append(method).Append(" ").Append(uri)
-                   .Append(" (").Append(contentLength).Append("-byte body)");
+            builder
+                .Append("--> ")
+                .Append(method)
+                .Append(' ')
+                .Append(uri)
+                .Append(" (")
+                .Append(contentLength)
+                .Append("-byte body)");
 
             _logger.Log(TraceLevel, builder.ToString());
 
             return;
         }
 
-        builder.Append("--> ").Append(method).Append(" ").AppendLine(uri);
+        builder.Append("--> ").Append(method).Append(' ').AppendLine(uri);
 
         // Headers
-        foreach (KeyValuePair<string, IEnumerable<string>> header in request.Headers)
+        foreach (var header in request.Headers)
         {
-            string? key = header.Key;
-            IEnumerable<string>? values = header.Value;
+            var key = header.Key;
+            var values = header.Value;
 
             if (key == null || values == null)
             {
                 continue;
             }
 
-            string valuesSeparator = key.Equals("User-Agent") ? SpaceSeparator : CommaSeparator;
+            var valuesSeparator = key.Equals("User-Agent") ? SpaceSeparator : CommaSeparator;
             builder.Append(key).Append(": ").AppendLine(string.Join(valuesSeparator, values));
         }
 
@@ -101,9 +113,14 @@ internal class HttpLoggingHandler : DelegatingHandler
         }
 
         // Body
-        builder.AppendLine() // Line break between header(s) and body
-               .AppendLine(request.Content?.ReadAsStringAsync().Result ?? "No content")
-               .Append("<-- END ").Append(method).Append(" (").Append(contentLength).Append("-byte body)");
+        builder
+            .AppendLine() // Line break between header(s) and body
+            .AppendLine(request.Content?.ReadAsStringAsync().Result ?? "No content")
+            .Append("<-- END ")
+            .Append(method)
+            .Append(" (")
+            .Append(contentLength)
+            .Append("-byte body)");
 
         _logger.Log(TraceLevel, builder.ToString());
     }
@@ -119,11 +136,18 @@ internal class HttpLoggingHandler : DelegatingHandler
         builder.Clear();
 
         // Essential info
-        int statusCode = (int)response.StatusCode;
-        string uri = response.RequestMessage?.RequestUri?.ToString() ?? "Unknown URI";
+        var statusCode = (int)response.StatusCode;
+        var uri = response.RequestMessage?.RequestUri?.ToString() ?? "Unknown URI";
 
         // Basic
-        builder.Append("<-- ").Append(statusCode).Append(" ").Append(uri).Append(" (").Append(rtt).Append("ms)");
+        builder
+            .Append("<-- ")
+            .Append(statusCode)
+            .Append(' ')
+            .Append(uri)
+            .Append(" (")
+            .Append(rtt)
+            .Append("ms)");
 
         if (_httpLogLevel == HttpLogLevel.Basic)
         {
@@ -135,10 +159,10 @@ internal class HttpLoggingHandler : DelegatingHandler
         builder.AppendLine();
 
         // Headers
-        foreach (KeyValuePair<string, IEnumerable<string>> header in response.Headers)
+        foreach (var header in response.Headers)
         {
-            string? key = header.Key;
-            IEnumerable<string>? values = header.Value;
+            var key = header.Key;
+            var values = header.Value;
 
             if (key == null || values == null)
             {
@@ -158,9 +182,10 @@ internal class HttpLoggingHandler : DelegatingHandler
         }
 
         // Body
-        builder.AppendLine() // Line break between header(s) and body
-               .AppendLine(response.Content.ReadAsStringAsync().Result)
-               .Append("<-- END HTTP");
+        builder
+            .AppendLine() // Line break between header(s) and body
+            .AppendLine(response.Content.ReadAsStringAsync().Result)
+            .Append("<-- END HTTP");
 
         _logger.Log(TraceLevel, builder.ToString());
     }
@@ -171,8 +196,10 @@ internal class HttpLoggingHandler : DelegatingHandler
     /// Handles logging the request and response.
     /// </summary>
     /// <inheritdoc/>
-    protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
-                                                                 CancellationToken cancellationToken)
+    protected override async Task<HttpResponseMessage> SendAsync(
+        HttpRequestMessage request,
+        CancellationToken cancellationToken
+    )
     {
         if (_httpLogLevel == HttpLogLevel.None)
         {
@@ -183,9 +210,9 @@ internal class HttpLoggingHandler : DelegatingHandler
 
         LogRequest(request, builder);
 
-        DateTimeOffset start = DateTimeOffset.Now;
-        HttpResponseMessage response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
-        DateTimeOffset end = DateTimeOffset.Now;
+        var start = DateTimeOffset.Now;
+        var response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
+        var end = DateTimeOffset.Now;
 
         LogResponse(response, (end - start).Milliseconds, builder);
 
