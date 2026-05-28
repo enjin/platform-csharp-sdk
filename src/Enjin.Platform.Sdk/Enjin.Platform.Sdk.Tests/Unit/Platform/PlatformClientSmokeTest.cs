@@ -50,22 +50,28 @@ public class PlatformClientSmokeTest
                 .WithHeader("Content-Type", "application/json")
                 .WithBody(responseBody));
 
-        QueryQueryBuilder builder = new QueryQueryBuilder()
+        var builder = new QueryQueryBuilder()
             .WithGetAccount(
                 new AccountQueryBuilder().WithId().WithAddress(),
                 Network.Enjin, Chain.Matrix, "0xabc");
 
         // Act
-        IPlatformResponse<QueryResponse> response = await _client.SendQuery(builder);
+        var response = await _client.SendQuery(builder);
+        Assert.Multiple(() =>
+        {
 
-        // Assert
-        Assert.That(response.IsSuccessStatusCode, Is.True);
-        Assert.That(response.Result, Is.Not.Null);
+            // Assert
+            Assert.That(response.IsSuccessStatusCode, Is.True);
+            Assert.That(response.Result, Is.Not.Null);
+        });
         Assert.That(response.Result.Data, Is.Not.Null);
         Assert.That(response.Result.Data.GetAccount, Is.Not.Null);
-        Assert.That(response.Result.Data.GetAccount!.Id, Is.EqualTo("0xabc"));
-        Assert.That(response.Result.Data.GetAccount.Address, Is.EqualTo("5xyz"));
-        Assert.That(response.Result.Errors, Is.Null);
+        Assert.Multiple(() =>
+        {
+            Assert.That(response.Result.Data.GetAccount!.Id, Is.EqualTo("0xabc"));
+            Assert.That(response.Result.Data.GetAccount.Address, Is.EqualTo("5xyz"));
+            Assert.That(response.Result.Errors, Is.Null);
+        });
     }
 
     [Test]
@@ -88,13 +94,13 @@ public class PlatformClientSmokeTest
                 .WithHeader("Content-Type", "application/json")
                 .WithBody(responseBody));
 
-        QueryQueryBuilder builder = new QueryQueryBuilder()
+        var builder = new QueryQueryBuilder()
             .WithGetAccount(
                 new AccountQueryBuilder().WithId(),
                 Network.Enjin, Chain.Matrix, "0xabc");
 
         // Act
-        IPlatformResponse<QueryResponse> response = await _client.SendQuery(builder);
+        var response = await _client.SendQuery(builder);
 
         // Assert
         Assert.That(response.Result.Errors, Is.Not.Null);
@@ -117,7 +123,7 @@ public class PlatformClientSmokeTest
 
         _client.Auth("test-token-123");
 
-        QueryQueryBuilder builder = new QueryQueryBuilder()
+        var builder = new QueryQueryBuilder()
             .WithGetAccount(new AccountQueryBuilder().WithId(),
                 Network.Enjin, Chain.Matrix, "0x");
 
@@ -128,8 +134,11 @@ public class PlatformClientSmokeTest
         var logEntry = _server.LogEntries.GetEnumerator();
         Assert.That(logEntry.MoveNext(), Is.True);
         var headers = logEntry.Current.RequestMessage.Headers!;
-        Assert.That(headers.ContainsKey("Authorization"), Is.True);
-        Assert.That(headers["Authorization"][0], Is.EqualTo("Bearer test-token-123"));
+        Assert.Multiple(() =>
+        {
+            Assert.That(headers.ContainsKey("Authorization"), Is.True);
+            Assert.That(headers["Authorization"][0], Is.EqualTo("Bearer test-token-123"));
+        });
     }
 
     [Test]
@@ -143,7 +152,7 @@ public class PlatformClientSmokeTest
                 .WithHeader("Content-Type", "application/json")
                 .WithBody("""{"data":{}}"""));
 
-        QueryQueryBuilder builder = new QueryQueryBuilder()
+        var builder = new QueryQueryBuilder()
             .WithGetAccount(new AccountQueryBuilder().WithId(),
                 Network.Enjin, Chain.Matrix, "0xabc");
 
@@ -153,7 +162,7 @@ public class PlatformClientSmokeTest
         // Assert
         var logEntry = _server.LogEntries.GetEnumerator();
         Assert.That(logEntry.MoveNext(), Is.True);
-        string body = logEntry.Current.RequestMessage.Body!;
+        var body = logEntry.Current.RequestMessage.Body!;
         Assert.That(body, Does.StartWith("{\"query\":"));
         Assert.That(body, Does.Contain("GetAccount"));
         Assert.That(body, Does.Contain("id"));

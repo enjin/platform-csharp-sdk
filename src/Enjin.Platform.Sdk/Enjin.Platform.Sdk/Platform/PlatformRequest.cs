@@ -40,7 +40,7 @@ public sealed class PlatformRequest : IPlatformRequest
             throw new ArgumentNullException(nameof(builder));
         }
 
-        string body = JsonConvert.SerializeObject(new GraphQlRequestBody(builder.Build()));
+        var body = JsonConvert.SerializeObject(new GraphQlRequestBody(builder.Build()));
         StringContent content = new(body, Encoding.UTF8, GraphQlMediaType);
 
         return new PlatformRequest(content, path);
@@ -49,14 +49,9 @@ public sealed class PlatformRequest : IPlatformRequest
     /// <summary>
     /// Serializable wire format for a GraphQL HTTP POST body.
     /// </summary>
-    private sealed class GraphQlRequestBody
+    private sealed class GraphQlRequestBody(string query)
     {
         [JsonProperty("query")]
-        public string Query { get; }
-
-        public GraphQlRequestBody(string query)
-        {
-            Query = query;
-        }
+        public string Query { get; } = query;
     }
 }

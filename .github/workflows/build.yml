@@ -34,6 +34,9 @@ jobs:
       - name: Restore Packages
         run: dotnet restore ./src/Enjin.Platform.Sdk/Enjin.Platform.Sdk.sln
 
+      - name: Verify Formatting
+        run: dotnet format ./src/Enjin.Platform.Sdk/Enjin.Platform.Sdk.sln --verify-no-changes --no-restore --severity info
+
       - name: Build Solution
         run: dotnet build ./src/Enjin.Platform.Sdk/Enjin.Platform.Sdk.sln --configuration Release --no-restore
 

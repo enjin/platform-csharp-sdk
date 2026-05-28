@@ -76,10 +76,7 @@ public sealed class PlatformClient : IPlatformClient
     }
 
     /// <inheritdoc/>
-    public Task<IPlatformResponse<TResult>> SendRequest<TResult>(IPlatformRequest request)
-    {
-        return SendRequest<TResult>(request, CancellationToken.None);
-    }
+    public Task<IPlatformResponse<TResult>> SendRequest<TResult>(IPlatformRequest request) => SendRequest<TResult>(request, CancellationToken.None);
 
     /// <summary>
     /// Sends the given <paramref name="request"/> to the platform and deserializes the response body as <typeparamref name="TResult"/>.
@@ -101,12 +98,12 @@ public sealed class PlatformClient : IPlatformClient
             Content = request.Content,
         };
 
-        using HttpResponseMessage response = await _httpClient
+        using var response = await _httpClient
             .SendAsync(message, cancellationToken)
             .ConfigureAwait(false);
 
-        string body = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-        TResult result = JsonConvert.DeserializeObject<TResult>(body)!;
+        var body = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+        var result = JsonConvert.DeserializeObject<TResult>(body)!;
 
         return new PlatformResponse<TResult>(response.StatusCode, response.Headers, result);
     }
