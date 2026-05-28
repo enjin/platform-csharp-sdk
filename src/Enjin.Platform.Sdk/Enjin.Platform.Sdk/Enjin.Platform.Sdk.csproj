@@ -15,12 +15,10 @@
 
     <!-- Assembly properties -->
     <AssemblyName>Enjin.Platform.Sdk</AssemblyName>
-    <AssemblyInformationalVersion>v3.0.0</AssemblyInformationalVersion>
 
     <!-- Package properties -->
     <PackageId>Enjin.Platform.Sdk</PackageId>
     <PackageProjectUrl>https://enjin.io/</PackageProjectUrl>
-    <PackageVersion>3.0.0</PackageVersion>
     <PackageLicenseExpression>LGPL-3.0-only</PackageLicenseExpression>
     <PackageIcon>packageIcon.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>

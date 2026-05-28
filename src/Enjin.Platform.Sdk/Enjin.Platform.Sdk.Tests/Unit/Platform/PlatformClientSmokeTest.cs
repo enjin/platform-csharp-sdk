@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using WireMock.RequestBuilders;
@@ -187,5 +188,35 @@ public class PlatformClientSmokeTest
         Assert.That(body, Does.StartWith("{\"query\":"));
         Assert.That(body, Does.Contain("GetAccount"));
         Assert.That(body, Does.Contain("id"));
+    }
+
+    [Test]
+    public void DefaultUserAgentIsDerivedFromAssemblyVersion()
+    {
+        // Arrange
+        var asm = typeof(PlatformClient).Assembly;
+        var version =
+            asm.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion
+            ?? asm.GetName().Version?.ToString(3)
+            ?? "unknown";
+
+        var plus = version.IndexOf('+');
+        if (plus >= 0)
+        {
+            version = version[..plus];
+        }
+
+        if (version.StartsWith("v"))
+        {
+            version = version[1..];
+        }
+
+        var expected = $"Enjin.Platform.Sdk/{version}";
+
+        // Act
+        using var client = new PlatformClient(new Uri(_server.Urls[0] + "/graphql"));
+
+        // Assert
+        Assert.That(client.UserAgent, Is.EqualTo(expected));
     }
 }

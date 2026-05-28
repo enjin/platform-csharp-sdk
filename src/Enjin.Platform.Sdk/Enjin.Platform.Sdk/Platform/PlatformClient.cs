@@ -1,6 +1,7 @@
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
@@ -14,7 +15,31 @@ namespace Enjin.Platform.Sdk;
 [PublicAPI]
 public sealed class PlatformClient : IPlatformClient
 {
-    private const string DefaultUserAgent = "Enjin.Platform.Sdk/3.0.0";
+    private static readonly string DefaultUserAgent = BuildDefaultUserAgent();
+
+    private static string BuildDefaultUserAgent()
+    {
+        var asm = typeof(PlatformClient).Assembly;
+        var version =
+            asm.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion
+            ?? asm.GetName().Version?.ToString(3)
+            ?? "unknown";
+
+        // Strip SourceLink commit suffix like "3.0.0+abc1234".
+        var plus = version.IndexOf('+');
+        if (plus >= 0)
+        {
+            version = version[..plus];
+        }
+
+        // Strip a leading "v" so the header carries a plain SemVer value.
+        if (version.StartsWith("v"))
+        {
+            version = version[1..];
+        }
+
+        return $"Enjin.Platform.Sdk/{version}";
+    }
 
     private readonly HttpClient _httpClient;
     private readonly PlatformHandler _platformHandler;
@@ -34,7 +59,7 @@ public sealed class PlatformClient : IPlatformClient
     /// Initializes a new <see cref="PlatformClient"/>.
     /// </summary>
     /// <param name="baseAddress">The base address of the platform's GraphQL endpoint (e.g. <c>https://platform.enjin.io/graphql</c>).</param>
-    /// <param name="userAgent">Optional User-Agent header value. Defaults to <c>Enjin.Platform.Sdk/3.0.0</c>.</param>
+    /// <param name="userAgent">Optional User-Agent header value. Defaults to <c>Enjin.Platform.Sdk/{assembly-version}</c>.</param>
     /// <param name="logger">Optional logger; when provided HTTP traffic is logged at the given <paramref name="httpLogLevel"/>.</param>
     /// <param name="httpLogLevel">HTTP log level. Ignored when <paramref name="logger"/> is <c>null</c>.</param>
     public PlatformClient(
