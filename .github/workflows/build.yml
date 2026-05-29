@@ -85,7 +85,10 @@ jobs:
     # (which is what users reference in their Unity Package Manager git URL),
     # and attaches the tarball to the same draft GitHub Release.
     needs: build
-    if: startsWith(github.ref, 'refs/tags/v') || github.event_name == 'workflow_dispatch'
+    # Run on v* tag pushes, or on manual dispatches that supply a version. A
+    # workflow_dispatch with an empty version input is treated as "main build
+    # only" and skips the UPM job rather than hard-failing.
+    if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && github.event.inputs.version != '')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
