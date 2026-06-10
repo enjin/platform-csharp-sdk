@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+      # TEMP(PLA-2420): exercise the release/upm pipeline on this branch.
+      # Remove before merge.
+      - bugfix/PLA-2420/fix-release-ci
     tags:
       - '*'
   pull_request:
@@ -81,22 +84,32 @@ jobs:
 
   upm:
     # Assembles the Unity Package Manager distribution from unity-template/ +
-    # the freshly-built DLL, pushes it to a parallel `upm/v<version>` git tag
-    # (which is what users reference in their Unity Package Manager git URL),
-    # and attaches the tarball to the same draft GitHub Release.
+    # the freshly-built DLL and publishes it to the dedicated
+    # `enjin/platform-unity-sdk` repo: the package tree is committed to that
+    # repo's `master` branch (latest, always browsable) and pinned with a
+    # `v<version>` git tag. Users reference either in their Unity Package
+    # Manager git URL:
+    #   https://github.com/enjin/platform-unity-sdk.git           (latest)
+    #   https://github.com/enjin/platform-unity-sdk.git#v3.0.0    (pinned)
+    # The tarball is still attached to this repo's draft GitHub Release.
     needs: build
     # Run on v* tag pushes, or on manual dispatches that supply a version. A
     # workflow_dispatch with an empty version input is treated as "main build
     # only" and skips the UPM job rather than hard-failing.
-    if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && github.event.inputs.version != '')
+    #
+    # TEMP(PLA-2420): also run on pushes to bugfix/PLA-2420/fix-release-ci so
+    # the release/upm path can be smoke-tested before merge. The Determine
+    # version step below produces a synthetic test version on that branch, and
+    # the publish step pushes to a `ci-test` branch instead of `master`. Remove
+    # before merge.
+    if: |
+      startsWith(github.ref, 'refs/tags/v')
+      || (github.event_name == 'workflow_dispatch' && github.event.inputs.version != '')
+      || github.ref == 'refs/heads/bugfix/PLA-2420/fix-release-ci'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          # Need full history + a writable token so we can push the upm/<version> tag.
-          fetch-depth: 0
-          persist-credentials: true
 
       - name: Determine version
         id: version
@@ -107,12 +120,23 @@ jobs:
               echo "::error::workflow_dispatch requires the 'version' input"
               exit 1
             fi
-          else
+            TAG="v${VERSION}"
+          elif [[ "${GITHUB_REF}" == refs/tags/v* ]]; then
             # strip leading 'v' from refs/tags/v3.0.0
             VERSION="${GITHUB_REF_NAME#v}"
+            TAG="v${VERSION}"
+          else
+            # TEMP(PLA-2420): branch-driven smoke test. Use a synthetic
+            # version so we don't collide with real releases; the publish step
+            # routes this to a `ci-test` branch rather than master. Remove
+            # before merge.
+            SHORT_SHA="${GITHUB_SHA::7}"
+            VERSION="0.0.0-test.${SHORT_SHA}"
+            TAG="v${VERSION}"
           fi
           echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
-          echo "Building UPM package for version ${VERSION}"
+          echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
+          echo "Building UPM package for version ${VERSION} (tag ${TAG})"
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -133,38 +157,53 @@ jobs:
       - name: Assemble UPM package
         run: ./scripts/assemble-upm.sh ${{ steps.version.outputs.version }}
 
-      - name: Push upm/<version> tag
-        # This is what end users reference in their Unity Package Manager git URL:
-        #   https://github.com/enjin/platform-csharp-sdk.git#upm/v3.0.0
-        # The tag points at an orphan commit whose tree is exactly the contents
-        # of upm-staging/, so Unity's git fetcher sees a valid UPM package at
-        # the repo root (without any ?path= suffix needed).
-        #
-        # NOTE: the repo's tag-name ruleset must allow upm/v* tags (or grant a
-        # bypass to github-actions). Otherwise the push is rejected with
-        # "Tag name must match a given regex pattern".
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Setup SSH
+        # Loads the deploy-key for enjin/platform-unity-sdk so the publish step
+        # below can push over SSH. webfactory/ssh-agent also adds github.com to
+        # known_hosts. The matching public key must be registered as a
+        # write-enabled deploy key on enjin/platform-unity-sdk.
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.UNITY_SDK_DEPLOY_KEY }}
+
+      - name: Publish package to platform-unity-sdk
+        # Commits the assembled upm-staging/ tree to the dedicated repo's master
+        # branch (latest) and pins it with a v<version> tag. End users reference
+        # either in their Unity Package Manager git URL:
+        #   https://github.com/enjin/platform-unity-sdk.git          (latest)
+        #   https://github.com/enjin/platform-unity-sdk.git#v3.0.0   (pinned)
+        # The package lives at the repo root, so no ?path= suffix is needed.
         run: |
           set -euo pipefail
           VERSION="${{ steps.version.outputs.version }}"
-          UPM_TAG="upm/v${VERSION}"
+          TAG="${{ steps.version.outputs.tag }}"
+
+          # TEMP(PLA-2420): route smoke-test runs to a ci-test branch so the
+          # dedicated repo's master is never touched by test builds. Remove
+          # before merge.
+          BRANCH="master"
+          if [[ "${GITHUB_REF}" == refs/heads/bugfix/PLA-2420/fix-release-ci ]]; then
+            BRANCH="ci-test"
+          fi
 
           WORK="$(mktemp -d)"
-          cp -R upm-staging/. "${WORK}/"
+          git clone --depth 1 git@github.com:enjin/platform-unity-sdk.git "${WORK}"
           (
             cd "${WORK}"
-            git init -q -b "${UPM_TAG}"
-            git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+            git checkout -B "${BRANCH}"
+            # Replace tracked contents with the freshly assembled package.
+            git rm -rqf . >/dev/null 2>&1 || true
+            cp -R "${GITHUB_WORKSPACE}/upm-staging/." .
             git add -A
             git -c user.name="github-actions[bot]" \
                 -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
-                commit -q -m "UPM package v${VERSION}"
-            git tag -f "${UPM_TAG}"
-            git push -f origin "refs/tags/${UPM_TAG}"
+                commit -m "UPM package v${VERSION}"
+            git tag -f "${TAG}"
+            git push origin "HEAD:${BRANCH}"
+            git push -f origin "refs/tags/${TAG}"
           )
           rm -rf "${WORK}"
-          echo "Pushed tag ${UPM_TAG}"
+          echo "Published v${VERSION} to platform-unity-sdk (${BRANCH} + tag ${TAG})"
 
       - name: Attach UPM tarball to draft release
         uses: softprops/action-gh-release@v2
