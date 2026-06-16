@@ -211,12 +211,32 @@ public class PlatformClientSmokeTest
             version = version[1..];
         }
 
-        var expected = $"Enjin.Platform.Sdk/{version}";
+        var expected = $"Enjin-Platform-CSharp-SDK/{version}";
 
         // Act
         using var client = new PlatformClient(new Uri(_server.Urls[0] + "/graphql"));
 
         // Assert
         Assert.That(client.UserAgent, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void ParameterlessConstructorUsesDefaultBaseAddress()
+    {
+        // Act
+        using var client = new PlatformClient();
+
+        // Assert
+        Assert.That(client.BaseAddress, Is.EqualTo(PlatformClient.DefaultBaseAddress));
+    }
+
+    [Test]
+    public void NullBaseAddressUsesDefaultBaseAddress()
+    {
+        // Act
+        using var client = new PlatformClient(null);
+
+        // Assert
+        Assert.That(client.BaseAddress, Is.EqualTo(PlatformClient.DefaultBaseAddress));
     }
 }

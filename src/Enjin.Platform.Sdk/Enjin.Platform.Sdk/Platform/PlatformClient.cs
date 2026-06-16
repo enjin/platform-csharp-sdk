@@ -15,6 +15,11 @@ namespace Enjin.Platform.Sdk;
 [PublicAPI]
 public sealed class PlatformClient : IPlatformClient
 {
+    /// <summary>
+    /// The default base address of the Enjin Platform GraphQL endpoint.
+    /// </summary>
+    public static readonly Uri DefaultBaseAddress = new("https://platform.enjin.io/graphql");
+
     private static readonly string DefaultUserAgent = BuildDefaultUserAgent();
 
     private static string BuildDefaultUserAgent()
@@ -38,7 +43,7 @@ public sealed class PlatformClient : IPlatformClient
             version = version[1..];
         }
 
-        return $"Enjin.Platform.Sdk/{version}";
+        return $"Enjin-Platform-CSharp-SDK/{version}";
     }
 
     private readonly HttpClient _httpClient;
@@ -58,21 +63,18 @@ public sealed class PlatformClient : IPlatformClient
     /// <summary>
     /// Initializes a new <see cref="PlatformClient"/>.
     /// </summary>
-    /// <param name="baseAddress">The base address of the platform's GraphQL endpoint (e.g. <c>https://platform.enjin.io/graphql</c>).</param>
-    /// <param name="userAgent">Optional User-Agent header value. Defaults to <c>Enjin.Platform.Sdk/{assembly-version}</c>.</param>
+    /// <param name="baseAddress">The base address of the platform's GraphQL endpoint (e.g. <c>https://platform.enjin.io/graphql</c>). Defaults to <see cref="DefaultBaseAddress"/>.</param>
+    /// <param name="userAgent">Optional User-Agent header value. Defaults to <c>Enjin-Platform-CSharp-SDK/{assembly-version}</c>.</param>
     /// <param name="logger">Optional logger; when provided HTTP traffic is logged at the given <paramref name="httpLogLevel"/>.</param>
     /// <param name="httpLogLevel">HTTP log level. Ignored when <paramref name="logger"/> is <c>null</c>.</param>
     public PlatformClient(
-        Uri baseAddress,
+        Uri? baseAddress = null,
         string? userAgent = null,
         ILogger? logger = null,
         HttpLogLevel httpLogLevel = HttpLogLevel.None
     )
     {
-        if (baseAddress == null)
-        {
-            throw new ArgumentNullException(nameof(baseAddress));
-        }
+        baseAddress ??= DefaultBaseAddress;
 
         UserAgent = userAgent ?? DefaultUserAgent;
 
