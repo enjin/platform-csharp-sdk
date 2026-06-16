@@ -5,7 +5,7 @@ on:
     branches:
       - master
     tags:
-      - '*'
+      - 'v*'
   pull_request:
   workflow_dispatch:
     inputs:
@@ -181,9 +181,16 @@ jobs:
             git rm -rqf . >/dev/null 2>&1 || true
             cp -R "${GITHUB_WORKSPACE}/upm-staging/." .
             git add -A
-            git -c user.name="github-actions[bot]" \
-                -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
-                commit -m "UPM package v${VERSION}"
+            # Skip the commit when the assembled package is identical to the
+            # current branch contents (e.g. re-running a release tag), so the
+            # job stays idempotent instead of failing on "nothing to commit".
+            if git diff --cached --quiet; then
+              echo "UPM package contents unchanged; skipping commit"
+            else
+              git -c user.name="github-actions[bot]" \
+                  -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+                  commit -m "UPM package v${VERSION}"
+            fi
             git tag -f "${TAG}"
             git push origin "HEAD:${BRANCH}"
             git push -f origin "refs/tags/${TAG}"
