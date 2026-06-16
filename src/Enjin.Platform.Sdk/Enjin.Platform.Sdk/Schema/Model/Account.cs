@@ -34,8 +34,8 @@ public partial class Account
     /// </summary>
     public global::System.Numerics.BigInteger Balance { get; set; }
     /// <summary>
-    /// The tokens held by this account.
+    /// The tokens held by this account, each paired with the account's balance.
     /// </summary>
-    public ICollection<Token>? Tokens { get; set; }
+    public ICollection<AccountToken>? Tokens { get; set; }
 }
 

@@ -33,6 +33,7 @@ public static class GraphQlTypes
 
     public const string Account = "Account";
     public const string AccountPool = "AccountPool";
+    public const string AccountToken = "AccountToken";
     public const string Attribute = "Attribute";
     public const string Block = "Block";
     public const string Collection = "Collection";

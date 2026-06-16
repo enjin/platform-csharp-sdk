@@ -54,7 +54,7 @@ public partial class Collection
     /// </summary>
     public ICollection<TokenGroup>? TokenGroups { get; set; }
     /// <summary>
-    /// The holders of tokens in this collection. Only populated when fetching a single collection via GetCollection.
+    /// The holders of tokens in this collection. The effective per-page limit depends on context: up to 100 when fetched via GetCollection (detail), up to 10 when fetched via GetCollections (bulk).
     /// </summary>
     public ICollection<CollectionHolder>? Holders { get; set; }
 }
