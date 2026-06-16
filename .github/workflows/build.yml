@@ -83,7 +83,7 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/bugfix/PLA-2420/fix-release-ci'
         uses: NuGet/login@v1
         with:
-          user: enjin
+          user: ${{ secrets.NUGET_USER }}
 
       # TEMP(PLA-2420): confirm the trusted-publishing policy matched and a
       # temporary key was issued. Does NOT publish. Remove before merge.
