@@ -68,12 +68,14 @@ public partial class CollectionQueryBuilder : GraphQlQueryBuilder<CollectionQuer
 
     public CollectionQueryBuilder ExceptTokenGroups() => ExceptField("tokenGroups");
 
-    /// <param name="limit">Number of holders to return per page (max 100, default 100).</param>
+    /// <param name="limit">Number of holders to return per page. Defaults to the context cap (100 in GetCollection, 10 in bulk queries). Requesting a limit above the context cap raises a validation error.</param>
     /// <param name="page">Page number (max 500, default 1).</param>
-    public CollectionQueryBuilder WithHolders(CollectionHolderQueryBuilder collectionHolderQueryBuilder, QueryBuilderParameter<int> limit, QueryBuilderParameter<int> page, string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null)
+    public CollectionQueryBuilder WithHolders(CollectionHolderQueryBuilder collectionHolderQueryBuilder, QueryBuilderParameter<int> page, QueryBuilderParameter<int?>? limit = null, string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null)
     {
         var args = new List<QueryBuilderArgumentInfo>();
-        args.Add(new() { ArgumentName = "limit", ArgumentValue = limit} );
+        if (limit != null)
+            args.Add(new() { ArgumentName = "limit", ArgumentValue = limit} );
+
         args.Add(new() { ArgumentName = "page", ArgumentValue = page} );
         return WithObjectField("holders", alias, collectionHolderQueryBuilder, [include, skip], args);
     }

@@ -20,7 +20,7 @@ public partial class AccountQueryBuilder : GraphQlQueryBuilder<AccountQueryBuild
         new() { Name = "address" },
         new() { Name = "nonce" },
         new() { Name = "balance" },
-        new() { Name = "tokens", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(TokenQueryBuilder) }
+        new() { Name = "tokens", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(AccountTokenQueryBuilder) }
     };
 
     protected override string TypeName => "Account";
@@ -47,7 +47,8 @@ public partial class AccountQueryBuilder : GraphQlQueryBuilder<AccountQueryBuild
     /// <param name="after">The offset for pagination.</param>
     /// <param name="collectionId">Filter tokens by collection ID.</param>
     /// <param name="tokenIds">Filter by token IDs within the collection (requires collectionId).</param>
-    public AccountQueryBuilder WithTokens(TokenQueryBuilder tokenQueryBuilder, QueryBuilderParameter<int> limit, QueryBuilderParameter<int?>? after = null, QueryBuilderParameter<global::System.Numerics.BigInteger?>? collectionId = null, QueryBuilderParameter<IEnumerable<global::System.Numerics.BigInteger>>? tokenIds = null, string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null)
+    /// <param name="tokenGroupId">Filter tokens to only those belonging to this token group ID.</param>
+    public AccountQueryBuilder WithTokens(AccountTokenQueryBuilder accountTokenQueryBuilder, QueryBuilderParameter<int> limit, QueryBuilderParameter<int?>? after = null, QueryBuilderParameter<global::System.Numerics.BigInteger?>? collectionId = null, QueryBuilderParameter<IEnumerable<global::System.Numerics.BigInteger>>? tokenIds = null, QueryBuilderParameter<global::System.Numerics.BigInteger?>? tokenGroupId = null, string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null)
     {
         var args = new List<QueryBuilderArgumentInfo>();
         args.Add(new() { ArgumentName = "limit", ArgumentValue = limit} );
@@ -60,7 +61,10 @@ public partial class AccountQueryBuilder : GraphQlQueryBuilder<AccountQueryBuild
         if (tokenIds != null)
             args.Add(new() { ArgumentName = "tokenIds", ArgumentValue = tokenIds} );
 
-        return WithObjectField("tokens", alias, tokenQueryBuilder, [include, skip], args);
+        if (tokenGroupId != null)
+            args.Add(new() { ArgumentName = "tokenGroupId", ArgumentValue = tokenGroupId} );
+
+        return WithObjectField("tokens", alias, accountTokenQueryBuilder, [include, skip], args);
     }
 
     public AccountQueryBuilder ExceptTokens() => ExceptField("tokens");

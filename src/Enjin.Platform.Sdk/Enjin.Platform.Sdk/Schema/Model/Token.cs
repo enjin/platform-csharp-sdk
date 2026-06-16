@@ -74,7 +74,7 @@ public partial class Token
     /// </summary>
     public Collection? Collection { get; set; }
     /// <summary>
-    /// The holders of this token with their balances. Only populated when querying via GetToken directly.
+    /// The holders of this token with their balances. The effective per-page limit depends on context: up to 100 when fetched via GetToken (detail), up to 10 when fetched via GetTokens or GetAccount.tokens (bulk).
     /// </summary>
     public ICollection<TokenHolder>? Holders { get; set; }
 }
