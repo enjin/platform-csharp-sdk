@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - master
-      # TEMP(PLA-2420): run on this branch to verify the NuGet OIDC trusted-
-      # publishing handshake (login only, no publish). Remove before merge.
-      - bugfix/PLA-2420/fix-release-ci
     tags:
       - '*'
   pull_request:
@@ -77,27 +74,10 @@ jobs:
 
       - name: NuGet login (OIDC -> temp API key)
         id: nuget-login
-        # TEMP(PLA-2420): also run on the smoke-test branch so the OIDC
-        # handshake can be verified without publishing. Restore to
-        # `if: startsWith(github.ref, 'refs/tags/v')` before merge.
-        if: startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/bugfix/PLA-2420/fix-release-ci'
+        if: startsWith(github.ref, 'refs/tags/v')
         uses: NuGet/login@v1
         with:
           user: ${{ secrets.NUGET_USER }}
-
-      # TEMP(PLA-2420): confirm the trusted-publishing policy matched and a
-      # temporary key was issued. Does NOT publish. Remove before merge.
-      - name: Verify OIDC key issued (smoke test)
-        if: github.ref == 'refs/heads/bugfix/PLA-2420/fix-release-ci'
-        env:
-          NUGET_API_KEY: ${{ steps.nuget-login.outputs.NUGET_API_KEY }}
-        run: |
-          if [[ -n "${NUGET_API_KEY}" ]]; then
-            echo "OIDC trusted-publishing handshake succeeded: temporary NuGet API key obtained."
-          else
-            echo "::error::NuGet/login returned no API key - check the trusted-publishing policy on nuget.org"
-            exit 1
-          fi
 
       - name: Publish to NuGet.org
         if: startsWith(github.ref, 'refs/tags/v')
