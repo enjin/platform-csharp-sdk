@@ -14,13 +14,13 @@ on:
         required: false
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write   # upload nupkgs to the draft release
+      contents: read    # checkout
       id-token: write   # mint GitHub OIDC token for NuGet trusted publishing
     steps:
       - name: Checkout
@@ -60,18 +60,6 @@ jobs:
       - name: Build NuGet Packages
         run: dotnet pack ./src/Enjin.Platform.Sdk/Enjin.Platform.Sdk/Enjin.Platform.Sdk.csproj --configuration Release --no-build --output ./src/Enjin.Platform.Sdk/nuget-packages/
 
-      - name: Upload nupkgs to draft release
-        uses: softprops/action-gh-release@v2
-        if: startsWith(github.ref, 'refs/tags/v')
-        with:
-          # Keep the release in draft mode until the publish-release job flips
-          # it. softprops/action-gh-release upserts the release, so uploads from
-          # multiple jobs/workflows on the same tag all attach to the same
-          # draft. This avoids the "immutable release" upload error that
-          # happens when assets are pushed after publication.
-          draft: true
-          files: ./src/Enjin.Platform.Sdk/nuget-packages/*.nupkg
-
       - name: NuGet login (OIDC -> temp API key)
         id: nuget-login
         if: startsWith(github.ref, 'refs/tags/v')
@@ -96,7 +84,9 @@ jobs:
     # Manager git URL:
     #   https://github.com/enjin/platform-unity-sdk.git           (latest)
     #   https://github.com/enjin/platform-unity-sdk.git#v3.0.0    (pinned)
-    # The tarball is still attached to this repo's draft GitHub Release.
+    # The tarball is also uploaded as a workflow artifact for inspection. This
+    # job does not touch this repo's GitHub Release — that is created/published
+    # manually so it stays compatible with immutable releases.
     needs: build
     # Run on v* tag pushes, or on manual dispatches that supply a version. A
     # workflow_dispatch with an empty version input is treated as "main build
@@ -198,13 +188,6 @@ jobs:
           rm -rf "${WORK}"
           echo "Published v${VERSION} to platform-unity-sdk (${BRANCH} + tag ${TAG})"
 
-      - name: Attach UPM tarball to draft release
-        uses: softprops/action-gh-release@v2
-        if: startsWith(github.ref, 'refs/tags/v')
-        with:
-          draft: true
-          files: EnjinPlatformSdk-v${{ steps.version.outputs.version }}-upm.tar.gz
-
       - name: Upload tarball as workflow artifact
         # Always upload (including workflow_dispatch runs) so manual builds are
         # downloadable for inspection without needing a release.
@@ -212,21 +195,3 @@ jobs:
         with:
           name: EnjinPlatformSdk-v${{ steps.version.outputs.version }}-upm
           path: EnjinPlatformSdk-v${{ steps.version.outputs.version }}-upm.tar.gz
-
-  publish-release:
-    # Flip the draft release to published once both the nupkgs and UPM tarball
-    # have been attached. This step is what makes the release "go live" on the
-    # repo's Releases page and on the GitHub Releases API.
-    needs: [build, upm]
-    if: startsWith(github.ref, 'refs/tags/v')
-    runs-on: ubuntu-latest
-    steps:
-      - name: Publish GitHub Release
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_REPO: ${{ github.repository }}
-        run: |
-          set -euo pipefail
-          TAG="${GITHUB_REF_NAME}"
-          echo "Publishing release ${TAG}"
-          gh release edit "${TAG}" --draft=false
