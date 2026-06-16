@@ -22,6 +22,9 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write   # upload nupkgs to the draft release
+      id-token: write   # mint GitHub OIDC token for NuGet trusted publishing
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -72,13 +75,18 @@ jobs:
           draft: true
           files: ./src/Enjin.Platform.Sdk/nuget-packages/*.nupkg
 
+      - name: NuGet login (OIDC -> temp API key)
+        id: nuget-login
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: NuGet/login@v1
+        with:
+          user: enjin
+
       - name: Publish to NuGet.org
         if: startsWith(github.ref, 'refs/tags/v')
-        env:
-          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
         run: |
           dotnet nuget push ./src/Enjin.Platform.Sdk/nuget-packages/*.nupkg \
-            --api-key "${NUGET_API_KEY}" \
+            --api-key "${{ steps.nuget-login.outputs.NUGET_API_KEY }}" \
             --source https://api.nuget.org/v3/index.json \
             --skip-duplicate
 
