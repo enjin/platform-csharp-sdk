@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - master
-      # TEMP(PLA-2420): exercise the release/upm pipeline on this branch.
-      # Remove before merge.
+      # TEMP(PLA-2420): run on this branch to verify the NuGet OIDC trusted-
+      # publishing handshake (login only, no publish). Remove before merge.
       - bugfix/PLA-2420/fix-release-ci
     tags:
       - '*'
@@ -77,10 +77,27 @@ jobs:
 
       - name: NuGet login (OIDC -> temp API key)
         id: nuget-login
-        if: startsWith(github.ref, 'refs/tags/v')
+        # TEMP(PLA-2420): also run on the smoke-test branch so the OIDC
+        # handshake can be verified without publishing. Restore to
+        # `if: startsWith(github.ref, 'refs/tags/v')` before merge.
+        if: startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/bugfix/PLA-2420/fix-release-ci'
         uses: NuGet/login@v1
         with:
           user: enjin
+
+      # TEMP(PLA-2420): confirm the trusted-publishing policy matched and a
+      # temporary key was issued. Does NOT publish. Remove before merge.
+      - name: Verify OIDC key issued (smoke test)
+        if: github.ref == 'refs/heads/bugfix/PLA-2420/fix-release-ci'
+        env:
+          NUGET_API_KEY: ${{ steps.nuget-login.outputs.NUGET_API_KEY }}
+        run: |
+          if [[ -n "${NUGET_API_KEY}" ]]; then
+            echo "OIDC trusted-publishing handshake succeeded: temporary NuGet API key obtained."
+          else
+            echo "::error::NuGet/login returned no API key - check the trusted-publishing policy on nuget.org"
+            exit 1
+          fi
 
       - name: Publish to NuGet.org
         if: startsWith(github.ref, 'refs/tags/v')
@@ -104,16 +121,9 @@ jobs:
     # Run on v* tag pushes, or on manual dispatches that supply a version. A
     # workflow_dispatch with an empty version input is treated as "main build
     # only" and skips the UPM job rather than hard-failing.
-    #
-    # TEMP(PLA-2420): also run on pushes to bugfix/PLA-2420/fix-release-ci so
-    # the release/upm path can be smoke-tested before merge. The Determine
-    # version step below produces a synthetic test version on that branch, and
-    # the publish step pushes to a `ci-test` branch instead of `master`. Remove
-    # before merge.
     if: |
       startsWith(github.ref, 'refs/tags/v')
       || (github.event_name == 'workflow_dispatch' && github.event.inputs.version != '')
-      || github.ref == 'refs/heads/bugfix/PLA-2420/fix-release-ci'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -134,13 +144,8 @@ jobs:
             VERSION="${GITHUB_REF_NAME#v}"
             TAG="v${VERSION}"
           else
-            # TEMP(PLA-2420): branch-driven smoke test. Use a synthetic
-            # version so we don't collide with real releases; the publish step
-            # routes this to a `ci-test` branch rather than master. Remove
-            # before merge.
-            SHORT_SHA="${GITHUB_SHA::7}"
-            VERSION="0.0.0-test.${SHORT_SHA}"
-            TAG="v${VERSION}"
+            echo "::error::upm job triggered on an unsupported ref ${GITHUB_REF}"
+            exit 1
           fi
           echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
           echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
@@ -185,14 +190,7 @@ jobs:
           set -euo pipefail
           VERSION="${{ steps.version.outputs.version }}"
           TAG="${{ steps.version.outputs.tag }}"
-
-          # TEMP(PLA-2420): route smoke-test runs to a ci-test branch so the
-          # dedicated repo's master is never touched by test builds. Remove
-          # before merge.
           BRANCH="master"
-          if [[ "${GITHUB_REF}" == refs/heads/bugfix/PLA-2420/fix-release-ci ]]; then
-            BRANCH="ci-test"
-          fi
 
           WORK="$(mktemp -d)"
           git clone --depth 1 git@github.com:enjin/platform-unity-sdk.git "${WORK}"
