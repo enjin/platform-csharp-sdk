@@ -44,11 +44,11 @@ IL2CPP `link.xml` to keep the SDK's types from being stripped on AOT targets.
 4. Click **+** ▸ **Add package from git URL…** and paste:
 
    ```
-   https://github.com/enjin/platform-unity-sdk.git#v3.0.2
+   https://github.com/enjin/platform-unity-sdk.git
    ```
 
-   Replace `v3.0.2` with the version you want, or omit the `#v…` suffix to track the latest
-   published package. Available versions are listed on the
+   This tracks the latest published package. To pin a specific version, append a `#v<version>`
+   suffix (e.g. `…platform-unity-sdk.git#v3.0.2`). Available versions are listed on the
    [tags](https://github.com/enjin/platform-unity-sdk/tags) page; each release is pinned with a
    matching `v<version>` tag.
 
