@@ -33,8 +33,9 @@ distribution described below is Unity-specific.
 
 ## Install in Unity
 
-The SDK is published as a Unity Package Manager (UPM) package on every tagged release. The
-package contains the precompiled `Enjin.Platform.Sdk.dll`, XML documentation, and an
+The SDK is published as a Unity Package Manager (UPM) package on every tagged release, in the
+dedicated [`enjin/platform-unity-sdk`](https://github.com/enjin/platform-unity-sdk) distribution
+repo. The package contains the precompiled `Enjin.Platform.Sdk.dll`, XML documentation, and an
 IL2CPP `link.xml` to keep the SDK's types from being stripped on AOT targets.
 
 1. Open your Unity project (**2021.3 LTS or newer**).
@@ -43,21 +44,17 @@ IL2CPP `link.xml` to keep the SDK's types from being stripped on AOT targets.
 4. Click **+** ▸ **Add package from git URL…** and paste:
 
    ```
-   https://github.com/enjin/platform-csharp-sdk.git#upm/v3.0.0
+   https://github.com/enjin/platform-unity-sdk.git#v3.0.2
    ```
 
-   Replace `v3.0.0` with the version you want. Available versions are listed on the
-   [Releases](https://github.com/enjin/platform-csharp-sdk/releases) page; each release has a
-   matching `upm/v<version>` tag.
+   Replace `v3.0.2` with the version you want, or omit the `#v…` suffix to track the latest
+   published package. Available versions are listed on the
+   [tags](https://github.com/enjin/platform-unity-sdk/tags) page; each release is pinned with a
+   matching `v<version>` tag.
 
 The Package Manager will automatically resolve the
 [`com.unity.nuget.newtonsoft-json`](https://docs.unity3d.com/Packages/com.unity.nuget.newtonsoft-json@3.2/manual/index.html)
 dependency, which is the only third-party library required at runtime.
-
-If you cannot use a git URL (offline CI, corporate firewall, etc.), each release also
-attaches a `EnjinPlatformSdk-v<version>-upm.tar.gz` tarball that can be installed via
-**Package Manager ▸ + ▸ Install package from tarball…** or extracted under
-`Packages/io.enjin.platform-sdk/` in your project.
 
 ### IL2CPP notes
 
