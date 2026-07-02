@@ -21,22 +21,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   fields.
 - Smoke tests for `PlatformClient` covering success, error, and bearer-token paths against a WireMock
   server.
-- Unity Package Manager (UPM) distribution: every `v*` tag push assembles a UPM package
-  (manifest, precompiled `Enjin.Platform.Sdk.dll`, XML docs, IL2CPP `link.xml`, third-party
-  notices) from `unity-template/` via `scripts/assemble-upm.sh` and the
-  `.github/workflows/unity.yml` workflow. The package is published as a parallel
-  `upm/v<version>` git tag (installable as
-  `https://github.com/enjin/platform-csharp-sdk.git#upm/v<version>`) and attached as a
-  tarball to the GitHub Release. Declares `com.unity.nuget.newtonsoft-json` 3.2.1 as its
-  only dependency; requires Unity 2021.3 LTS with the .NET Standard 2.1 API compatibility
-  level.
 
 ### Changed
 
 - **Breaking:** SDK now targets the Enjin Platform v3 GraphQL API. The v2 schema and all hand-written
   v2 operation/model classes have been removed.
 - **Breaking:** Target framework lowered from `.NET Standard 2.0` to `.NET Standard 2.1` so the SDK
-  can be consumed from Unity 2021.2+ and Godot 4+.
+  can be consumed from Godot 4+.
 - **Breaking:** JSON serialization moved from `System.Text.Json` to `Newtonsoft.Json` (13.0.3) to match
   the generator's runtime and engine ecosystem expectations.
 - **Breaking:** `PlatformHandler` now attaches `Authorization: Bearer <token>` (previously the scheme
