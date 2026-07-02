@@ -17,52 +17,12 @@ Starting with version 3.0.0 the SDK ships as a single package targeting the v3 P
 sub-packages (`Enjin.Platform.Sdk.Beam`, `Enjin.Platform.Sdk.FuelTanks`, `Enjin.Platform.Sdk.Marketplace`) have been
 discontinued — all functionality now lives in `Enjin.Platform.Sdk`.
 
-Unity developers can install the SDK directly from the Unity Package Manager — see
-[Install in Unity](#install-in-unity) below.
-
 ## Compatibility
 
 This SDK targets **.NET Standard 2.1**, which is compatible with:
 
 * .NET 5.0+
-* Unity 2021.3 LTS or newer (using the .NET Standard 2.1 API compatibility level)
 * Godot 4.0 or newer (using .NET 6+ / .NET Standard 2.1)
-
-Godot users should install via NuGet (`dotnet add package Enjin.Platform.Sdk`); the UPM
-distribution described below is Unity-specific.
-
-## Install in Unity
-
-The SDK is published as a Unity Package Manager (UPM) package on every tagged release, in the
-dedicated [`enjin/platform-unity-sdk`](https://github.com/enjin/platform-unity-sdk) distribution
-repo. The package contains the precompiled `Enjin.Platform.Sdk.dll`, XML documentation, and an
-IL2CPP `link.xml` to keep the SDK's types from being stripped on AOT targets.
-
-1. Open your Unity project (**2021.3 LTS or newer**).
-2. Set **Edit ▸ Project Settings ▸ Player ▸ Other Settings ▸ Api Compatibility Level** to **.NET Standard 2.1**.
-3. Open **Window ▸ Package Manager**.
-4. Click **+** ▸ **Add package from git URL…** and paste:
-
-   ```
-   https://github.com/enjin/platform-unity-sdk.git
-   ```
-
-   This tracks the latest published package. To pin a specific version, append a `#v<version>`
-   suffix (e.g. `…platform-unity-sdk.git#v3.0.2`). Available versions are listed on the
-   [tags](https://github.com/enjin/platform-unity-sdk/tags) page; each release is pinned with a
-   matching `v<version>` tag.
-
-The Package Manager will automatically resolve the
-[`com.unity.nuget.newtonsoft-json`](https://docs.unity3d.com/Packages/com.unity.nuget.newtonsoft-json@3.2/manual/index.html)
-dependency, which is the only third-party library required at runtime.
-
-### IL2CPP notes
-
-The shipped `link.xml` preserves the entire `Enjin.Platform.Sdk` assembly from the IL2CPP
-managed code stripper. This is necessary because the SDK uses Newtonsoft.Json reflection
-to (de)serialize the GraphQL response model. If you ship to mobile, console, or WebGL
-and need to shrink build size, you can replace the bundled `Runtime/link.xml` with a
-narrower ruleset, but verify against your real responses first.
 
 ## Quick start
 
