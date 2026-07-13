@@ -63,6 +63,18 @@ public partial class TransactionInput : IGraphQlInputObject
     private InputPropertyInfo _nominationPoolsUnbond;
     private InputPropertyInfo _acceptCollectionTransfer;
     private InputPropertyInfo _cancelCollectionTransfer;
+    private InputPropertyInfo _approveCollection;
+    private InputPropertyInfo _unapproveCollection;
+    private InputPropertyInfo _createFuelTank;
+    private InputPropertyInfo _mutateFuelTank;
+    private InputPropertyInfo _removeFuelTank;
+    private InputPropertyInfo _createRuleSet;
+    private InputPropertyInfo _removeRuleSet;
+    private InputPropertyInfo _addAccount;
+    private InputPropertyInfo _addAccounts;
+    private InputPropertyInfo _removeAccount;
+    private InputPropertyInfo _removeAccounts;
+    private InputPropertyInfo _mutateFreezeState;
 
     /// <summary>
     /// Arguments for CREATE_COLLECTION method. Provide only one specific input object per transaction.
@@ -616,6 +628,150 @@ public partial class TransactionInput : IGraphQlInputObject
         set => _cancelCollectionTransfer = new() { Name = "cancelCollectionTransfer", Value = value };
     }
 
+    /// <summary>
+    /// Arguments for APPROVE_COLLECTION method (MultiTokens.approve_collection). Provide only one specific input object per transaction.
+    /// </summary>
+    #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+    [JsonConverter(typeof(QueryBuilderParameterConverter<ApproveCollectionInput?>))]
+    #endif
+    public QueryBuilderParameter<ApproveCollectionInput?>? ApproveCollection
+    {
+        get => (QueryBuilderParameter<ApproveCollectionInput?>?)_approveCollection.Value;
+        set => _approveCollection = new() { Name = "approveCollection", Value = value };
+    }
+
+    /// <summary>
+    /// Arguments for UNAPPROVE_COLLECTION method (MultiTokens.unapprove_collection). Provide only one specific input object per transaction.
+    /// </summary>
+    #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+    [JsonConverter(typeof(QueryBuilderParameterConverter<UnapproveCollectionInput?>))]
+    #endif
+    public QueryBuilderParameter<UnapproveCollectionInput?>? UnapproveCollection
+    {
+        get => (QueryBuilderParameter<UnapproveCollectionInput?>?)_unapproveCollection.Value;
+        set => _unapproveCollection = new() { Name = "unapproveCollection", Value = value };
+    }
+
+    /// <summary>
+    /// Arguments for CREATE_FUEL_TANK method (FuelTanks.create_fuel_tank). Matrix chain only. Provide only one specific input object per transaction.
+    /// </summary>
+    #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+    [JsonConverter(typeof(QueryBuilderParameterConverter<CreateFuelTankInput?>))]
+    #endif
+    public QueryBuilderParameter<CreateFuelTankInput?>? CreateFuelTank
+    {
+        get => (QueryBuilderParameter<CreateFuelTankInput?>?)_createFuelTank.Value;
+        set => _createFuelTank = new() { Name = "createFuelTank", Value = value };
+    }
+
+    /// <summary>
+    /// Arguments for MUTATE_FUEL_TANK method (FuelTanks.mutate_fuel_tank). Matrix chain only. Provide only one specific input object per transaction.
+    /// </summary>
+    #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+    [JsonConverter(typeof(QueryBuilderParameterConverter<MutateFuelTankInput?>))]
+    #endif
+    public QueryBuilderParameter<MutateFuelTankInput?>? MutateFuelTank
+    {
+        get => (QueryBuilderParameter<MutateFuelTankInput?>?)_mutateFuelTank.Value;
+        set => _mutateFuelTank = new() { Name = "mutateFuelTank", Value = value };
+    }
+
+    /// <summary>
+    /// Arguments for REMOVE_FUEL_TANK method (FuelTanks.destroy_fuel_tank). Tank must be frozen and empty. Matrix chain only. Provide only one specific input object per transaction.
+    /// </summary>
+    #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+    [JsonConverter(typeof(QueryBuilderParameterConverter<RemoveFuelTankInput?>))]
+    #endif
+    public QueryBuilderParameter<RemoveFuelTankInput?>? RemoveFuelTank
+    {
+        get => (QueryBuilderParameter<RemoveFuelTankInput?>?)_removeFuelTank.Value;
+        set => _removeFuelTank = new() { Name = "removeFuelTank", Value = value };
+    }
+
+    /// <summary>
+    /// Arguments for CREATE_RULE_SET method (FuelTanks.insert_rule_set). Upsert semantics. Matrix chain only. Provide only one specific input object per transaction.
+    /// </summary>
+    #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+    [JsonConverter(typeof(QueryBuilderParameterConverter<CreateRuleSetInput?>))]
+    #endif
+    public QueryBuilderParameter<CreateRuleSetInput?>? CreateRuleSet
+    {
+        get => (QueryBuilderParameter<CreateRuleSetInput?>?)_createRuleSet.Value;
+        set => _createRuleSet = new() { Name = "createRuleSet", Value = value };
+    }
+
+    /// <summary>
+    /// Arguments for REMOVE_RULE_SET method (FuelTanks.remove_rule_set). Tank or rule set must be frozen. Matrix chain only. Provide only one specific input object per transaction.
+    /// </summary>
+    #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+    [JsonConverter(typeof(QueryBuilderParameterConverter<RemoveRuleSetInput?>))]
+    #endif
+    public QueryBuilderParameter<RemoveRuleSetInput?>? RemoveRuleSet
+    {
+        get => (QueryBuilderParameter<RemoveRuleSetInput?>?)_removeRuleSet.Value;
+        set => _removeRuleSet = new() { Name = "removeRuleSet", Value = value };
+    }
+
+    /// <summary>
+    /// Arguments for ADD_ACCOUNT method (FuelTanks.add_account). Matrix chain only. Provide only one specific input object per transaction.
+    /// </summary>
+    #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+    [JsonConverter(typeof(QueryBuilderParameterConverter<AddAccountInput?>))]
+    #endif
+    public QueryBuilderParameter<AddAccountInput?>? AddAccount
+    {
+        get => (QueryBuilderParameter<AddAccountInput?>?)_addAccount.Value;
+        set => _addAccount = new() { Name = "addAccount", Value = value };
+    }
+
+    /// <summary>
+    /// Arguments for ADD_ACCOUNTS method (FuelTanks.batch_add_account). Matrix chain only. Provide only one specific input object per transaction.
+    /// </summary>
+    #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+    [JsonConverter(typeof(QueryBuilderParameterConverter<AddAccountsInput?>))]
+    #endif
+    public QueryBuilderParameter<AddAccountsInput?>? AddAccounts
+    {
+        get => (QueryBuilderParameter<AddAccountsInput?>?)_addAccounts.Value;
+        set => _addAccounts = new() { Name = "addAccounts", Value = value };
+    }
+
+    /// <summary>
+    /// Arguments for REMOVE_ACCOUNT method (FuelTanks.remove_account). Matrix chain only. Provide only one specific input object per transaction.
+    /// </summary>
+    #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+    [JsonConverter(typeof(QueryBuilderParameterConverter<RemoveAccountInput?>))]
+    #endif
+    public QueryBuilderParameter<RemoveAccountInput?>? RemoveAccount
+    {
+        get => (QueryBuilderParameter<RemoveAccountInput?>?)_removeAccount.Value;
+        set => _removeAccount = new() { Name = "removeAccount", Value = value };
+    }
+
+    /// <summary>
+    /// Arguments for REMOVE_ACCOUNTS method (FuelTanks.batch_remove_account). Matrix chain only. Provide only one specific input object per transaction.
+    /// </summary>
+    #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+    [JsonConverter(typeof(QueryBuilderParameterConverter<RemoveAccountsInput?>))]
+    #endif
+    public QueryBuilderParameter<RemoveAccountsInput?>? RemoveAccounts
+    {
+        get => (QueryBuilderParameter<RemoveAccountsInput?>?)_removeAccounts.Value;
+        set => _removeAccounts = new() { Name = "removeAccounts", Value = value };
+    }
+
+    /// <summary>
+    /// Arguments for MUTATE_FREEZE_STATE method (FuelTanks.mutate_freeze_state). Matrix chain only. Provide only one specific input object per transaction.
+    /// </summary>
+    #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+    [JsonConverter(typeof(QueryBuilderParameterConverter<MutateFreezeStateInput?>))]
+    #endif
+    public QueryBuilderParameter<MutateFreezeStateInput?>? MutateFreezeState
+    {
+        get => (QueryBuilderParameter<MutateFreezeStateInput?>?)_mutateFreezeState.Value;
+        set => _mutateFreezeState = new() { Name = "mutateFreezeState", Value = value };
+    }
+
     IEnumerable<InputPropertyInfo> IGraphQlInputObject.GetPropertyValues()
     {
         if (_createCollection.Name != null) yield return _createCollection;
@@ -664,6 +820,18 @@ public partial class TransactionInput : IGraphQlInputObject
         if (_nominationPoolsUnbond.Name != null) yield return _nominationPoolsUnbond;
         if (_acceptCollectionTransfer.Name != null) yield return _acceptCollectionTransfer;
         if (_cancelCollectionTransfer.Name != null) yield return _cancelCollectionTransfer;
+        if (_approveCollection.Name != null) yield return _approveCollection;
+        if (_unapproveCollection.Name != null) yield return _unapproveCollection;
+        if (_createFuelTank.Name != null) yield return _createFuelTank;
+        if (_mutateFuelTank.Name != null) yield return _mutateFuelTank;
+        if (_removeFuelTank.Name != null) yield return _removeFuelTank;
+        if (_createRuleSet.Name != null) yield return _createRuleSet;
+        if (_removeRuleSet.Name != null) yield return _removeRuleSet;
+        if (_addAccount.Name != null) yield return _addAccount;
+        if (_addAccounts.Name != null) yield return _addAccounts;
+        if (_removeAccount.Name != null) yield return _removeAccount;
+        if (_removeAccounts.Name != null) yield return _removeAccounts;
+        if (_mutateFreezeState.Name != null) yield return _mutateFreezeState;
     }
 }
 

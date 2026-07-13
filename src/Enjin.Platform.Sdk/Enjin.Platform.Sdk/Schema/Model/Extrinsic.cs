@@ -53,5 +53,9 @@ public partial class Extrinsic
     /// The error message if failed.
     /// </summary>
     public string? Error { get; set; }
+    /// <summary>
+    /// The events in this extrinsic.
+    /// </summary>
+    public ICollection<Event?>? Events { get; set; }
 }
 

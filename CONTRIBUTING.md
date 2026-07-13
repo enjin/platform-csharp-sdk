@@ -87,10 +87,8 @@ To regenerate the schema after a Platform API change:
    git clone git@github.com:enjin/platform-sdk-generators.git
    ```
 
-2. Drop the latest `v3.json` schema (downloadable via introspection from the target Platform deployment) into
-   `platform-sdk-generators/CSharpSchemaGenerator/CSharpSchemaGenerator/schema/v3.json`.
-
-3. Run the generator:
+2. Run the generator. It fetches the live GraphQL schema via introspection directly from the Platform,
+   so there is no schema file to download or drop in:
 
    ```sh
    cd platform-sdk-generators/CSharpSchemaGenerator/CSharpSchemaGenerator
@@ -100,7 +98,7 @@ To regenerate the schema after a Platform API change:
    This produces `generated/v3/Schema/{Infrastructure,Enums,Model,Inputs,QueryBuilders}/*.cs` in the same folder.
    The generator wipes `generated/v3/` before writing, so renamed or removed types do not leave orphan files.
 
-4. Replace the SDK's `Schema/` tree with the generator output:
+3. Replace the SDK's `Schema/` tree with the generator output:
 
    ```sh
    rm -rf ../../../platform-csharp-sdk/src/Enjin.Platform.Sdk/Enjin.Platform.Sdk/Schema
@@ -108,13 +106,13 @@ To regenerate the schema after a Platform API change:
        ../../../platform-csharp-sdk/src/Enjin.Platform.Sdk/Enjin.Platform.Sdk/Schema
    ```
 
-5. Build and run the tests:
+4. Build and run the tests:
 
    ```sh
    dotnet test src/Enjin.Platform.Sdk/Enjin.Platform.Sdk.sln
    ```
 
-6. (Recommended) Run the live smoke runner against a real Platform deployment to confirm the regenerated
+5. (Recommended) Run the live smoke runner against a real Platform deployment to confirm the regenerated
    client still round-trips real data over the wire:
 
    ```sh

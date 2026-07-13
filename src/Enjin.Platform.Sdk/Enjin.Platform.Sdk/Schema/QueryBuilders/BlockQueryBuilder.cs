@@ -18,9 +18,8 @@ public partial class BlockQueryBuilder : GraphQlQueryBuilder<BlockQueryBuilder>
     {
         new() { Name = "number" },
         new() { Name = "hash" },
-        new() { Name = "validator", IsComplex = true, QueryBuilderType = typeof(AccountQueryBuilder) },
+        new() { Name = "validator" },
         new() { Name = "extrinsics", IsComplex = true, QueryBuilderType = typeof(ExtrinsicQueryBuilder) },
-        new() { Name = "events", IsComplex = true, QueryBuilderType = typeof(EventQueryBuilder) },
         new() { Name = "createdAt" }
     };
 
@@ -36,17 +35,13 @@ public partial class BlockQueryBuilder : GraphQlQueryBuilder<BlockQueryBuilder>
 
     public BlockQueryBuilder ExceptHash() => ExceptField("hash");
 
-    public BlockQueryBuilder WithValidator(AccountQueryBuilder accountQueryBuilder, string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null) => WithObjectField("validator", alias, accountQueryBuilder, [include, skip]);
+    public BlockQueryBuilder WithValidator(string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null) => WithScalarField("validator", alias, [include, skip]);
 
     public BlockQueryBuilder ExceptValidator() => ExceptField("validator");
 
     public BlockQueryBuilder WithExtrinsics(ExtrinsicQueryBuilder extrinsicQueryBuilder, string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null) => WithObjectField("extrinsics", alias, extrinsicQueryBuilder, [include, skip]);
 
     public BlockQueryBuilder ExceptExtrinsics() => ExceptField("extrinsics");
-
-    public BlockQueryBuilder WithEvents(EventQueryBuilder eventQueryBuilder, string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null) => WithObjectField("events", alias, eventQueryBuilder, [include, skip]);
-
-    public BlockQueryBuilder ExceptEvents() => ExceptField("events");
 
     public BlockQueryBuilder WithCreatedAt(string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null) => WithScalarField("createdAt", alias, [include, skip]);
 

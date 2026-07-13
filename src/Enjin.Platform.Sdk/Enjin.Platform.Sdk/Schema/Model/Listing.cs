@@ -38,13 +38,13 @@ public partial class Listing
     /// </summary>
     public global::System.Numerics.BigInteger Amount { get; set; }
     /// <summary>
-    /// The price of the take asset requested.
+    /// The price of the take asset requested, expressed as ENJ.
     /// </summary>
-    public global::System.Numerics.BigInteger Price { get; set; }
+    public string Price { get; set; }
     /// <summary>
-    /// The minimum take value.
+    /// The minimum take value, expressed as ENJ.
     /// </summary>
-    public global::System.Numerics.BigInteger MinTakeValue { get; set; }
+    public string MinTakeValue { get; set; }
     /// <summary>
     /// The listing type.
     /// </summary>
@@ -54,8 +54,8 @@ public partial class Listing
     /// </summary>
     public bool? IsActive { get; set; }
     /// <summary>
-    /// The highest price bid so far (if applicable).
+    /// The highest price bid so far, expressed as ENJ (if applicable).
     /// </summary>
-    public global::System.Numerics.BigInteger? HighestPrice { get; set; }
+    public string? HighestPrice { get; set; }
 }
 

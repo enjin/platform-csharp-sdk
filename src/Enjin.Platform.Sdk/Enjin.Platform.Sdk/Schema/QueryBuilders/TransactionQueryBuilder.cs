@@ -20,8 +20,9 @@ public partial class TransactionQueryBuilder : GraphQlQueryBuilder<TransactionQu
         new() { Name = "idempotencyKey" },
         new() { Name = "action" },
         new() { Name = "encodedData" },
-        new() { Name = "extrinsicHash" },
+        new() { Name = "extrinsic", IsComplex = true, QueryBuilderType = typeof(ExtrinsicQueryBuilder) },
         new() { Name = "state" },
+        new() { Name = "error" },
         new() { Name = "createdAt" },
         new() { Name = "updatedAt" }
     };
@@ -46,13 +47,17 @@ public partial class TransactionQueryBuilder : GraphQlQueryBuilder<TransactionQu
 
     public TransactionQueryBuilder ExceptEncodedData() => ExceptField("encodedData");
 
-    public TransactionQueryBuilder WithExtrinsicHash(string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null) => WithScalarField("extrinsicHash", alias, [include, skip]);
+    public TransactionQueryBuilder WithExtrinsic(ExtrinsicQueryBuilder extrinsicQueryBuilder, string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null) => WithObjectField("extrinsic", alias, extrinsicQueryBuilder, [include, skip]);
 
-    public TransactionQueryBuilder ExceptExtrinsicHash() => ExceptField("extrinsicHash");
+    public TransactionQueryBuilder ExceptExtrinsic() => ExceptField("extrinsic");
 
     public TransactionQueryBuilder WithState(string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null) => WithScalarField("state", alias, [include, skip]);
 
     public TransactionQueryBuilder ExceptState() => ExceptField("state");
+
+    public TransactionQueryBuilder WithError(string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null) => WithScalarField("error", alias, [include, skip]);
+
+    public TransactionQueryBuilder ExceptError() => ExceptField("error");
 
     public TransactionQueryBuilder WithCreatedAt(string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null) => WithScalarField("createdAt", alias, [include, skip]);
 

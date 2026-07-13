@@ -47,38 +47,27 @@ await RunQuery(client, "3. GetBlocks(ids: [recent, recent-1, recent-2]) - list o
         return $"{blocks.Count} blocks: " + string.Join(", ", blocks.Select(b => b?.Number?.ToString() ?? "?"));
     });
 
-await RunQuery(client, "4. GetBlock with Events - Event type + nullable BigInteger",
-    new QueryQueryBuilder()
-        .WithGetBlock(
-            new BlockQueryBuilder()
-                .WithNumber()
-                .WithEvents(new EventQueryBuilder().WithId().WithName().WithCollectionId()),
-            Network.Canary, Chain.Matrix, id: recentBlockId),
-    r =>
-    {
-        var evs = r.Data?.GetBlock?.Events;
-        if (evs is null) return "no events field";
-        var sample = string.Join(", ", evs.Take(3).Select(e => $"{e?.Name}(coll={e?.CollectionId?.ToString() ?? "null"})"));
-        return $"{evs.Count} events, sample=[{sample}]";
-    });
+// NOTE: the former "GetBlock with Events" check was removed — the Platform v3
+// schema no longer exposes `Block.events` (and there is no top-level events
+// query), so that check no longer compiles. See the regeneration notes.
 
-await RunQuery(client, "5. GetBlock with Validator + Extrinsics - nested complex types",
+await RunQuery(client, "4. GetBlock with Validator + Extrinsics - scalar validator + nested extrinsics",
     new QueryQueryBuilder()
         .WithGetBlock(
             new BlockQueryBuilder()
                 .WithNumber()
-                .WithValidator(new AccountQueryBuilder().WithAddress().WithBalance())
+                .WithValidator()
                 .WithExtrinsics(new ExtrinsicQueryBuilder().WithHash().WithSuccess().WithPallet().WithMethod()),
             Network.Canary, Chain.Matrix, id: recentBlockId),
     r =>
     {
         var b = r.Data?.GetBlock;
         if (b is null) return "null";
-        return $"#{b.Number} validator={b.Validator?.Address} extrinsics={b.Extrinsics?.Count ?? 0}";
+        return $"#{b.Number} validator={b.Validator} extrinsics={b.Extrinsics?.Count ?? 0}";
     });
 
 string externalId = $"sdk-smoke-{DateTimeOffset.UtcNow:yyyyMMddHHmmss}-{Guid.NewGuid():N}".Substring(0, 40);
-await RunMutation(client, $"6. CreateManagedWallet(externalId={externalId}) - non-destructive mutation",
+await RunMutation(client, $"5. CreateManagedWallet(externalId={externalId}) - non-destructive mutation",
     new MutationQueryBuilder()
         .WithCreateManagedWallet(externalId),
     r => $"created={r.Data?.CreateManagedWallet}");

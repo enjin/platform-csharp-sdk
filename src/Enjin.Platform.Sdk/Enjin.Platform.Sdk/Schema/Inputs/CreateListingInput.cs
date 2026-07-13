@@ -62,14 +62,14 @@ public partial class CreateListingInput : IGraphQlInputObject
     }
 
     /// <summary>
-    /// The requested price per unit of the make asset.
+    /// The requested price per unit of the make asset, expressed as a decimal or integer ENJ (e.g. "1.5"); converted to base units on-chain.
     /// </summary>
     #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
-    [JsonConverter(typeof(QueryBuilderParameterConverter<global::System.Numerics.BigInteger>))]
+    [JsonConverter(typeof(QueryBuilderParameterConverter<string>))]
     #endif
-    public QueryBuilderParameter<global::System.Numerics.BigInteger>? Price
+    public QueryBuilderParameter<string>? Price
     {
-        get => (QueryBuilderParameter<global::System.Numerics.BigInteger>?)_price.Value;
+        get => (QueryBuilderParameter<string>?)_price.Value;
         set => _price = new() { Name = "price", Value = value };
     }
 

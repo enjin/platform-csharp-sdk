@@ -34,13 +34,17 @@ public partial class Transaction
     /// </summary>
     public string? EncodedData { get; set; }
     /// <summary>
-    /// The on-chain extrinsic hash.
+    /// The on-chain extrinsic, resolved from the indexer.
     /// </summary>
-    public string? ExtrinsicHash { get; set; }
+    public Extrinsic? Extrinsic { get; set; }
     /// <summary>
     /// The state of the transaction.
     /// </summary>
     public TransactionStateEnum? State { get; set; }
+    /// <summary>
+    /// The on-chain failure reason when the transaction failed, including partial batch failures where the extrinsic finalized but one or more wrapped items did not dispatch.
+    /// </summary>
+    public string? Error { get; set; }
     /// <summary>
     /// When the transaction was created.
     /// </summary>

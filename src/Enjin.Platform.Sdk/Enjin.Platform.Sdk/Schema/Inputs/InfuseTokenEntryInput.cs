@@ -33,14 +33,14 @@ public partial class InfuseTokenEntryInput : IGraphQlInputObject
     }
 
     /// <summary>
-    /// The amount of currency to infuse into the token.
+    /// The amount of ENJ currency to infuse into the token, expressed as a decimal or integer ENJ (e.g. "1.5"); converted to base units on-chain.
     /// </summary>
     #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
-    [JsonConverter(typeof(QueryBuilderParameterConverter<global::System.Numerics.BigInteger>))]
+    [JsonConverter(typeof(QueryBuilderParameterConverter<string>))]
     #endif
-    public QueryBuilderParameter<global::System.Numerics.BigInteger>? Amount
+    public QueryBuilderParameter<string>? Amount
     {
-        get => (QueryBuilderParameter<global::System.Numerics.BigInteger>?)_amount.Value;
+        get => (QueryBuilderParameter<string>?)_amount.Value;
         set => _amount = new() { Name = "amount", Value = value };
     }
 

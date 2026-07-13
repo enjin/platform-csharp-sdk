@@ -19,7 +19,8 @@ public partial class EventQueryBuilder : GraphQlQueryBuilder<EventQueryBuilder>
         new() { Name = "id" },
         new() { Name = "name" },
         new() { Name = "collectionId" },
-        new() { Name = "tokenId" }
+        new() { Name = "tokenId" },
+        new() { Name = "data" }
     };
 
     protected override string TypeName => "Event";
@@ -41,5 +42,9 @@ public partial class EventQueryBuilder : GraphQlQueryBuilder<EventQueryBuilder>
     public EventQueryBuilder WithTokenId(string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null) => WithScalarField("tokenId", alias, [include, skip]);
 
     public EventQueryBuilder ExceptTokenId() => ExceptField("tokenId");
+
+    public EventQueryBuilder WithData(string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null) => WithScalarField("data", alias, [include, skip]);
+
+    public EventQueryBuilder ExceptData() => ExceptField("data");
 }
 

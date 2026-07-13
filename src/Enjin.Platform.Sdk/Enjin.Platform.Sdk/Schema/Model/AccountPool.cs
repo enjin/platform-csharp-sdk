@@ -30,17 +30,17 @@ public partial class AccountPool
     /// </summary>
     public PoolStateEnum? State { get; set; }
     /// <summary>
-    /// Amount of sENJ bonded.
+    /// Amount of sENJ bonded, expressed as ENJ.
     /// </summary>
-    public global::System.Numerics.BigInteger Bonded { get; set; }
+    public string Bonded { get; set; }
     /// <summary>
-    /// Accumulated unrealised ENJ rewards.
+    /// Accumulated unrealised ENJ rewards, expressed as ENJ.
     /// </summary>
-    public global::System.Numerics.BigInteger UnrealisedEnj { get; set; }
+    public string UnrealisedEnj { get; set; }
     /// <summary>
-    /// Total ENJ currently being unbonded (sum of all unbonding eras).
+    /// Total ENJ currently being unbonded (sum of all unbonding eras), expressed as ENJ.
     /// </summary>
-    public global::System.Numerics.BigInteger TotalUnbonding { get; set; }
+    public string TotalUnbonding { get; set; }
     /// <summary>
     /// Pool annual percentage yield.
     /// </summary>

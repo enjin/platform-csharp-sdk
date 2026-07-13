@@ -47,6 +47,10 @@ public partial class Query
     /// </summary>
     public ManagedWalletCursorPagination? GetManagedWallets { get; set; }
     /// <summary>
+    /// Reports whether a managed wallet has been swept, based on its transferable token balance from the indexer.
+    /// </summary>
+    public ManagedWalletSweepStatus? ManagedWalletSweepStatus { get; set; }
+    /// <summary>
     /// Get a single token by ID, or by collectionId + tokenId.
     /// </summary>
     public Token? GetToken { get; set; }
@@ -83,6 +87,10 @@ public partial class Query
     /// </summary>
     public ICollection<Extrinsic?>? GetExtrinsics { get; set; }
     /// <summary>
+    /// Returns a linked wallet. Requires at least address or idempotencyKey to be provided.
+    /// </summary>
+    public LinkedWallet? GetLinkedWallet { get; set; }
+    /// <summary>
     /// Verify a signed message against a public key.
     /// </summary>
     public bool? VerifyMessage { get; set; }
@@ -98,5 +106,21 @@ public partial class Query
     /// Get a paginated list of nomination pools.
     /// </summary>
     public ICollection<NominationPool>? GetNominationPools { get; set; }
+    /// <summary>
+    /// Get a single fuel tank by its address.
+    /// </summary>
+    public FuelTank? GetFuelTank { get; set; }
+    /// <summary>
+    /// Get a paginated list of fuel tanks, optionally filtered by tank address and/or name.
+    /// </summary>
+    public ICollection<FuelTank>? GetFuelTanks { get; set; }
+    /// <summary>
+    /// Get a paginated list of accounts registered on a fuel tank, optionally filtered by address.
+    /// </summary>
+    public ICollection<FuelTankAccount>? GetFuelTankAccounts { get; set; }
+    /// <summary>
+    /// Get fuel tanks that are compatible with a given account, pallet, and method.
+    /// </summary>
+    public ICollection<CompatibleFuelTank>? GetCompatibleFuelTanks { get; set; }
 }
 

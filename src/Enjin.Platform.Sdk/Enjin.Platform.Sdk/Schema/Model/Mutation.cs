@@ -23,6 +23,10 @@ public partial class Mutation
     /// </summary>
     public Transaction? CreateBatchTransaction { get; set; }
     /// <summary>
+    /// Creates a new, short-lived, linking code. The user must either enter the code or scan the QR to authorize you to submit signing requests.
+    /// </summary>
+    public LinkingCode? CreateLinkingCode { get; set; }
+    /// <summary>
     /// Prepares the creation of a new managed wallet.
     /// </summary>
     public bool? CreateManagedWallet { get; set; }
@@ -34,5 +38,9 @@ public partial class Mutation
     /// Signs a pending transaction.
     /// </summary>
     public Transaction? SignTransaction { get; set; }
+    /// <summary>
+    /// Sweep all transferable tokens and ENJ from a managed wallet to a recipient. The work is performed asynchronously and rate-limited to once per hour per wallet.
+    /// </summary>
+    public SweepManagedWalletResult? SweepManagedWallet { get; set; }
 }
 

@@ -30,9 +30,9 @@ public partial class NominationPool
     /// </summary>
     public PoolStateEnum? State { get; set; }
     /// <summary>
-    /// Maximum bonding capacity in sENJ.
+    /// Maximum bonding capacity in sENJ, expressed as ENJ.
     /// </summary>
-    public global::System.Numerics.BigInteger Capacity { get; set; }
+    public string Capacity { get; set; }
     /// <summary>
     /// Stash, reward and active balances.
     /// </summary>

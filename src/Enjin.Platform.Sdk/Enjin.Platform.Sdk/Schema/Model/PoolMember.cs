@@ -22,12 +22,12 @@ public partial class PoolMember
     /// </summary>
     public string? PublicKey { get; set; }
     /// <summary>
-    /// Amount of sENJ bonded.
+    /// Amount of sENJ bonded, expressed as ENJ.
     /// </summary>
-    public global::System.Numerics.BigInteger Bonded { get; set; }
+    public string Bonded { get; set; }
     /// <summary>
-    /// Accumulated unrealised ENJ rewards.
+    /// Accumulated unrealised ENJ rewards, expressed as ENJ.
     /// </summary>
-    public global::System.Numerics.BigInteger UnrealisedEnj { get; set; }
+    public string UnrealisedEnj { get; set; }
 }
 
