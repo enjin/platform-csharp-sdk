@@ -42,9 +42,9 @@ public partial class Token
     /// </summary>
     public bool? IsListingForbidden { get; set; }
     /// <summary>
-    /// The infusion amount.
+    /// The infusion amount, expressed as ENJ.
     /// </summary>
-    public global::System.Numerics.BigInteger? Infusion { get; set; }
+    public string? Infusion { get; set; }
     /// <summary>
     /// Whether anyone can infuse this token.
     /// </summary>

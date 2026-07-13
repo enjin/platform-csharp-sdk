@@ -26,17 +26,13 @@ public partial class Block
     /// </summary>
     public string? Hash { get; set; }
     /// <summary>
-    /// The block validator account.
+    /// The block validator public key.
     /// </summary>
-    public Account? Validator { get; set; }
+    public string? Validator { get; set; }
     /// <summary>
     /// The extrinsics in this block.
     /// </summary>
     public ICollection<Extrinsic?>? Extrinsics { get; set; }
-    /// <summary>
-    /// The events in this block.
-    /// </summary>
-    public ICollection<Event?>? Events { get; set; }
     /// <summary>
     /// The block creation time.
     /// </summary>

@@ -24,7 +24,8 @@ public partial class ExtrinsicQueryBuilder : GraphQlQueryBuilder<ExtrinsicQueryB
         new() { Name = "method" },
         new() { Name = "signer", IsComplex = true, QueryBuilderType = typeof(AccountQueryBuilder) },
         new() { Name = "nonce" },
-        new() { Name = "error" }
+        new() { Name = "error" },
+        new() { Name = "events", IsComplex = true, QueryBuilderType = typeof(EventQueryBuilder) }
     };
 
     protected override string TypeName => "Extrinsic";
@@ -66,5 +67,9 @@ public partial class ExtrinsicQueryBuilder : GraphQlQueryBuilder<ExtrinsicQueryB
     public ExtrinsicQueryBuilder WithError(string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null) => WithScalarField("error", alias, [include, skip]);
 
     public ExtrinsicQueryBuilder ExceptError() => ExceptField("error");
+
+    public ExtrinsicQueryBuilder WithEvents(EventQueryBuilder eventQueryBuilder, string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null) => WithObjectField("events", alias, eventQueryBuilder, [include, skip]);
+
+    public ExtrinsicQueryBuilder ExceptEvents() => ExceptField("events");
 }
 

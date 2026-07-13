@@ -33,14 +33,14 @@ public partial class TransferEnjInput : IGraphQlInputObject
     }
 
     /// <summary>
-    /// The amount of ENJ to transfer, expressed as whole ENJ (integer; converted to base units on-chain).
+    /// The amount of ENJ to transfer, expressed as a decimal or integer ENJ (e.g. "1.5" for 1.5 ENJ; converted to base units on-chain).
     /// </summary>
     #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
-    [JsonConverter(typeof(QueryBuilderParameterConverter<global::System.Numerics.BigInteger>))]
+    [JsonConverter(typeof(QueryBuilderParameterConverter<string>))]
     #endif
-    public QueryBuilderParameter<global::System.Numerics.BigInteger>? Amount
+    public QueryBuilderParameter<string>? Amount
     {
-        get => (QueryBuilderParameter<global::System.Numerics.BigInteger>?)_amount.Value;
+        get => (QueryBuilderParameter<string>?)_amount.Value;
         set => _amount = new() { Name = "amount", Value = value };
     }
 

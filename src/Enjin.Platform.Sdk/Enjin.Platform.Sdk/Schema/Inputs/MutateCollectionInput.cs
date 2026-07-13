@@ -17,7 +17,7 @@ namespace Enjin.Platform.Sdk;
 /// </summary>
 public partial class MutateCollectionInput : IGraphQlInputObject
 {
-    private InputPropertyInfo _collectionId;
+    private InputPropertyInfo _id;
     private InputPropertyInfo _owner;
     private InputPropertyInfo _royalties;
     private InputPropertyInfo _explicitRoyaltyCurrencies;
@@ -29,10 +29,10 @@ public partial class MutateCollectionInput : IGraphQlInputObject
     #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
     [JsonConverter(typeof(QueryBuilderParameterConverter<global::System.Numerics.BigInteger>))]
     #endif
-    public QueryBuilderParameter<global::System.Numerics.BigInteger>? CollectionId
+    public QueryBuilderParameter<global::System.Numerics.BigInteger>? Id
     {
-        get => (QueryBuilderParameter<global::System.Numerics.BigInteger>?)_collectionId.Value;
-        set => _collectionId = new() { Name = "collectionId", Value = value };
+        get => (QueryBuilderParameter<global::System.Numerics.BigInteger>?)_id.Value;
+        set => _id = new() { Name = "id", Value = value };
     }
 
     /// <summary>
@@ -85,7 +85,7 @@ public partial class MutateCollectionInput : IGraphQlInputObject
 
     IEnumerable<InputPropertyInfo> IGraphQlInputObject.GetPropertyValues()
     {
-        if (_collectionId.Name != null) yield return _collectionId;
+        if (_id.Name != null) yield return _id;
         if (_owner.Name != null) yield return _owner;
         if (_royalties.Name != null) yield return _royalties;
         if (_explicitRoyaltyCurrencies.Name != null) yield return _explicitRoyaltyCurrencies;

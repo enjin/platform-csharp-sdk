@@ -34,14 +34,14 @@ public partial class NominationPoolsBondInput : IGraphQlInputObject
     }
 
     /// <summary>
-    /// The specific amount to bond. Mutually exclusive with fill.
+    /// The specific amount to bond, expressed as ENJ (e.g. "1.5" for 1.5 ENJ; converted to base units on-chain). Mutually exclusive with fill.
     /// </summary>
     #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
-    [JsonConverter(typeof(QueryBuilderParameterConverter<global::System.Numerics.BigInteger?>))]
+    [JsonConverter(typeof(QueryBuilderParameterConverter<string?>))]
     #endif
-    public QueryBuilderParameter<global::System.Numerics.BigInteger?>? Amount
+    public QueryBuilderParameter<string?>? Amount
     {
-        get => (QueryBuilderParameter<global::System.Numerics.BigInteger?>?)_amount.Value;
+        get => (QueryBuilderParameter<string?>?)_amount.Value;
         set => _amount = new() { Name = "amount", Value = value };
     }
 

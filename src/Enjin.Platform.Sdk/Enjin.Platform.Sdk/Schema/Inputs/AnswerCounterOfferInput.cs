@@ -59,14 +59,14 @@ public partial class AnswerCounterOfferInput : IGraphQlInputObject
     }
 
     /// <summary>
-    /// Required when response is Counter — the new counter price.
+    /// Required when response is Counter — the new counter price, expressed as a decimal or integer ENJ (e.g. "1.5"); converted to base units on-chain.
     /// </summary>
     #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
-    [JsonConverter(typeof(QueryBuilderParameterConverter<global::System.Numerics.BigInteger?>))]
+    [JsonConverter(typeof(QueryBuilderParameterConverter<string?>))]
     #endif
-    public QueryBuilderParameter<global::System.Numerics.BigInteger?>? CounterPrice
+    public QueryBuilderParameter<string?>? CounterPrice
     {
-        get => (QueryBuilderParameter<global::System.Numerics.BigInteger?>?)_counterPrice.Value;
+        get => (QueryBuilderParameter<string?>?)_counterPrice.Value;
         set => _counterPrice = new() { Name = "counterPrice", Value = value };
     }
 

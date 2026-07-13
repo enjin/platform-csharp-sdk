@@ -22,8 +22,9 @@ public partial class QueryQueryBuilder : GraphQlQueryBuilder<QueryQueryBuilder>
         new() { Name = "GetBlocks", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(BlockQueryBuilder) },
         new() { Name = "GetListing", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(ListingQueryBuilder) },
         new() { Name = "GetListings", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(ListingQueryBuilder) },
-        new() { Name = "GetManagedWallet", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(ManagedWalletQueryBuilder) },
+        new() { Name = "GetManagedWallet", IsComplex = true, QueryBuilderType = typeof(ManagedWalletQueryBuilder) },
         new() { Name = "GetManagedWallets", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(ManagedWalletCursorPaginationQueryBuilder) },
+        new() { Name = "ManagedWalletSweepStatus", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(ManagedWalletSweepStatusQueryBuilder) },
         new() { Name = "GetToken", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(TokenQueryBuilder) },
         new() { Name = "GetTokens", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(TokenQueryBuilder) },
         new() { Name = "GetTransaction", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(TransactionQueryBuilder) },
@@ -33,10 +34,15 @@ public partial class QueryQueryBuilder : GraphQlQueryBuilder<QueryQueryBuilder>
         new() { Name = "GetPendingCollectionTransfers", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(PendingCollectionQueryBuilder) },
         new() { Name = "GetExtrinsic", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(ExtrinsicQueryBuilder) },
         new() { Name = "GetExtrinsics", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(ExtrinsicQueryBuilder) },
+        new() { Name = "GetLinkedWallet", IsComplex = true, QueryBuilderType = typeof(LinkedWalletQueryBuilder) },
         new() { Name = "VerifyMessage", RequiresParameters = true },
         new() { Name = "GetAccountPools", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(AccountPoolQueryBuilder) },
         new() { Name = "GetNominationPool", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(NominationPoolQueryBuilder) },
-        new() { Name = "GetNominationPools", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(NominationPoolQueryBuilder) }
+        new() { Name = "GetNominationPools", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(NominationPoolQueryBuilder) },
+        new() { Name = "GetFuelTank", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(FuelTankQueryBuilder) },
+        new() { Name = "GetFuelTanks", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(FuelTankQueryBuilder) },
+        new() { Name = "GetFuelTankAccounts", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(FuelTankAccountQueryBuilder) },
+        new() { Name = "GetCompatibleFuelTanks", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(CompatibleFuelTankQueryBuilder) }
     };
 
     protected override string TypeName => "Query";
@@ -153,15 +159,11 @@ public partial class QueryQueryBuilder : GraphQlQueryBuilder<QueryQueryBuilder>
 
     public QueryQueryBuilder ExceptGetListings() => ExceptField("GetListings");
 
-    /// <param name="network">The network to query.</param>
-    /// <param name="chain">The chain to query.</param>
     /// <param name="publicKey">A list of public keys. (mutually exclusive with externalId)</param>
     /// <param name="externalId">A list of user-defined external identifiers. (mutually exclusive with publicKey)</param>
-    public QueryQueryBuilder WithGetManagedWallet(ManagedWalletQueryBuilder managedWalletQueryBuilder, QueryBuilderParameter<Network> network, QueryBuilderParameter<Chain> chain, QueryBuilderParameter<string?>? publicKey = null, QueryBuilderParameter<string?>? externalId = null, string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null)
+    public QueryQueryBuilder WithGetManagedWallet(ManagedWalletQueryBuilder managedWalletQueryBuilder, QueryBuilderParameter<string?>? publicKey = null, QueryBuilderParameter<string?>? externalId = null, string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null)
     {
         var args = new List<QueryBuilderArgumentInfo>();
-        args.Add(new() { ArgumentName = "network", ArgumentValue = network} );
-        args.Add(new() { ArgumentName = "chain", ArgumentValue = chain} );
         if (publicKey != null)
             args.Add(new() { ArgumentName = "publicKey", ArgumentValue = publicKey} );
 
@@ -173,17 +175,13 @@ public partial class QueryQueryBuilder : GraphQlQueryBuilder<QueryQueryBuilder>
 
     public QueryQueryBuilder ExceptGetManagedWallet() => ExceptField("GetManagedWallet");
 
-    /// <param name="network">The network to query.</param>
-    /// <param name="chain">The chain to query.</param>
     /// <param name="publicKeys">A list of public keys. (mutually exclusive with externalIds)</param>
     /// <param name="externalIds">A list of user-defined external identifiers. (mutually exclusive with publicKeys)</param>
     /// <param name="limit">The number of results to return per page.</param>
     /// <param name="cursor">The cursor for which to paginate using.</param>
-    public QueryQueryBuilder WithGetManagedWallets(ManagedWalletCursorPaginationQueryBuilder managedWalletCursorPaginationQueryBuilder, QueryBuilderParameter<Network> network, QueryBuilderParameter<Chain> chain, QueryBuilderParameter<int> limit, QueryBuilderParameter<IEnumerable<string>>? publicKeys = null, QueryBuilderParameter<IEnumerable<string>>? externalIds = null, QueryBuilderParameter<string?>? cursor = null, string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null)
+    public QueryQueryBuilder WithGetManagedWallets(ManagedWalletCursorPaginationQueryBuilder managedWalletCursorPaginationQueryBuilder, QueryBuilderParameter<int> limit, QueryBuilderParameter<IEnumerable<string>>? publicKeys = null, QueryBuilderParameter<IEnumerable<string>>? externalIds = null, QueryBuilderParameter<string?>? cursor = null, string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null)
     {
         var args = new List<QueryBuilderArgumentInfo>();
-        args.Add(new() { ArgumentName = "network", ArgumentValue = network} );
-        args.Add(new() { ArgumentName = "chain", ArgumentValue = chain} );
         if (publicKeys != null)
             args.Add(new() { ArgumentName = "publicKeys", ArgumentValue = publicKeys} );
 
@@ -198,6 +196,20 @@ public partial class QueryQueryBuilder : GraphQlQueryBuilder<QueryQueryBuilder>
     }
 
     public QueryQueryBuilder ExceptGetManagedWallets() => ExceptField("GetManagedWallets");
+
+    /// <param name="network">The network to query.</param>
+    /// <param name="chain">The chain to query.</param>
+    /// <param name="externalId">The user-defined external identifier of the managed wallet to inspect.</param>
+    public QueryQueryBuilder WithManagedWalletSweepStatus(ManagedWalletSweepStatusQueryBuilder managedWalletSweepStatusQueryBuilder, QueryBuilderParameter<Network> network, QueryBuilderParameter<Chain> chain, QueryBuilderParameter<string> externalId, string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null)
+    {
+        var args = new List<QueryBuilderArgumentInfo>();
+        args.Add(new() { ArgumentName = "network", ArgumentValue = network} );
+        args.Add(new() { ArgumentName = "chain", ArgumentValue = chain} );
+        args.Add(new() { ArgumentName = "externalId", ArgumentValue = externalId} );
+        return WithObjectField("ManagedWalletSweepStatus", alias, managedWalletSweepStatusQueryBuilder, [include, skip], args);
+    }
+
+    public QueryQueryBuilder ExceptManagedWalletSweepStatus() => ExceptField("ManagedWalletSweepStatus");
 
     /// <param name="network">The network to query.</param>
     /// <param name="chain">The chain to query.</param>
@@ -227,9 +239,10 @@ public partial class QueryQueryBuilder : GraphQlQueryBuilder<QueryQueryBuilder>
     /// <param name="chain">The chain to query.</param>
     /// <param name="collectionId">The collection ID.</param>
     /// <param name="tokenIds">Optional token IDs within the collection (max 100). Can be combined with pagination.</param>
+    /// <param name="name">Optional token metadata name substring to search for (case-insensitive).</param>
     /// <param name="limit">Number of tokens to return per page (max 100, default 25).</param>
     /// <param name="page">Page number (max 500, default 1).</param>
-    public QueryQueryBuilder WithGetTokens(TokenQueryBuilder tokenQueryBuilder, QueryBuilderParameter<Network> network, QueryBuilderParameter<Chain> chain, QueryBuilderParameter<global::System.Numerics.BigInteger> collectionId, QueryBuilderParameter<int> limit, QueryBuilderParameter<int> page, QueryBuilderParameter<IEnumerable<global::System.Numerics.BigInteger>>? tokenIds = null, string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null)
+    public QueryQueryBuilder WithGetTokens(TokenQueryBuilder tokenQueryBuilder, QueryBuilderParameter<Network> network, QueryBuilderParameter<Chain> chain, QueryBuilderParameter<global::System.Numerics.BigInteger> collectionId, QueryBuilderParameter<int> limit, QueryBuilderParameter<int> page, QueryBuilderParameter<IEnumerable<global::System.Numerics.BigInteger>>? tokenIds = null, QueryBuilderParameter<string?>? name = null, string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null)
     {
         var args = new List<QueryBuilderArgumentInfo>();
         args.Add(new() { ArgumentName = "network", ArgumentValue = network} );
@@ -237,6 +250,9 @@ public partial class QueryQueryBuilder : GraphQlQueryBuilder<QueryQueryBuilder>
         args.Add(new() { ArgumentName = "collectionId", ArgumentValue = collectionId} );
         if (tokenIds != null)
             args.Add(new() { ArgumentName = "tokenIds", ArgumentValue = tokenIds} );
+
+        if (name != null)
+            args.Add(new() { ArgumentName = "name", ArgumentValue = name} );
 
         args.Add(new() { ArgumentName = "limit", ArgumentValue = limit} );
         args.Add(new() { ArgumentName = "page", ArgumentValue = page} );
@@ -381,6 +397,22 @@ public partial class QueryQueryBuilder : GraphQlQueryBuilder<QueryQueryBuilder>
 
     public QueryQueryBuilder ExceptGetExtrinsics() => ExceptField("GetExtrinsics");
 
+    /// <param name="address">The address of the account (either a public key or SS58 address). (mutually exclusive with idempotencyKey)</param>
+    /// <param name="idempotencyKey">The idempotency key assigned when creating a linking code. (mutually exclusive with address)</param>
+    public QueryQueryBuilder WithGetLinkedWallet(LinkedWalletQueryBuilder linkedWalletQueryBuilder, QueryBuilderParameter<string?>? address = null, QueryBuilderParameter<string?>? idempotencyKey = null, string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null)
+    {
+        var args = new List<QueryBuilderArgumentInfo>();
+        if (address != null)
+            args.Add(new() { ArgumentName = "address", ArgumentValue = address} );
+
+        if (idempotencyKey != null)
+            args.Add(new() { ArgumentName = "idempotencyKey", ArgumentValue = idempotencyKey} );
+
+        return WithObjectField("GetLinkedWallet", alias, linkedWalletQueryBuilder, [include, skip], args);
+    }
+
+    public QueryQueryBuilder ExceptGetLinkedWallet() => ExceptField("GetLinkedWallet");
+
     /// <param name="network">The network to query.</param>
     /// <param name="chain">The chain to query.</param>
     /// <param name="publicKey">The public key that allegedly signed the message.</param>
@@ -442,5 +474,87 @@ public partial class QueryQueryBuilder : GraphQlQueryBuilder<QueryQueryBuilder>
     }
 
     public QueryQueryBuilder ExceptGetNominationPools() => ExceptField("GetNominationPools");
+
+    /// <param name="network">The network to query.</param>
+    /// <param name="chain">The chain to query.</param>
+    /// <param name="id">The fuel tank address. Accepts either a 0x-prefixed public key or an SS58 address.</param>
+    public QueryQueryBuilder WithGetFuelTank(FuelTankQueryBuilder fuelTankQueryBuilder, QueryBuilderParameter<Network> network, QueryBuilderParameter<Chain> chain, QueryBuilderParameter<string> id, string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null)
+    {
+        var args = new List<QueryBuilderArgumentInfo>();
+        args.Add(new() { ArgumentName = "network", ArgumentValue = network} );
+        args.Add(new() { ArgumentName = "chain", ArgumentValue = chain} );
+        args.Add(new() { ArgumentName = "id", ArgumentValue = id} );
+        return WithObjectField("GetFuelTank", alias, fuelTankQueryBuilder, [include, skip], args);
+    }
+
+    public QueryQueryBuilder ExceptGetFuelTank() => ExceptField("GetFuelTank");
+
+    /// <param name="network">The network to query.</param>
+    /// <param name="chain">The chain to query.</param>
+    /// <param name="id">Filter to the fuel tank with this address. Accepts either a 0x-prefixed public key or an SS58 address. When combined with name, the two are OR-ed (matches either).</param>
+    /// <param name="name">Filter to fuel tanks whose name contains this term (case-insensitive). When combined with id, the two are OR-ed (matches either).</param>
+    /// <param name="address">Filter fuel tanks by owner address (public key or SS58). If combined with id and/or name, the owner filter is AND-ed with the other criteria.</param>
+    /// <param name="limit">Number of fuel tanks to return (default 25, max 100).</param>
+    /// <param name="page">Page number for pagination (default 1).</param>
+    public QueryQueryBuilder WithGetFuelTanks(FuelTankQueryBuilder fuelTankQueryBuilder, QueryBuilderParameter<Network> network, QueryBuilderParameter<Chain> chain, QueryBuilderParameter<int> limit, QueryBuilderParameter<int> page, QueryBuilderParameter<string?>? id = null, QueryBuilderParameter<string?>? name = null, QueryBuilderParameter<string?>? address = null, string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null)
+    {
+        var args = new List<QueryBuilderArgumentInfo>();
+        args.Add(new() { ArgumentName = "network", ArgumentValue = network} );
+        args.Add(new() { ArgumentName = "chain", ArgumentValue = chain} );
+        if (id != null)
+            args.Add(new() { ArgumentName = "id", ArgumentValue = id} );
+
+        if (name != null)
+            args.Add(new() { ArgumentName = "name", ArgumentValue = name} );
+
+        if (address != null)
+            args.Add(new() { ArgumentName = "address", ArgumentValue = address} );
+
+        args.Add(new() { ArgumentName = "limit", ArgumentValue = limit} );
+        args.Add(new() { ArgumentName = "page", ArgumentValue = page} );
+        return WithObjectField("GetFuelTanks", alias, fuelTankQueryBuilder, [include, skip], args);
+    }
+
+    public QueryQueryBuilder ExceptGetFuelTanks() => ExceptField("GetFuelTanks");
+
+    /// <param name="network">The network to query.</param>
+    /// <param name="chain">The chain to query.</param>
+    /// <param name="tankId">The fuel tank address. Accepts either a 0x-prefixed public key or an SS58 address.</param>
+    /// <param name="address">Filter to a single account address. Accepts either a 0x-prefixed public key or an SS58 address.</param>
+    /// <param name="limit">Number of accounts to return (default 25, max 100).</param>
+    /// <param name="page">Page number for pagination (default 1).</param>
+    public QueryQueryBuilder WithGetFuelTankAccounts(FuelTankAccountQueryBuilder fuelTankAccountQueryBuilder, QueryBuilderParameter<Network> network, QueryBuilderParameter<Chain> chain, QueryBuilderParameter<string> tankId, QueryBuilderParameter<int> limit, QueryBuilderParameter<int> page, QueryBuilderParameter<string?>? address = null, string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null)
+    {
+        var args = new List<QueryBuilderArgumentInfo>();
+        args.Add(new() { ArgumentName = "network", ArgumentValue = network} );
+        args.Add(new() { ArgumentName = "chain", ArgumentValue = chain} );
+        args.Add(new() { ArgumentName = "tankId", ArgumentValue = tankId} );
+        if (address != null)
+            args.Add(new() { ArgumentName = "address", ArgumentValue = address} );
+
+        args.Add(new() { ArgumentName = "limit", ArgumentValue = limit} );
+        args.Add(new() { ArgumentName = "page", ArgumentValue = page} );
+        return WithObjectField("GetFuelTankAccounts", alias, fuelTankAccountQueryBuilder, [include, skip], args);
+    }
+
+    public QueryQueryBuilder ExceptGetFuelTankAccounts() => ExceptField("GetFuelTankAccounts");
+
+    /// <param name="network">The network to query.</param>
+    /// <param name="chain">The chain to query.</param>
+    /// <param name="account">The account address that will dispatch the call. Accepts either a 0x-prefixed public key or an SS58 address.</param>
+    /// <param name="pallet">The pallet name, e.g. MULTI_TOKENS.</param>
+    /// <param name="method">The extrinsic / method name, e.g. CREATE_TOKEN.</param>
+    public QueryQueryBuilder WithGetCompatibleFuelTanks(CompatibleFuelTankQueryBuilder compatibleFuelTankQueryBuilder, QueryBuilderParameter<Network> network, QueryBuilderParameter<Chain> chain, QueryBuilderParameter<string> account, QueryBuilderParameter<string> pallet, QueryBuilderParameter<string> method, string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null)
+    {
+        var args = new List<QueryBuilderArgumentInfo>();
+        args.Add(new() { ArgumentName = "network", ArgumentValue = network} );
+        args.Add(new() { ArgumentName = "chain", ArgumentValue = chain} );
+        args.Add(new() { ArgumentName = "account", ArgumentValue = account} );
+        args.Add(new() { ArgumentName = "pallet", ArgumentValue = pallet} );
+        args.Add(new() { ArgumentName = "method", ArgumentValue = method} );
+        return WithObjectField("GetCompatibleFuelTanks", alias, compatibleFuelTankQueryBuilder, [include, skip], args);
+    }
+
+    public QueryQueryBuilder ExceptGetCompatibleFuelTanks() => ExceptField("GetCompatibleFuelTanks");
 }
 

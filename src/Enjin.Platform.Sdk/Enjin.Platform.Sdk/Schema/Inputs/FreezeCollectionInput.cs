@@ -17,7 +17,7 @@ namespace Enjin.Platform.Sdk;
 /// </summary>
 public partial class FreezeCollectionInput : IGraphQlInputObject
 {
-    private InputPropertyInfo _collectionId;
+    private InputPropertyInfo _id;
 
     /// <summary>
     /// The collection to freeze.
@@ -25,15 +25,15 @@ public partial class FreezeCollectionInput : IGraphQlInputObject
     #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
     [JsonConverter(typeof(QueryBuilderParameterConverter<global::System.Numerics.BigInteger>))]
     #endif
-    public QueryBuilderParameter<global::System.Numerics.BigInteger>? CollectionId
+    public QueryBuilderParameter<global::System.Numerics.BigInteger>? Id
     {
-        get => (QueryBuilderParameter<global::System.Numerics.BigInteger>?)_collectionId.Value;
-        set => _collectionId = new() { Name = "collectionId", Value = value };
+        get => (QueryBuilderParameter<global::System.Numerics.BigInteger>?)_id.Value;
+        set => _id = new() { Name = "id", Value = value };
     }
 
     IEnumerable<InputPropertyInfo> IGraphQlInputObject.GetPropertyValues()
     {
-        if (_collectionId.Name != null) yield return _collectionId;
+        if (_id.Name != null) yield return _id;
     }
 }
 

@@ -14,19 +14,27 @@ namespace Enjin.Platform.Sdk;
 
 public static class GraphQlTypes
 {
+    public const string BigDecimal = "BigDecimal";
     public const string BigInt = "BigInt";
     public const string Boolean = "Boolean";
+    public const string Enj = "ENJ";
     public const string Float = "Float";
     public const string Int = "Int";
     public const string Json = "JSON";
     public const string String = "String";
 
+    public const string BatchTransactionModeEnum = "BatchTransactionModeEnum";
     public const string Chain = "Chain";
     public const string CounterOfferResponseEnum = "CounterOfferResponseEnum";
+    public const string CoveragePolicy = "CoveragePolicy";
     public const string FreezeState = "FreezeState";
+    public const string FuelTankPermittedMethod = "FuelTankPermittedMethod";
+    public const string FuelTankWhitelistedPallet = "FuelTankWhitelistedPallet";
     public const string ListingTypeEnum = "ListingTypeEnum";
+    public const string ManagedWalletSweepStatusEnum = "ManagedWalletSweepStatusEnum";
     public const string Network = "Network";
     public const string PoolStateEnum = "PoolStateEnum";
+    public const string ShouldMutateAction = "ShouldMutateAction";
     public const string TokenBehaviorType = "TokenBehaviorType";
     public const string TokenCapType = "TokenCapType";
     public const string TransactionStateEnum = "TransactionStateEnum";
@@ -38,11 +46,23 @@ public static class GraphQlTypes
     public const string Block = "Block";
     public const string Collection = "Collection";
     public const string CollectionHolder = "CollectionHolder";
+    public const string CompatibleFuelTank = "CompatibleFuelTank";
+    public const string CompatibleFuelTankRuleSet = "CompatibleFuelTankRuleSet";
     public const string Event = "Event";
     public const string Extrinsic = "Extrinsic";
+    public const string FuelBudget = "FuelBudget";
+    public const string FuelTank = "FuelTank";
+    public const string FuelTankAccount = "FuelTankAccount";
+    public const string FuelTankAccountRule = "FuelTankAccountRule";
+    public const string FuelTankPermittedExtrinsic = "FuelTankPermittedExtrinsic";
+    public const string FuelTankRuleSet = "FuelTankRuleSet";
+    public const string FuelTankUserAccountManagement = "FuelTankUserAccountManagement";
+    public const string LinkedWallet = "LinkedWallet";
+    public const string LinkingCode = "LinkingCode";
     public const string Listing = "Listing";
     public const string ManagedWallet = "ManagedWallet";
     public const string ManagedWalletCursorPagination = "ManagedWalletCursorPagination";
+    public const string ManagedWalletSweepStatus = "ManagedWalletSweepStatus";
     public const string MarketPolicy = "MarketPolicy";
     public const string Metadata = "Metadata";
     public const string MetadataMedia = "MetadataMedia";
@@ -54,8 +74,10 @@ public static class GraphQlTypes
     public const string PoolBalance = "PoolBalance";
     public const string PoolMember = "PoolMember";
     public const string Query = "Query";
+    public const string RequireToken = "RequireToken";
     public const string RoyaltyBeneficiary = "RoyaltyBeneficiary";
     public const string RoyaltyCurrency = "RoyaltyCurrency";
+    public const string SweepManagedWalletResult = "SweepManagedWalletResult";
     public const string Token = "Token";
     public const string TokenBehavior = "TokenBehavior";
     public const string TokenCap = "TokenCap";
@@ -67,9 +89,13 @@ public static class GraphQlTypes
     public const string TransferPolicy = "TransferPolicy";
 
     public const string AcceptCollectionTransferInput = "AcceptCollectionTransferInput";
+    public const string AccountRuleInput = "AccountRuleInput";
+    public const string AddAccountInput = "AddAccountInput";
+    public const string AddAccountsInput = "AddAccountsInput";
     public const string AddTokenToGroupInput = "AddTokenToGroupInput";
     public const string AddWhitelistedAccountsInput = "AddWhitelistedAccountsInput";
     public const string AnswerCounterOfferInput = "AnswerCounterOfferInput";
+    public const string ApproveCollectionInput = "ApproveCollectionInput";
     public const string AssetIdInput = "AssetIdInput";
     public const string AttributeInput = "AttributeInput";
     public const string BatchSetCollectionAttributeInput = "BatchSetCollectionAttributeInput";
@@ -79,17 +105,21 @@ public static class GraphQlTypes
     public const string CancelCollectionTransferInput = "CancelCollectionTransferInput";
     public const string CancelListingInput = "CancelListingInput";
     public const string CreateCollectionInput = "CreateCollectionInput";
+    public const string CreateFuelTankInput = "CreateFuelTankInput";
     public const string CreateListingInput = "CreateListingInput";
+    public const string CreateRuleSetInput = "CreateRuleSetInput";
     public const string CreateTokenEntryInput = "CreateTokenEntryInput";
     public const string CreateTokenGroupInput = "CreateTokenGroupInput";
     public const string CreateTokenInput = "CreateTokenInput";
     public const string CreateTokensInput = "CreateTokensInput";
     public const string DestroyCollectionInput = "DestroyCollectionInput";
     public const string DestroyTokenGroupInput = "DestroyTokenGroupInput";
+    public const string DispatchRuleInput = "DispatchRuleInput";
     public const string FillListingInput = "FillListingInput";
     public const string FinalizeAuctionInput = "FinalizeAuctionInput";
     public const string FreezeCollectionInput = "FreezeCollectionInput";
     public const string FreezeTokenInput = "FreezeTokenInput";
+    public const string FuelBudgetRuleInput = "FuelBudgetRuleInput";
     public const string InfuseTokenEntryInput = "InfuseTokenEntryInput";
     public const string InfuseTokenInput = "InfuseTokenInput";
     public const string InfuseTokensInput = "InfuseTokensInput";
@@ -98,24 +128,34 @@ public static class GraphQlTypes
     public const string MintTokenInput = "MintTokenInput";
     public const string MintTokensInput = "MintTokensInput";
     public const string MutateCollectionInput = "MutateCollectionInput";
+    public const string MutateFreezeStateInput = "MutateFreezeStateInput";
+    public const string MutateFuelTankInput = "MutateFuelTankInput";
     public const string MutateTokenInput = "MutateTokenInput";
     public const string NominationPoolsBondInput = "NominationPoolsBondInput";
     public const string NominationPoolsUnbondInput = "NominationPoolsUnbondInput";
     public const string PlaceBidInput = "PlaceBidInput";
     public const string PlaceCounterOfferInput = "PlaceCounterOfferInput";
+    public const string RemoveAccountInput = "RemoveAccountInput";
+    public const string RemoveAccountsInput = "RemoveAccountsInput";
     public const string RemoveAllCollectionAttributesInput = "RemoveAllCollectionAttributesInput";
     public const string RemoveAllTokenAttributesInput = "RemoveAllTokenAttributesInput";
     public const string RemoveCollectionAttributeInput = "RemoveCollectionAttributeInput";
+    public const string RemoveFuelTankInput = "RemoveFuelTankInput";
+    public const string RemoveRuleSetInput = "RemoveRuleSetInput";
     public const string RemoveTokenAttributeInput = "RemoveTokenAttributeInput";
     public const string RemoveTokenFromGroupInput = "RemoveTokenFromGroupInput";
     public const string RemoveTokenGroupAttributeInput = "RemoveTokenGroupAttributeInput";
     public const string RemoveWhitelistedAccountsInput = "RemoveWhitelistedAccountsInput";
+    public const string RequireTokenInput = "RequireTokenInput";
     public const string RoyaltyCurrencyInput = "RoyaltyCurrencyInput";
     public const string RoyaltyInput = "RoyaltyInput";
+    public const string RuleSetEntryInput = "RuleSetEntryInput";
     public const string SetCollectionAttributeInput = "SetCollectionAttributeInput";
     public const string SetTokenAttributeInput = "SetTokenAttributeInput";
     public const string SetTokenGroupAttributeInput = "SetTokenGroupAttributeInput";
     public const string SetTokenGroupsInput = "SetTokenGroupsInput";
+    public const string ShouldMutateAccountExpirationInput = "ShouldMutateAccountExpirationInput";
+    public const string ShouldMutateUserAccountManagementInput = "ShouldMutateUserAccountManagementInput";
     public const string ThawCollectionInput = "ThawCollectionInput";
     public const string ThawTokenInput = "ThawTokenInput";
     public const string TokenBehaviorInput = "TokenBehaviorInput";
@@ -124,6 +164,8 @@ public static class GraphQlTypes
     public const string TransferEnjInput = "TransferEnjInput";
     public const string TransferTokenEntryInput = "TransferTokenEntryInput";
     public const string TransferTokenInput = "TransferTokenInput";
+    public const string UnapproveCollectionInput = "UnapproveCollectionInput";
+    public const string UserAccountManagementInput = "UserAccountManagementInput";
     public const string WhitelistedAccountInput = "WhitelistedAccountInput";
 
     public static readonly IReadOnlyDictionary<global::System.Type, string> ReverseMapping =
@@ -131,14 +173,18 @@ public static class GraphQlTypes
         {
             { typeof(string), "String" },
             { typeof(int), "Int" },
-            { typeof(global::System.Numerics.BigInteger), "BigInt" },
             { typeof(decimal), "Float" },
+            { typeof(global::System.Numerics.BigInteger), "BigInt" },
             { typeof(DateTimeOffset), "String" },
             { typeof(bool), "Boolean" },
             { typeof(AcceptCollectionTransferInput), "AcceptCollectionTransferInput" },
+            { typeof(AccountRuleInput), "AccountRuleInput" },
+            { typeof(AddAccountInput), "AddAccountInput" },
+            { typeof(AddAccountsInput), "AddAccountsInput" },
             { typeof(AddTokenToGroupInput), "AddTokenToGroupInput" },
             { typeof(AddWhitelistedAccountsInput), "AddWhitelistedAccountsInput" },
             { typeof(AnswerCounterOfferInput), "AnswerCounterOfferInput" },
+            { typeof(ApproveCollectionInput), "ApproveCollectionInput" },
             { typeof(AssetIdInput), "AssetIdInput" },
             { typeof(AttributeInput), "AttributeInput" },
             { typeof(BatchSetCollectionAttributeInput), "BatchSetCollectionAttributeInput" },
@@ -148,17 +194,21 @@ public static class GraphQlTypes
             { typeof(CancelCollectionTransferInput), "CancelCollectionTransferInput" },
             { typeof(CancelListingInput), "CancelListingInput" },
             { typeof(CreateCollectionInput), "CreateCollectionInput" },
+            { typeof(CreateFuelTankInput), "CreateFuelTankInput" },
             { typeof(CreateListingInput), "CreateListingInput" },
+            { typeof(CreateRuleSetInput), "CreateRuleSetInput" },
             { typeof(CreateTokenEntryInput), "CreateTokenEntryInput" },
             { typeof(CreateTokenGroupInput), "CreateTokenGroupInput" },
             { typeof(CreateTokenInput), "CreateTokenInput" },
             { typeof(CreateTokensInput), "CreateTokensInput" },
             { typeof(DestroyCollectionInput), "DestroyCollectionInput" },
             { typeof(DestroyTokenGroupInput), "DestroyTokenGroupInput" },
+            { typeof(DispatchRuleInput), "DispatchRuleInput" },
             { typeof(FillListingInput), "FillListingInput" },
             { typeof(FinalizeAuctionInput), "FinalizeAuctionInput" },
             { typeof(FreezeCollectionInput), "FreezeCollectionInput" },
             { typeof(FreezeTokenInput), "FreezeTokenInput" },
+            { typeof(FuelBudgetRuleInput), "FuelBudgetRuleInput" },
             { typeof(InfuseTokenEntryInput), "InfuseTokenEntryInput" },
             { typeof(InfuseTokenInput), "InfuseTokenInput" },
             { typeof(InfuseTokensInput), "InfuseTokensInput" },
@@ -167,24 +217,34 @@ public static class GraphQlTypes
             { typeof(MintTokenInput), "MintTokenInput" },
             { typeof(MintTokensInput), "MintTokensInput" },
             { typeof(MutateCollectionInput), "MutateCollectionInput" },
+            { typeof(MutateFreezeStateInput), "MutateFreezeStateInput" },
+            { typeof(MutateFuelTankInput), "MutateFuelTankInput" },
             { typeof(MutateTokenInput), "MutateTokenInput" },
             { typeof(NominationPoolsBondInput), "NominationPoolsBondInput" },
             { typeof(NominationPoolsUnbondInput), "NominationPoolsUnbondInput" },
             { typeof(PlaceBidInput), "PlaceBidInput" },
             { typeof(PlaceCounterOfferInput), "PlaceCounterOfferInput" },
+            { typeof(RemoveAccountInput), "RemoveAccountInput" },
+            { typeof(RemoveAccountsInput), "RemoveAccountsInput" },
             { typeof(RemoveAllCollectionAttributesInput), "RemoveAllCollectionAttributesInput" },
             { typeof(RemoveAllTokenAttributesInput), "RemoveAllTokenAttributesInput" },
             { typeof(RemoveCollectionAttributeInput), "RemoveCollectionAttributeInput" },
+            { typeof(RemoveFuelTankInput), "RemoveFuelTankInput" },
+            { typeof(RemoveRuleSetInput), "RemoveRuleSetInput" },
             { typeof(RemoveTokenAttributeInput), "RemoveTokenAttributeInput" },
             { typeof(RemoveTokenFromGroupInput), "RemoveTokenFromGroupInput" },
             { typeof(RemoveTokenGroupAttributeInput), "RemoveTokenGroupAttributeInput" },
             { typeof(RemoveWhitelistedAccountsInput), "RemoveWhitelistedAccountsInput" },
+            { typeof(RequireTokenInput), "RequireTokenInput" },
             { typeof(RoyaltyCurrencyInput), "RoyaltyCurrencyInput" },
             { typeof(RoyaltyInput), "RoyaltyInput" },
+            { typeof(RuleSetEntryInput), "RuleSetEntryInput" },
             { typeof(SetCollectionAttributeInput), "SetCollectionAttributeInput" },
             { typeof(SetTokenAttributeInput), "SetTokenAttributeInput" },
             { typeof(SetTokenGroupAttributeInput), "SetTokenGroupAttributeInput" },
             { typeof(SetTokenGroupsInput), "SetTokenGroupsInput" },
+            { typeof(ShouldMutateAccountExpirationInput), "ShouldMutateAccountExpirationInput" },
+            { typeof(ShouldMutateUserAccountManagementInput), "ShouldMutateUserAccountManagementInput" },
             { typeof(ThawCollectionInput), "ThawCollectionInput" },
             { typeof(ThawTokenInput), "ThawTokenInput" },
             { typeof(TokenBehaviorInput), "TokenBehaviorInput" },
@@ -193,6 +253,8 @@ public static class GraphQlTypes
             { typeof(TransferEnjInput), "TransferEnjInput" },
             { typeof(TransferTokenEntryInput), "TransferTokenEntryInput" },
             { typeof(TransferTokenInput), "TransferTokenInput" },
+            { typeof(UnapproveCollectionInput), "UnapproveCollectionInput" },
+            { typeof(UserAccountManagementInput), "UserAccountManagementInput" },
             { typeof(WhitelistedAccountInput), "WhitelistedAccountInput" }
         };
 }

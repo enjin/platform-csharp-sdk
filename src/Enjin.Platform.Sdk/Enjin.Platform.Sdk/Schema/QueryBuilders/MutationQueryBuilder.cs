@@ -18,9 +18,11 @@ public partial class MutationQueryBuilder : GraphQlQueryBuilder<MutationQueryBui
     {
         new() { Name = "CreateTransaction", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(TransactionQueryBuilder) },
         new() { Name = "CreateBatchTransaction", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(TransactionQueryBuilder) },
+        new() { Name = "CreateLinkingCode", IsComplex = true, QueryBuilderType = typeof(LinkingCodeQueryBuilder) },
         new() { Name = "CreateManagedWallet", RequiresParameters = true },
         new() { Name = "RefreshMetadata", RequiresParameters = true },
-        new() { Name = "SignTransaction", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(TransactionQueryBuilder) }
+        new() { Name = "SignTransaction", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(TransactionQueryBuilder) },
+        new() { Name = "SweepManagedWallet", RequiresParameters = true, IsComplex = true, QueryBuilderType = typeof(SweepManagedWalletResultQueryBuilder) }
     };
 
     protected override string TypeName => "Mutation";
@@ -40,8 +42,9 @@ public partial class MutationQueryBuilder : GraphQlQueryBuilder<MutationQueryBui
     /// <param name="idempotencyKey">An optional idempotency key. A validation error will occur if the key already exists.</param>
     /// <param name="proxyAddress">Wrap the call in Proxy.proxy with this address as the real origin.</param>
     /// <param name="fuelTank">Wrap the call in FuelTanks.dispatch_and_touch using this tank address.</param>
+    /// <param name="fuelTankRuleSetId">The fuel tank rule set id to dispatch against. Defaults to 0. Only used when fuelTank is provided.</param>
     /// <param name="transaction">The transaction details including the underlying method and required attributes.</param>
-    public MutationQueryBuilder WithCreateTransaction(TransactionQueryBuilder transactionQueryBuilder, QueryBuilderParameter<Network> network, QueryBuilderParameter<Chain> chain, QueryBuilderParameter<TransactionInput> transaction, QueryBuilderParameter<string?>? signerAddress = null, QueryBuilderParameter<string?>? signerExternalId = null, QueryBuilderParameter<string?>? idempotencyKey = null, QueryBuilderParameter<string?>? proxyAddress = null, QueryBuilderParameter<string?>? fuelTank = null, string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null)
+    public MutationQueryBuilder WithCreateTransaction(TransactionQueryBuilder transactionQueryBuilder, QueryBuilderParameter<Network> network, QueryBuilderParameter<Chain> chain, QueryBuilderParameter<TransactionInput> transaction, QueryBuilderParameter<string?>? signerAddress = null, QueryBuilderParameter<string?>? signerExternalId = null, QueryBuilderParameter<string?>? idempotencyKey = null, QueryBuilderParameter<string?>? proxyAddress = null, QueryBuilderParameter<string?>? fuelTank = null, QueryBuilderParameter<int?>? fuelTankRuleSetId = null, string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null)
     {
         var args = new List<QueryBuilderArgumentInfo>();
         args.Add(new() { ArgumentName = "network", ArgumentValue = network} );
@@ -60,6 +63,9 @@ public partial class MutationQueryBuilder : GraphQlQueryBuilder<MutationQueryBui
 
         if (fuelTank != null)
             args.Add(new() { ArgumentName = "fuelTank", ArgumentValue = fuelTank} );
+
+        if (fuelTankRuleSetId != null)
+            args.Add(new() { ArgumentName = "fuelTankRuleSetId", ArgumentValue = fuelTankRuleSetId} );
 
         args.Add(new() { ArgumentName = "transaction", ArgumentValue = transaction} );
         return WithObjectField("CreateTransaction", alias, transactionQueryBuilder, [include, skip], args);
@@ -74,8 +80,10 @@ public partial class MutationQueryBuilder : GraphQlQueryBuilder<MutationQueryBui
     /// <param name="idempotencyKey">An optional idempotency key. A validation error will occur if the key already exists.</param>
     /// <param name="proxyAddress">Wrap the call in Proxy.proxy with this address as the real origin.</param>
     /// <param name="fuelTank">Wrap the call in FuelTanks.dispatch_and_touch using this tank address.</param>
+    /// <param name="fuelTankRuleSetId">The fuel tank rule set id to dispatch against. Defaults to 0. Only used when fuelTank is provided.</param>
     /// <param name="transactions">The list of transactions to encode.</param>
-    public MutationQueryBuilder WithCreateBatchTransaction(TransactionQueryBuilder transactionQueryBuilder, QueryBuilderParameter<Network> network, QueryBuilderParameter<Chain> chain, QueryBuilderParameter<IEnumerable<TransactionInput>> transactions, QueryBuilderParameter<string?>? signerAddress = null, QueryBuilderParameter<string?>? signerExternalId = null, QueryBuilderParameter<string?>? idempotencyKey = null, QueryBuilderParameter<string?>? proxyAddress = null, QueryBuilderParameter<string?>? fuelTank = null, string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null)
+    /// <param name="batchMode">Determines whether the batch halts, continues, or reverts when a call fails.</param>
+    public MutationQueryBuilder WithCreateBatchTransaction(TransactionQueryBuilder transactionQueryBuilder, QueryBuilderParameter<Network> network, QueryBuilderParameter<Chain> chain, QueryBuilderParameter<IEnumerable<TransactionInput>> transactions, QueryBuilderParameter<BatchTransactionModeEnum> batchMode, QueryBuilderParameter<string?>? signerAddress = null, QueryBuilderParameter<string?>? signerExternalId = null, QueryBuilderParameter<string?>? idempotencyKey = null, QueryBuilderParameter<string?>? proxyAddress = null, QueryBuilderParameter<string?>? fuelTank = null, QueryBuilderParameter<int?>? fuelTankRuleSetId = null, string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null)
     {
         var args = new List<QueryBuilderArgumentInfo>();
         args.Add(new() { ArgumentName = "network", ArgumentValue = network} );
@@ -95,11 +103,27 @@ public partial class MutationQueryBuilder : GraphQlQueryBuilder<MutationQueryBui
         if (fuelTank != null)
             args.Add(new() { ArgumentName = "fuelTank", ArgumentValue = fuelTank} );
 
+        if (fuelTankRuleSetId != null)
+            args.Add(new() { ArgumentName = "fuelTankRuleSetId", ArgumentValue = fuelTankRuleSetId} );
+
         args.Add(new() { ArgumentName = "transactions", ArgumentValue = transactions} );
+        args.Add(new() { ArgumentName = "batchMode", ArgumentValue = batchMode} );
         return WithObjectField("CreateBatchTransaction", alias, transactionQueryBuilder, [include, skip], args);
     }
 
     public MutationQueryBuilder ExceptCreateBatchTransaction() => ExceptField("CreateBatchTransaction");
+
+    /// <param name="idempotencyKey">An optional idempotency key. A validation error will occur if the key already exists.</param>
+    public MutationQueryBuilder WithCreateLinkingCode(LinkingCodeQueryBuilder linkingCodeQueryBuilder, QueryBuilderParameter<string?>? idempotencyKey = null, string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null)
+    {
+        var args = new List<QueryBuilderArgumentInfo>();
+        if (idempotencyKey != null)
+            args.Add(new() { ArgumentName = "idempotencyKey", ArgumentValue = idempotencyKey} );
+
+        return WithObjectField("CreateLinkingCode", alias, linkingCodeQueryBuilder, [include, skip], args);
+    }
+
+    public MutationQueryBuilder ExceptCreateLinkingCode() => ExceptField("CreateLinkingCode");
 
     /// <param name="externalId">A user-defined external identifier.</param>
     public MutationQueryBuilder WithCreateManagedWallet(QueryBuilderParameter<string> externalId, string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null)
@@ -150,5 +174,35 @@ public partial class MutationQueryBuilder : GraphQlQueryBuilder<MutationQueryBui
     }
 
     public MutationQueryBuilder ExceptSignTransaction() => ExceptField("SignTransaction");
+
+    /// <param name="network">The network to mutate.</param>
+    /// <param name="chain">The chain to mutate.</param>
+    /// <param name="signerAddress">The SS58 address or public key of the signer. (mutually exclusive with signerExternalId)</param>
+    /// <param name="signerExternalId">A user-defined external identifier, used with the daemon, to be used to sign the transaction. (mutually exclusive with signerAddress)</param>
+    /// <param name="recipient">The address to which all swept funds and tokens will be sent.</param>
+    /// <param name="fuelTank">Optional fuel tank to sponsor the sweep fee. When set, the sweep is dispatched via FuelTanks.dispatch_and_touch.</param>
+    /// <param name="fuelTankRuleSetId">The fuel tank rule set id to dispatch against. Defaults to 0. Only used when fuelTank is provided.</param>
+    public MutationQueryBuilder WithSweepManagedWallet(SweepManagedWalletResultQueryBuilder sweepManagedWalletResultQueryBuilder, QueryBuilderParameter<Network> network, QueryBuilderParameter<Chain> chain, QueryBuilderParameter<string> recipient, QueryBuilderParameter<string?>? signerAddress = null, QueryBuilderParameter<string?>? signerExternalId = null, QueryBuilderParameter<string?>? fuelTank = null, QueryBuilderParameter<int?>? fuelTankRuleSetId = null, string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null)
+    {
+        var args = new List<QueryBuilderArgumentInfo>();
+        args.Add(new() { ArgumentName = "network", ArgumentValue = network} );
+        args.Add(new() { ArgumentName = "chain", ArgumentValue = chain} );
+        if (signerAddress != null)
+            args.Add(new() { ArgumentName = "signerAddress", ArgumentValue = signerAddress} );
+
+        if (signerExternalId != null)
+            args.Add(new() { ArgumentName = "signerExternalId", ArgumentValue = signerExternalId} );
+
+        args.Add(new() { ArgumentName = "recipient", ArgumentValue = recipient} );
+        if (fuelTank != null)
+            args.Add(new() { ArgumentName = "fuelTank", ArgumentValue = fuelTank} );
+
+        if (fuelTankRuleSetId != null)
+            args.Add(new() { ArgumentName = "fuelTankRuleSetId", ArgumentValue = fuelTankRuleSetId} );
+
+        return WithObjectField("SweepManagedWallet", alias, sweepManagedWalletResultQueryBuilder, [include, skip], args);
+    }
+
+    public MutationQueryBuilder ExceptSweepManagedWallet() => ExceptField("SweepManagedWallet");
 }
 

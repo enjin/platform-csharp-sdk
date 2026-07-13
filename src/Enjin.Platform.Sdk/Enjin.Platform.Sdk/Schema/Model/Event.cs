@@ -22,7 +22,7 @@ public partial class Event
     /// </summary>
     public string? Id { get; set; }
     /// <summary>
-    /// The event name.
+    /// The human-readable event name (pallet and method with spaces).
     /// </summary>
     public string? Name { get; set; }
     /// <summary>
@@ -33,5 +33,9 @@ public partial class Event
     /// The related token ID.
     /// </summary>
     public string? TokenId { get; set; }
+    /// <summary>
+    /// The raw event data payload.
+    /// </summary>
+    public string? Data { get; set; }
 }
 

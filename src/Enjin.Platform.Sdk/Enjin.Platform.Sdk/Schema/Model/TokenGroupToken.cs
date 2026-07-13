@@ -22,6 +22,10 @@ public partial class TokenGroupToken
     /// </summary>
     public global::System.Numerics.BigInteger TokenGroupId { get; set; }
     /// <summary>
+    /// The collection ID.
+    /// </summary>
+    public global::System.Numerics.BigInteger CollectionId { get; set; }
+    /// <summary>
     /// The token ID.
     /// </summary>
     public string? TokenId { get; set; }

@@ -21,6 +21,8 @@ public partial class TransferTokenInput : IGraphQlInputObject
     private InputPropertyInfo _collectionId;
     private InputPropertyInfo _tokenId;
     private InputPropertyInfo _amount;
+    private InputPropertyInfo _sourceAddress;
+    private InputPropertyInfo _operatorPaysDeposit;
 
     /// <summary>
     /// The SS58 address or public key of the token recipient.
@@ -70,12 +72,38 @@ public partial class TransferTokenInput : IGraphQlInputObject
         set => _amount = new() { Name = "amount", Value = value };
     }
 
+    /// <summary>
+    /// Optional token owner's address. When set, the signer transfers on the owner's behalf as an approved collection operator (MultiTokens TransferParams::Operator); otherwise the signer's own balance is moved (Simple).
+    /// </summary>
+    #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+    [JsonConverter(typeof(QueryBuilderParameterConverter<string?>))]
+    #endif
+    public QueryBuilderParameter<string?>? SourceAddress
+    {
+        get => (QueryBuilderParameter<string?>?)_sourceAddress.Value;
+        set => _sourceAddress = new() { Name = "sourceAddress", Value = value };
+    }
+
+    /// <summary>
+    /// When transferring on behalf of a sourceAddress, whether the operator (signer) pays the token account deposit instead of the owner. Ignored without a sourceAddress.
+    /// </summary>
+    #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+    [JsonConverter(typeof(QueryBuilderParameterConverter<bool?>))]
+    #endif
+    public QueryBuilderParameter<bool?>? OperatorPaysDeposit
+    {
+        get => (QueryBuilderParameter<bool?>?)_operatorPaysDeposit.Value;
+        set => _operatorPaysDeposit = new() { Name = "operatorPaysDeposit", Value = value };
+    }
+
     IEnumerable<InputPropertyInfo> IGraphQlInputObject.GetPropertyValues()
     {
         if (_recipient.Name != null) yield return _recipient;
         if (_collectionId.Name != null) yield return _collectionId;
         if (_tokenId.Name != null) yield return _tokenId;
         if (_amount.Name != null) yield return _amount;
+        if (_sourceAddress.Name != null) yield return _sourceAddress;
+        if (_operatorPaysDeposit.Name != null) yield return _operatorPaysDeposit;
     }
 }
 

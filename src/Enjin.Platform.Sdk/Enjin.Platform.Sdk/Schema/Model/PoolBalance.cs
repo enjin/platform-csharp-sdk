@@ -18,16 +18,16 @@ namespace Enjin.Platform.Sdk;
 public partial class PoolBalance
 {
     /// <summary>
-    /// Total stash balance.
+    /// Total stash balance, expressed as ENJ.
     /// </summary>
-    public global::System.Numerics.BigInteger Stash { get; set; }
+    public string Stash { get; set; }
     /// <summary>
-    /// Reward account balance.
+    /// Reward account balance, expressed as ENJ.
     /// </summary>
-    public global::System.Numerics.BigInteger Reward { get; set; }
+    public string Reward { get; set; }
     /// <summary>
-    /// Active bonded amount.
+    /// Active bonded amount, expressed as ENJ.
     /// </summary>
-    public global::System.Numerics.BigInteger Active { get; set; }
+    public string Active { get; set; }
 }
 

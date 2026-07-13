@@ -30,9 +30,9 @@ public partial class Account
     /// </summary>
     public int? Nonce { get; set; }
     /// <summary>
-    /// The account transferable balance.
+    /// The account transferable balance, expressed as ENJ.
     /// </summary>
-    public global::System.Numerics.BigInteger Balance { get; set; }
+    public string Balance { get; set; }
     /// <summary>
     /// The tokens held by this account, each paired with the account's balance.
     /// </summary>

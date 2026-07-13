@@ -17,6 +17,7 @@ public partial class TokenGroupTokenQueryBuilder : GraphQlQueryBuilder<TokenGrou
     private static readonly GraphQlFieldMetadata[] AllFieldMetadata =
     {
         new() { Name = "tokenGroupId" },
+        new() { Name = "collectionId" },
         new() { Name = "tokenId" },
         new() { Name = "position" },
         new() { Name = "token", IsComplex = true, QueryBuilderType = typeof(TokenQueryBuilder) },
@@ -30,6 +31,10 @@ public partial class TokenGroupTokenQueryBuilder : GraphQlQueryBuilder<TokenGrou
     public TokenGroupTokenQueryBuilder WithTokenGroupId(string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null) => WithScalarField("tokenGroupId", alias, [include, skip]);
 
     public TokenGroupTokenQueryBuilder ExceptTokenGroupId() => ExceptField("tokenGroupId");
+
+    public TokenGroupTokenQueryBuilder WithCollectionId(string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null) => WithScalarField("collectionId", alias, [include, skip]);
+
+    public TokenGroupTokenQueryBuilder ExceptCollectionId() => ExceptField("collectionId");
 
     public TokenGroupTokenQueryBuilder WithTokenId(string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null) => WithScalarField("tokenId", alias, [include, skip]);
 
