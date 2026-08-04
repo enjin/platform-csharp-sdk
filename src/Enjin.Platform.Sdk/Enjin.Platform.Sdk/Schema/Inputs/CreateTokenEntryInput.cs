@@ -23,6 +23,7 @@ public partial class CreateTokenEntryInput : IGraphQlInputObject
     private InputPropertyInfo _listingForbidden;
     private InputPropertyInfo _cap;
     private InputPropertyInfo _behavior;
+    private InputPropertyInfo _freezeState;
     private InputPropertyInfo _attributes;
     private InputPropertyInfo _infusion;
     private InputPropertyInfo _anyoneCanInfuse;
@@ -101,6 +102,18 @@ public partial class CreateTokenEntryInput : IGraphQlInputObject
     }
 
     /// <summary>
+    /// The initial freeze state of the token. Omit to create the token unfrozen and freezable later.
+    /// </summary>
+    #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
+    [JsonConverter(typeof(QueryBuilderParameterConverter<FreezeState?>))]
+    #endif
+    public QueryBuilderParameter<FreezeState?>? FreezeState
+    {
+        get => (QueryBuilderParameter<FreezeState?>?)_freezeState.Value;
+        set => _freezeState = new() { Name = "freezeState", Value = value };
+    }
+
+    /// <summary>
     /// Key-value attributes to attach to the token on-chain.
     /// </summary>
     #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
@@ -113,14 +126,14 @@ public partial class CreateTokenEntryInput : IGraphQlInputObject
     }
 
     /// <summary>
-    /// Amount of currency infused into the token at creation.
+    /// Amount of ENJ infused into the token at creation, expressed as a decimal or integer ENJ (e.g. "1.5"); converted to base units on-chain.
     /// </summary>
     #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
-    [JsonConverter(typeof(QueryBuilderParameterConverter<global::System.Numerics.BigInteger>))]
+    [JsonConverter(typeof(QueryBuilderParameterConverter<string>))]
     #endif
-    public QueryBuilderParameter<global::System.Numerics.BigInteger>? Infusion
+    public QueryBuilderParameter<string>? Infusion
     {
-        get => (QueryBuilderParameter<global::System.Numerics.BigInteger>?)_infusion.Value;
+        get => (QueryBuilderParameter<string>?)_infusion.Value;
         set => _infusion = new() { Name = "infusion", Value = value };
     }
 
@@ -156,6 +169,7 @@ public partial class CreateTokenEntryInput : IGraphQlInputObject
         if (_listingForbidden.Name != null) yield return _listingForbidden;
         if (_cap.Name != null) yield return _cap;
         if (_behavior.Name != null) yield return _behavior;
+        if (_freezeState.Name != null) yield return _freezeState;
         if (_attributes.Name != null) yield return _attributes;
         if (_infusion.Name != null) yield return _infusion;
         if (_anyoneCanInfuse.Name != null) yield return _anyoneCanInfuse;

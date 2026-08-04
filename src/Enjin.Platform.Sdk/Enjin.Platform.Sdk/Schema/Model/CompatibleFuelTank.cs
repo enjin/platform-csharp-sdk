@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 namespace Enjin.Platform.Sdk;
 
 /// <summary>
-/// A fuel tank that is compatible with a given account, pallet, and method.
+/// A fuel tank that is compatible with a transaction call.
 /// </summary>
 public partial class CompatibleFuelTank
 {
@@ -25,6 +25,10 @@ public partial class CompatibleFuelTank
     /// The fuel tank display name.
     /// </summary>
     public string? Name { get; set; }
+    /// <summary>
+    /// The fuel tank account address.
+    /// </summary>
+    public string? Address { get; set; }
     /// <summary>
     /// Whether the tank covers the storage deposit in addition to fees.
     /// </summary>
@@ -38,20 +42,12 @@ public partial class CompatibleFuelTank
     /// </summary>
     public CompatibleFuelTankRuleSet? RuleSet { get; set; }
     /// <summary>
-    /// Remaining per-user fuel budget expressed as ENJ, or null if no budget rule applies.
-    /// </summary>
-    public string? RemainingBudget { get; set; }
-    /// <summary>
-    /// Maximum per-user fuel budget expressed as ENJ, or null if no budget rule applies.
-    /// </summary>
-    public string? MaxBudget { get; set; }
-    /// <summary>
-    /// Amount of per-user fuel budget already consumed, expressed as ENJ, or null if no budget rule applies.
-    /// </summary>
-    public string? ConsumedBudget { get; set; }
-    /// <summary>
     /// Free balance of the tank account, expressed as ENJ.
     /// </summary>
     public string? TankBalance { get; set; }
+    /// <summary>
+    /// The amount available to fund this transaction, expressed as ENJ.
+    /// </summary>
+    public string AvailableBudget { get; set; }
 }
 

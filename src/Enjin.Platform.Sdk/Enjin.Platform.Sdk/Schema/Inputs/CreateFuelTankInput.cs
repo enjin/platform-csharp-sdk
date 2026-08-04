@@ -61,7 +61,7 @@ public partial class CreateFuelTankInput : IGraphQlInputObject
     }
 
     /// <summary>
-    /// Rule sets to create with the tank, each paired with its numeric id. Omit for an empty tank.
+    /// Rule sets to create with the tank, each paired with its numeric id. At least one rule set is required — the chain rejects a tank with no rule sets.
     /// </summary>
     #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
     [JsonConverter(typeof(QueryBuilderParameterConverter<ICollection<RuleSetEntryInput>?>))]

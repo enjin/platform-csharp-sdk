@@ -42,9 +42,13 @@ public partial class Transaction
     /// </summary>
     public TransactionStateEnum? State { get; set; }
     /// <summary>
-    /// The on-chain failure reason when the transaction failed, including partial batch failures where the extrinsic finalized but one or more wrapped items did not dispatch.
+    /// The on-chain failure reason, or null when none. Set both when the extrinsic itself failed (state FAILED) and when it finalized (state FINALIZED) with one or more wrapped batch items failing to dispatch — a force_batch still finalizes on-chain, so state reflects the extrinsic while this field reports the per-item outcome. Treat a non-null value as "the requested work did not fully happen" regardless of state.
     /// </summary>
     public string? Error { get; set; }
+    /// <summary>
+    /// Zero-based positions of batch items that failed to dispatch while the extrinsic finalized, i.e. with state FINALIZED and a non-null error (CONTINUE_ON_ERROR batches only). Null when unknown or not applicable.
+    /// </summary>
+    public ICollection<int>? FailedItemIndexes { get; set; }
     /// <summary>
     /// When the transaction was created.
     /// </summary>

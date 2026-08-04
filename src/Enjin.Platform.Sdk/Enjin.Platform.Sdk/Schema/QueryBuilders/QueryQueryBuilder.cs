@@ -542,16 +542,16 @@ public partial class QueryQueryBuilder : GraphQlQueryBuilder<QueryQueryBuilder>
     /// <param name="network">The network to query.</param>
     /// <param name="chain">The chain to query.</param>
     /// <param name="account">The account address that will dispatch the call. Accepts either a 0x-prefixed public key or an SS58 address.</param>
-    /// <param name="pallet">The pallet name, e.g. MULTI_TOKENS.</param>
-    /// <param name="method">The extrinsic / method name, e.g. CREATE_TOKEN.</param>
-    public QueryQueryBuilder WithGetCompatibleFuelTanks(CompatibleFuelTankQueryBuilder compatibleFuelTankQueryBuilder, QueryBuilderParameter<Network> network, QueryBuilderParameter<Chain> chain, QueryBuilderParameter<string> account, QueryBuilderParameter<string> pallet, QueryBuilderParameter<string> method, string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null)
+    /// <param name="transactions">Transaction calls to encode and check for compatible fuel tanks.</param>
+    /// <param name="batchMode">The batching behavior used when multiple transactions are supplied.</param>
+    public QueryQueryBuilder WithGetCompatibleFuelTanks(CompatibleFuelTankQueryBuilder compatibleFuelTankQueryBuilder, QueryBuilderParameter<Network> network, QueryBuilderParameter<Chain> chain, QueryBuilderParameter<string> account, QueryBuilderParameter<IEnumerable<TransactionInput>> transactions, QueryBuilderParameter<BatchTransactionModeEnum> batchMode, string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null)
     {
         var args = new List<QueryBuilderArgumentInfo>();
         args.Add(new() { ArgumentName = "network", ArgumentValue = network} );
         args.Add(new() { ArgumentName = "chain", ArgumentValue = chain} );
         args.Add(new() { ArgumentName = "account", ArgumentValue = account} );
-        args.Add(new() { ArgumentName = "pallet", ArgumentValue = pallet} );
-        args.Add(new() { ArgumentName = "method", ArgumentValue = method} );
+        args.Add(new() { ArgumentName = "transactions", ArgumentValue = transactions} );
+        args.Add(new() { ArgumentName = "batchMode", ArgumentValue = batchMode} );
         return WithObjectField("GetCompatibleFuelTanks", alias, compatibleFuelTankQueryBuilder, [include, skip], args);
     }
 

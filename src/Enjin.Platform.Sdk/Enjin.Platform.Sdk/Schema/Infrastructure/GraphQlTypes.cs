@@ -73,6 +73,7 @@ public static class GraphQlTypes
     public const string PendingCollection = "PendingCollection";
     public const string PoolBalance = "PoolBalance";
     public const string PoolMember = "PoolMember";
+    public const string PusherSocketAuth = "PusherSocketAuth";
     public const string Query = "Query";
     public const string RequireToken = "RequireToken";
     public const string RoyaltyBeneficiary = "RoyaltyBeneficiary";
