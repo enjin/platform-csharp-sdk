@@ -42,9 +42,9 @@ public partial class FuelTankRuleSet
     /// </summary>
     public ICollection<global::System.Numerics.BigInteger?>? WhitelistedCollections { get; set; }
     /// <summary>
-    /// Only calls targeting these pallet names are permitted.
+    /// Only calls targeting these pallets are permitted.
     /// </summary>
-    public ICollection<string>? WhitelistedPallets { get; set; }
+    public ICollection<FuelTankWhitelistedPallet>? WhitelistedPallets { get; set; }
     /// <summary>
     /// Maximum fuel that any single transaction under this rule set may burn, expressed as ENJ.
     /// </summary>

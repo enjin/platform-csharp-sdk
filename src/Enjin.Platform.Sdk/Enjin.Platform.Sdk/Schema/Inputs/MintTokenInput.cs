@@ -72,14 +72,14 @@ public partial class MintTokenInput : IGraphQlInputObject
     }
 
     /// <summary>
-    /// The unit price for the minted tokens. Omit to keep the existing unit price.
+    /// The unit price for the minted tokens, expressed as a decimal or integer ENJ (e.g. "1.5"); converted to base units on-chain. Omit to keep the existing unit price.
     /// </summary>
     #if !GRAPHQL_GENERATOR_DISABLE_NEWTONSOFT_JSON
-    [JsonConverter(typeof(QueryBuilderParameterConverter<global::System.Numerics.BigInteger?>))]
+    [JsonConverter(typeof(QueryBuilderParameterConverter<string?>))]
     #endif
-    public QueryBuilderParameter<global::System.Numerics.BigInteger?>? UnitPrice
+    public QueryBuilderParameter<string?>? UnitPrice
     {
-        get => (QueryBuilderParameter<global::System.Numerics.BigInteger?>?)_unitPrice.Value;
+        get => (QueryBuilderParameter<string?>?)_unitPrice.Value;
         set => _unitPrice = new() { Name = "unitPrice", Value = value };
     }
 

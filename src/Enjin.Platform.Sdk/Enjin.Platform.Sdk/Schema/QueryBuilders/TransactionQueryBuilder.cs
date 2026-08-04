@@ -23,6 +23,7 @@ public partial class TransactionQueryBuilder : GraphQlQueryBuilder<TransactionQu
         new() { Name = "extrinsic", IsComplex = true, QueryBuilderType = typeof(ExtrinsicQueryBuilder) },
         new() { Name = "state" },
         new() { Name = "error" },
+        new() { Name = "failedItemIndexes", IsComplex = true },
         new() { Name = "createdAt" },
         new() { Name = "updatedAt" }
     };
@@ -58,6 +59,10 @@ public partial class TransactionQueryBuilder : GraphQlQueryBuilder<TransactionQu
     public TransactionQueryBuilder WithError(string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null) => WithScalarField("error", alias, [include, skip]);
 
     public TransactionQueryBuilder ExceptError() => ExceptField("error");
+
+    public TransactionQueryBuilder WithFailedItemIndexes(string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null) => WithScalarField("failedItemIndexes", alias, [include, skip]);
+
+    public TransactionQueryBuilder ExceptFailedItemIndexes() => ExceptField("failedItemIndexes");
 
     public TransactionQueryBuilder WithCreatedAt(string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null) => WithScalarField("createdAt", alias, [include, skip]);
 

@@ -119,7 +119,7 @@ public partial class Query
     /// </summary>
     public ICollection<FuelTankAccount>? GetFuelTankAccounts { get; set; }
     /// <summary>
-    /// Get fuel tanks that are compatible with a given account, pallet, and method.
+    /// Get fuel tanks that are compatible with a transaction call.
     /// </summary>
     public ICollection<CompatibleFuelTank>? GetCompatibleFuelTanks { get; set; }
 }

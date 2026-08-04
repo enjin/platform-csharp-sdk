@@ -15,6 +15,10 @@ namespace Enjin.Platform.Sdk;
 public partial class Mutation
 {
     /// <summary>
+    /// Authorizes the current user to subscribe to a private Pusher channel.
+    /// </summary>
+    public PusherSocketAuth? AuthenticatePusherSocket { get; set; }
+    /// <summary>
     /// Create and encode a transaction on the Enjin blockchain.
     /// </summary>
     public Transaction? CreateTransaction { get; set; }

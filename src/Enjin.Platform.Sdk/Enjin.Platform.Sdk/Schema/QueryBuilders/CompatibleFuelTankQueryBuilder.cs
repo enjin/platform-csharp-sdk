@@ -18,13 +18,12 @@ public partial class CompatibleFuelTankQueryBuilder : GraphQlQueryBuilder<Compat
     {
         new() { Name = "id" },
         new() { Name = "name" },
+        new() { Name = "address" },
         new() { Name = "providesDeposit" },
         new() { Name = "coveragePolicy" },
         new() { Name = "ruleSet", IsComplex = true, QueryBuilderType = typeof(CompatibleFuelTankRuleSetQueryBuilder) },
-        new() { Name = "remainingBudget" },
-        new() { Name = "maxBudget" },
-        new() { Name = "consumedBudget" },
-        new() { Name = "tankBalance" }
+        new() { Name = "tankBalance" },
+        new() { Name = "availableBudget" }
     };
 
     protected override string TypeName => "CompatibleFuelTank";
@@ -39,6 +38,10 @@ public partial class CompatibleFuelTankQueryBuilder : GraphQlQueryBuilder<Compat
 
     public CompatibleFuelTankQueryBuilder ExceptName() => ExceptField("name");
 
+    public CompatibleFuelTankQueryBuilder WithAddress(string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null) => WithScalarField("address", alias, [include, skip]);
+
+    public CompatibleFuelTankQueryBuilder ExceptAddress() => ExceptField("address");
+
     public CompatibleFuelTankQueryBuilder WithProvidesDeposit(string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null) => WithScalarField("providesDeposit", alias, [include, skip]);
 
     public CompatibleFuelTankQueryBuilder ExceptProvidesDeposit() => ExceptField("providesDeposit");
@@ -51,20 +54,12 @@ public partial class CompatibleFuelTankQueryBuilder : GraphQlQueryBuilder<Compat
 
     public CompatibleFuelTankQueryBuilder ExceptRuleSet() => ExceptField("ruleSet");
 
-    public CompatibleFuelTankQueryBuilder WithRemainingBudget(string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null) => WithScalarField("remainingBudget", alias, [include, skip]);
-
-    public CompatibleFuelTankQueryBuilder ExceptRemainingBudget() => ExceptField("remainingBudget");
-
-    public CompatibleFuelTankQueryBuilder WithMaxBudget(string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null) => WithScalarField("maxBudget", alias, [include, skip]);
-
-    public CompatibleFuelTankQueryBuilder ExceptMaxBudget() => ExceptField("maxBudget");
-
-    public CompatibleFuelTankQueryBuilder WithConsumedBudget(string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null) => WithScalarField("consumedBudget", alias, [include, skip]);
-
-    public CompatibleFuelTankQueryBuilder ExceptConsumedBudget() => ExceptField("consumedBudget");
-
     public CompatibleFuelTankQueryBuilder WithTankBalance(string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null) => WithScalarField("tankBalance", alias, [include, skip]);
 
     public CompatibleFuelTankQueryBuilder ExceptTankBalance() => ExceptField("tankBalance");
+
+    public CompatibleFuelTankQueryBuilder WithAvailableBudget(string? alias = null, IncludeDirective? include = null, SkipDirective? skip = null) => WithScalarField("availableBudget", alias, [include, skip]);
+
+    public CompatibleFuelTankQueryBuilder ExceptAvailableBudget() => ExceptField("availableBudget");
 }
 

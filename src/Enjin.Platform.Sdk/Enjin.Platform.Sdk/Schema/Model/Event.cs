@@ -18,7 +18,7 @@ namespace Enjin.Platform.Sdk;
 public partial class Event
 {
     /// <summary>
-    /// The event ID.
+    /// The event ID (blockNumber-eventIndex).
     /// </summary>
     public string? Id { get; set; }
     /// <summary>
